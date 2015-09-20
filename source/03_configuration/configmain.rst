@@ -588,23 +588,3 @@ Default:
 
 Enable SSL name check.
 
-
-.. _configuration/configmain#http_backend:
-
-HTTP Backend
--------------
-
-Format:
-
-::
-
-  http_backend=[auto, cherrypy, swsgiref]
-
-Default:
-
-::
-
-  http_backend=auto
-
-Specify which http_backend to use. Auto is better. If cherrypy3 is not available, it will fail back to swsgiref
-.. note:: Actually, if you specify something else than cherrypy or auto, it will fall into swsgiref

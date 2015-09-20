@@ -28,7 +28,7 @@ Requirements
 Mandatory Requirements
 ----------------------
 
-* `Python`_ 2.6 or higher (2.7 will get higher performance)
+* `Python`_ 2.6 or 2.7 (2.7 will get higher performance)
 * `python-pycurl`_ Python package for Alignak daemon communication
 * `setuptools`_ or `distribute` Python package for installation
 
@@ -37,7 +37,7 @@ Conditional Requirements
 ------------------------
 
 * `Python`_ 2.7 is required for developers to run the test suite, alignak/test/
-* `python-cherrypy3`_ (recommended) enhanceddaemons communications, especially in HTTPS mode
+* `python-cherrypy3`_ is required for enhanceddaemons communications, especially in HTTPS mode
 * `Monitoring Plugins`_ (recommended) provides a set of plugins to monitor host (Alignak uses check_icmp by default install).
   Monitoring plugins are available on most linux distributions (nagios-plugins package)
 

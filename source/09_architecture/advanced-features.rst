@@ -16,7 +16,7 @@ In fact the load is present in 2 major places:
   * pollers: they launch checks, they use a lot of resources
   * schedulers: they schedule, potentially lots of checks
 
-For both, a limit of 150000 checks/5min is a reasonable goal on an average server(4 cores@3Ghz). But remember that is can be multiplied as much as you wish, just by adding another server.
+For both, a limit of 150000 checks/5min is a reasonable goal on an average server(4 cores at 3Ghz). But remember that is can be multiplied as much as you wish, just by adding another server.
 
 There are 2 cases:
   * checks that ask for a lot of performance (perl or shell scripts for example)

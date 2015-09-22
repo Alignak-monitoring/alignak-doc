@@ -29,7 +29,6 @@ Mandatory Requirements
 ----------------------
 
 * `Python`_ 2.6 or 2.7 (2.7 will get higher performance)
-* `python-pycurl`_ Python package for Alignak daemon communication
 * `setuptools`_ or `distribute` Python package for installation
 
 
@@ -59,7 +58,7 @@ You can download the tarball and execute the setup.py or just use the pip comman
 
 ::
 
-  apt-get install python-pip python-pycurl
+  apt-get install python-pip
   adduser alignak
   pip install alignak
 
@@ -109,7 +108,7 @@ Steps are basically the same as on Linux (Python install etc.) but in windows en
 .. _Monitoring Plugins: https://www.monitoring-plugins.org/
 .. _python-pycurl: http://pycurl.sourceforge.net/
 .. _setuptools: http://pypi.python.org/pypi/setuptools/
-.. _git snapshot: https://github.com/naparuba/alignak/tarball/master
+.. _git snapshot: https://github.com/Alignak-monitoring/alignak/archive/master.zip
 .. _Alignak tarball: http://www.
 .. _install.d/README: https://github.com/Alignak-monitoring/alignak/blob/master/install.d/README
 

@@ -22,7 +22,7 @@ Nevertheless, Alignak was first made differently and we try to keep all the good
    * Easy to migrate from Nagios : we want Nagios configuration and plugins to work in Alignak so that it is a "in place" replacement.
      Plugins provide great flexibility and are a big legacy codebase to use. It would be a shame not to use all this community work
    * Multi-platform : python is available in a lot of OS. We try to write generic code to keep this possible.
-   * Utf8 compliant : python is here to do that. For now Alignak is compatible with 2.6-2.7 version but python 3.X is even more character encoding friendly.
+   * Utf8 compliant : python is here to do that. For now Alignak is compatible with 2.6-2.7 version but will work with python 3.x in the future.
    * Independent from other monitoring solution : our goal is to provide a modular *tool* that can integrate with others through standard interfaces). Flexibility first.
    * Flexible : in an architecture point view. It is very close to our scalability wish. Cloud computing is make architecture moving a lot, we have to fit to it.
    * Fun to code : python ensure good code readability. Adding code should not be a pain when developing.
@@ -109,13 +109,7 @@ Roadmap is available in a `specific Github issue`_, feature addition can be disc
 Technical point of view about a specific feature are discussed in a separated issue.
 
 
-Release code names
-===================
-
-I (Jean Gabès) keep the right to name the code name of each release. That's the only thing I will keep for me in this project as its founder. :)
-
-
 .. _Nagios: http://www.nagios.org
 .. _GNU Affero General Public License: http://www.gnu.org/licenses/agpl.txt
 .. _alignak-monitoring organization's page: https://github.com/Alignak-monitoring
-.. _specific Github issue: https://github.com/Alignak-monitoring/alignak/labels/CURRENT%20ROADMAP
+.. _specific Github issue: https://github.com/Alignak-monitoring/alignak/issues/4

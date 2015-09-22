@@ -4,7 +4,7 @@
 Where is the configuration?
 ----------------------------
 
-The configuration is where you put the ``etc`` directory. Usually it's ``/etc/alignak`` or ``C:/Program Files/Alignak``.
+The configuration is where you put the ``etc`` directory. Usually it's ``/usr/local/etc/alignak`` or ``/etc/alignak`` or ``C:/Program Files/Alignak``.
   * ``alignak.cfg`` is meant to be main configuration file that will call all others
 
 

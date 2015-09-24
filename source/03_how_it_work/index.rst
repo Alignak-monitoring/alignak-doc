@@ -2,10 +2,10 @@
 
     \newpage
 
-.. _gettingstarted/index:
+.. _how_it_works/index:
 
-Getting Started
-===============
+How it works
+============
 
 .. raw:: LaTeX
 

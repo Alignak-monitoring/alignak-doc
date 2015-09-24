@@ -2,10 +2,10 @@
 
     \newpage
 
-.. _gettingstarted/index:
+.. _configuration/index:
 
-Getting Started
-===============
+Configuration
+=============
 
 .. raw:: LaTeX
 

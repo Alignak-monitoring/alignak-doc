@@ -10,6 +10,8 @@ Welcome to Alignak's documentation!
 .. toctree::
     :maxdepth: 2
 
+    01_introduction/index
+    02_installation/index
     03_how_it_work/index
     04_configuration/index
 

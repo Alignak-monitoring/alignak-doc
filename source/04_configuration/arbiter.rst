@@ -37,7 +37,7 @@ The configuration is defined in this style::
 ==================================== ======= ======= ======== ============================================================
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== ============================================================
-arbiter_name                         string          yes      Nome of arbiter
+arbiter_name                         string          yes      Name of arbiter
 host_name                            string          yes      hostname
 address                              string          yes      dns name or ip address
 port                                 integer  7770   no       port of the daemon
@@ -126,7 +126,7 @@ The configuration is defined in this style::
 ==================================== ======= ======= ======== =============================================================
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
-scheduler_name                       string          yes      Nome of scheduler
+scheduler_name                       string          yes      Name of scheduler
 address                              string          yes      dns name or ip address
 port                                 integer  7768   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
@@ -221,7 +221,7 @@ The configuration is defined in this style::
 ==================================== ======= ======= ======== =============================================================
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
-broker_name                          string          yes      Nome of broker
+broker_name                          string          yes      Name of broker
 address                              string          yes      dns name or ip address
 port                                 integer  7772   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
@@ -306,7 +306,7 @@ The configuration is defined in this style::
 ==================================== ======= ======= ======== =============================================================
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
-poller_name                          string          yes      Nome of poller
+poller_name                          string          yes      Name of poller
 address                              string          yes      dns name or ip address
 port                                 integer  7771   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
@@ -398,7 +398,7 @@ The configuration is defined in this style::
 ==================================== ======= ======= ======== =============================================================
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
-reactionner_name                     string          yes      Nome of reactionner
+reactionner_name                     string          yes      Name of reactionner
 address                              string          yes      dns name or ip address
 port                                 integer  7769   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
@@ -491,7 +491,7 @@ The configuration is defined in this style::
 ==================================== ======= ======= ======== =============================================================
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
-receiver_name                        string          yes      Nome of receiver
+receiver_name                        string          yes      Name of receiver
 address                              string          yes      dns name or ip address
 port                                 integer  7773   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare

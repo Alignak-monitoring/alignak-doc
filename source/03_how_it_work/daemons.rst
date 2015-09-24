@@ -43,6 +43,7 @@ It is connected to:
 
 * Arbiter
 * Scheduler
+* Broker
 
 Receiver
 --------
@@ -53,6 +54,7 @@ It is connected to:
 
 * Arbiter
 * Scheduler
+* Broker
 
 Broker
 ------
@@ -62,7 +64,11 @@ The *Broker* get all events from scheduler
 It is connected to:
 
 * Arbiter
+* Poller
 * Scheduler
+* Receiver
+* Reactionner
+
 
 Reactionner
 -----------
@@ -73,4 +79,4 @@ It is connected to:
 
 * Arbiter
 * Scheduler
-
+* Broker

@@ -16,4 +16,5 @@ How it works
 
    daemons
    high_availability
+   load_balancing
 

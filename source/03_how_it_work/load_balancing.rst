@@ -7,8 +7,6 @@ Load balancing
 Introduction
 ============
 
-###### TODO
-
 The load balancing is the ability to share load on multiple servers.
 
 The first thing  to know is that not all Alignak daemons can be managed in load availability.
@@ -65,7 +63,8 @@ define the scheduler_name, the IP of ServerC like::
 Third step
 ----------
 
-On *serverA* start *Arbiter* but not *Scheduler*
+On *serverA* start *Arbiter* but not *Scheduler*.
+
 On *ServerB* and *ServerC*, start only *Scheduler* daemon.
 
 Conclusion

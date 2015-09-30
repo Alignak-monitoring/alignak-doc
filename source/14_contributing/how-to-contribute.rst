@@ -1,7 +1,7 @@
 .. _contributing/how-to-contribute:
 
 ===================================
-Getting Help and Ways to Contribute 
+Getting Help and Ways to Contribute
 ===================================
 
 
@@ -20,29 +20,42 @@ if you don't want virtualenv (you are in a docker or something), just add sudo /
 
 Getting started into the developer documentation :
 ==================================================
+
 The `developer documentation`_ is generated from Alignak source code and basically describe its modules.
 You can see in details the functions and jump to the source code if necessary. You also have some class diagram in the index page to browse code more easily
+A good entry point could be the daemon module, you can find the python files used to launch daemons (arbiter, scheduler ...).
 
 
-.. _contributing/index#alignak_resources_for_users:
 
-Alignak resources for users (help) : 
-=====================================
+Git and GitHub 101 :
+====================
 
+Before starting to dig into Alignak code, you should be able to use git with ease. If you are new to it, we can suggest you the following links : http://www.git-tower.com/blog/git-cheat-sheet/ and http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf
 
-    * `Alignak documentation`_
-    * :ref:`Alignak Troubleshooting FAQ <troubleshooting/troubleshooting-alignak>`
-    * `Support Forums`_
-    * `Alignak issues and bug reports`_
-    * `Alignak Ideas`_
+If you are already familiar with this, here are some of useful commands we use quite often.
+Consider "origin" the remote branch from Alignak-monitoring organization
 
+Add the fork you have made by pressing the "Fork" button on Github ::
 
-The documentation wiki contains a **Getting started** section for how-to and tutorial related information. It also hosts an official documentation that has the full in-depth details and a how to contribute section where you can learn how to help grow Alignak.
-
-Your input and support is a precious resource. If the documentation is not clear, or you need help finding that nugget of information, the support forum has the answer to your burning questions. The Alignak Ideas page is a good place to let the development team how Alignak can improve to meet new challenges or better serve its user base.
+  git remote add <yournick> git@github.com:<yournick>/alignak.git   # Add your remote git
+  git fetch <yournick>   # Fetch data from this remote
+  git checkout <yournick>/develop -b mydevelop  # Create new branch named mydevelop linked to the remote develop branch of you fork
 
 
-Ways to contribute : 
+Synchronize alignak develop with your current branch (considering no conflicts)::
+
+  git fetch origin
+  git merge origin/develop  # You should have a merge commit to confirm
+  git log  # Pick the id of the commit before the merging commit you have just done
+  git rebase <commit-id>  # git will automatically try to stack commit over the commit you specified (develop HEAD)
+  git push -f <yournick> <current_branch>  # This push the new tree upstream (we have to force push as your local and remote have drifted)
+
+Step by step contribution example :
+===================================
+
+
+
+Ways to contribute :
 =====================
 
     * help on the documentation `Alignak documentation`_
@@ -57,7 +70,7 @@ Ways to contribute :
 .. tip::  Guidelines and resources are described for users in the first section and power users and developers in the second section.
 
 
-Alignak Guidelines for developers and power users : 
+Alignak Guidelines for developers and power users :
 ====================================================
 
 Guidelines that should be followed when contributing to the code

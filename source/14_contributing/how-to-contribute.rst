@@ -73,6 +73,54 @@ Clean a Pull request before submitting it::
 Step by step contribution example :
 ===================================
 
+The process to contribute to Alignak is quite simple. However, depending on what you are planning to do, the most efficient way to do it may vary.
+
+If you have a very small to do (typo, doc, one file commit), you'd better use Github. You can click edit in the Alignak repository.
+It will fork the repository for you and let you edit the file through the Web Interface.
+Once you picked a good commit message (see below for commit message habits) you can push it in a new branch (see below for branch name habits).
+Finally, you can create a new pull request to the Alignak repos (still with Github UI)
+
+
+If you have more than that then, no magic, you will have to do the whole process "manually"
+Once you have forked the repository and added remote (see above) you can start a new branch ::
+
+  git checkout -b Add_ponies_and_rainbows
+
+Here your new branch is Add_ponies_and_rainbows. You can now start editing files
+
+Before making commit (unless you know that you are pushing unfinished stuff) you should run tests.
+If you have enabled Travis on your fork (recommended) and does not run tests you may received a mail from it noticing that your commit broke tests.
+To run the test cases do the following ::
+
+  cd test
+  ./quick_tests.sh
+
+This script launches all test_*.py file and perform a pep8 check. This more or less the same thing that Travis does.
+If you want to run the same thing that Travis does, have a look at .travis.yml in the root tree.
+You will find something like ::
+
+  nosetests -xv --process-restartworker --processes=1 --process-timeout=300  --with-coverage --cover-package=alignak
+  coverage combine
+  cd .. && pep8 --max-line-length=100 --exclude='*.pyc' alignak/*
+  pylint --rcfile=.pylintrc [...] -r no alignak/*
+  pep257 --select=D300 alignak
+
+Nosetest launches all test_*.py (unless they have a +x chmod), pep8 , pylint and pep257 checks python code.
+Pylint is for now a very long line because we haven't done all rules yet. So, we only enable the rule we did
+
+
+You should be ready to commit now, all new files and modified files are added in "stage"
+If you look at the commit tree, you can notice more or less a pattern in commit message ::
+
+  Enh|Fix|Add: <Generic word to describe> - <Specific word to descript>
+
+Example::
+
+  Enh: Tests - Clean unused imports
+
+This is not a mandatory format to write commit. If you want to do it differently it's fine.
+Always keep in mind that a commit message has to be clear enough.
+Message like "fix", "try1", "update", "clean" are not really relevant to understand what's in the commit.
 
 
 Ways to contribute :

@@ -50,6 +50,26 @@ Synchronize alignak develop with your current branch (considering no conflicts):
   git rebase <commit-id>  # git will automatically try to stack commit over the commit you specified (develop HEAD)
   git push -f <yournick> <current_branch>  # This push the new tree upstream (we have to force push as your local and remote have drifted)
 
+
+Avoid merge commit because you forgot to pull before committing::
+
+  git pull  # This will fetch and merge remote branch with your local one creating a merge commit
+  git log   # Pick the id of the commit corresponding to the remote HEAD (usually 2 commit before)
+  git rebase  <commit-id>  # Git will revert you commit(s) and stack it after the remote HEAD
+  git push  # Don't need to force you have only added one commit over remote.
+
+
+Clean a Pull request before submitting it::
+
+  git rebase -i  <commit-id>  # Pick the id of the current origin develop (see synchronize)
+  # Here you  squash, fix, reword or edit order of commit the way you want.
+  # At the end git will try to make the tree the way you ask (if no conflict)
+  # I case of conflict git will stop were the conflict is and let you deal with it
+  # git mergtools may help for that
+  # One you are done (git status says there no modified file neither added file)
+  # git rebase --continue
+
+
 Step by step contribution example :
 ===================================
 

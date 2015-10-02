@@ -75,12 +75,19 @@ Step by step contribution example :
 
 The process to contribute to Alignak is quite simple. However, depending on what you are planning to do, the most efficient way to do it may vary.
 
+Simple fix :
+------------
 If you have a very small to do (typo, doc, one file commit), you'd better use Github. You can click edit in the Alignak repository.
 It will fork the repository for you and let you edit the file through the Web Interface.
 Once you picked a good commit message (see below for commit message habits) you can push it in a new branch (see below for branch name habits).
 Finally, you can create a new pull request to the Alignak repos (still with Github UI)
 
 
+Not so simple fix :
+-------------------
+
+Checkout new branch :
+~~~~~~~~~~~~~~~~~~~~~
 If you have more than that then, no magic, you will have to do the whole process "manually"
 Once you have forked the repository and added remote (see above) you can start a new branch ::
 
@@ -88,6 +95,8 @@ Once you have forked the repository and added remote (see above) you can start a
 
 Here your new branch is Add_ponies_and_rainbows. You can now start editing files
 
+Run tests :
+~~~~~~~~~~~
 Before making commit (unless you know that you are pushing unfinished stuff) you should run tests.
 If you have enabled Travis on your fork (recommended) and does not run tests you may received a mail from it noticing that your commit broke tests.
 To run the test cases do the following ::
@@ -109,6 +118,8 @@ Nosetest launches all test_*.py (unless they have a +x chmod), pep8 , pylint and
 Pylint is for now a very long line because we haven't done all rules yet. So, we only enable the rule we did
 
 
+Commit :
+~~~~~~~~
 You should be ready to commit now, all new files and modified files are added in "stage"
 If you look at the commit tree, you can notice more or less a pattern in commit message ::
 
@@ -122,57 +133,35 @@ This is not a mandatory format to write commit. If you want to do it differently
 Always keep in mind that a commit message has to be clear enough.
 Message like "fix", "try1", "update", "clean" are not really relevant to understand what's in the commit.
 
-
-Ways to contribute :
-=====================
-
-    * help on the documentation `Alignak documentation`_
-    * help on updating this web site
-    * help on tracking and fixing bugs, `Alignak is on github`_ to make it easy!
-    * coding new features, modules and test cases
-    * performance profiling of the various daemons, interfaces and modules
-    * providing references for large installations
-    * submitting ideas to Alignak Ideas
-    * responding to questions on the forums
-
-.. tip::  Guidelines and resources are described for users in the first section and power users and developers in the second section.
+Create new tests :
+~~~~~~~~~~~~~~~~~~
+If you are fix a bug or adding a new feature you need to add test case.
 
 
-Alignak Guidelines for developers and power users :
-====================================================
+Create pull request :
+~~~~~~~~~~~~~~~~~~~~~
+You feel like your fix / new feature is ready to be merge upstream? Time to create a pull request.
+The pull request in the entry point for Alignak team' review process.
+Keep in mind that we are humans and we usually are doing more that one thing at a time. So the clearer the pull request is the quicker it will be merged
+Here are some hints to help reviewers ::
 
-Guidelines that should be followed when contributing to the code
+* Explain the issue you encountered, and how you fixed it (short description)
+* Add test cases in a separate commit
+* Link any Github issue it is related to (if you fix an issue for example)
+* Mention any limitations of your imlpementation
+* Mention any removal of supported feature
 
-    * Guidelines - :ref:`Hacking the code <development/hackingcode>` [Examples of Alignak programming]
-    * Guidelines - :ref:`How to add a new WebUI page <packages/webui/webui-devel>`
-    * Guidelines - :ref:`Test driven development <development/test-driven-development>` [How to create and run tests]
-    * Guidelines - :ref:`Programming rules <development/programming-rules>` [Style, technical debt, logging]
-    * Informational - :ref:`Feature planning process and release cycle <about/features-and-release-cycle>`
+If you run the test previously you should see that Travis managed to build successfully. If not you will get an email.
+Travis should passed in order to merge the pull request. Reviewers may not look at your pull request if build is broken.
 
-Resources for developers and power users
+.. tip:: You don't need such details for a typo / doc fix.
 
-    * Development - Collaborative code repository on `Alignak github`_
-    * Development - Bug tracking on `Alignak github`_
-    * Development - Automated test and integration on `Alignak Jenkins server`_
-    * Development - The forums are also a good medium to discuss issues `Support Forums`_
-    * Development - Developer Mailing list - `Register or search the alignak-devel Mailing list`_
+Release TODO list :
+===================
+Here are few thing to check when doing a release
 
-For bug hunting and programming, you will need to look at the “How to hacking" tutorial page.
-
-GitHub offers great facilities to fork, test, commit, review and comment anything related to Alignak. You can also follow the projects progress in real time.
-
-There is a development mailing list where you can join us. Come and let us know what you think about Alignak, propose your help or ask for it. :)
-
-Thank you for your help in making this software an open source success.
 
 
 .. _developer documentation: http://alignak.readthedocs.org/
 
-.. _Shinken issues and bug reports: https://github.com/Alignak-monitoring/alignak/issues?sort=created&direction=desc&state=open
-.. _Register or search the shinken-devel Mailing list: https://lists.sourceforge.net/lists/listinfo/alignak-devel
-.. _Alignak github: https://github.com/Alignak-monitoring/alignak/issues?sort=created&direction=desc&state=open
-.. _Alignak documentation: http://alignak.readthedocs.org/
-.. _Alignak Jenkins server: https://test.savoirfairelinux.com/view/Alignak/
-.. _Alignak is on github: https://github.com/Alignak-monitoring/alignak/
-.. _Support Forums: http://...
 

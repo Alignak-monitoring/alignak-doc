@@ -12,7 +12,6 @@ Configuration
     \newpage
 
 .. toctree::
-   :maxdepth: 2
 
    arbiter
    daemons

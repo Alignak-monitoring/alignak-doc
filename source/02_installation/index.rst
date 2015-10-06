@@ -15,7 +15,7 @@ Installation
 .. toctree::
    :maxdepth: 2
 
-   dep_packages
+   deb_packages
    rpm_packages
    pip
    sources

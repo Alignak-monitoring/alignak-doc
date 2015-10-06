@@ -14,6 +14,7 @@ Welcome to Alignak's documentation!
     02_installation/index
     03_how_it_work/index
     04_configuration/index
+    14_contributing/index
 
 .. only:: html
 

@@ -91,7 +91,7 @@ copyright = u'2015, Alignak Team'
 # built documents.
 #
 # The short X.Y version.
-version = VERSION
+version = 0.1
 # The full version, including alpha/beta/rc tags.
 release = version
 

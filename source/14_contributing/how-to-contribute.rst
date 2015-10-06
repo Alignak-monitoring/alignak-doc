@@ -133,9 +133,56 @@ This is not a mandatory format to write commit. If you want to do it differently
 Always keep in mind that a commit message has to be clear enough.
 Message like "fix", "try1", "update", "clean" are not really relevant to understand what's in the commit.
 
+
 Create new tests :
 ~~~~~~~~~~~~~~~~~~
-If you are fix a bug or adding a new feature you need to add test case.
+If you fix a bug or add a new feature you need to add test case.
+
+There are several simple test cases that you can you to create yours :
+
+* test_bad_contact_call.py
+* test_bad_escalation_on_groups.py
+* test_bad_timeperiods.py
+* test_dummy.py
+[...]
+
+Almost every test uses alignak_test.py module and inherit from AlignakTest class. This class provides a set of function to help tests ::
+
+* scheduler_loop : used to fake a scheduler loop (run check, create broks, raise notification etc..)
+* show_logs : Dump logs (broks with type "log")
+* show_actions : Dump actions (notification, enventhandler)
+* assert_log_match / assert_any_log_match / ... : Find regexp into logs
+* add : add a brok or external command
+
+You can have a look in the file for a complete list of function or have a look in other test files.
+
+The default configuration file is *etc/alignak_1r_1h_1s.cfg* that basically read the *etc/standard/**.cfg files.
+All you need to to add you specific configuration test is to call setup_with_file function with the file containing what you need.
+For example (bad_contact_call)::
+
+  self.setup_with_file(['etc/alignak_bad_contact_call.cfg'])
+
+and the file content ::
+
+  define service{
+  action_url                     http://search.cpan.org/dist/Monitoring-Generator-TestConfig/
+  active_checks_enabled          1
+  check_command                  check_service!ok
+  check_interval                 1
+  host_name                      test_host_0
+  icon_image                     ../../docs/images/tip.gif
+  icon_image_alt                 icon alt string
+  notes                          just a notes string
+  notes_url                      http://search.cpan.org/dist/Monitoring-Generator-TestConfig/README
+  retry_interval                 1
+  service_description            test_ok_0_badcon
+  servicegroups                  servicegroup_01,ok
+  use                            generic-service
+  event_handler                  eventhandler
+  contacts			 IDONOTEXIST
+  }
+
+You only need to define the service with the not existing contact and it's done.
 
 
 Create pull request :
@@ -155,6 +202,8 @@ If you run the test previously you should see that Travis managed to build succe
 Travis should passed in order to merge the pull request. Reviewers may not look at your pull request if build is broken.
 
 .. tip:: You don't need such details for a typo / doc fix.
+
+
 
 Release TODO list :
 ===================

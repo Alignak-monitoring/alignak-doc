@@ -10,7 +10,8 @@ Introduction
 The load balancing is the ability to share load on multiple servers.
 
 The first thing  to know is that not all Alignak daemons can be managed in load availability.
-There are the daemons you can:
+
+This ia the list of daemons it's possible:
 
 * *Scheduler* daemon
 * *Poller* daemon
@@ -44,6 +45,7 @@ Second step
 -----------
 
 We configure the 2 *Scheduler* daemons in *Arbiter* config on *ServerA*.
+
 In folder etc/alignak/arbiter_cfg/daemons_cfg:
 
 * rename the file *scheduler-master.cfg* in *scheduler-mars.cfg*. In this file, define the IP of *ServerB* like::
@@ -52,8 +54,7 @@ In folder etc/alignak/arbiter_cfg/daemons_cfg:
     address             192.168.0.2
     spare               0
 
-* copy this file *scheduler-mars.cfg* to *scheduler-venus.cfg* (the name is not really important). In this file,
-define the scheduler_name, the IP of ServerC like::
+* copy this file *scheduler-mars.cfg* to *scheduler-venus.cfg* (the name is not really important). In this file, define the scheduler_name, the IP of ServerC like::
 
     scheduler_name      scheduler-venus
     address             192.168.0.3

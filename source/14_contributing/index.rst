@@ -13,4 +13,5 @@ How to contribute
 
 .. toctree::
 
+    links-to-know
     how-to-contribute

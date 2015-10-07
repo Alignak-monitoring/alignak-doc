@@ -6,8 +6,8 @@ Getting Help and Ways to Contribute
 
 
 
-Setup environment for Alignak :
-===============================
+Setup environment for Alignak
+=============================
 
 Alignak require python-pbr to be setup (and so python). We suggest to use virtualenv also ::
 
@@ -18,8 +18,8 @@ Alignak require python-pbr to be setup (and so python). We suggest to use virtua
 if you don't want virtualenv (you are in a docker or something), just add sudo / install it on you system.
 
 
-Getting started into the developer documentation :
-==================================================
+Getting started into the developer documentation
+================================================
 
 The `developer documentation`_ is generated from Alignak source code and basically describe its modules.
 You can see in details the functions and jump to the source code if necessary. You also have some class diagram in the index page to browse code more easily
@@ -27,8 +27,8 @@ A good entry point could be the daemon module, you can find the python files use
 
 
 
-Git and GitHub 101 :
-====================
+Git and GitHub 101
+==================
 
 Before starting to dig into Alignak code, you should be able to use git with ease. If you are new to it, we can suggest you the following links : http://www.git-tower.com/blog/git-cheat-sheet/ and http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf
 
@@ -75,19 +75,19 @@ Step by step contribution example :
 
 The process to contribute to Alignak is quite simple. However, depending on what you are planning to do, the most efficient way to do it may vary.
 
-Simple fix :
-------------
+Simple fix
+----------
 If you have a very small to do (typo, doc, one file commit), you'd better use Github. You can click edit in the Alignak repository.
 It will fork the repository for you and let you edit the file through the Web Interface.
 Once you picked a good commit message (see below for commit message habits) you can push it in a new branch (see below for branch name habits).
 Finally, you can create a new pull request to the Alignak repos (still with Github UI)
 
 
-Not so simple fix :
--------------------
+Not so simple fix
+-----------------
 
-Checkout new branch :
-~~~~~~~~~~~~~~~~~~~~~
+Checkout new branch
+~~~~~~~~~~~~~~~~~~~
 If you have more than that then, no magic, you will have to do the whole process "manually"
 Once you have forked the repository and added remote (see above) you can start a new branch ::
 
@@ -95,8 +95,8 @@ Once you have forked the repository and added remote (see above) you can start a
 
 Here your new branch is Add_ponies_and_rainbows. You can now start editing files
 
-Run tests :
-~~~~~~~~~~~
+Run tests
+~~~~~~~~~
 Before making commit (unless you know that you are pushing unfinished stuff) you should run tests.
 If you have enabled Travis on your fork (recommended) and does not run tests you may received a mail from it noticing that your commit broke tests.
 To run the test cases do the following ::
@@ -118,8 +118,8 @@ Nosetest launches all test_*.py (unless they have a +x chmod), pep8 , pylint and
 Pylint is for now a very long line because we haven't done all rules yet. So, we only enable the rule we did
 
 
-Commit :
-~~~~~~~~
+Commit
+~~~~~~
 You should be ready to commit now, all new files and modified files are added in "stage"
 If you look at the commit tree, you can notice more or less a pattern in commit message ::
 
@@ -134,8 +134,8 @@ Always keep in mind that a commit message has to be clear enough.
 Message like "fix", "try1", "update", "clean" are not really relevant to understand what's in the commit.
 
 
-Create new tests :
-~~~~~~~~~~~~~~~~~~
+Create new tests
+~~~~~~~~~~~~~~~~
 If you fix a bug or add a new feature you need to add test case.
 
 There are several simple test cases that you can you to create yours :
@@ -153,6 +153,7 @@ Almost every test uses alignak_test.py module and inherit from AlignakTest class
 * show_actions : Dump actions (notification, enventhandler)
 * assert_log_match / assert_any_log_match / ... : Find regexp into logs
 * add : add a brok or external command
+
 
 You can have a look in the file for a complete list of function or have a look in other test files.
 
@@ -185,8 +186,8 @@ and the file content ::
 You only need to define the service with the not existing contact and it's done.
 
 
-Create pull request :
-~~~~~~~~~~~~~~~~~~~~~
+Create pull request
+~~~~~~~~~~~~~~~~~~~
 You feel like your fix / new feature is ready to be merge upstream? Time to create a pull request.
 The pull request in the entry point for Alignak team' review process.
 Keep in mind that we are humans and we usually are doing more that one thing at a time. So the clearer the pull request is the quicker it will be merged
@@ -197,6 +198,7 @@ Here are some hints to help reviewers ::
 * Link any Github issue it is related to (if you fix an issue for example)
 * Mention any limitations of your imlpementation
 * Mention any removal of supported feature
+
 
 If you run the test previously you should see that Travis managed to build successfully. If not you will get an email.
 Travis should passed in order to merge the pull request. Reviewers may not look at your pull request if build is broken.
@@ -209,7 +211,22 @@ Release TODO list :
 ===================
 Here are few thing to check when doing a release
 
+* Commit Changelog
 
+* Merge and tag
+  ::
+
+  VERSION="X.Y"
+  git checkout master && git merge develop && git tag $VERSION
+  git push
+
+* Update packaging
+
+* Upload package
+
+* Send mail on user lists
+
+* Send news on social networks (Twitter, website etc)
 
 .. _developer documentation: http://alignak.readthedocs.org/
 

@@ -15,8 +15,8 @@ Alignak Project
 
 The main idea when developing Alignak is the flexibility which is our definition of framework.
 Nevertheless, Alignak was first made differently and we try to keep all the good things that made it a monitoring solution :
-   * Easy to install : we will always recommend packages installations. You can still install it with pip or setup.py directly
-   * Easy for new users : this documentation should helps you to discover Alignak and show simple use-case
+   * Easy to install : we will always recommend packages installations. You can still install it with pip or setup.py directly, see :ref:`installation/index`.
+   * Easy for new users : this documentation should helps you to discover Alignak and show simple use-case.
    * Easy to migrate from Nagios : Nagios configuration and plugins will work with Alignak, we try to keep this compatibility while developing it.
    * Multi-platform : python is available in a lot of OS. We try to write generic code to keep this possible. However, Linux is the most tested OS so far.
    * Utf8 compliant : python is here to do that. For now Alignak is compatible with 2.6-2.7 version but will work with python 3.x and Pypy in the future.

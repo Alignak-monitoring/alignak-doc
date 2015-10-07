@@ -44,8 +44,7 @@ In folder etc/alignak/arbiter_cfg/daemons_cfg:
 
     address             192.168.0.2
 
-* copy this file *scheduler-master.cfg* to *scheduler-slave.cfg* (the name is not really important). In 
-this file, define the scheduler_name, the IP of ServerC and activate the spare like::
+* copy this file *scheduler-master.cfg* to *scheduler-slave.cfg* (the name is not really important). In this file, define the scheduler_name, the IP of ServerC and activate the spare like::
 
     scheduler_name      scheduler-slave
     address             192.168.0.3

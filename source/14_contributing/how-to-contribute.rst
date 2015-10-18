@@ -5,7 +5,6 @@ Getting Help and Ways to Contribute
 ===================================
 
 
-
 Setup environment for Alignak
 =============================
 
@@ -16,6 +15,20 @@ Alignak require python-pbr to be setup (and so python). We suggest to use virtua
   python setup.py develop
 
 if you don't want virtualenv (you are in a docker or something), just add sudo / install it on you system.
+
+If you want to use init scripts in your virtualenv you have to do another command and REsource ``activate``::
+
+  python setup.py install_data
+  . alignak_env/bin/activate
+
+
+
+You can use the alignak-* binaries in your path. You need to specified config file as parameter.
+You will find them in etc/alignak directory (in your virtualenv path)
+
+Otherwise you can use sysV init script alignak-*.
+You can find them in etc/init.d directory (in your virtualenv path)
+
 
 
 Getting started into the developer documentation
@@ -68,6 +81,22 @@ Clean a Pull request before submitting it::
   # git mergtools may help for that
   # One you are done (git status says there no modified file neither added file)
   # git rebase --continue
+
+
+
+Bug report
+==========
+
+Bugs are tracked in the `issue list on GitHub`_ . Always search for existing issues before filing a new one (use the search field at the top of the page).
+When filing a new bug, please remember to include:
+
+*	A helpful title - use descriptive keywords in the title and body so others can find your bug (avoiding duplicates).
+*	Steps to reproduce the problem, with actual vs. expected results
+*	Alignak version (or if you're pulling directly from the Git repo, your current commit SHA - use git rev-parse HEAD)
+*	OS version
+*	If the problem happens with specific code, link to test files (`gist.github.com`_  is a great place to upload code).
+*	Screenshots are very helpful if you're seeing an error message or a UI display problem. (Just drag an image into the issue description field to include it).
+
 
 
 Step by step contribution example :
@@ -228,6 +257,8 @@ Here are few thing to check when doing a release
 
 * Send news on social networks (Twitter, website etc)
 
-.. _developer documentation: http://alignak.readthedocs.org/
+.. _developer documentation: https://alignak.readthedocs.org/
+.. _issue list on GitHub: https://github.com/Alignak-monitoring/alignak/issues/
+.. _gist.github.com: https://gist.github.com/
 
 

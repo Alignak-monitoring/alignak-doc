@@ -29,4 +29,21 @@ This is the steps:
      python setup.py install
 
 
+Install Alignak as python lib
+=============================
+
+In a virtualenv ::
+
+  virtualenv env
+  source env/bin/activate
+  python setup.py install_lib
+  python -c 'from alignak.bin import VERSION; print(VERSION)'
+
+Or directly on your system ::
+
+  sudo python setup.py install_lib
+  python -c 'from alignak.bin import VERSION; print(VERSION)'
+
+
+
 

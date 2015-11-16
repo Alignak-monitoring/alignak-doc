@@ -15,6 +15,7 @@ How it works
    :maxdepth: 2
 
    daemons
+   run_daemons
    high_availability
    load_balancing
 

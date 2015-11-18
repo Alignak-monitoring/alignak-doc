@@ -22,7 +22,7 @@ All the configuration is stored by default in the folder *etc/alignak/*. Each pa
 
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 3
 
    arbiter
    daemons

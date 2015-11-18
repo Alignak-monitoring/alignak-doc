@@ -9,12 +9,12 @@ There are 2 types of modules
 Alignak modules (official way)
 ------------------------------
 
-Alignak modules use namespace of alignak. 
+Alignak modules use namespace of alignak.
 To install them, install with pip command::
 
      pip install nameofmodule
 
-The configuration file will be available in folder::
+The configuration file will be available in the folder::
 
     etc/alignak/arbiter_cfg/modules
 

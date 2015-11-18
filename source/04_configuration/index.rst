@@ -21,8 +21,6 @@ Configuration
 
 
 .. toctree::
-  :titlesonly:
-  :maxdepth: 2
 
    arbiter
    daemons

@@ -18,11 +18,12 @@ The Alignak configuration is splitted in three main parts:
 - daemons configuration,
 - external modules configuration.
 
-All the configuration is stored by default in the folder *etc/alignak/*. Each part of the configuration is described in the following chapters:
+The arbiter configuration part describes the Alignak framework infrastructure (which daemons are used and how they are) and the monitoring objects (what is monitored and how it is).
+
+All the configuration is stored by default in the folder *etc/alignak/*. Each main part of the configuration is described in the following chapters:
 
 
 .. toctree::
-  :maxdepth: 3
 
    arbiter
    daemons

@@ -277,7 +277,8 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~
+
 
 ::
 
@@ -299,7 +300,7 @@ Example Definition:
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -367,7 +368,8 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~~~~
+
 
 ::
 
@@ -390,7 +392,7 @@ Example Definition:
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -457,7 +459,7 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -483,7 +485,7 @@ Example Definition:
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -545,13 +547,13 @@ realm                                string   All    no       it's for multi-dat
 ==================================== ======= ======= ======== =============================================================
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 

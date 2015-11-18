@@ -16,6 +16,7 @@ How it works
 
    daemons
    run_daemons
+   single_node
    high_availability
    load_balancing
 

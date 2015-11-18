@@ -7,24 +7,26 @@ Daemons and how they works together
 Daemons
 =======
 
-Alignak is composed by 6 daemons
+Alignak framework is made of 6 daemons
 
 
 Arbiter
 -------
 
-The *Arbiter* daemon has many features:
+The *Arbiter* daemon has several features:
 
 * Load the configuration. In this word configuration, we have:
-  * objects configuration
-  * daemons list and configuration of them (address, port, spare, modules...)
-* Manage connections with other daemons
-* Dispatch the configuration to other daemons
+
+  * monitoring objects configuration
+  * daemons list and configuration (address, port, spare, modules...)
+
+* Manage connections with the other daemons
+* Dispatch the configuration to the other daemons
 
 Scheduler
 ---------
 
-The *Scheduler* is used to manage check to run, period when need to run, acknowledge, downtimes...
+The *Scheduler* manages the checks to run, the period when it needs to run the checks, acknowledge, downtimes...
 
 It is connected to:
 
@@ -37,7 +39,7 @@ It is connected to:
 Poller
 ------
 
-The *Poller* run active checks ordered by *Scheduler*.
+The *Poller* runs active checks ordered by *Scheduler*.
 
 It is connected to:
 
@@ -48,7 +50,7 @@ It is connected to:
 Receiver
 --------
 
-The *Receiver* receive the passive checks
+The *Receiver* receives the passive checks
 
 It is connected to:
 
@@ -59,7 +61,7 @@ It is connected to:
 Broker
 ------
 
-The *Broker* get all events from scheduler
+The *Broker* gets all events from scheduler
 
 It is connected to:
 
@@ -73,7 +75,7 @@ It is connected to:
 Reactionner
 -----------
 
-The *Reactionner* send notifications to users
+The *Reactionner* sends the notifications to the users
 
 It is connected to:
 

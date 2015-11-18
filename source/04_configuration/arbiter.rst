@@ -5,20 +5,58 @@ Arbiter
 =======
 
 
-In arbiter configuration, there are:
+The arbiter is the main Alignak daemon. As of it, its configuration part is the most important one.
 
-* configuration of daemons
+This part of the configuration is stored by default in the folder *etc/alignak/arbiter_cfg/* and it contains:
+
+* configuration of the daemons
 * configuration of (external) modules
-* configuration of objects
-* configuration of resources
+* configuration of monitoring objects
+* configuration of monitoring resources
+
+Each sub-part is stored by default in its own sub-directory:
+
+* *etc/alignak/arbiter_cfg/daemons/* for the daemons
+* *etc/alignak/arbiter_cfg/modules/* for the modules
+* *etc/alignak/arbiter_cfg/objects/* for the objects
+* *etc/alignak/arbiter_cfg/resource.d/* for the resources
 
 
-Configuration of daemons
-========================
+Monitoring resources configuration
+==================================
 
-These files are stored by default in folder etc/alignak/arbiter_cfg/daemons_cfg/.
+The monitoring resources part of the configuration is used mainly to define common macros used in the whole configuration. The default installed configuration defines the following ones:
 
-It's configuration of daemons.
+* checks plugins directories
+* SNMP community used for SNMP checks
+* Windows Management Instrumentation default configuration
+
+
+External modules configuration
+==============================
+
+Each external module installed on Alignak stores its configuration file in this part of the configuration.
+
+
+Monitoring objects configuration
+================================
+
+This part of the configuration stores all the monitoring objects configuration:
+
+* hosts
+* services
+* contacts
+* commands
+* ...
+
+Currently this part of the documentation is not yet available but an old version is still available here: `Old documentation`_
+
+Daemons configuration
+=====================
+
+These files are stored by default in the folder *etc/alignak/arbiter_cfg/daemons_cfg/*.
+
+Each daemon has its own configuration file.
 
 
 Arbiter configuration
@@ -239,7 +277,8 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~
+
 
 ::
 
@@ -261,7 +300,7 @@ Example Definition:
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -287,7 +326,7 @@ manage_sub_realms
   This variable is used to define if the broker will take jobs from scheduler from the sub-realms of it's realm. The default value is *1*.
 
 modules
-  This variable is used to define all modules that the broker will load. The main goal ofthe Broker is to give status to theses modules.
+  This variable is used to define all modules that the broker will load. The main goal of the Broker is to give status to theses modules.
 
 
 Poller configuration
@@ -321,7 +360,7 @@ max_check_attempts                   integer  3      no       number of time bef
 check_interval                       integer  60     no       seconds to wait before issuing a new check
 modules                              string          no       modules list separed by comma
 passive                              boolean  0      no       set 1 to inverse the connections, so scheduler -> poller
-poller_tags                          string   None   no       tags separed by comma. Use None to manage untaggued checks
+poller_tags                          string   None   no       tags separed by comma. Use None to manage untagged checks
 use_ssl                              boolean  0      no       use ssl for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 realm                                string   All    no       it's for multi-datacenter
@@ -329,7 +368,8 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~~~~
+
 
 ::
 
@@ -352,7 +392,7 @@ Example Definition:
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -375,8 +415,8 @@ manage_sub_realms
   This variable is used to define if the poller will take jobs from scheduler from the sub-realms of it's realm. The default value is *0*.
 
 poller_tags
-  This variable is used to define the checks the poller can take. If no poller_tags is defined, poller will take all untagued checks. If at least one tag is defined, it will take only the checks that are also taggued like it.
-  By default, there is no poller_tag, so poller can take all untagued checks (default).
+  This variable is used to define the checks the poller can take. If no poller_tags is defined, poller will take all untagged checks. If at least one tag is defined, it will take only the checks that are also taggued like it.
+  By default, there is no poller_tag, so poller can take all untagged checks (default).
 
 modules
   This variable is used to define all modules that the scheduler will load.
@@ -411,7 +451,7 @@ data_timeout                         integer  120    no       seconds to wait wh
 max_check_attempts                   integer  3      no       number of time before node declared failed
 check_interval                       integer  60     no       seconds to wait before issuing a new check
 modules                              string          no       modules list separed by comma
-reactionner_tags                     string   None   no       tags separed by comma. Use None to manage untaggued handlers
+reactionner_tags                     string   None   no       tags separed by comma. Use None to manage untagged handlers
 use_ssl                              boolean  0      no       use ssl for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 realm                                string   All    no       it's for multi-datacenter
@@ -419,7 +459,7 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -445,7 +485,7 @@ Example Definition:
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -471,9 +511,9 @@ modules
   This variable is used to define all modules that the reactionner will load.
 
 reactionner_tags
-  This variable is used to define the checks the reactionner can take. If no reactionner_tags is defined, reactionner  will take all untagued notifications and event handlers. If at least one tag is defined, it will take only the checks that are also taggued like it.
+  This variable is used to define the checks the reactionner can take. If no reactionner_tags is defined, reactionner  will take all untagged notifications and event handlers. If at least one tag is defined, it will take only the checks that are also taggued like it.
 
-By default, there is no reactionner_tag, so reactionner can take all untagued notification/event handlers (default).
+By default, there is no reactionner_tag, so reactionner can take all untagged notification/event handlers (default).
 
 Reaceiver configuration
 ---------------------
@@ -507,13 +547,14 @@ realm                                string   All    no       it's for multi-dat
 ==================================== ======= ======= ======== =============================================================
 
 Example Definition:
-====================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
 
 Variable Descriptions
-======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
+.. _Old documentation: http://alignak-doc.readthedocs.org/en/old/03_configuration/config.html

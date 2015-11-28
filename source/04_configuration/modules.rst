@@ -7,7 +7,7 @@ Modules
 Alignak modules (official way)
 ------------------------------
 
-Alignak modules use namespace of alignak.
+Alignak modules are available on pip with name begin with "alignak_module_".
 To install them, install with pip command::
 
      pip install alignak_module_nameofmodule

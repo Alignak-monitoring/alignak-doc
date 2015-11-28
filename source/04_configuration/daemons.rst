@@ -41,7 +41,6 @@ hard_ssl_name_check                  boolean 0                              set 
 use_local_log                        boolean 1                              set to 1 to ease troubleshooting
 local_log                            string  %(logdir)s/schedulerd.log      file to write logs
 log_level                            string  WARNING                        log level in DEBUG,INFO,WARNING,ERROR,CRITICAL
-modules_dir                          string  /var/lib/alignak/modules       folder where find module code (python files)
 ==================================== ======= ============================== ============================================================
 
 Poller
@@ -67,7 +66,6 @@ hard_ssl_name_check                  boolean 0                              set 
 use_local_log                        boolean 1                              set to 1 to ease troubleshooting
 local_log                            string  %(logdir)s/pollerd.log         file to write logs
 log_level                            string  WARNING                        log level in DEBUG,INFO,WARNING,ERROR,CRITICAL
-modules_dir                          string  /var/lib/alignak/modules       folder where find module code (python files)
 ==================================== ======= ============================== ============================================================
 
 Receiver
@@ -93,7 +91,6 @@ hard_ssl_name_check                  boolean 0                              set 
 use_local_log                        boolean 1                              set to 1 to ease troubleshooting
 local_log                            string  %(logdir)s/receiverd.log       file to write logs
 log_level                            string  WARNING                        log level in DEBUG,INFO,WARNING,ERROR,CRITICAL
-modules_dir                          string  /var/lib/alignak/modules       folder where find module code (python files)
 ==================================== ======= ============================== ============================================================
 
 Broker
@@ -120,7 +117,6 @@ use_local_log                        boolean 1                              set 
 local_log                            string  %(logdir)s/brokerd.log         file to write logs
 log_level                            string  WARNING                        log level in DEBUG,INFO,WARNING,ERROR,CRITICAL
 max_queue_size                       integer 100000                         restart an external module if queue to high. 0 to disable
-modules_dir                          string  /var/lib/alignak/modules       folder where find module code (python files)
 ==================================== ======= ============================== ============================================================
 
 Reactionner
@@ -146,5 +142,4 @@ hard_ssl_name_check                  boolean 0                              set 
 use_local_log                        boolean 1                              set to 1 to ease troubleshooting
 local_log                            string  %(logdir)s/reactionnerd.log    file to write logs
 log_level                            string  WARNING                        log level in DEBUG,INFO,WARNING,ERROR,CRITICAL
-modules_dir                          string  /var/lib/alignak/modules       folder where find module code (python files)
 ==================================== ======= ============================== ============================================================

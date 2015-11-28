@@ -3,8 +3,6 @@
 Modules
 =======
 
-There are 2 types of modules
-
 
 Alignak modules (official way)
 ------------------------------
@@ -12,7 +10,7 @@ Alignak modules (official way)
 Alignak modules use namespace of alignak.
 To install them, install with pip command::
 
-     pip install nameofmodule
+     pip install alignak_module_nameofmodule
 
 The configuration file will be available in the folder::
 
@@ -22,10 +20,7 @@ The configuration file will be available in the folder::
 Shinken modules
 ---------------
 
-Shinken modules can be compatibles, but need these information:
-
-* Modules with dependencies with internal shinken modules like webui or bottle can't works
-* Install manually, so add modules/ files into modules folder /var/lib/alignak/modules/[name of your module without mod-]
-* Install manually, so add configuration files into folder etc/alignak/arbiter_cfg/modules/
+The shinken module are not compatible with Alignak. 
+For some of them, it's possible with some modifications in code, but we not recommand it.
 
 

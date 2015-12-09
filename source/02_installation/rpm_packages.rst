@@ -8,7 +8,7 @@ You can find packages in a dedicated repository.
 
 Create /etc/yum.repos.d/alignak.repo with the following content :
 
-CentOS 7 :
+CentOS 7 ::
 
   [Alignak]
   name=Alignak CentOS-$releasever packages

@@ -108,4 +108,4 @@ Technical point of view about a specific feature are discussed in a separated is
 .. _Nagios: http://www.nagios.org
 .. _GNU Affero General Public License: http://www.gnu.org/licenses/agpl.txt
 .. _alignak-monitoring organization's page: https://github.com/Alignak-monitoring
-.. _specific Github issue: https://github.com/Alignak-monitoring/alignak/issues/4
+.. _specific Github issue: https://github.com/Alignak-monitoring/alignak/issues/262

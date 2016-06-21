@@ -17,6 +17,7 @@ Installation
 
 This is the steps:
 
+* Create user *alignak* and connect with
 * Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases 
 * Uncompress the archive
 * Go in alignak folder
@@ -24,9 +25,14 @@ This is the steps:
 
     pip install -r requirements.txt
 
-* Install with python::
+* Install with python (as sudo)::
 
-     python setup.py install
+    python setup.py install
+
+* Give rights to following fodlers::
+
+    chown -R alignak:alignak /usr/local/var/run/alignak
+    chown -R alignak:alignak /usr/local/var/log/alignak
 
 
 Install Alignak as python lib

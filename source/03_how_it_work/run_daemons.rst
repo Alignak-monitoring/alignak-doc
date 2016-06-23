@@ -13,7 +13,11 @@ If you install with packaging (DEB, RPM...), see on it how to run.
 With sources and pip
 ====================
 
-You must start each daemons manually.
+You must start all daemons (as alignak user)  like this::
+
+    /usr/local/etc/init.d/alignak start
+
+You can also start each daemons manually.
 
 For Broker::
 

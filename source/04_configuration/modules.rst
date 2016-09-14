@@ -16,6 +16,7 @@ The configuration file will be available in the folder::
 
     etc/alignak/arbiter_cfg/modules
 
+
 Documentation links
 ~~~~~~~~~~~~~~~~~~~
 
@@ -37,5 +38,3 @@ Shinken modules
 
 The shinken module are not compatible with Alignak. 
 For some of them, it's possible with some modifications in code, but we not recommand it.
-
-

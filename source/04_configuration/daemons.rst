@@ -6,8 +6,8 @@ Daemons
 Ini files
 =========
 
-When run a daemon, it start with an ini file.
-This ini file define options like IP address, port, SSL...
+To run a daemon, it must start with a configuration file (ini file).
+This configuration file defines options like IP address, port, SSL...
 
 The format is same for all and defined in this style::
 

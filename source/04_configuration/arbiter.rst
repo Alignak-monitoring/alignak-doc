@@ -18,6 +18,8 @@ Each sub-part is stored by default in its own sub-directory:
 
 * *etc/alignak/arbiter_cfg/daemons/* for the daemons
 * *etc/alignak/arbiter_cfg/modules/* for the modules
+* *etc/alignak/arbiter_cfg/templates/* for the objects templates
+* *etc/alignak/arbiter_cfg/packs/* for the checks packs
 * *etc/alignak/arbiter_cfg/objects/* for the objects
 * *etc/alignak/arbiter_cfg/resource.d/* for the resources
 
@@ -25,11 +27,10 @@ Each sub-part is stored by default in its own sub-directory:
 Monitoring resources configuration
 ==================================
 
-The monitoring resources part of the configuration is used mainly to define common macros used in the whole configuration. The default installed configuration defines the following ones:
+The monitoring resources part of the configuration is used mainly to define common macros used
+in the whole configuration. The default installed configuration defines the following ones:
 
 * checks plugins directories
-* SNMP community used for SNMP checks
-* Windows Management Instrumentation default configuration
 
 
 External modules configuration

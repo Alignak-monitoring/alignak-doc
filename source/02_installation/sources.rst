@@ -51,6 +51,8 @@ Or directly on your system ::
 Data directory
 ==============
 
-To change ther data files installation directory you can run::
+To change the data files installation directory you can run::
 
     python setup.py install --data-dir /tmp
+
+This command will use */tmp* directory instead of the usual data installation directory determined by the system.

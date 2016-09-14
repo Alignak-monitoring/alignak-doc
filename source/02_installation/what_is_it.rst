@@ -36,6 +36,7 @@ Variables to update *default/alignak*::
     'LOG': '/var/log/alignak',
     'LIB': '/var/libexec/alignak',
 
+
 Variables to update *alignak.cfg* and *daemons.ini* files::
 
     'workdir': '/var/run/alignak',
@@ -54,6 +55,19 @@ Variables to update *alignak.cfg* and *daemons.ini* files::
     'server_key': '/etc/alignak/certs/server.key',
 
 **Note:** The last three variables concern SSL and they are replaced and stay commented in the configuration files.
+
+
+Variables to update *alignak.cfg* and *daemons.ini* files with user credentials::
+
+    'alignak_user'
+    'alignak_group'
+    'user'
+    'group'
+    'ALIGNAKUSER'
+    'ALIGNAKGROUP'
+
+**Note:** Those variables are intended for macro definition and they are replaced with *$name$*.
+
 
 Variables to update *resource.d/paths.cfg*::
 

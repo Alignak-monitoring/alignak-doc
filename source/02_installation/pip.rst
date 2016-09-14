@@ -21,6 +21,3 @@ Installation
 The installation is very simple, use this command::
 
     pip install alignak
-
-
-

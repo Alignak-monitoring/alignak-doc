@@ -19,4 +19,5 @@ Installation
    rpm_packages
    pip
    sources
+   what_is_it
 

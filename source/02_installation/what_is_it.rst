@@ -13,14 +13,14 @@ The python *setup.py* script used by Alignak does the following:
 
 * determine the installation directory according to the system (setuptools inner method)
 
-* create a */etc/default/alignak* main configuration file:
+* create a */etc/default/alignak* main configuration file (only on non Free BSD platform):
     - copy the *bin/default/alignak.in* file
     - update the main variable directories according to the used installation directory
 
 * copy the alignak default configuration files in */etc/alignak* and update some files:
     - update the *alignak.cfg* file according to the used installation directory
     - update the *daemons/*.ini* files according to the used installation directory
-    - update the *paths.cfg* file with the Nagios plugins dir and Alignak plugins directory
+    - update the *paths.cfg* file with the Alignak plugins directory
 
 Files / directories lists
 =========================

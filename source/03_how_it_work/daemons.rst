@@ -28,7 +28,7 @@ Scheduler
 
 The *Scheduler* manages the checks to run, the period when it needs to run the checks, acknowledge, downtimes...
 
-It is connected to:
+It is connected to the other daemons:
 
 * Arbiter
 * Poller
@@ -39,9 +39,9 @@ It is connected to:
 Poller
 ------
 
-The *Poller* runs active checks ordered by *Scheduler*.
+The *Poller* runs active checks required by the *Scheduler*.
 
-It is connected to:
+It is connected to the other daemons:
 
 * Arbiter
 * Scheduler
@@ -52,7 +52,7 @@ Receiver
 
 The *Receiver* receives the passive checks
 
-It is connected to:
+It is connected to the other daemons:
 
 * Arbiter
 * Scheduler
@@ -63,7 +63,7 @@ Broker
 
 The *Broker* gets all events from scheduler
 
-It is connected to:
+It is connected to the other daemons:
 
 * Arbiter
 * Poller
@@ -77,7 +77,7 @@ Reactionner
 
 The *Reactionner* sends the notifications to the users
 
-It is connected to:
+It is connected to the other daemons:
 
 * Arbiter
 * Scheduler

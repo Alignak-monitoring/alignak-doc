@@ -28,7 +28,7 @@ This is the steps:
 
 * Install with python (as sudo)::
 
-    python setup.py install
+    sudo python setup.py install
 
 
 Install Alignak as python lib

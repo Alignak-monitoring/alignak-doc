@@ -8,13 +8,13 @@ Getting Help and Ways to Contribute
 Setup environment for Alignak
 =============================
 
-Alignak require python-pbr to be setup (and so python). We suggest to use virtualenv also ::
+Alignak requires python-pbr to be installed (and so python). We suggest to use virtualenv also ::
 
   virtualenv alignak_env
   . alignak_env/bin/activate
   python setup.py develop
 
-if you don't want virtualenv (you are in a docker or something), just add sudo / install it on you system.
+if you don't want virtualenv (you are in a docker or something else), just add sudo / install it on you system.
 
 If you want to use init scripts in your virtualenv you have to do another command and REsource ``activate``::
 
@@ -22,8 +22,7 @@ If you want to use init scripts in your virtualenv you have to do another comman
   . alignak_env/bin/activate
 
 
-
-You can use the alignak-* binaries in your path. You need to specified config file as parameter.
+You can use the alignak-* binaries in your path. You need to specify config file as parameter.
 You will find them in etc/alignak directory (in your virtualenv path)
 
 Otherwise you can use sysV init script alignak-*.
@@ -34,7 +33,7 @@ You can find them in etc/init.d directory (in your virtualenv path)
 Getting started into the developer documentation
 ================================================
 
-The `developer documentation`_ is generated from Alignak source code and basically describe its modules.
+The `developer documentation`_ is generated from Alignak source code and basically describes its modules.
 You can see in details the functions and jump to the source code if necessary. You also have some class diagram in the index page to browse code more easily
 A good entry point could be the daemon module, you can find the python files used to launch daemons (arbiter, scheduler ...).
 
@@ -123,6 +122,10 @@ Once you have forked the repository and added remote (see above) you can start a
   git checkout -b Add_ponies_and_rainbows
 
 Here your new branch is Add_ponies_and_rainbows. You can now start editing files
+
+Run Alignak
+~~~~~~~~~~~
+The *dev* directory of the repository includes several useful scripts to run Alignak daemons on your development platform. the scripts names are self explanatory.
 
 Run tests
 ~~~~~~~~~

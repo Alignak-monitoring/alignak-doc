@@ -36,5 +36,5 @@ So there are the steps to install all:
 Shinken modules
 ---------------
 
-The shinken module are not compatible with Alignak. 
-For some of them, it's possible with some modifications in code, but we not recommand it.
+The shinken module are not compatible *as is* with Alignak.
+For some of them, it's possible with some small modifications in the source code, but we do not recommand it. This matter should be discussed; for this please log an issue in the project repository.

@@ -40,7 +40,7 @@ For Receiver::
     alignak-receiver -c /usr/local/etc/alignak/daemons/receiverd.ini
 
 
-For Arbiter (be carefull, this daemon not start like other)::
+For Arbiter (be carefull, this daemon does not start like other)::
 
     alignak-arbiter -c /usr/local/etc/alignak/alignak.cfg
 

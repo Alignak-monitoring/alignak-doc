@@ -46,7 +46,7 @@ Second step
 
 We configure the 2 *Scheduler* daemons in *Arbiter* config on *ServerA*.
 
-In folder etc/alignak/arbiter_cfg/daemons_cfg:
+In folder etc/alignak/arbiter/daemons:
 
 * rename the file *scheduler-master.cfg* in *scheduler-mars.cfg*. In this file, define the IP of *ServerB* like::
 

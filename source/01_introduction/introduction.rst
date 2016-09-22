@@ -1,17 +1,17 @@
 .. _introduction/introduction:
 
 
-==============
+=============
 About Alignak
-==============
+=============
 
 Alignak is an open source monitoring framework written in Python under the terms of the `GNU Affero General Public License`_ .
-It's a fork of Shinken
+It is a fork of the Shinken project.
 
 
 
 Alignak Project
-================
+===============
 
 The main idea when developing Alignak is the flexibility which is our definition of framework.
 Nevertheless, Alignak was first made differently and we try to keep all the good things that made it a monitoring solution :
@@ -28,7 +28,7 @@ This is basically what Alignak is made of. Maybe add the "keep it simple" Linux 
 
 
 Features
-=========
+========
 
 Alignak has a lot of features, we started to list some of them in the last paragraph. Let's go into details:
 
@@ -97,9 +97,9 @@ Alignak has a lot of features, we started to list some of them in the last parag
 
 
 Release cycle
-==============
+=============
 
-Alignak has no strict schedule for now on release date. We will keep you updated on user mailing on what we plan for next release.
+Alignak has no strict schedule for now on release date. We will keep you updated on user mailing list on what we plan for next release.
 Developers meeting will define a realease cycle later in 2015 fall.
 Roadmap is available in a `specific Github issue`_, feature addition can be discussed there.
 Technical point of view about a specific feature are discussed in a separated issue.

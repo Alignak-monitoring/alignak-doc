@@ -12,9 +12,9 @@ To install them, install with pip command::
 
      pip install alignak_module_nameofmodule
 
-The configuration file will be available in the folder::
+The configuration file of the installed module will be installed in the folder::
 
-    etc/alignak/arbiter_cfg/modules
+    etc/alignak/arbiter/modules
 
 
 Documentation links
@@ -36,5 +36,12 @@ So there are the steps to install all:
 Shinken modules
 ---------------
 
-The shinken module are not compatible *as is* with Alignak.
-For some of them, it's possible with some small modifications in the source code, but we do not recommand it. This matter should be discussed; for this please log an issue in the project repository.
+The Shinken module are not compatible *as is* with Alignak. For some of them, only small
+modifications are necessary in the source code, but we do not recommend it. A lot of the features
+needing external modules in Shinken are now available thanks to the still existing Alignak modules.
+
+Do not hesitate to contact the Alignak team on our IRC channel or developers list.
+
+This matter should be discussed; for this please log an issue in the `Alignak
+contributions project repository <https://github.com/Alignak-monitoring-contrib>`_.
+

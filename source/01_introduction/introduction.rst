@@ -8,7 +8,7 @@ About Alignak
 Alignak is an open source monitoring framework written in Python under the terms of the `GNU Affero General Public License`_ .
 It is a fork of the Shinken project.
 
-
+More information about Alignak is available in the `Alignak documentation <http://alignak-doc.readthedocs.io/en/latest/>`_.
 
 Alignak Project
 ===============

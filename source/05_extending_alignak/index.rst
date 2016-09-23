@@ -27,3 +27,4 @@ extend Alignak for making it suit your monitoring needs
     installing_checks
     alignak_backend
     installing_modules
+    alignak_webui

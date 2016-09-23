@@ -30,7 +30,7 @@ The Alignak backend is a REST backend dedicated to the Alignak framework. It is 
         * store all the system acitivity in a timestamped log
 
 
-More information is available in the `module project repository <https://github.com/Alignak-monitoring-contrib/alignak-backend>`_.
+More information is available in the `project repository <https://github.com/Alignak-monitoring-contrib/alignak-backend>`_.
 
 The backend full documentation is available on http://alignak-backend.readthedocs.io/en/latest/intro.html
 
@@ -51,15 +51,19 @@ The different installation methods are detailed in the documentation but the mos
     pip install alignak-backend
 
 
-Once installed, the backend is ready to run and you start with::
+Once installed, the backend is ready to run and you can start with::
 
     ./bin/run.sh
 
 
-Configuring the Alignak backend is made thanks to a *settings.json* file.
+Configuring the Alignak backend is made easy thanks to a *settings.json* file.
 The default configuration makes the backend run on the local interface, on port 5000, and it creates an admin user that can be used to log-in.
 
 **Note**: to be updated after the backend packaging ...
+
+Once installed, the backend needs to be related to Alignak daemons. This is achieved thanks to the `Alignak backend`_ modules.
+
+A backend installation tutorial exists on the `SysAdmin.cool web site <http://sysadmin.cool/>`_.
 
 Feeding the backend
 ===================
@@ -113,3 +117,5 @@ where you specify that you want to delete existing data (*-d*), import the exist
 
 
 More information is available in this `documentation <http://alignak-backend-import.readthedocs.io/en/latest/>`_.
+
+A backend feeding tutorial exists on the `SysAdmin.cool web site <http://sysadmin.cool/>`_.

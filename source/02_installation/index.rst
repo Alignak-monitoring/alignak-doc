@@ -12,6 +12,9 @@ Installation
 
     \newpage
 
+Installing Alignak is an easy process thanks to the different packagings and available procedures.
+A complete tutorial exists on the `SysAdmin.cool web site <http://sysadmin.cool/>`_.
+
 .. toctree::
    :maxdepth: 2
 

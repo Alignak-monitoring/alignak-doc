@@ -1,4 +1,4 @@
-
+.. _configuration/arbiter:
 
 =======
 Arbiter

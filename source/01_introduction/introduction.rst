@@ -24,7 +24,7 @@ Nevertheless, Alignak was first made differently and we try to keep all the good
    * Flexible : in an architecture point view. It is very close to our scalability wish. OpenStack integration is our long term goal (short lifetime architecture)
    * Easy to contribute : contribution has to be an easy process. Alignak follow pep8 and pylint coding standard add readability. Step by step help to contribute can be found in :ref:`Contributing <contributing/how_to_contribute>`
 
-This is basically what Alignak is made of. Maybe add the "keep it simple" Linux principle and it's prefect. There is nothing we don't want, we consider every features / ideas.
+This is basically what Alignak is made of. Maybe add the "keep it simple" Linux principle and it's perfect. There is nothing we don't want, we consider every features / ideas.
 
 
 Features
@@ -35,7 +35,7 @@ Alignak has a lot of features, we started to list some of them in the last parag
   * Role separated daemons : we want a daemon to do one thing but doing it good. There are 6 of them but one is not compulsory.
   * Great flexibility : you didn't got that already? Alignak modules allow it to talk to almost everything you can imagine.
 
-  Those to points involve all the following :
+  Those two points involve all the following :
 
   * Data export to databases :
 
@@ -60,8 +60,7 @@ Alignak has a lot of features, we started to list some of them in the last parag
       * NConf
       * Centreon (With NDO, not fully working, not recommended)
 
-
-  * Import config from databases :
+  * Import configuration from databases :
 
       * GLPI
       * Amazon EC2
@@ -69,8 +68,7 @@ Alignak has a lot of features, we started to list some of them in the last parag
       * MongoDB
       * Canonical Landscape
 
-
-  * Alignak provide sets of configuration, named packs, for a huge number of services :
+ * Alignak provide sets of configuration, named packs, for a huge number of services :
 
       * Databases (Mysql, Oracle, MSSQL, memcached, mongodb, influxdb etc.)
       * Routers, Switches (Cisco, Nortel, Procurve etc.)
@@ -85,10 +83,10 @@ Alignak has a lot of features, we started to list some of them in the last parag
   * Scalability : no server overloading, you just have to install new daemons on another server and load balancing is done.
 
 
-  But Alignak is even more :
+But Alignak is even more :
 
   * Realm concept : you can monitor independent environments / customer
-  * DMZ monitroing : some daemon have passive facilities so that firewall don't block monitoring.
+  * DMZ monitoring : some daemons have passive facilities so that firewall don't block monitoring.
   * Business impact : Alignak can differentiate impact of a critical alert on a toaster versus the web store
   * Efficient correlation between parent-child relationship and business process rules
   * High availability : daemons can have spare ones.
@@ -99,7 +97,7 @@ Alignak has a lot of features, we started to list some of them in the last parag
 Release cycle
 =============
 
-Alignak has no strict schedule for now on release date. We will keep you updated on user mailing list on what we plan for next release.
+Alignak has no strict schedule for now on release date. We will keep you updated on the user mailing list on what we plan for next release.
 Developers meeting will define a realease cycle later in 2015 fall.
 Roadmap is available in a `specific Github issue`_, feature addition can be discussed there.
 Technical point of view about a specific feature are discussed in a separated issue.

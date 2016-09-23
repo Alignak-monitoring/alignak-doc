@@ -1,3 +1,4 @@
+.. _extending/updating_default:
 
 ==============================
 Updating default configuration

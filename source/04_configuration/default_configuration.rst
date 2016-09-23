@@ -1,3 +1,4 @@
+.. _configuration/default_configuration:
 
 =====================
 Default configuration

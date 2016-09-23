@@ -1,3 +1,4 @@
+.. _extending/checks:
 
 =================
 Installing checks
@@ -59,7 +60,7 @@ Short story::
 
 
 Checking with WMI
-------------------
+-----------------
 
 For checking an host and its most common services through WMI, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi>`_.
 
@@ -73,6 +74,24 @@ Short story::
         use                 windows-wmi
         host_name           wmi_host
         address             127.0.0.1
+    }
+
+
+Passive checking with NSCA
+--------------------------
+
+For checking an host and its most common services through NSCA, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nsca>`_.
+
+With this type of checking, hosts do not have any check_command (indeed they have a fake one ...) because Alignak is waiting for the hosts and services to send their own check information.
+
+Short story::
+
+    pip install alignak-checks-windows-nsca
+
+    define host{
+        use                 windows-nsca
+        host_name           nsca_windows_host
+        address             0.0.0.0
     }
 
 

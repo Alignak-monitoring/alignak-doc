@@ -23,6 +23,25 @@ plugins already packaged in an easy installable package called an **Alignak chec
 Alignak checks packs
 ====================
 
+Checking with the Monitoring plugins
+------------------------------------
+
+For checking an host and its most common services with the "most common" plugins, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-monitoring>`_.
+
+The monitoring plugins are most often known as Nagios plugins... they provide many checks for network services.
+
+Short story::
+
+    pip install alignak-checks-monitoring
+
+    define host{
+        use                 dns, ftp, http
+        host_name           snmp_host
+        address             127.0.0.1
+    }
+
+
+
 Checking with SNMP
 ------------------
 
@@ -77,12 +96,14 @@ Short story::
     }
 
 
-Passive checking with NSCA
---------------------------
+Passive checking Windows with NSCA
+----------------------------------
 
-For checking an host and its most common services through NSCA, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nsca>`_.
+For checking a Windows host and its most common services through NSCA, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nsca>`_.
 
 With this type of checking, hosts do not have any check_command (indeed they have a fake one ...) because Alignak is waiting for the hosts and services to send their own check information.
+
+**Note**: this checks pack assumes that your Windows host are using the `NSClient agent<https://www.nsclient.org/>`_.
 
 Short story::
 

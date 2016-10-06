@@ -9,7 +9,7 @@ dedicated to the Alignak framework. It is used to display and edit the monitorin
 
 More information is available in the `project repository <https://github.com/Alignak-monitoring-contrib/alignak-webui>`_.
 
-The WebUI documentation is available on http://alignak-webui.readthedocs.io/en/latest/intro.html
+The WebUI documentation is available on http://alignak-web-ui.readthedocs.io/
 
 
 Installing the WebUI

@@ -1,4 +1,4 @@
-
+.. _configuration/arbiter:
 
 =======
 Arbiter
@@ -7,29 +7,32 @@ Arbiter
 
 The arbiter is the main Alignak daemon. As of it, its configuration part is the most important one.
 
-This part of the configuration is stored by default in the folder *etc/alignak/arbiter_cfg/* and it contains:
+This part of the configuration is stored by default in the folder *etc/alignak/arbiter/* and it contains:
 
-* configuration of the daemons
-* configuration of (external) modules
-* configuration of monitoring objects
-* configuration of monitoring resources
+* the configuration of the daemons and their (external) modules
+* the configuration of the monitored objects
+* the configuration of monitoring resources
 
 Each sub-part is stored by default in its own sub-directory:
 
-* *etc/alignak/arbiter_cfg/daemons/* for the daemons
-* *etc/alignak/arbiter_cfg/modules/* for the modules
-* *etc/alignak/arbiter_cfg/objects/* for the objects
-* *etc/alignak/arbiter_cfg/resource.d/* for the resources
+* *etc/alignak/arbiter/daemons/* for the daemons
+* *etc/alignak/arbiter/modules/* for the modules
+* *etc/alignak/arbiter/templates/* for the objects templates
+* *etc/alignak/arbiter/packs/* for the checks packs
+* *etc/alignak/arbiter/objects/* for the objects
+* *etc/alignak/arbiter/resource.d/* for the resources and global macros
 
 
-Monitoring resources configuration
-==================================
+Resources configuration
+=======================
 
-The monitoring resources part of the configuration is used mainly to define common macros used in the whole configuration. The default installed configuration defines the following ones:
+The resources part of the configuration is used mainly to define common macros used in the whole
+configuration. The default installed configuration defines the following ones:
 
 * checks plugins directories
-* SNMP community used for SNMP checks
-* Windows Management Instrumentation default configuration
+
+The default installed configuration also includes a directory that will be used when some Alignak
+checks packs will be installed on the system.
 
 
 External modules configuration
@@ -54,7 +57,7 @@ Currently this part of the documentation is not yet available but an old version
 Daemons configuration
 =====================
 
-These files are stored by default in the folder *etc/alignak/arbiter_cfg/daemons_cfg/*.
+These files are stored by default in the folder *etc/alignak/arbiter/daemons/*.
 
 Each daemon has its own configuration file.
 

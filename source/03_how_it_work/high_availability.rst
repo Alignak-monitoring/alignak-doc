@@ -38,7 +38,7 @@ Second step
 
 We configure the 2 *Scheduler* daemons in *Arbiter* config on *ServerA*.
 
-In folder etc/alignak/arbiter_cfg/daemons_cfg:
+In folder etc/alignak/arbiter/daemons:
 
 * modify the file *scheduler-master.cfg*. In this file, define the IP of *ServerB* like::
 
@@ -87,4 +87,4 @@ Important
 =========
 
 Be careful, in case you configure *Arbiter* in high availability, you need to have same configuration
-files (folder etc/alignak/arbiter_cfg) in both *Arbiter* servers (master and slave).
+files (folder etc/alignak/arbiter) in both *Arbiter* servers (master and slave).

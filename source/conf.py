@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Shinken documentation build configuration file, created by
+# Alignak documentation build configuration file, created by
 # sphinx-quickstart on Wed Nov 13 01:01:23 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -84,7 +84,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Alignak Manual'
-copyright = u'2015, Alignak Team'
+copyright = u'2015-2016, Alignak Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

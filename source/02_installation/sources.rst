@@ -1,7 +1,7 @@
 .. _Installation/sources:
 
 =========================
-Installation with sources
+Installation from sources
 =========================
 
 Introduction
@@ -18,7 +18,7 @@ Installation
 
 This is the steps:
 
-* Create user *alignak* and connect with
+* Create user *alignak* and login with this user account
 * Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases 
 * Uncompress the archive
 * Go in alignak folder
@@ -28,12 +28,7 @@ This is the steps:
 
 * Install with python (as sudo)::
 
-    python setup.py install
-
-* Give rights to following fodlers::
-
-    chown -R alignak:alignak /usr/local/var/run/alignak
-    chown -R alignak:alignak /usr/local/var/log/alignak
+    sudo python setup.py install
 
 
 Install Alignak as python lib
@@ -53,4 +48,11 @@ Or directly on your system ::
 
 
 
+Data directory
+==============
 
+To change the data files installation directory you can run::
+
+    python setup.py install --data-dir /tmp
+
+This command will use */tmp* directory instead of the usual data installation directory determined by the system.

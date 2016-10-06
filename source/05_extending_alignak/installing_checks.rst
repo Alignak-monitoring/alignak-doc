@@ -31,7 +31,7 @@ Using each pack is documented in the pack repository README file.
 Checking with the Monitoring plugins
 ------------------------------------
 
-For checking an host and its most common services with the "most common" plugins, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-monitoring>`_.
+For checking an host and its most common services with the "most common" plugins, `install monitoring package <https://github.com/Alignak-monitoring-contrib/alignak-checks-monitoring>`_.
 
 The monitoring plugins are most often known as Nagios plugins... they provide many checks for network services.
 
@@ -50,7 +50,7 @@ Short story::
 Checking with SNMP
 ------------------
 
-For checking an host and its most common services through SNMP, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-snmp>`_.
+For checking an host and its most common services through SNMP, `install SNMP package <https://github.com/Alignak-monitoring-contrib/alignak-checks-snmp>`_.
 
 Hosts inherit from a check command that gets the host uptime with an SNMP get, this to confirm that the host is alive and that SNMP connection is ok.
 
@@ -68,7 +68,7 @@ Short story::
 Checking with NRPE
 ------------------
 
-For checking an host and its most common services through NRPE, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe>`_.
+For checking an host and its most common services through NRPE, `install NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe>`_.
 
 Hosts inherit from a check command that gets the host NRPE daemon version, this to confirm that the host is alive and that NRPE connection is ok.
 
@@ -86,7 +86,7 @@ Short story::
 Checking with WMI
 -----------------
 
-For checking an host and its most common services through WMI, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi>`_.
+For checking an host and its most common services through WMI, `install WMI package <https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi>`_.
 
 Hosts inherit from a check command that gets the host uptime with a WMI request, this to confirm that the host is alive and that WMI connection is ok.
 
@@ -104,7 +104,7 @@ Short story::
 Passive checking Windows with NSCA
 ----------------------------------
 
-For checking a Windows host and its most common services through NSCA, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nsca>`_.
+For checking a Windows host and its most common services through NSCA, `install Windows NSCA package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nsca>`_.
 
 With this type of checking, hosts do not have any check_command (indeed they have a fake one ...) because Alignak is waiting for the hosts and services to send their own check information.
 

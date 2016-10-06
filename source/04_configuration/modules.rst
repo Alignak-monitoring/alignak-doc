@@ -8,7 +8,7 @@ Modules
 Alignak modules (official way)
 ------------------------------
 
-Alignak modules are available on PyPi_. Their name starts with "alignak_module_".
+Alignak modules are available on PyPi_. Their name starts with "alignak_module".
 To install them, install with pip command::
 
      pip install alignak_module_nameofmodule

@@ -4,8 +4,8 @@
 
 .. _extending/index:
 
-Configuration
-=============
+Extending Alignak
+=================
 
 .. raw:: LaTeX
 

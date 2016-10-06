@@ -12,7 +12,7 @@ because it defines helpful stuff to set-up a configuration
 
 Note that this configuration allows you to run Alignak because it includes a *localhost* host that is self-checked
 
-More information on the content of this configuration and how to adapt to your needs in the `next chapter<_extending_alignak/updating_default>`_.
+More information on the content of this configuration and how to adapt to your needs in the `_next chapter<05_extending_alignak/updating_default>`_.
 
 
 Folders hierarchy

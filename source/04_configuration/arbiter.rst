@@ -152,7 +152,7 @@ accept_passive_unknown_check_results
 
 
 Scheduler configuration
----------------------
+-----------------------
 
 Definition Format
 ~~~~~~~~~~~~~~~~~
@@ -237,7 +237,7 @@ spare
   This variable is used to define if the scheduler must be managed as a spare one (will take the conf only if a master failed). The default value is *0* (master).
 
 realm
-  This variable is used to define the :ref:`realm <configobjects/realm>` where the scheduler will be put. If none is selected, it will be assigned to the default one.
+  This variable is used to define the realm where the scheduler will be put. If none is selected, it will be assigned to the default one.
 
 modules
   This variable is used to define all modules that the scheduler will load.
@@ -247,7 +247,7 @@ accept_passive_unknown_check_results
 
 
 Broker configuration
----------------------
+--------------------
 
 Definition Format
 ~~~~~~~~~~~~~~~~~
@@ -280,7 +280,7 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 
 ::
@@ -303,7 +303,7 @@ Example Definition:
 
 
 Variable Descriptions
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -320,7 +320,7 @@ spare
   This variable is used to define if the broker must be managed as a spare one (will take the conf only if a master failed). The default value is *0* (master).
 
 realm
-  This variable is used to define the :ref:`realm <configobjects/realm>` where the broker will be put. If none is selected, it will be assigned to the default one.
+  This variable is used to define the realm where the broker will be put. If none is selected, it will be assigned to the default one.
 
 manage_arbiters
   Take data from Arbiter. There should be only one broker for the arbiter.
@@ -333,7 +333,7 @@ modules
 
 
 Poller configuration
----------------------
+--------------------
 
 Definition Format
 ~~~~~~~~~~~~~~~~~
@@ -371,7 +371,7 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 
 ::
@@ -395,7 +395,7 @@ Example Definition:
 
 
 Variable Descriptions
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -412,7 +412,7 @@ spare
   This variable is used to define if the poller must be managed as a spare one (will take the conf only if a master failed). The default value is *0* (master).
 
 realm
-  This variable is used to define the :ref:`realm <configobjects/realm>` where the poller will be put. If none is selected, it will be assigned to the default one.
+  This variable is used to define the realm where the poller will be put. If none is selected, it will be assigned to the default one.
 
 manage_sub_realms
   This variable is used to define if the poller will take jobs from scheduler from the sub-realms of it's realm. The default value is *0*.
@@ -426,7 +426,7 @@ modules
 
 
 Reactionner configuration
----------------------
+-------------------------
 
 Definition Format
 ~~~~~~~~~~~~~~~~~
@@ -462,7 +462,7 @@ realm                                string   All    no       it's for multi-dat
 
 
 Example Definition:
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -488,7 +488,7 @@ Example Definition:
 
 
 Variable Descriptions
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
@@ -505,7 +505,7 @@ spare
   This variable is used to define if the reactionner must be managed as a spare one (will take the conf only if a master failed). The default value is *0* (master).
 
 realm
-  This variable is used to define the :ref:`realm <configobjects/realm>` where the reactionner will be put. If none is selected, it will be assigned to the default one.
+  This variable is used to define the realm where the reactionner will be put. If none is selected, it will be assigned to the default one.
 
 manage_sub_realms
   This variable is used to define if the poller will take jobs from scheduler from the sub-realms of it's realm. The default value is *1*.
@@ -519,7 +519,7 @@ reactionner_tags
 By default, there is no reactionner_tag, so reactionner can take all untagged notification/event handlers (default).
 
 Reaceiver configuration
----------------------
+-----------------------
 
 Definition Format
 ~~~~~~~~~~~~~~~~~
@@ -550,13 +550,13 @@ realm                                string   All    no       it's for multi-dat
 ==================================== ======= ======= ======== =============================================================
 
 Example Definition:
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 
 
 Variable Descriptions
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 == TODO UPDATE THIS PART ==
 

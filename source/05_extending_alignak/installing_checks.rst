@@ -108,7 +108,7 @@ For checking a Windows host and its most common services through NSCA, `install 
 
 With this type of checking, hosts do not have any check_command (indeed they have a fake one ...) because Alignak is waiting for the hosts and services to send their own check information.
 
-**Note**: this checks pack assumes that your Windows host is using the `NSClient agent<https://www.nsclient.org/>`_.
+**Note**: this checks pack assumes that your Windows host is using the `NSClient agent`_.
 
 Short story::
 
@@ -121,3 +121,4 @@ Short story::
     }
 
 
+.. _NSClient agent: https://www.nsclient.org

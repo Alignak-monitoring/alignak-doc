@@ -17,8 +17,6 @@ The configuration file of the installed module will be installed in the folder::
 
     etc/alignak/arbiter/modules
 
-This documentation includes more information about the modules in the `Installing modules`_ chapter.
-
 .. _Pypi: https://pypi.python.org/pypi
 
 

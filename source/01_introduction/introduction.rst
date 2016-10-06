@@ -15,6 +15,7 @@ Alignak Project
 
 The main idea when developing Alignak is the flexibility which is our definition of framework.
 Nevertheless, Alignak was first made differently and we try to keep all the good things that made it a monitoring solution :
+
    * Easy to install : we will always recommend packages installations. You can still install it with pip or setup.py directly, see :ref:`installation/index`.
    * Easy for new users : this documentation should helps you to discover Alignak and show simple use-case.
    * Easy to migrate from Nagios : Nagios configuration and plugins will work with Alignak, we try to keep this compatibility while developing it.
@@ -22,7 +23,7 @@ Nevertheless, Alignak was first made differently and we try to keep all the good
    * Utf8 compliant : python is here to do that. For now Alignak is compatible with 2.6-2.7 version but will work with python 3.x and Pypy in the future.
    * Independent from other monitoring solution : Alignak is a framework that can integrate with others through standard interfaces). Flexibility first.
    * Flexible : in an architecture point view. It is very close to our scalability wish. OpenStack integration is our long term goal (short lifetime architecture)
-   * Easy to contribute : contribution has to be an easy process. Alignak follow pep8 and pylint coding standard add readability. Step by step help to contribute can be found in :ref:`Contributing <contributing/how_to_contribute>`
+   * Easy to contribute : contribution has to be an easy process. Alignak follow pep8 and pylint coding standard add readability. Step by step help to contribute can be found in :ref:`Contributing <14_contributing/how_to_contribute>`
 
 This is basically what Alignak is made of. Maybe add the "keep it simple" Linux principle and it's perfect. There is nothing we don't want, we consider every features / ideas.
 

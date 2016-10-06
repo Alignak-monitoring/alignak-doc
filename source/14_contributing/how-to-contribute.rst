@@ -10,23 +10,23 @@ Setup environment for Alignak
 
 Alignak requires python-pbr to be installed (and so python). We suggest to use virtualenv also ::
 
-  virtualenv alignak_env
-  . alignak_env/bin/activate
-  python setup.py develop
+    virtualenv alignak_env
+    . alignak_env/bin/activate
+    python setup.py develop
 
 if you don't want virtualenv (you are in a docker or something else), just add sudo / install it on you system.
 
 If you want to use init scripts in your virtualenv you have to do another command and REsource ``activate``::
 
-  python setup.py install_data
-  . alignak_env/bin/activate
+    python setup.py install_data
+    . alignak_env/bin/activate
 
 
 You can use the alignak-* binaries in your path. You need to specify config file as parameter.
-You will find them in etc/alignak directory (in your virtualenv path)
+You will find them in *etc/alignak* directory (in your virtualenv path)
 
-Otherwise you can use sysV init script alignak-*.
-You can find them in etc/init.d directory (in your virtualenv path)
+Otherwise you can use sysV init script `alignak-`.
+You can find them in *etc/init.d* directory (in your virtualenv path)
 
 
 
@@ -170,21 +170,20 @@ Create new tests
 ~~~~~~~~~~~~~~~~
 If you fix a bug or add a new feature you need to add test case.
 
-There are several simple test cases that you can you to create yours :
+There are several simple test cases that you can re-use to create yours :
 
-* test_bad_contact_call.py
-* test_bad_escalation_on_groups.py
-* test_bad_timeperiods.py
-* test_dummy.py
-[...]
+    * test_bad_contact_call.py
+    * test_bad_escalation_on_groups.py
+    * test_bad_timeperiods.py
+    * test_dummy.py
 
 Almost every test uses alignak_test.py module and inherit from AlignakTest class. This class provides a set of function to help tests ::
 
-* scheduler_loop : used to fake a scheduler loop (run check, create broks, raise notification etc..)
-* show_logs : Dump logs (broks with type "log")
-* show_actions : Dump actions (notification, enventhandler)
-* assert_log_match / assert_any_log_match / ... : Find regexp into logs
-* add : add a brok or external command
+    * scheduler_loop : used to fake a scheduler loop (run check, create broks, raise notification etc..)
+    * show_logs : Dump logs (broks with type "log")
+    * show_actions : Dump actions (notification, enventhandler)
+    * assert_log_match / assert_any_log_match / ... : Find regexp into logs
+    * add : add a brok or external command
 
 
 You can have a look in the file for a complete list of function or have a look in other test files.
@@ -193,27 +192,27 @@ The default configuration file is *etc/alignak_1r_1h_1s.cfg* that basically read
 All you need to to add you specific configuration test is to call setup_with_file function with the file containing what you need.
 For example (bad_contact_call)::
 
-  self.setup_with_file(['etc/alignak_bad_contact_call.cfg'])
+    self.setup_with_file(['etc/alignak_bad_contact_call.cfg'])
 
 and the file content ::
 
-  define service{
-  action_url                     http://search.cpan.org/dist/Monitoring-Generator-TestConfig/
-  active_checks_enabled          1
-  check_command                  check_service!ok
-  check_interval                 1
-  host_name                      test_host_0
-  icon_image                     ../../docs/images/tip.gif
-  icon_image_alt                 icon alt string
-  notes                          just a notes string
-  notes_url                      http://search.cpan.org/dist/Monitoring-Generator-TestConfig/README
-  retry_interval                 1
-  service_description            test_ok_0_badcon
-  servicegroups                  servicegroup_01,ok
-  use                            generic-service
-  event_handler                  eventhandler
-  contacts			 IDONOTEXIST
-  }
+    define service{
+        action_url                     http://search.cpan.org/dist/Monitoring-Generator-TestConfig/
+        active_checks_enabled          1
+        check_command                  check_service!ok
+        check_interval                 1
+        host_name                      test_host_0
+        icon_image                     ../../docs/images/tip.gif
+        icon_image_alt                 icon alt string
+        notes                          just a notes string
+        notes_url                      http://search.cpan.org/dist/Monitoring-Generator-TestConfig/README
+        retry_interval                 1
+        service_description            test_ok_0_badcon
+        servicegroups                  servicegroup_01,ok
+        use                            generic-service
+        event_handler                  eventhandler
+        contacts			 IDONOTEXIST
+    }
 
 You only need to define the service with the not existing contact and it's done.
 
@@ -225,11 +224,11 @@ The pull request in the entry point for Alignak team' review process.
 Keep in mind that we are humans and we usually are doing more that one thing at a time. So the clearer the pull request is the quicker it will be merged
 Here are some hints to help reviewers ::
 
-* Explain the issue you encountered, and how you fixed it (short description)
-* Add test cases in a separate commit
-* Link any Github issue it is related to (if you fix an issue for example)
-* Mention any limitations of your imlpementation
-* Mention any removal of supported feature
+    * Explain the issue you encountered, and how you fixed it (short description)
+    * Add test cases in a separate commit
+    * Link any Github issue it is related to (if you fix an issue for example)
+    * Mention any limitations of your imlpementation
+    * Mention any removal of supported feature
 
 
 If you run the test previously you should see that Travis managed to build successfully. If not you will get an email.
@@ -248,9 +247,9 @@ Here are few thing to check when doing a release
 * Merge and tag
   ::
 
-  VERSION="X.Y"
-  git checkout master && git merge develop && git tag $VERSION
-  git push
+    VERSION="X.Y"
+    git checkout master && git merge develop && git tag $VERSION
+    git push
 
 * Update packaging
 

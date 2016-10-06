@@ -18,13 +18,15 @@ Installation
 
 This is the steps:
 
-* Create user *alignak* and login with this user account
+* Create user *alignak* member of group *alignak*
+* Add this user to the sudoers
+* Login with this user account
 * Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases 
 * Uncompress the archive
-* Go in alignak folder
+* cd to alignak folder
 * Run command::
 
-    pip install -r requirements.txt
+    sudo pip install -r requirements.txt
 
 * Install with python (as sudo)::
 

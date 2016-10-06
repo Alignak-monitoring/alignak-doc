@@ -27,7 +27,7 @@ The Alignak backend is a REST backend dedicated to the Alignak framework. It is 
 
     - system activity log
 
-        * store all the system acitivity in a timestamped log
+        * store all the system activity in a timestamped log
 
 
 More information is available in the `project repository <https://github.com/Alignak-monitoring-contrib/alignak-backend>`_.
@@ -70,7 +70,7 @@ Feeding the backend
 
 On start, the backend creates some elements if they do not yet exist:
 
-    * a default super administrator user named `admin`
+    * a default super administrator user named `admin` with an `admin` password
     * a default Realm (`All`)
     * default groups (users groups, hosts groups and services groups) named `All`
     * default time periods: `24x7` and `None`

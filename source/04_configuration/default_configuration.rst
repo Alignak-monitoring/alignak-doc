@@ -7,13 +7,12 @@ Default configuration
 Main information
 ================
 
-The default configuration installed with Alignak is a quite good starte to build your won configuration.
-It defines:
+The default configuration installed with Alignak is a quite good start to build your own configuration
+because it defines helpful stuff to set-up a configuration
 
-    * a `generic-contact` template that contains the main common contact parameters
-    * a `generic-host` template that contains the main common host parameters
-    * a `generic-host` template that contains the main common host parameters
-    for hosts, services and contacts
+Note that this configuration allows you to run Alignak because it includes a *localhost* host that is self-checked
+
+More information on the content of this configuration and how to adapt to your needs in the `next chapter<_extending/updating_default>`_.
 
 
 Folders hierarchy

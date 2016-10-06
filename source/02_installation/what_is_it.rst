@@ -13,7 +13,7 @@ The python *setup.py* script used by Alignak does the following:
 
 * determine the installation directory according to the system (setuptools inner method)
 
-* create a */etc/default/alignak* main configuration file (only on non Free BSD platform):
+* create a */etc/default/alignak* main configuration file (only on non FreeBSD platform):
     - copy the *bin/default/alignak.in* file
     - update the main variable directories according to the used installation directory
 

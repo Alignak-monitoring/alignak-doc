@@ -23,6 +23,11 @@ plugins already packaged in an easy installable package called an **Alignak chec
 Alignak checks packs
 ====================
 
+All the Alignak checks packs have their own repository and are easily installable thanks to Python PIP.
+
+Using each pack is documented in the pack repository README file.
+
+
 Checking with the Monitoring plugins
 ------------------------------------
 
@@ -65,7 +70,7 @@ Checking with NRPE
 
 For checking an host and its most common services through NRPE, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe>`_.
 
-Hosts inherit from a check command that gets the host NRPE daemon version, this to confirm that the host is alive and that SNMP connection is ok.
+Hosts inherit from a check command that gets the host NRPE daemon version, this to confirm that the host is alive and that NRPE connection is ok.
 
 Short story::
 
@@ -83,7 +88,7 @@ Checking with WMI
 
 For checking an host and its most common services through WMI, `install this package <https://github.com/Alignak-monitoring-contrib/alignak-checks-wmi>`_.
 
-Hosts inherit from a check command that gets the host uptime with a WMI request, this to confirm that the host is alive and that SNMP connection is ok.
+Hosts inherit from a check command that gets the host uptime with a WMI request, this to confirm that the host is alive and that WMI connection is ok.
 
 Short story::
 
@@ -103,7 +108,7 @@ For checking a Windows host and its most common services through NSCA, `install 
 
 With this type of checking, hosts do not have any check_command (indeed they have a fake one ...) because Alignak is waiting for the hosts and services to send their own check information.
 
-**Note**: this checks pack assumes that your Windows host are using the `NSClient agent<https://www.nsclient.org/>`_.
+**Note**: this checks pack assumes that your Windows host is using the `NSClient agent<https://www.nsclient.org/>`_.
 
 Short story::
 

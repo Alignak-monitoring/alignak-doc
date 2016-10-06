@@ -13,13 +13,13 @@ The default configuration installed with Alignak defines:
     * some templates:
         * a `generic-contact` template that contains the main common contact parameters
         * a `generic-host` template that contains the main common host parameters
-        * a `generic-host` template that contains the main common host parameters
+        * a `generic-service` template that contains the main common service parameters
         for hosts, services and contacts
     * one host (``localhost``) which is always UP
     * no services
     * two contacts: ``guest`` and ``admin``
 
-This configuration is fully functionnal but it almost does nothing ... except saying that ``localhost`` is UP without even chking if it is true :)
+This configuration is fully functionnal but it almost does nothing ... except saying that ``localhost`` is UP without even checking if it is true :)
 
 What is important at the moment is to check that the existing configuration is valid and that Alignak is able to use it. For checking the configuration, run::
 

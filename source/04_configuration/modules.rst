@@ -25,7 +25,7 @@ This documentation includes more information about the modules in the `Installin
 Shinken modules
 ---------------
 
-The Shinken module are not compatible *as is* with Alignak. For some of them, only small
+The Shinken modules are not compatible *as is* with Alignak. For some of them, only small
 modifications are necessary in the source code, but we do not recommend it. A lot of the features
 needing external modules in Shinken are now available thanks to the still existing Alignak modules.
 

@@ -9,9 +9,9 @@ Introduction
 
 The load balancing is the ability to share load on multiple servers.
 
-The first thing  to know is that not all Alignak daemons can be managed in load availability.
+The first thing to know is that not all Alignak daemons can be managed in load availability.
 
-This ia the list of daemons it's possible:
+This is the list of daemons for which it is possible:
 
 * *Scheduler* daemon
 * *Poller* daemon
@@ -25,28 +25,29 @@ Configuration
 Introduction
 ------------
 
-We will introduce the configuration part with an example. We put *Scheduler* daemon in load
-balancing mode.
+We will introduce the configuration part with an example.
 
-We have the daemons:
+We set the *Scheduler* daemon in load balancing mode.
 
-* *Arbiter* daemon on *ServerA* with IP 192.168.0.1
-* *Scheduler mars* on *ServerB* with IP 192.168.0.2
-* *Scheduler venus* on *ServerC* with IP 192.168.0.3
+We will distribute the following daemons on three servers:
 
-So, it's possible to have more than 2 *Scheduler* daemons, this example is for 2.
+* *Arbiter* daemon is on *ServerA* with IP 192.168.0.1
+* *Scheduler master* is on *ServerB* with IP 192.168.0.2
+* *Scheduler spare* is on *ServerC* with IP 192.168.0.3
+
+**Note**: it is possible to have more than 2 *Scheduler* daemons, this example is for 2.
 
 First step
 ----------
 
-We need install Alignak on the 3 servers.
+We need to install Alignak on the 3 servers.
 
 Second step
 -----------
 
-We configure the 2 *Scheduler* daemons in *Arbiter* config on *ServerA*.
+We configure the 2 *Scheduler* daemons in the *Arbiter* configuration on *ServerA*.
 
-In folder etc/alignak/arbiter/daemons:
+In the folder *etc/alignak/arbiter/daemons*:
 
 * rename the file *scheduler-master.cfg* in *scheduler-mars.cfg*. In this file, define the IP of *ServerB* like::
 
@@ -54,7 +55,7 @@ In folder etc/alignak/arbiter/daemons:
     address             192.168.0.2
     spare               0
 
-* copy this file *scheduler-mars.cfg* to *scheduler-venus.cfg* (the name is not really important). In this file, define the scheduler_name, the IP of ServerC like::
+* copy this file *scheduler-mars.cfg* to *scheduler-venus.cfg* (the name is not really important). In this file, define the scheduler_name, the IP of *ServerC* like::
 
     scheduler_name      scheduler-venus
     address             192.168.0.3
@@ -64,9 +65,9 @@ In folder etc/alignak/arbiter/daemons:
 Third step
 ----------
 
-On *serverA* start *Arbiter* but not *Scheduler*.
+On *ServerB* and *ServerC*, start the *Scheduler* daemons, and only those daemons.
 
-On *ServerB* and *ServerC*, start only *Scheduler* daemon.
+On *ServerA*, start the *Arbiter* daemon.
 
 Conclusion
 ----------

@@ -70,6 +70,12 @@ files need to be updated to reflect the daemons configuration.
 
     /usr/local/etc/alignak/daemons
         -> ... for the daemons
+        arbiterd.ini
+        brokerd.ini
+        pollerd.ini
+        reactionned.ini
+        receiverd.ini
+        schedulerd.ini
 
 Arbiter
 ~~~~~~~

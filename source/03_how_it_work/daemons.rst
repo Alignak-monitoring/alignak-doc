@@ -7,7 +7,7 @@ Daemons and how they works together
 Daemons
 =======
 
-Alignak framework is made of 6 daemons
+Alignak framework is made of 6 daemons. Each daemon type has its own role in the monitoring process.
 
 
 Arbiter
@@ -18,10 +18,10 @@ The *Arbiter* daemon has several features:
 * Load the configuration. In this word configuration, we have:
 
   * monitoring objects configuration
-  * daemons list and configuration (address, port, spare, modules...)
+  * other daemons list and configuration (address, port, spare, modules...)
 
 * Manage connections with the other daemons
-* Dispatch the configuration to the other daemons
+* Dispatch the whole framework configuration to the other daemons
 
 Scheduler
 ---------

@@ -7,15 +7,88 @@ Running Alignak
 With packaging
 ==============
 
-If you install with packaging (DEB, RPM...), see the package documentation for the best soltuion to start/stop Alignak.
+If you install with packaging (DEB, RPM...), see the package documentation for the best solution to
+configure the daemons and to start/stop Alignak.
 
 
 With sources and pip
 ====================
 
-You can start all daemons (as alignak user) like this::
+Individual start / stop
+-----------------------
+All the Alignak daemons have a script that can be launched with command line parameters.
 
-    /usr/local/etc/init.d/alignak start
+All the command line parameters are optional because default values are used by the aemon when it
+starts but it is recommended to use, at least, a daemon configuration file with the `-c` option.
+
+Other command line parameters are available, but they are use rarely ;)
+
+For all the daemons (broker, poller, receiver, reactionner, scheduler)::
+
+    $ alignak-broker -h
+
+    usage: alignak-broker [-h] [-v] [-c CONFIG_FILE] [-d] [-r]
+                          [--debugfile DEBUG_FILE]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --version         show program's version number and exit
+      -c CONFIG_FILE, --config CONFIG_FILE
+                            Daemon configuration file
+      -d, --daemon          Run as a daemon
+      -r, --replace         Replace previous running daemon
+      --debugfile DEBUG_FILE
+                            File to dump debug logs
+
+
+The arbiter is slightly different because it needs to receive the monitoring configuration that is to be loaded::
+
+    $ alignak-arbiter -h
+
+    usage: alignak-arbiter [-h] [-v] -a MONITORING_FILES [-V] [-n CONFIG_NAME]
+                           [-c CONFIG_FILE] [-d] [-r] [--debugfile DEBUG_FILE]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --version         show program's version number and exit
+      -a MONITORING_FILES, --arbiter MONITORING_FILES
+                            Monitored configuration file(s),multiple -a can be
+                            used, and they will be concatenated.
+      -V, --verify-config   Verify config file and exit
+      -n CONFIG_NAME, --config-name CONFIG_NAME
+                            Use name of arbiter defined in the configuration files
+                            (default arbiter-master)
+      -c CONFIG_FILE, --config CONFIG_FILE
+                            Daemon configuration file
+      -d, --daemon          Run as a daemon
+      -r, --replace         Replace previous running daemon
+      --debugfile DEBUG_FILE
+                            File to dump debug logs
+
+
+With the default installed configuration::
+
+    $ alignak-broker -c /usr/local/etc/alignak/daemons/brokerd.ini
+    $ alignak-scheduler -c /usr/local/etc/alignak/daemons/schedulerd.ini
+    $ alignak-poller -c /usr/local/etc/alignak/daemons/pollerd.ini
+    $ alignak-reactionner -c /usr/local/etc/alignak/daemons/reactionnerd.ini
+    $ alignak-receiver -c /usr/local/etc/alignak/daemons/receiverd.ini
+    $ alignak-arbiter -c /usr/local/etc/alignak/daemons/arbiterd.ini -a /usr/local/etc/alignak/alignak.cfg
+
+
+Installed scripts
+-----------------
+Some scripts to start/stop are provided when installing Alignak with its default configuration.
+Those scripts are located in the */usr/local/etc/init.d* or *rc.d* directory. They allow starting
+one instance of each Alignak daemon with:
+
+    - its own configuration file as installed in the default configuration (*-c /usr/local/etc/alignak/daemons/*.ini*)
+    - in daemon mode (*-d*)
+    - for the Arbiter, adding the default monitored configuration (*-a /usr/local/etc/alignak/alignak.cfg*)
+
+You can then start all daemons (as alignak user) like this::
+
+    $ /usr/local/etc/init.d/alignak start (or /usr/local/etc/rc.d/alignak start)
 
     Starting scheduler:
        ...done.
@@ -30,67 +103,14 @@ You can start all daemons (as alignak user) like this::
     Starting arbiter:
        ...done.
 
-You can stop all daemons (as alignak user) like this::
+Then stop all daemons::
 
-    /usr/local/etc/init.d/alignak stop
-
-    Stopping scheduler
-       ...done.
-    Stopping poller
-       ...done.
-    Stopping reactionner
-       ...done.
-    Stopping broker
-       ...done.
-    Stopping receiver
-       ...done.
-    Stopping arbiter
-       ...done.
+    $ /usr/local/etc/init.d/alignak stop (or /usr/local/etc/rc.d/alignak stop)
 
 
 Restart to load a new configuration::
 
-    Restarting scheduler
-       ...done.
-    Restarting poller
-       ...done.
-    Restarting reactionner
-       ...done.
-    Restarting broker
-       ...done.
-    Restarting receiver
-       ...done.
-    Restarting arbiter
-    Doing config check
-       ...done.
-       ...done.
-
-You can also start each daemon individually.
-
-For Broker::
-
-    alignak-broker -c /usr/local/etc/alignak/daemons/brokerd.ini
-
-For Scheduler::
-
-    alignak-scheduler -c /usr/local/etc/alignak/daemons/schedulerd.ini
-
-For Poller::
-
-    alignak-poller -c /usr/local/etc/alignak/daemons/pollerd.ini
-
-for Reactionner::
-
-    alignak-reactionner -c /usr/local/etc/alignak/daemons/reactionnerd.ini
-
-For Receiver::
-
-    alignak-receiver -c /usr/local/etc/alignak/daemons/receiverd.ini
-
-
-For Arbiter (be carefull, this daemon does not start like other)::
-
-    alignak-arbiter -c /usr/local/etc/alignak/alignak.cfg
+    $ /usr/local/etc/init.d/alignak restart (or /usr/local/etc/rc.d/alignak restart)
 
 
 
@@ -99,7 +119,9 @@ Log files
 
 When running, the Alignak daemons are logging their activity in log files that can be found in the
 */usr/local/var/log/* directory. Each daemon has its own log file. Log files are kept on the system
-for a period of 6 rotating days.
+for a default period of 7 rotating days.
+
+Each daemon log file configuration is found in the daemon configuration file (/usr/local/etc/alignak/daemons/*.ini*).
 
 In case of problem, make sure that there is no ERROR and/or WARNING logs in the log files.
 

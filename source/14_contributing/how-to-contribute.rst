@@ -125,7 +125,10 @@ Here your new branch is Add_ponies_and_rainbows. You can now start editing files
 
 Run Alignak
 ~~~~~~~~~~~
-The *dev* directory of the repository includes several useful scripts to run Alignak daemons on your development platform. the scripts names are self explanatory.
+The *dev* directory of the repository includes several useful scripts to run Alignak daemons on your development platform. The scripts names are self explanatory.
+
+Installing Alignak and its default configuration will create an environement almost identical to the one you will find on your production server. See the `configuration`_ chapter for more information.
+With the default installation your have `init.d` scripts that will allow easy running Alignak...
 
 Run tests
 ~~~~~~~~~

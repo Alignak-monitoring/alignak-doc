@@ -4,10 +4,89 @@
 Installing modules
 ==================
 
-Extending Alignak features is made thanks to daemons modules. Some modules are already packaged in an easy installable package called an **Alignak module package**.
+Extending Alignak features is made thanks to daemons modules. Some modules are already packaged in
+an easy installable package called an **Alignak module package**.
 
 Alignak modules
 ===============
+
+Configuring daemons with modules
+--------------------------------
+
+Each Alignak daemon can be configured to load and use modules. In the daemon configuration file,
+the attribute `modules` may contain a list of the daemon modules.
+
+As a defaut, no module is installed nor configured but one can edit the daemon configuration file
+to declare which module is to be used. The `modules` property is a comma separated list of the
+declared modules alias.
+
+**Note** that the module alias is case sensitive.
+
+For more information about modules, see the `example module repository <https://github.com/Alignak-monitoring/alignak-module-example>`_.
+
+
+Logs
+----
+
+This module collects all the monitoring logs and send them to a python logger.
+
+Short story::
+
+    pip install alignak-module-logs
+
+    # Update your broker daemon configuration
+    define receiver{
+        receiver_name           broker-master
+
+        modules                 logs
+    }
+
+
+    # Edit the module configuration (etc/alignak/arbiter/modules/mod-logs.cfg)
+define module {
+    module_alias            logs
+    module_types            logs
+    python_name             alignak_module_logs
+
+    # Logger configuration file
+    # ---
+    # You should define the logger JSON configuration file here or, even better, declare an
+    # environment variable 'ALIGNAK_MONITORING_LOGS_CFG' to specify the full path of the
+    # logger configuration file.
+    # The environment variable will be used in priority to any other configuration in this file
+    #logger_configuration    ALIGNAKETC/arbiter/modules/mod-logs-logger.json
+
+    # Default parameters
+    # ---
+    # If the logger configuration file is not configured or it does not exist the logger is
+    # configured with the following default parameters
+    # Logger name
+    #log_logger_name         monitoring-logs
+
+    # Logger file
+    log_dir                 ALIGNAKLOG
+    #log_file                monitoring-logs.log
+
+    # Logger file rotation parameters
+    #log_rotation_when       midnight
+    #log_rotation_interval   1
+    #log_rotation_count      7
+
+    # Logger level (accepted log level values=INFO,WARNING,ERROR)
+    #log_level               INFO
+
+    # Logger log format
+    #log_format              [%(created)i] %(levelname)s: %(message)s
+
+    # Logger date is ISO8601 with timezone
+    #log_date                %Y-%m-%d %H:%M:%S %Z
+}
+
+The module default configuration allows to create a monitoring-logs.log file in the default Alignak log directory.
+The file is largely commented to help understand and configure this module.
+
+More information is available in the `module project repository <https://github.com/Alignak-monitoring-contrib/alignak-module-log>`_.
+
 
 NSCA collector
 --------------
@@ -42,6 +121,96 @@ The module default configuration allows to collect non-encrypted NSCA checks for
 The file is largely commented to help understand and configure this module.
 
 More information is available in the `module project repository <https://github.com/Alignak-monitoring-contrib/alignak-module-nsca>`_.
+
+
+External commands
+-----------------
+
+Alignak framework, like Nagios, reacts to external commands sent to a named pipe file. This module
+periodically reads the content of a configured file and builds an external command with the
+information read from this file.
+
+Short story::
+
+    pip install alignak-module-external-commands
+
+    # Update your receiver daemon configuration
+    define receiver{
+        receiver_name           receiver-master
+
+        modules                 external-commands
+    }
+
+
+    # Edit the external commands module configuration (etc/alignak/arbiter/modules/mod-external-commands.cfg)
+    define module {
+        module_alias            external-commands
+        module_types            external-commands
+        python_name             alignak_module_external_commands
+
+        # Default file path is /tmp/alignak.cmd
+        file_path               /tmp/alignak.cmd
+    }
+
+The module default configuration gets commands from a */tmp/alignak.cmd* file.
+
+More information is available in the `module project repository <https://github.com/Alignak-monitoring-contrib/alignak-module-external-commands>`_.
+
+
+Web services
+------------
+
+This module exposes Web services to get information about the Alignak framework and to notify
+external commands from a third-party application.
+
+Short story::
+
+    pip install alignak-module-web-services
+
+    # Update your receiver daemon configuration
+    define receiver{
+        receiver_name           receiver-master
+
+        modules                 web-services
+    }
+
+
+    # Edit the web services module configuration (etc/alignak/arbiter/modules/mod-web-services.cfg)
+    define module {
+        module_alias            web-services
+        module_types            web-services
+        python_name             alignak_module_ws
+
+        #-- Alignak configuration
+        # Alignak main arbiter interface
+        #alignak_host            127.0.0.1
+        #alignak_port            7770
+
+        # Alignak polling period
+        #alignak_polling_period  1
+
+        # Alignak daemons status refresh period
+        #alignak_daemons_polling_period  10
+
+        #-- Network configuration
+        # Interface the modules listens to
+        host                    0.0.0.0
+        # Do not comment the port parameter (see Alignak #504)
+        port                    8888
+
+        #-- SSL configuration --
+        use_ssl                 0
+        #ca_cert                 /usr/local/etc/alignak/certs/ca.pem
+        #server_cert             /usr/local/etc/alignak/certs/server.cert
+        #server_key              /usr/local/etc/alignak/certs/server.key
+        #server_dh               /usr/local/etc/alignak/certs/server.pem
+        #hard_ssl_name_check     0
+    }
+
+The module default configuration tries to get information from a local Alignak arbiter and listens
+to all network interfaces on port 8888.
+
+More information is available in the `module project repository <https://github.com/Alignak-monitoring-contrib/alignak-module-web-services>`_.
 
 
 Alignak backend

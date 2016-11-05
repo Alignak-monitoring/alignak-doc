@@ -13,6 +13,11 @@ Debian 8 (jessie) :
   deb http://alignak-monitoring.github.io/repos/deb jessie main
 
 
+Ubuntu 16.04 (Xenial):
+
+  deb http://alignak-monitoring.github.io/repos/deb xenial main
+
+
 Ubuntu 14.04 (trusty):
 
   deb http://alignak-monitoring.github.io/repos/deb trusty main

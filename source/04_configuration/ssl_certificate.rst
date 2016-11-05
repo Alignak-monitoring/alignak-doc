@@ -29,22 +29,23 @@ You can generate yourself your certificate, the commands are::
     openssl genrsa -passout pass:the_password_you_want -out certificate_test.key 2048
     openssl req -new -x509 -days 3650 -key certificate_test.key -out certificate_test.csr
 
-When generate the certificate_test.csr (last command), if your Alignak run inly in local, you can put in *Common Name*
+When generate the certificate_test.csr (last command), if you Alignak runs only locally, you can use *Common Name*
 the value: *localhost*, otherwise put the server name where the daemon is running.
 
 
 Configuration in daemons
 ------------------------
 
-In *.ini files in etc/alignak/daemons/ define the complete path of your certificates::
+In *.ini files in etc/alignak/daemons/ define the complete path of your certificates and uncomment::
 
-    server_cert=/usr/local/etc/alignak/certs/certificate_test.csr
-    server_key=/usr/local/etc/alignak/certs/certificate_test.key
-    server_dh=/usr/local/etc/alignak/certs/dhparams.pem
+    server_cert=%(etcdir)s/certs/certificate_test.csr
+    server_key=%(etcdir)s/certs/certificate_test.key
+    server_dh=%(etcdir)s/certs/dhparams.pem
 
-In case you use a certificate from an official certificate authority, define too the intermediate certificate of the authority::
+In case you use a certificate from an official certificate authority, define too the intermediate certificate 
+of the authority and uncomment::
 
-    ca_cert=/usr/local/etc/alignak/certs/ca.pem
+    ca_cert=%(etcdir)s/certs/ca.pem
 
 
 At the end, enable SSL in daemons configuration (it's the client in satellite/daemons to communicate with other daemons).
@@ -52,7 +53,7 @@ So in etc/alignak/arbiter/daemons/*.cfg define::
 
     use_ssl 1
 
-For more security, active::
+For more security, uncomment and active::
 
     hard_ssl_name_check 1
 

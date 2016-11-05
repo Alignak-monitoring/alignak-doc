@@ -30,6 +30,6 @@ Typo fixes, updates, ...
 
 Contributions to this project are welcome and encouraged, feel free to update or add your own writings to this project
 
-The `issue tracker of the project<https://github.com/Alignak-monitoring/alignak-doc/issues>`_ is the preferred channel for reporting errors and submitting pull requests.
+The `issue tracker of the project <https://github.com/Alignak-monitoring/alignak-doc/issues>`_ is the preferred channel for reporting errors and submitting pull requests.
 
 

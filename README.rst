@@ -22,7 +22,7 @@ For a local build of the documentation, run::
 Documentation
 =============
 
-You can find online documentation on `Read The Docs <http://alignak-web-ui.readthedocs.io/?badge=latest>`_ and in the */docs* directory.
+You can find online documentation on `Read The Docs <http://alignak-doc.readthedocs.io/?badge=latest>`_ and in the */docs* directory.
 
 
 Typo fixes, updates, ...

@@ -15,3 +15,4 @@ How to contribute
 
     links-to-know
     how-to-contribute
+    modules-and-checks-packages

@@ -32,4 +32,5 @@ The last chapter gives more information about the default installed configuratio
    daemons
    modules
    default_configuration
+   ssl_certificate
 

@@ -43,44 +43,44 @@ Short story::
 
 
     # Edit the module configuration (etc/alignak/arbiter/modules/mod-logs.cfg)
-define module {
-    module_alias            logs
-    module_types            logs
-    python_name             alignak_module_logs
+    define module {
+        module_alias            logs
+        module_types            logs
+        python_name             alignak_module_logs
 
-    # Logger configuration file
-    # ---
-    # You should define the logger JSON configuration file here or, even better, declare an
-    # environment variable 'ALIGNAK_MONITORING_LOGS_CFG' to specify the full path of the
-    # logger configuration file.
-    # The environment variable will be used in priority to any other configuration in this file
-    #logger_configuration    ALIGNAKETC/arbiter/modules/mod-logs-logger.json
+        # Logger configuration file
+        # ---
+        # You should define the logger JSON configuration file here or, even better, declare an
+        # environment variable 'ALIGNAK_MONITORING_LOGS_CFG' to specify the full path of the
+        # logger configuration file.
+        # The environment variable will be used in priority to any other configuration in this file
+        #logger_configuration    ALIGNAKETC/arbiter/modules/mod-logs-logger.json
 
-    # Default parameters
-    # ---
-    # If the logger configuration file is not configured or it does not exist the logger is
-    # configured with the following default parameters
-    # Logger name
-    #log_logger_name         monitoring-logs
+        # Default parameters
+        # ---
+        # If the logger configuration file is not configured or it does not exist the logger is
+        # configured with the following default parameters
+        # Logger name
+        #log_logger_name         monitoring-logs
 
-    # Logger file
-    log_dir                 ALIGNAKLOG
-    #log_file                monitoring-logs.log
+        # Logger file
+        log_dir                 ALIGNAKLOG
+        #log_file                monitoring-logs.log
 
-    # Logger file rotation parameters
-    #log_rotation_when       midnight
-    #log_rotation_interval   1
-    #log_rotation_count      7
+        # Logger file rotation parameters
+        #log_rotation_when       midnight
+        #log_rotation_interval   1
+        #log_rotation_count      7
 
-    # Logger level (accepted log level values=INFO,WARNING,ERROR)
-    #log_level               INFO
+        # Logger level (accepted log level values=INFO,WARNING,ERROR)
+        #log_level               INFO
 
-    # Logger log format
-    #log_format              [%(created)i] %(levelname)s: %(message)s
+        # Logger log format
+        #log_format              [%(created)i] %(levelname)s: %(message)s
 
-    # Logger date is ISO8601 with timezone
-    #log_date                %Y-%m-%d %H:%M:%S %Z
-}
+        # Logger date is ISO8601 with timezone
+        #log_date                %Y-%m-%d %H:%M:%S %Z
+    }
 
 The module default configuration allows to create a monitoring-logs.log file in the default Alignak log directory.
 The file is largely commented to help understand and configure this module.

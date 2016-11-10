@@ -27,6 +27,7 @@ Each main part of the configuration is described in the following chapters:
 The last chapter gives more information about the default installed configuration.
 
 .. toctree::
+   :maxdepth: 1
 
    arbiter
    daemons

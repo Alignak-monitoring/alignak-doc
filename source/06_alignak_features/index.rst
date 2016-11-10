@@ -2,7 +2,7 @@
 
     \newpage
 
-.. _features/index:
+.. _alignak_features/index:
 
 Alignak features
 ================
@@ -14,11 +14,10 @@ Alignak features
 
 Alignak has some rich features:
 
-    - business rules
-    - ...
-
-The next chapters dcument and explain those specific features.
-
 .. toctree::
+   :maxdepth: 1
 
-    business_rules
+   business_rules
+   notifications_escalations
+
+The next chapters explain those specific features.

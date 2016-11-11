@@ -1,4 +1,4 @@
-.. _features/business_rules:
+.. _alignak_features/business_rules:
 
 ==============
 Business rules

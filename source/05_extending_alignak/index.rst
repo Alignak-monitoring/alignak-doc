@@ -22,9 +22,10 @@ The next chapters explain what may be done to update the default installed confi
 extend Alignak for making it suit your monitoring needs
 
 .. toctree::
+   :maxdepth: 2
 
-    updating_default
-    installing_checks
-    alignak_backend
-    installing_modules
-    alignak_webui
+   updating_default
+   installing_checks
+   alignak_backend
+   installing_modules
+   alignak_webui

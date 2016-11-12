@@ -26,6 +26,7 @@ Alignak implementes the NAGIOS legacy features:
    flapping
    dependencies
    event_handlers
+   macros
    external_commands
 
 The next chapters explain those features.

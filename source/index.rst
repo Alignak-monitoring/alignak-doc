@@ -19,6 +19,7 @@ Contents:
    06_monitoring_features/index
    07_alignak_features/index
    14_contributing/index
+   20_annexes/index
 
 
 .. only:: html

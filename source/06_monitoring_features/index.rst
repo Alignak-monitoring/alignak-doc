@@ -19,11 +19,13 @@ Alignak implementes the NAGIOS legacy features:
 
    services_checks
    hosts_checks
+   active_passive_checks
    network_reachability
    notifications
    downtime
    flapping
    dependencies
    event_handlers
+   external_commands
 
 The next chapters explain those features.

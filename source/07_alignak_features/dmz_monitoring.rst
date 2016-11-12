@@ -12,7 +12,7 @@ There is two ways for monitoring a DMZ network:
 If you can take the first, use it :)
 
 If you can't because your security manager is not happy about it, you should put a poller in the DMZ.
-So look at the page :ref:`distributed shinken <advanced/distributed-shinken>` first, because you
+So look at the page :ref:`distributed shinken <alignak_features/distributed>` first, because you
 will need a distributed architecture.
 
 Pollers are "dumb" things. They get their jobs from the schedulers (of their realm, if you don't

@@ -17,6 +17,7 @@ Alignak has some rich features:
 .. toctree::
    :maxdepth: 1
 
+   cached_checks
    distributed
    dmz_monitoring
    business_rules

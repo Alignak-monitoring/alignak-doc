@@ -16,7 +16,8 @@ Contents:
    03_how_it_work/index
    04_configuration/index
    05_extending_alignak/index
-   06_alignak_features/index
+   06_monitoring_features/index
+   07_alignak_features/index
    14_contributing/index
 
 

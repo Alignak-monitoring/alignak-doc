@@ -17,6 +17,7 @@ Alignak implementes the NAGIOS legacy features:
 .. toctree::
    :maxdepth: 1
 
+   services_checks
    hosts_checks
    network_reachability
    notifications

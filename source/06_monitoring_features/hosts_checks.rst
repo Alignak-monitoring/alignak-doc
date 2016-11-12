@@ -1,4 +1,4 @@
-.. _monitoring_features/host_checks:
+.. _monitoring_features/hosts_checks:
 
 ============
 Hosts checks 

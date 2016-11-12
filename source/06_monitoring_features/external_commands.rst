@@ -59,7 +59,7 @@ External commands list
 
 Below you will find descriptions of each external command.
 
-.. warning:: all those external commands are not implemented in Alignak! When possible this list will be updated to reflect the real status of usable commands!
+.. warning:: all those external commands are not implemented in Alignak! This list contains all the commonly known external commands and keep you informed if the command is implemented or not!
 
 ACKNOWLEDGE_HOST_PROBLEM
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -178,12 +178,16 @@ CHANGE_GLOBAL_HOST_EVENT_HANDLER
 
       Changes the global host event handler command to be that specified by the "event_handler_command" option. The "event_handler_command" option specifies the short name of the command that should be used as the new host event handler. The command must have been configured in Alignak before it was last (re)started.
 
+.. note:: this command is not currently implemented in Alignak
+
 CHANGE_GLOBAL_SVC_EVENT_HANDLER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_GLOBAL_SVC_EVENT_HANDLER;<event_handler_command>``
 
       Changes the global service event handler command to be that specified by the "event_handler_command" option. The "event_handler_command" option specifies the short name of the command that should be used as the new service event handler. The command must have been configured in Alignak before it was last (re)started.
+
+.. note:: this command is not currently implemented in Alignak
 
 CHANGE_HOST_CHECK_COMMAND
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -251,72 +255,72 @@ CHANGE_NORMAL_SVC_CHECK_INTERVAL
 CHANGE_RETRY_HOST_CHECK_INTERVAL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_RETRY_HOST_CHECK_INTERVAL;<host_name>;<check_interval>``
+   ``CHANGE_RETRY_HOST_CHECK_INTERVAL;<host_name>;<check_interval>``
 
-Changes the retry check interval for a particular host.
+      Changes the retry check interval for a particular host.
 
 CHANGE_RETRY_SVC_CHECK_INTERVAL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_RETRY_SVC_CHECK_INTERVAL;<host_name>;<service_description>;<check_interval>``
+   ``CHANGE_RETRY_SVC_CHECK_INTERVAL;<host_name>;<service_description>;<check_interval>``
 
-Changes the retry check interval for a particular service.
+      Changes the retry check interval for a particular service.
 
 CHANGE_SVC_CHECK_COMMAND
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_SVC_CHECK_COMMAND;<host_name>;<service_description>;<check_command>``
+   ``CHANGE_SVC_CHECK_COMMAND;<host_name>;<service_description>;<check_command>``
 
-Changes the check command for a particular service to be that specified by the "check_command" option. The "check_command" option specifies the short name of the command that should be used as the new service check command. The command must have been configured in Alignak before it was last (re)started.
+      Changes the check command for a particular service to be that specified by the "check_command" option. The "check_command" option specifies the short name of the command that should be used as the new service check command. The command must have been configured in Alignak before it was last (re)started.
 
 CHANGE_SVC_CHECK_TIMEPERIOD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_SVC_CHECK_TIMEPERIOD;<host_name>;<service_description>;<check_timeperiod>``
+   ``CHANGE_SVC_CHECK_TIMEPERIOD;<host_name>;<service_description>;<check_timeperiod>``
 
-Changes the check timeperiod for a particular service to what is specified by the "check_timeperiod" option. The "check_timeperiod" option should be the short name of the timeperod that is to be used as the service check timeperiod. The timeperiod must have been configured in Alignak before it was last (re)started.
+      Changes the check timeperiod for a particular service to what is specified by the "check_timeperiod" option. The "check_timeperiod" option should be the short name of the timeperod that is to be used as the service check timeperiod. The timeperiod must have been configured in Alignak before it was last (re)started.
 
 CHANGE_SVC_EVENT_HANDLER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_SVC_EVENT_HANDLER;<host_name>;<service_description>;<event_handler_command>``
+   ``CHANGE_SVC_EVENT_HANDLER;<host_name>;<service_description>;<event_handler_command>``
 
-Changes the event handler command for a particular service to be that specified by the "event_handler_command" option. The "event_handler_command" option specifies the short name of the command that should be used as the new service event handler. The command must have been configured in Alignak before it was last (re)started.
+      Changes the event handler command for a particular service to be that specified by the "event_handler_command" option. The "event_handler_command" option specifies the short name of the command that should be used as the new service event handler. The command must have been configured in Alignak before it was last (re)started.
 
 CHANGE_SVC_MODATTR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_SVC_MODATTR;<host_name>;<service_description>;<value>``
+   ``CHANGE_SVC_MODATTR;<host_name>;<service_description>;<value>``
 
-This command changes the modified attributes value for the specified service. Modified attributes values are used by Alignak to determine which object properties should be retained across program restarts. Thus, modifying the value of the attributes can affect data retention. This is an advanced option and should only be used by people who are intimately familiar with the data retention logic in Alignak.
+      This command changes the modified attributes value for the specified service. Modified attributes values are used by Alignak to determine which object properties should be retained across program restarts. Thus, modifying the value of the attributes can affect data retention. This is an advanced option and should only be used by people who are intimately familiar with the data retention logic in Alignak.
 
 CHANGE_SVC_NOTIFICATION_TIMEPERIOD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``CHANGE_SVC_NOTIFICATION_TIMEPERIOD;<host_name>;<service_description>;<notification_timeperiod>``
+   ``CHANGE_SVC_NOTIFICATION_TIMEPERIOD;<host_name>;<service_description>;<notification_timeperiod>``
 
-Changes the notification timeperiod for a particular service to what is specified by the "notification_timeperiod" option. The "notification_timeperiod" option should be the short name of the timeperiod that is to be used as the service notification timeperiod. The timeperiod must have been configured in Alignak before it was last (re)started.
+      Changes the notification timeperiod for a particular service to what is specified by the "notification_timeperiod" option. The "notification_timeperiod" option should be the short name of the timeperiod that is to be used as the service notification timeperiod. The timeperiod must have been configured in Alignak before it was last (re)started.
 
 DEL_ALL_HOST_COMMENTS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DEL_ALL_HOST_COMMENTS;<host_name>``
+   ``DEL_ALL_HOST_COMMENTS;<host_name>``
 
-Deletes all comments associated with a particular host.
+      Deletes all comments associated with a particular host.
 
 DEL_ALL_SVC_COMMENTS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DEL_ALL_SVC_COMMENTS;<host_name>;<service_description>``
+   ``DEL_ALL_SVC_COMMENTS;<host_name>;<service_description>``
 
-Deletes all comments associated with a particular service.
+      Deletes all comments associated with a particular service.
 
 DEL_HOST_COMMENT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DEL_HOST_COMMENT;<comment_id>``
+   ``DEL_HOST_COMMENT;<comment_id>``
 
-Deletes a host comment. The id number of the comment that is to be deleted must be specified.
+      Deletes a host comment. The id number of the comment that is to be deleted must be specified.
 
 DEL_DOWNTIME_BY_HOST_NAME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -379,30 +383,32 @@ Delays the next notification for a particular host until "notification_time". Th
 DELAY_SVC_NOTIFICATION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DELAY_SVC_NOTIFICATION;<host_name>;<service_description>;<notification_time>``
+   ``DELAY_SVC_NOTIFICATION;<host_name>;<service_description>;<notification_time>``
 
-Delays the next notification for a parciular service until "notification_time". The "notification_time" argument is specified in time_t format (seconds since the UNIX epoch). Note that this will only have an affect if the service stays in the same problem state that it is currently in. If the service changes to another state, a new notification may go out before the time you specify in the "notification_time" argument.
+      Delays the next notification for a parciular service until "notification_time". The "notification_time" argument is specified in time_t format (seconds since the UNIX epoch). Note that this will only have an affect if the service stays in the same problem state that it is currently in. If the service changes to another state, a new notification may go out before the time you specify in the "notification_time" argument.
 
 DISABLE_ALL_NOTIFICATIONS_BEYOND_HOST
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_ALL_NOTIFICATIONS_BEYOND_HOST;<host_name>``
+   ``DISABLE_ALL_NOTIFICATIONS_BEYOND_HOST;<host_name>``
 
-Disables notifications for all hosts and services "beyond" (e.g. on all child hosts of) the specified host. The current notification setting for the specified host is not affected.
+      Disables notifications for all hosts and services "beyond" (e.g. on all child hosts of) the specified host. The current notification setting for the specified host is not affected.
+
+.. note:: this command is not currently implemented in Alignak
 
 DISABLE_CONTACT_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_CONTACT_HOST_NOTIFICATIONS;<contact_name>``
+   ``DISABLE_CONTACT_HOST_NOTIFICATIONS;<contact_name>``
 
-Disables host notifications for a particular contact.
+      Disables host notifications for a particular contact.
 
 DISABLE_CONTACT_SVC_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_CONTACT_SVC_NOTIFICATIONS;<contact_name>``
+   ``DISABLE_CONTACT_SVC_NOTIFICATIONS;<contact_name>``
 
-Disables service notifications for a particular contact.
+      Disables service notifications for a particular contact.
 
 DISABLE_CONTACTGROUP_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -428,37 +434,39 @@ Disables host and service event handlers on a program-wide basis.
 DISABLE_FAILURE_PREDICTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_FAILURE_PREDICTION``
+   ``DISABLE_FAILURE_PREDICTION``
 
-Disables failure prediction on a program-wide basis.
+      Disables failure prediction on a program-wide basis.
 
 DISABLE_FLAP_DETECTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_FLAP_DETECTION``
+   ``DISABLE_FLAP_DETECTION``
 
-Disables host and service flap detection on a program-wide basis.
+      Disables host and service flap detection on a program-wide basis.
 
 DISABLE_HOST_AND_CHILD_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOST_AND_CHILD_NOTIFICATIONS;<host_name>``
+   ``DISABLE_HOST_AND_CHILD_NOTIFICATIONS;<host_name>``
 
-Disables notifications for the specified host, as well as all hosts "beyond" (e.g. on all child hosts of) the specified host.
+      Disables notifications for the specified host, as well as all hosts "beyond" (e.g. on all child hosts of) the specified host.
+
+.. note:: this command is not currently implemented in Alignak
 
 DISABLE_HOST_CHECK
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOST_CHECK;<host_name>``
+   ``DISABLE_HOST_CHECK;<host_name>``
 
-Disables (regularly scheduled and on-demand) active checks of the specified host.
+      Disables (regularly scheduled and on-demand) active checks of the specified host.
 
 DISABLE_HOST_EVENT_HANDLER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOST_EVENT_HANDLER;<host_name>``
+   ``DISABLE_HOST_EVENT_HANDLER;<host_name>``
 
-Disables the event handler for the specified host.
+      Disables the event handler for the specified host.
 
 DISABLE_HOST_FLAP_DETECTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -658,6 +666,8 @@ ENABLE_ALL_NOTIFICATIONS_BEYOND_HOST
 
 Enables notifications for all hosts and services "beyond" (e.g. on all child hosts of) the specified host. The current notification setting for the specified host is not affected. Notifications will only be sent out for these hosts and services if notifications are also enabled on a program-wide basis.
 
+.. note:: this command is not currently implemented in Alignak
+
 ENABLE_CONTACT_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -713,6 +723,8 @@ ENABLE_HOST_AND_CHILD_NOTIFICATIONS
    ``ENABLE_HOST_AND_CHILD_NOTIFICATIONS;<host_name>``
 
       Enables notifications for the specified host, as well as all hosts "beyond" (e.g. on all child hosts of) the specified host. Notifications will only be sent out for these hosts if notifications are also enabled on a program-wide basis.
+
+.. note:: this command is not currently implemented in Alignak
 
 ENABLE_HOST_CHECK
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -908,35 +920,61 @@ ENABLE_SVC_NOTIFICATIONS
 
    ``ENABLE_SVC_NOTIFICATIONS;<host_name>;<service_description>``
 
-Enables notifications for a particular service. Notifications will be sent out for the service only if notifications are enabled on a program-wide basis as well.
+      Enables notifications for a particular service. Notifications will be sent out for the service only if notifications are enabled on a program-wide basis as well.
+
+LAUNCH_HOST_EVENT_HANDLER
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ``LAUNCH_HOST_EVENT_HANDLER;<host_name>``
+
+      Runs the event handler for the specified host.
+
+LAUNCH_SVC_EVENT_HANDLER
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ``LAUNCH_SVC_EVENT_HANDLER;<host_name>;<service_description>``
+
+      Runs the event handler for the specified service.
 
 PROCESS_FILE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``PROCESS_FILE;<file_name>;<delete>``
 
-Directs Alignak to process all external commands that are found in the file specified by the <file_name> argument. If the <delete> option is non-zero, the file will be deleted once it has been processes. If the <delete> option is set to zero, the file is left untouched.
+      Directs Alignak to process all external commands that are found in the file specified by the <file_name> argument. If the <delete> option is non-zero, the file will be deleted once it has been processes. If the <delete> option is set to zero, the file is left untouched.
+
+.. note:: this command is not currently implemented in Alignak
 
 PROCESS_HOST_CHECK_RESULT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``PROCESS_HOST_CHECK_RESULT;<host_name>;<status_code>;<plugin_output>``
 
-This is used to submit a passive check result for a particular host. The "status_code" indicates the state of the host check and should be one of the following: 0=UP, 1=DOWN, 2=UNREACHABLE. The "plugin_output" argument contains the text returned from the host check, along with optional performance data.
+      This is used to submit a passive check result for a particular host. The "status_code" indicates the state of the host check and should be one of the following: 0=UP, 1=DOWN, 2=UNREACHABLE. The "plugin_output" argument contains the text returned from the host check, along with optional performance data.
 
 PROCESS_SERVICE_CHECK_RESULT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``PROCESS_SERVICE_CHECK_RESULT;<host_name>;<service_description>;<return_code>;<plugin_output>``
 
-This is used to submit a passive check result for a particular service. The "return_code" field should be one of the following: 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN. The "plugin_output" field contains text output from the service check, along with optional performance data.
+      This is used to submit a passive check result for a particular service. The "return_code" field should be one of the following: 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN. The "plugin_output" field contains text output from the service check, along with optional performance data.
 
 READ_STATE_INFORMATION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``READ_STATE_INFORMATION``
 
-Causes Alignak to load all current monitoring status information from the state retention file. Normally, state retention information is loaded when the Alignak process starts up and before it starts monitoring. WARNING: This command will cause Alignak to discard all current monitoring status information and use the information stored in state retention file! Use with care.
+      Causes Alignak to load all current monitoring status information from the state retention file. Normally, state retention information is loaded when the Alignak process starts up and before it starts monitoring. WARNING: This command will cause Alignak to discard all current monitoring status information and use the information stored in state retention file! Use with care.
+
+.. note:: this command is not currently implemented in Alignak
+
+RELOAD_CONFIG
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ``RELOAD_CONFIG``
+
+      Reloads the Alignak monitoring configuration.
+
 
 REMOVE_HOST_ACKNOWLEDGEMENT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -952,33 +990,39 @@ REMOVE_SVC_ACKNOWLEDGEMENT
 
 This removes the problem acknowledgement for a particular service. Once the acknowledgement has been removed, notifications can once again be sent out for the given service.
 
-RESTART_PROCESS
+RESTART_PROGRAM
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   ``RESTART_PROCESS``
+   ``RESTART_PROGRAM``
 
-Restarts the Alignak process.
+      Restarts the Alignak daemons.
 
 SAVE_STATE_INFORMATION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``SAVE_STATE_INFORMATION``
 
-Causes Alignak to save all current monitoring status information to the state retention file. Normally, state retention information is saved before the Alignak process shuts down and (potentially) at regularly scheduled intervals. This command allows you to force Alignak to save this information to the state retention file immediately. This does not affect the current status information in the Alignak process.
+      Causes Alignak to save all current monitoring status information to the state retention file. Normally, state retention information is saved before the Alignak process shuts down and (potentially) at regularly scheduled intervals. This command allows you to force Alignak to save this information to the state retention file immediately. This does not affect the current status information in the Alignak process.
+
+.. note:: this command is not currently implemented in Alignak
 
 SCHEDULE_AND_PROPAGATE_HOST_DOWNTIME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``SCHEDULE_AND_PROPAGATE_HOST_DOWNTIME;<host_name>;<start_time>;<end_time>;<fixed>;<trigger_id>;<duration>;<author>;<comment>``
 
-Schedules downtime for a specified host and all of its children (hosts). If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, downtime will begin between the "start" and "end" times and last for "duration" seconds. The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The specified (parent) host downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified (parent) host should not be triggered by another downtime entry.
+      Schedules downtime for a specified host and all of its children (hosts). If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, downtime will begin between the "start" and "end" times and last for "duration" seconds. The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The specified (parent) host downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified (parent) host should not be triggered by another downtime entry.
+
+.. note:: this command is not currently implemented in Alignak
 
 SCHEDULE_AND_PROPAGATE_TRIGGERED_HOST_DOWNTIME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``SCHEDULE_AND_PROPAGATE_TRIGGERED_HOST_DOWNTIME;<host_name>;<start_time>;<end_time>;<fixed>;<trigger_id>;<duration>;<author>;<comment>``
 
-Schedules downtime for a specified host and all of its children (hosts). If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, downtime will begin between the "start" and "end" times and last for "duration" seconds. The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). Downtime for child hosts are all set to be triggered by the downtime for the specified (parent) host. The specified (parent) host downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified (parent) host should not be triggered by another downtime entry.
+      Schedules downtime for a specified host and all of its children (hosts). If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, downtime will begin between the "start" and "end" times and last for "duration" seconds. The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). Downtime for child hosts are all set to be triggered by the downtime for the specified (parent) host. The specified (parent) host downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified (parent) host should not be triggered by another downtime entry.
+
+.. note:: this command is not currently implemented in Alignak
 
 SCHEDULE_FORCED_HOST_CHECK
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1078,12 +1122,16 @@ SEND_CUSTOM_HOST_NOTIFICATION
 
       Allows you to send a custom host notification. Very useful in dire situations, emergencies or to communicate with all admins that are responsible for a particular host. When the host notification is sent out, the $NOTIFICATIONTYPE$ macro will be set to "CUSTOM". The <options> field is a logical OR of the following integer values that affect aspects of the notification that are sent out: 0 = No option (default), 1 = Broadcast (send notification to all normal and all escalated contacts for the host), 2 = Forced (notification is sent out regardless of current time, whether or not notifications are enabled, etc.), 4 = Increment current notification # for the host (this is not done by default for custom notifications). The contents of the comment field is available in notification commands using the $NOTIFICATIONCOMMENT$ macro.
 
+.. note:: this command is not currently implemented in Alignak
+
 SEND_CUSTOM_SVC_NOTIFICATION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``SEND_CUSTOM_SVC_NOTIFICATION;<host_name>;<service_description>;<options>;<author>;<comment>``
 
       Allows you to send a custom service notification. Very useful in dire situations, emergencies or to communicate with all admins that are responsible for a particular service. When the service notification is sent out, the $NOTIFICATIONTYPE$ macro will be set to "CUSTOM". The <options> field is a logical OR of the following integer values that affect aspects of the notification that are sent out: 0 = No option (default), 1 = Broadcast (send notification to all normal and all escalated contacts for the service), 2 = Forced (notification is sent out regardless of current time, whether or not notifications are enabled, etc.), 4 = Increment current notification # for the service(this is not done by default for custom notifications). The contents of the comment field is available in notification commands using the $NOTIFICATIONCOMMENT$ macro.
+
+.. note:: this command is not currently implemented in Alignak
 
 SET_HOST_NOTIFICATION_NUMBER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1092,6 +1140,8 @@ SET_HOST_NOTIFICATION_NUMBER
 
       Sets the current notification number for a particular host. A value of 0 indicates that no notification has yet been sent for the current host problem. Useful for forcing an escalation (based on notification number) or replicating notification information in redundant monitoring environments. Notification numbers greater than zero have no noticeable affect on the notification process if the host is currently in an UP state.
 
+.. note:: this command is not currently implemented in Alignak
+
 SET_SVC_NOTIFICATION_NUMBER
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1099,12 +1149,16 @@ SET_SVC_NOTIFICATION_NUMBER
 
       Sets the current notification number for a particular service. A value of 0 indicates that no notification has yet been sent for the current service problem. Useful for forcing an escalation (based on notification number) or replicating notification information in redundant monitoring environments. Notification numbers greater than zero have no noticeable affect on the notification process if the service is currently in an OK state.
 
-SHUTDOWN_PROCESS
+.. note:: this command is not currently implemented in Alignak
+
+SHUTDOWN_PROGRAM
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   ``SHUTDOWN_PROCESS``
+   ``SHUTDOWN_PROGRAM``
 
       Shuts down the Alignak process.
+
+.. note:: this command is not currently implemented in Alignak
 
 START_ACCEPTING_PASSIVE_HOST_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

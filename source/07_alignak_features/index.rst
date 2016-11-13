@@ -18,7 +18,6 @@ Alignak has some rich features:
    :maxdepth: 1
 
    cached_checks
-   distributed
    dmz_monitoring
    business_rules
    notifications_escalations

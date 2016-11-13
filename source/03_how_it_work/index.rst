@@ -12,7 +12,7 @@ How it works
     \newpage
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    daemons
    run_daemons

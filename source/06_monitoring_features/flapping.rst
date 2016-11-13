@@ -6,7 +6,7 @@ Host / service state Flapping detection
 
 
 Introduction 
-============
+------------
 
 Alignak supports optional detection of hosts and services that are “flapping". Flapping occurs when a service
 or host state changes too frequently, resulting in a storm of problem and recovery notifications.
@@ -14,8 +14,8 @@ or host state changes too frequently, resulting in a storm of problem and recove
 Flapping can be indicative of configuration problems (i.e. thresholds set too low), troublesome services, or real network problems.
 
 
-How Flapping Detection Works
-============================
+How flapping detection works
+----------------------------
 
 Whenever Alignak checks the status of a host or service, it will check to see if it has started or stopped flapping. It does this by:
 
@@ -30,7 +30,7 @@ A host or service is determined to have stopped flapping when its percent state 
 
 
 Example 
-=======
+-------
 
 Let's describe in more detail how flap detection works with services...
 
@@ -82,32 +82,32 @@ If neither of those two conditions are met, the flap detection logic won't do an
 either not currently flapping or it is still flapping.
 
 
-Flap Detection for Services 
-===========================
+Flapping detection for services
+-------------------------------
 
 Alignak checks to see if a service is flapping whenever the service is checked (either actively or passively).
 
 The flap detection logic for services works as described in the example above.
 
 
-Flap Detection for Hosts 
-========================
+Flapping detection for hosts
+----------------------------
 
-Host flap detection works in a similar manner to service flap detection, with one important difference: Alignak
-will attempt to check to see if a host is flapping whenever:
+Hosts flapping detection works as services flapping detection, except for one important difference: Alignak
+will attempt to check if an host is flapping whenever:
 
     * The host is checked (actively or passively)
     * Sometimes when a service associated with that host is checked. More specifically, when at least x amount of time has passed since the flap detection was last performed, where x is equal to the average check interval of all services associated with the host.
 
-Why is this done? With services we know that the minimum amount of time between consecutive flap detection routines is going to be equal to the service check interval. However, you might not be monitoring hosts on a regular basis, so there might not be a host check interval that can be used in the flap detection logic. Also, it makes sense that checking a service should count towards the detection of host flapping. Services are attributes of or things associated with host after all... At any rate, that's the best method I could come up with for determining how often flap detection could be performed on a host, so there you have it.
+Why is this done? With services we know that the minimum amount of time between consecutive flap detection routines is going to be equal to the service check interval. However, you might not be monitoring hosts on a regular basis, so there might not be a host check interval that can be used in the flapping detection logic. Also, it makes sense that checking a service should count towards the detection of host flapping. Services are attributes of or things associated with host after all... At any rate, that's the best method I could come up with for determining how often flap detection could be performed on a host, so there you have it.
 
 
-Flap Detection Thresholds 
-=========================
+Flapping  detection thresholds
+------------------------------
 
-Alignak uses several variables to determine the percent state change thresholds is uses for flap detection. For both hosts and services, there are global high and low thresholds and host- or service-specific thresholds that you can configure. Alignak will use the global thresholds for flap detection if you to not specify host- or service- specific thresholds.
+Alignak uses several variables to determine the percentage of state change thresholds which is used for flapping detection. For both hosts and services, there are global high and low thresholds and host/service specific thresholds that you can configure. Alignak will use the global thresholds for flapping detection if you do not specify host/service specific thresholds.
 
-The table below shows the global and host- or service-specific variables that control the various thresholds used in flap detection.
+The table below shows the global and host/service specific variables that control the various thresholds used in flap detection.
 
 
 =========== ============================================================== ==============================================
@@ -117,8 +117,8 @@ Service     ``low_service_flap_threshold`` ``high_service_flap_threshold`` ``low
 =========== ============================================================== ==============================================
 
 
-States Used For Flap Detection 
-==============================
+States used for flapping detection
+----------------------------------
 
 Normally Alignak will track the results of the last 21 checks of a host or service, regardless of the check result (host/service state),
 for use in the flap detection logic.
@@ -128,8 +128,8 @@ in your host or service definitions. This directive allows you to specify what h
 you want to use for flap detection. If you don't use this directive, all host or service states are used in flap detection.
 
 
-Flap Handling 
-=============
+Flapping handling
+-----------------
 
 When a service or host is first detected as flapping, Alignak will:
 
@@ -146,8 +146,8 @@ When a service or host stops flapping, Alignak will:
     * Remove the block on notifications for the service or host (notifications will still be bound to the normal :ref:`notification logic <monitoring_features/notifications>`).
 
 
-Enabling Flap Detection 
-=======================
+Enabling flapping detection
+---------------------------
 
 In order to enable the flap detection features in Alignak, you'll need to:
 

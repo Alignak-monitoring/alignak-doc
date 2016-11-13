@@ -6,7 +6,7 @@ Event Handlers
 
 
 Introduction 
-============
+------------
 
 .. image:: /_static/images///official/images/eventhandlers.png
    :scale: 90 %
@@ -25,8 +25,8 @@ notified. Some other uses for event handlers include:
 Cycling power on a host that is experiencing problems with an automated script should not be implemented lightly. Consider the consequences of this carefully before implementing automatic reboots. :-)
 
 
-When Are Event Handlers Executed? 
-=================================
+When are event handlers executed?
+---------------------------------
 
 Event handlers are executed when a service or host:
 
@@ -36,8 +36,8 @@ Event handlers are executed when a service or host:
 
 
 
-Event Handler Types 
-===================
+Event handler types
+-------------------
 
 There are different types of optional event handlers that you can define to handle host and state changes:
 
@@ -62,8 +62,8 @@ your host and service definitions.
 These host (and service) specific event handlers are executed immediately after the (optional) global host or service event handler is executed.
 
 
-Enabling Event Handlers 
-=======================
+Enabling event handlers
+-----------------------
 
 Event handlers can be enabled or disabled on a program-wide basis by using the ``enable_event_handlers`` in your main configuration file.
 
@@ -72,22 +72,22 @@ your host and service definitions. Host (and service) specific event handlers wi
 the global ``enable_event_handlers`` option is disabled.
 
 
-Event Handler Execution Order 
-=============================
+Event handler execution order
+-----------------------------
 
 As already mentioned, global host and service event handlers are executed immediately before host (or service) specific event handlers.
 
 Event handlers are executed for HARD problem and recovery states immediately after notifications are sent out.
 
 
-Permissions For Event Handler Commands
-======================================
+Permissions for event handler commands
+--------------------------------------
 
 Event handler commands will normally execute with the same permissions as the user used by the Alignak daemons.
 This can raise a problem if you want to write an event handler that restarts system services, as root privileges
 are generally required to do these sorts of tasks.
 
-Ideally you should evaluate the types of event handlers you will be implementing and grant onlyt the necessary
+Ideally you should evaluate the types of event handlers you will be implementing and grant only the necessary
 permissions to the Alignak daemons user for executing the necessary system commands. You might want to try
 using `sudo` to accomplish this.
 
@@ -96,7 +96,7 @@ Writing Event Handler Commands
 ==============================
 
 Event handler commands will likely be shell or perl scripts, but they can be any type of executable that
-can run from a command prompt.
+can run from a command prompt (shell script, python, php, ...).
 
 At a minimum, the scripts should take the following macros as arguments:
 
@@ -108,7 +108,7 @@ The scripts should examine the values of the arguments provided and run action b
 The best way to understand how event handlers work is to see some examples.
 
 
-Service Event Handler Example
+Service event handler example
 -----------------------------
 
 
@@ -170,7 +170,7 @@ Now, let's actually write the event handler script (this is the "/usr/local/alig
     # Is this a "soft" or a "hard" state?
     case "$2" in
   
-      # We're in a "soft" state, meaning that Nagios is in the middle of retrying the
+      # We're in a "soft" state, meaning that Alignak is in the middle of retrying the
       # check before it turns into a "hard" state and contacts get notified...
       SOFT)
   
@@ -212,7 +212,7 @@ The sample script above will attempt to restart the web server on the local mach
   * After the service has been rechecked for the 3rd time and is in a SOFT CRITICAL state
   * After the service first goes into a HARD CRITICAL state
 
-The script should theorically restart the web server and it will fix the problem before the service goes
+The script should theoretically restart the web server and it will fix the problem before the service goes
 into a HARD problem state, but we include a fallback case in the event it doesn't succeed the first time.
 It should be noted that the event handler will only be executed the first time that the service falls into
 a HARD problem state. This prevents Alignak from continuously executing the script to restart the web server

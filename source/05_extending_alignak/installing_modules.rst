@@ -14,7 +14,19 @@ Configuring daemons with modules
 
 Each Alignak daemon can be configured to load and use modules. In the daemon configuration file, the attribute `modules` may contain a list of the daemon modules.
 
-As a defaut, no module is installed nor configured but one can edit the daemon configuration file to declare which module is to be used. The `modules` property is a comma separated list of the declared modules alias.
+As a default, no module is installed nor configured but one can edit the daemon configuration file to declare which module is to be used. The `modules` property is a comma separated list of the declared modules alias.
+
+As an example, the receiver can have several attached modules.
+::
+
+    # Receiver daemon configuration
+    define receiver{
+        receiver_name           receiver-master
+
+        modules                 nsca, external-commands, web-services
+    }
+
+
 
 **Note** that the module alias is case sensitive.
 
@@ -34,8 +46,8 @@ Short story::
     pip install alignak-module-logs
 
     # Update your broker daemon configuration
-    define receiver{
-        receiver_name           broker-master
+    define broker{
+        broker_name             broker-master
 
         modules                 logs
     }
@@ -130,7 +142,7 @@ More information is available in the `NSCA module repository <https://github.com
 External commands
 -----------------
 
-This module allows Alignak framework (like Nagios and al) to reacts to external commands sent to a named pipe file.
+This module allows Alignak framework (like Nagios *and al.*) to reacts to external commands sent to a named pipe file.
 
 Thanks to this module the receiver daemon periodically reads the content of a configured file and builds an external command with the information read from this file. This also allows Alignak to :ref:`receive passive checks<monitoring_features/passive_checks>`.
 
@@ -158,7 +170,7 @@ Short story::
 
 The module default configuration gets commands from a */tmp/alignak.cmd* file.
 
-More information is available in the `exteranl commands module repository <https://github.com/Alignak-monitoring-contrib/alignak-module-external-commands>`_.
+More information is available in the `external commands module repository <https://github.com/Alignak-monitoring-contrib/alignak-module-external-commands>`_.
 
 
 .. _modules/web_services:

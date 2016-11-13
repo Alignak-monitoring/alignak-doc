@@ -11,7 +11,7 @@ Introduction
 Alignak can process commands from external applications to alter various aspects of its monitoring functions based on the commands it receives.
 
 
-Enabling External Commands
+Enabling external commands
 --------------------------
 
 .. image:: /_static/images///official/images/externalcommands.png
@@ -27,16 +27,18 @@ An external commands capable module implements a solution to provide the externa
 
 The :ref:`external commands named pipe module <modules/named_pipe>` allows an external application residing on the same host as Alignak to simply write the external commands directly to a named pipe file as outlined above. However, applications on remote hosts can't do this so easily.
 
-To allow remote hosts to send passive check results to the Alignak, the :ref:`Web services module <modules/web_services>` exposes a Web service
+The :ref:`NSCA collector module <modules/nsca>` collects the passive checks sent by the *send_nsca*  command or from an NSCA agent (eg. Windows NSClient ++). This module only manages the external commands for receiving the passive checks.
+
+The :ref:`Web services module <modules/web_services>` exposes a Web service (``POST /alignak_command``) that allows to notify external commands to the Alignak framework.
 
 
-Using External Commands
+Using external commands
 -----------------------
 
 External commands can be used to accomplish a lot of different things while Alignak is running. Example of what can be done include temporarily disabling notifications for services and hosts, temporarily disabling service checks, forcing immediate service checks, adding comments to hosts and services, etc.
 
 
-Command Format
+Command format
 --------------
 
 External commands have the following format:

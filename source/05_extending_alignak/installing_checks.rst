@@ -4,29 +4,68 @@
 Installing checks
 =================
 
-The default configuration does not include any plugins to check the monitored hosts and services.
-If we leave it in this state, our system will be really unuseful !
+The default configuration does not include any plugins to check the monitored hosts and services. If we leave it in this state, our system will be really unuseful!
 
-The plugins used to check if an host or service is ok are not part of Alignak.
-There are litteraly thousands of plugins available to check various systems.
-To make Alignak use a new plugin to check, you must:
+The plugins used to check if an host or service is ok are not part of Alignak. There are litteraly thousands of plugins available to check various systems. To make Alignak use a new plugin to check, you must:
 
     * install the plugin
     * declare a new command that specifies how the plugin must be used
     * declare a new service on the monitored host
 
-Alignak propose an easy way to deal with these operations by providing the most common checks
-plugins already packaged in an easy installable package called an **Alignak checks package**.
+Alignak propose an easy way to deal with these operations by providing the most common checks plugins already packaged in an easy installable package called an **Alignak checks package**.
 
 *** TO BE COMPLETED ***
+
+Alignak notifications packs
+===========================
+
+All the Alignak notifications packs have their own repository and are easily installable thanks to the Python ``pip``.
+
+Using each pack is documented in the pack repository README file.
+
+
+.. _notifications/html_mail:
+
+HTML mail notifications
+-----------------------
+
+For sending notifications as HTML formatted mails, `install the notifications package <https://github.com/Alignak-monitoring-contrib/alignak-notifications>`_.
+
+This pack include several scripts that can be used to send notifications from Alignak:
+
+    * simple printf sent to sendmail
+    * python script to send HTML mail
+    * python script to send XMPP notifications
+
+
+Short story::
+
+   pip install alignak-notifications
+
+   define contact{
+      contact_name                     hotline
+      use                              generic-contact
+      email                            hotline@corporation.com
+      can_submit_commands              1
+      notificationways                 detailed-email
+
+
+      ; HTML mail commands ...
+      service_notification_commands    notify-service-by-email-html
+      host_notification_commands       notify-host-by-email-html
+   }
+
+
 
 Alignak checks packs
 ====================
 
-All the Alignak checks packs have their own repository and are easily installable thanks to Python PIP.
+All the Alignak checks packs have their own repository and are easily installable thanks to the Python ``pip``.
 
 Using each pack is documented in the pack repository README file.
 
+
+.. _checks/monitoring:
 
 Checking with the Monitoring plugins
 ------------------------------------
@@ -47,6 +86,8 @@ Short story::
 
 
 
+.. _checks/snmp:
+
 Checking with SNMP
 ------------------
 
@@ -64,6 +105,8 @@ Short story::
         address             127.0.0.1
     }
 
+
+.. _checks/nrpe:
 
 Checking with NRPE
 ------------------
@@ -83,6 +126,8 @@ Short story::
     }
 
 
+.. _checks/wmi:
+
 Checking with WMI
 -----------------
 
@@ -100,6 +145,8 @@ Short story::
         address             127.0.0.1
     }
 
+
+.. _checks/windows_nsca:
 
 Passive checking Windows with NSCA
 ----------------------------------

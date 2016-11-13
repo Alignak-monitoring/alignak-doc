@@ -7,8 +7,8 @@ Macros
 One of the main features that make Alignak so flexible is the ability to use macros in command definitions. Macros allow you to reference information from hosts, services, and other sources in the commands.
 
 
-Macro Substitution - How Macros Work 
-------------------------------------
+Macro substitution - how macros work?
+-------------------------------------
 
 Before Alignak executes a command, it will replace any macro found in the command definition with its corresponding value. This macro substitution occurs for all types of commands that Alignak executes - host and service checks, notifications, event handlers, etc.
 
@@ -17,7 +17,7 @@ Some macros may themselves contain other macros. These include the `$HOSTNOTES$`
 .. tip::  If, you need to have the `$` character in one of your command (and not referring to a macro), use ``$$`` instead. Alignak will replace all ``$$`` with a single `$`
 
 
-Example 1: Host Address Macro 
+Example 1: Host address macro
 ------------------------------
 
 When you use host and service macros in command definitions, they refer to values for the host or service for which the command is being run. Let's try an example. Assuming we are using a host definition and a check_ping command defined like this:
@@ -46,7 +46,7 @@ the expanded (eg. final) command line to be executed for the host's check comman
 Pretty simple, right? The beauty in this is that you can use a single command definition to check an unlimited number of hosts. Each host can be checked with the same command definition because each host's address is automatically substituted in the command line before execution.
 
 
-Example 2: Command Argument Macros 
+Example 2: Command argument macros
 ----------------------------------
 
 You can pass arguments to commands as well, which is quite handy if you'd like to keep your command definitions rather generic. Arguments are specified in the object (i.e. host or service) definition, by separating them from the command name with exclamation points (!) like so:
@@ -80,7 +80,7 @@ the expanded (eg. final) command line to be executed for the service's check com
 If you need to pass bang (!) characters in your command arguments, you can do so by escaping them with a backslash (\). If you need to include backslashes in your command arguments, they should also be escaped with a backslash (\\).
 
 
-On-Demand Macros 
+On-demand macros
 ----------------
 
 Usually when you use host and service macros in command definitions, they refer to values for the host or service for which the command is being run. For instance, if a host check command is being executed for a host named `linuxbox`, all the standard host macros (see later) will refer to values for that host (`linuxbox`).
@@ -115,7 +115,7 @@ On-demand macros are also available for hostgroup, servicegroup, contact, and co
   $SERVICEGROUPALIAS:DNS-Cluster$     // On-demand servicegroup macro
 
 
-On-Demand Group Macros 
+On-demand group macros
 ----------------------
 
 You can obtain the values of a macro across all contacts, hosts, or services in a specific group by using a special format for your on-demand macro declaration. You do this by referencing a specific host group, service group, or contact group name in an on-demand macro, like so:
@@ -129,7 +129,7 @@ Replace ``HOSTMACRONAME``, ``SERVICEMACRONAME``, and ``CONTACTMACRONAME`` with t
 As an example, ``$HOSTSTATEID:hg1:,$`` will be replaced with a comma-separated list of host state ids for hosts that are members of the hg1 hostgroup.
 
 
-Custom Variable Macros
+Custom variable macros
 ----------------------
 
 Any :ref:`custom object variables <configuration/customobjectvars>` that you define in host, service, or contact definitions are also available as macros. Custom variable macros are named as follows:
@@ -155,10 +155,10 @@ The ``_MACADDRESS`` custom variable is available in a macro called ``$_HOSTMACAD
 More information on custom object variables and how they can be used in macros can be found :ref:`here <configuration/customobjectvars>`.
 
 
-Macro Cleansing 
+Macro cleansing
 ---------------
 
-Some macros are stripped of potentially dangerous shell metacharacters before being substituted into commands to be executed. Which characters are stripped from the macros depends on the setting of the ``illegal_macro_output_chars`` directive that you can defini in the monitoring configuration file. The following macros are stripped of potentially dangerous characters:
+Some macros are stripped of potentially dangerous shell metacharacters before being substituted into commands to be executed. Which characters are stripped from the macros depends on the setting of the ``illegal_macro_output_chars`` directive that you can define in the monitoring configuration file. The following macros are stripped of potentially dangerous characters:
 
   * :ref:`$HOSTOUTPUT$ <$HOSTOUTPUT$>`
   * :ref:`$LONGHOSTOUTPUT$ <$LONGHOSTOUTPUT$>`
@@ -172,7 +172,7 @@ Some macros are stripped of potentially dangerous shell metacharacters before be
   * :ref:`$SERVICEACKCOMMENT$ <$SERVICEACKCOMMENT$>`
 
 
-Macros as Environment Variables 
+Macros as environment variables
 -------------------------------
 
 Most macros are made available as environment variables for easy reference by scripts or commands that are executed by Alignak. For purposes of security and sanity, :ref:`$USERn$ <annexes/macros_list#usern>` and `on-demand` host and service macros are not made available as environment variables.
@@ -180,7 +180,7 @@ Most macros are made available as environment variables for easy reference by sc
 Environment variables that contain standard macros are named the same as their corresponding macro names (listed :ref:`here <annexes/macros_list>`), with `NAGIOS\_` prepended to their names. For example, the :ref:`$HOSTNAME$ <annexes/macros_list#hostname>` macro would be available as an environment variable named `NAGIOS_HOSTNAME`.
 
 
-Available Macros 
+Available macros
 ----------------
 
 A list of all the macros that are available in Alignak, as well as a chart of when they can be used, can be found :ref:`here <annexes/macros_list>`.

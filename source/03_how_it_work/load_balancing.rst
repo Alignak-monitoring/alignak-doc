@@ -13,11 +13,13 @@ The first thing to know is that not all Alignak daemons can be managed in load a
 
 This is the list of daemons for which it is possible:
 
-* *Scheduler* daemon
-* *Poller* daemon
-* *Broker* daemon
-* *Reactionner* daemon
-* *Receiver* daemon
+    * *Scheduler* daemon
+    * *Poller* daemon
+    * *Broker* daemon
+    * *Reactionner* daemon
+    * *Receiver* daemon
+
+Only the Arbiter is not concerned with this
 
 Configuration
 =============

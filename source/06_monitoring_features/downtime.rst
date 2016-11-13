@@ -1,12 +1,12 @@
 .. _monitoring_features/downtime:
 
 ==================
-Scheduled Downtime 
+Scheduled downtime
 ==================
 
 
 Introduction 
-============
+------------
 
 .. image:: /_static/images///official/images/downtime.png
    :scale: 90 %
@@ -15,8 +15,8 @@ Alignak allows you to schedule downtime periods for hosts and service that you'r
 This is useful in the event that you actually know you're going to be taking a server down for an upgrade, etc.
 
 
-Scheduling Downtime 
-===================
+Scheduling downtime
+-------------------
 
 You can schedule downtime with external commands or with an Alignak Web UI.
 
@@ -25,8 +25,8 @@ that it is scheduled for downtime during the period of time you indicated. When 
 Alignak will automatically delete the comment that it added. Nice, huh?
 
 
-Fixed vs. Flexible Downtime 
-===========================
+Fixed vs. flexible downtime
+---------------------------
 
 When you schedule a downtime for an host or service through the web interface you'll be asked if the downtime
 is fixed or flexible. Here's an explanation of how "fixed" and "flexible" downtime differs:
@@ -46,8 +46,8 @@ the downtime expires. This is done for a very good reason. As we all know, you m
 problem fixed, but then have to restart a server ten times before it actually works right. Smart, eh?
 
 
-Triggered Downtime 
-==================
+Triggered downtime
+------------------
 
 When scheduling host or service downtime you have the option of making it "triggered" downtime.
 What is a triggered downtime? With triggered downtime the start of the downtime is triggered by the start
@@ -60,8 +60,8 @@ For instance, if you schedule a flexible downtime for a particular host (because
 you might want to schedule triggered downtime for all of that hosts's "children".
 
 
-How Scheduled Downtime Affects Notifications 
-============================================
+How scheduled downtime affects notifications?
+---------------------------------------------
 
 When a host or service is in a period of scheduled downtime, Alignak will not allow normal notifications to
 be sent out for the host or service. However, a ``DOWNTIMESTART`` notification will be sent out for the
@@ -74,10 +74,10 @@ is over, and they will start receiving normal alerts again.
 If the scheduled downtime is cancelled prematurely (before it expires), a ``DOWNTIMECANCELLED`` notification will get sent out to the appropriate contacts.
 
 
-Overlapping Scheduled Downtime 
-==============================
+Overlapping scheduled downtime
+------------------------------
 
-I like to refer to this as the "Oh crap, its not working" syndrome. You know what I'm talking about. You take
+I like to refer to this as the "Oh crap, it's not working" syndrome. You know what I'm talking about. You take
 a server down to perform a "routine" hardware upgrade, only to later realize that the OS drivers aren't working,
 the RAID array blew up, or the drive imaging failed and left your original disks useless to the world.
 Moral of the story is that any routine work on a server is quite likely to take three or four times as long as you had originally planned...

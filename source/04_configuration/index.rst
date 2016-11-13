@@ -43,4 +43,5 @@ The last chapters give more information about the default installed configuratio
    :maxdepth: 1
 
    default_configuration
+   main_configuration_file
    custom_objects_var

@@ -6,7 +6,7 @@ Alignak checks logic
 
 Alignak is capable of monitoring hosts and services in two ways: actively and passively. Active checks are described :ref:`in this chapter<monitoring_features/passive_checks>` and passive checks are described :ref:`in this chapter <monitoring_features/passive_checks>`.
 
-Active checks are the most common method for monitoring hosts and services. Active checks are initiated by the Alignak framework to "poll" a device on a regularly scheduled basis. In most cases you'll use Alignak to monitor your hosts and services withi this checking strategy.
+Active checks are the most common method for monitoring hosts and services. Active checks are initiated by the Alignak framework to "poll" a device on a regularly scheduled basis. In most cases you'll use Alignak to monitor your hosts and services within this checking strategy.
 
 Alignak also supports a way to monitor hosts and services passively instead of actively. Passive checks are initiated and performed by external applications/processes and then submitted to Alignak for its processing.
 
@@ -19,7 +19,7 @@ Active Checks
 -------------
 
 
-How Are Active Checks Performed?
+How are active checks performed?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: /_static/images///official/images/activechecks.png
@@ -28,7 +28,7 @@ How Are Active Checks Performed?
 Active checks are initiated by the check logic in the Alignak daemon. When Alignak needs to check the status of a host or service it will execute a plugin and pass it information about what needs to be checked. The plugin will then check the operational state of the host or service and report the results back to the Alignak daemon. Alignak will process the results of the host or service check and take appropriate action as necessary (eg. send notifications, run event handlers, etc).
 
 
-When Are Active Checks Executed? 
+When are active checks executed?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Active check are executed:
@@ -42,7 +42,7 @@ On-demand checks are performed whenever Alignak needs to obtain the latest statu
 
 .. _monitoring_features/passive_checks:
 
-Passive Checks
+Passive checks
 --------------
 
 
@@ -51,20 +51,21 @@ Using passive checks?
 
 Passive checks are useful for monitoring services that are:
 
-   * Asynchronous in nature, they cannot or would not be monitored effectively by polling their status on a regularly scheduled basis
-   * Located behind a firewall and cannot be checked actively from the monitoring host
+    * Asynchronous in nature, they cannot or would not be monitored effectively by polling their status on a regularly scheduled basis
+    * Located behind a firewall and cannot be checked actively from the monitoring host
 
-Examples of asynchronous services that lend themselves to being monitored passively include:
+Some examples of asynchronous services that are commonly monitored passively:
 
-   * "SNMP" traps and security alerts. You never know how many (if any) traps or alerts you'll receive in a given time frame, so it's not feasible to just monitor their status every few minutes.
-   * Aggregated checks from a host running an agent. Checks may be run at much lower intervals on hosts running an agent.
-   * Submitting check results that happen directly within an application without using an intermediate log file (syslog, event log, etc.).
+    * "SNMP" traps and security alerts. You never know how many (if any) traps or alerts you'll receive in a given time frame, so it's not possible to just monitor their status every few minutes.
+    * Aggregated checks from a host running an agent. Checks may be run at much lower intervals on hosts running an agent.
+    * Submitting check results that happen directly within an application without using an intermediate log file (syslog, event log, etc.).
+    * Hosts monitored from outside their own network. Passive checks do not need to create firewall rules for active monitoring protocols
 
 Passive checks are also used when configuring :ref:`distributed or redundant<alignak_features/distributed>` monitoring installations.
 
 
-How Passive Checks Work
-~~~~~~~~~~~~~~~~~~~~~~~
+How passive checks works?
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: /_static/images///official/images/passivechecks.png
    :scale: 90 %
@@ -107,9 +108,9 @@ Submitting passive checks to Alignak implies to send an :ref:`external command<m
     * use a dedicated protocol such as NSCA
     * use an external commands capable module
 
-The  :ref:`NSCA collector module <modules/nsca>` collects the passive checks sent by the *send_nsca*  command or from an NSCA agent (eg. Windows NSClient ++).
+The :ref:`NSCA collector module <modules/nsca>` collects the passive checks sent by the *send_nsca*  command or from an NSCA agent (eg. Windows NSClient ++).
 
-the external commands capable modules are described in the :ref:`following chapter<monitoring_features/external_commands>`.
+The external commands capable modules are described in the :ref:`following chapter<monitoring_features/external_commands>`.
 
 
 Submitting Passive Service Check Results
@@ -118,10 +119,10 @@ Submitting Passive Service Check Results
 External applications can submit passive service check results to Alignak by notifying a **PROCESS_SERVICE_CHECK_RESULT**
 :ref:`external command<monitoring_features/network_reachability>`.
 
-The format of the command is as follows: ``[<timestamp>] PROCESS_SERVICE_CHECK_RESULT;<configobjects/host_name>;<svc_description>;<return_code>;<plugin_output>``
+The format of the command is as follows: ``[<timestamp>] PROCESS_SERVICE_CHECK_RESULT;<host_name>;<svc_description>;<return_code>;<plugin_output>``
 where:
 
-   * ``timestamp`` is the time in time_t format (seconds since the UNIX epoch) that the service check was perfomed (or submitted).
+   * ``timestamp`` is the time in time_t format (seconds since the UNIX epoch) that the service check was performed (or submitted).
    * ``host_name`` is the short name of the host associated with the service in the service definition
    * ``svc_description`` is the description of the service as specified in the service definition
    * ``return_code`` is the return code of the check (0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN)
@@ -139,10 +140,10 @@ Submitting Passive Host Check Results
 External applications can submit passive host check results to Alignak by notifying a **PROCESS_HOST_CHECK_RESULT**
 :ref:`external command<monitoring_features/network_reachability>`.
 
-The format of the command is as follows: ``[<timestamp>]PROCESS_HOST_CHECK_RESULT;<configobjects/host_name>;<configobjects/host_status>;<plugin_output>``
+The format of the command is as follows: ``[<timestamp>]PROCESS_HOST_CHECK_RESULT;<host_name>;<configobjects/host_status>;<plugin_output>``
 where:
 
-  * ``timestamp`` is the time in time_t format (seconds since the UNIX epoch) that the host check was perfomed (or submitted). Please note the single space after the right bracket.
+  * ``timestamp`` is the time in time_t format (seconds since the UNIX epoch) that the host check was performed (or submitted). Please note the single space after the right bracket.
   * ``host_name`` is the short name of the host (as defined in the host definition)
   * ``host_status`` is the status of the host (0=UP, 1=DOWN, 2=UNREACHABLE)
   * ``plugin_output`` is the text output of the host check

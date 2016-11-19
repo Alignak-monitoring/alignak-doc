@@ -96,7 +96,7 @@ It is connected to the other daemons:
     * Receiver
     * Reactionner
 
-There can have many brokers for load-balancing or standby spares.
+There can have many brokers for standby spares.
 
 Reactionner
 -----------

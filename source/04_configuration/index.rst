@@ -44,4 +44,5 @@ The last chapters give more information about the default installed configuratio
 
    default_configuration
    main_configuration_file
+   objects_configuration
    custom_objects_var

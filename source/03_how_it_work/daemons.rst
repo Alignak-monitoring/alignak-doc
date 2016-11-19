@@ -9,7 +9,7 @@ Daemons
 
 Alignak framework is designed to set up easily and smartly a distributed monitoring application for network services and resources.
 
-It is made of 6 daemons wich features may be extended thanks to modules. Each daemon type has its own role in the monitoring process.
+It is made of 6 daemons which features may be extended thanks to modules. Each daemon type has its own role in the monitoring process.
 
 
 A picture says a thousand words:

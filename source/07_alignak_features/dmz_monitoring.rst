@@ -5,47 +5,41 @@ Monitoring a DMZ
 ================
 
 
-There is two ways for monitoring a DMZ network:
-  * got a poller on the LAN, and launch check from it, so the firewall should allow monitoring traffic (like nrpe, snmp, etc)
-  * got a poller on the DMZ, so only the Alignak communication should be opened through the firewall
+There are two ways for monitoring a DMZ network:
+    * have a poller on the LAN, and launch check from it, so the firewall should allow monitoring traffic (like nrpe, snmp, etc)
+    * have a poller into the DMZ, so only the Alignak communication should be opened through the firewall
 
-If you can take the first, use it :)
+If you can use the first solution, it is the most simple one, use it :)
 
-If you can't because your security manager is not happy about it, you should put a poller in the DMZ.
-So look at the page :ref:`distributed shinken <alignak_features/distributed>` first, because you
-will need a distributed architecture.
+If you can't (because of security concerns), use the second one and set a poller into the DMZ.
 
-Pollers are "dumb" things. They get their jobs from the schedulers (of their realm, if you don't
-know what is it from now, it's not important). So if you just have a poller in the DMZ network
-aside another one in the LAN, some checks for the dmz will only be catched by the LAN one,
-and some for the lan will be catched by the DMZ one. It's not a good thing of course :)
+Pollers are "dumb" things. They get their jobs from the schedulers. So if you just have a poller in the DMZ network aside another one in the LAN, some checks for the DMZ hosts will get catched by the LAN one, and some for the LAN hosts will get catched by the DMZ one.
 
 
 Tag your hosts and pollers for being "in the DMZ"
-=================================================
+-------------------------------------------------
 
-So we will need to "tag" checks, so they will be able to run **only** in the DMZ poller, or the lan one.
+Alignak allows to dedicate some checks to a specific poller. We will "tag" checks, so they will be able to run **only** in a specific poller.
 
-This tag is done with the **poller_tag** parameter. It can be applied on the following objects:
- * pollers
- * commands
- * services
- * hosts
+This is done with the **poller_tag** parameter that can be applied on the following objects:
+    * pollers
+    * commands
+    * services
+    * hosts
 
-It's quite simple: the objects have `tags`, and the pollers also have `tags`. You've got an
-implicit inheritance in this order: hosts->services->commands.
-If a command doesn't have a `poller_tag`, it will inherit the one from the service.
-And if this service neither has one, it will inherit from its host.
+It's quite simple: the monitoring objects are tagged, and the pollers are also tagged. When the tags match, the poller and the objects are compatible each others...
 
-You just need to install a poller with the *DMZ* tag in the DMZ and then add it to all hosts
-(or services) that are in the DMZ. They will be managed by this poller and you just need to open
-the port to this poller from the LAN. Your network admins will be happier :)
+There is an implicit inheritance in this order: hosts->services->commands. If a command doesn't have a ``poller_tag``, it will inherit from the service ones. And if this service neither has a ``poller_tag``, it will inherit from those of its host.
+
+You just need to install a poller with the *DMZ* tag in the DMZ and then tag the hosts (or services) that are in the DMZ with the same tag. Tagged hosts/services will have their checks run by the tagged poller. You simply have to open the DMZ poller communication from the LAN to allow scheduler / poller communication.
+
+You are sure that the tagged checks won't be launched from other pollers, because untagged pollers can't get tagged checks.
 
 
 Configuration part
-==================
+------------------
 
-So you need to declare in your poller configuration file:
+You need to tag the poller in its configuration file:
 
 ::
 
@@ -57,7 +51,7 @@ So you need to declare in your poller configuration file:
     }
 
 
-And "tag" some hosts and/or some services.
+And then tag some hosts and/or some services.
 
 ::
 
@@ -69,10 +63,5 @@ And "tag" some hosts and/or some services.
     }
 
 
-And that's all :)
 
-All checks for the host *server-DMZ-1* will be launched from the poller *poller-dmz*, and only
-from this poller (unless there is another poller in the DMZ with the same tag).
-
-You are sure that those checks won't be launched from the pollers within the LAN,
-because untagged pollers can't take tagged checks.
+All checks for the host *server-DMZ-1* will be launched from the poller *poller-dmz*, and only from this poller.

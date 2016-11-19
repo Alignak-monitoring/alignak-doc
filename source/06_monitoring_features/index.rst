@@ -12,7 +12,7 @@ Monitoring features
     \newpage
 
 
-Alignak implementes the NAGIOS legacy features:
+Alignak implements the NAGIOS legacy features:
 
 .. toctree::
    :maxdepth: 1

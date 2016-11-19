@@ -19,3 +19,10 @@ Some useful information:
 
    macros_list
    external_commands_list
+
+Monitoring objects configuration:
+
+.. toctree::
+   :maxdepth: 1
+
+   host

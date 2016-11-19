@@ -4,8 +4,8 @@
 
 .. _how_it_works/index:
 
-How it works
-============
+How does it work
+================
 
 .. raw:: LaTeX
 

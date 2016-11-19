@@ -7,8 +7,7 @@ Default configuration
 Main information
 ================
 
-The default configuration installed with Alignak is a quite good start to build your own configuration
-because it defines helpful stuff to set-up a configuration
+The default configuration installed with Alignak is a quite good start to build your own configuration because it defines helpful stuff to set-up a configuration
 
 Note that this configuration allows you to run Alignak because it includes a *localhost* host that is self-checked
 

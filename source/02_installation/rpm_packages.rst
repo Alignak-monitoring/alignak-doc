@@ -13,6 +13,6 @@ CentOS 7 ::
   [Alignak]
   name=Alignak CentOS-$releasever packages
   baseurl=http://alignak-monitoring.github.io/repos/centos/7/
-  gpgcheck=0
+  gpgcheck=1
   enabled=1
-  #gpgkey=file:///
+  gpgkey=https://alignak-monitoring.github.io/repos/alignak_pub.key

@@ -361,23 +361,23 @@ DISABLE_CONTACT_SVC_NOTIFICATIONS
 DISABLE_CONTACTGROUP_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_CONTACTGROUP_HOST_NOTIFICATIONS;<contactgroup_name>``
+    ``DISABLE_CONTACTGROUP_HOST_NOTIFICATIONS;<contactgroup_name>``
 
-Disables host notifications for all contacts in a particular contactgroup.
+    Disables host notifications for all contacts in a particular contactgroup.
 
 DISABLE_CONTACTGROUP_SVC_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_CONTACTGROUP_SVC_NOTIFICATIONS;<contactgroup_name>``
+    ``DISABLE_CONTACTGROUP_SVC_NOTIFICATIONS;<contactgroup_name>``
 
-Disables service notifications for all contacts in a particular contactgroup.
+    Disables service notifications for all contacts in a particular contactgroup.
 
 DISABLE_EVENT_HANDLERS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_EVENT_HANDLERS``
+    ``DISABLE_EVENT_HANDLERS``
 
-Disables host and service event handlers on a program-wide basis.
+    Disables host and service event handlers on a program-wide basis.
 
 DISABLE_FAILURE_PREDICTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -433,137 +433,137 @@ Disables freshness checks of all hosts on a program-wide basis.
 DISABLE_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOST_NOTIFICATIONS;<host_name>``
+    ``DISABLE_HOST_NOTIFICATIONS;<host_name>``
 
-Disables notifications for a particular host.
+    Disables notifications for a particular host.
 
 DISABLE_HOST_SVC_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOST_SVC_CHECKS;<host_name>``
+    ``DISABLE_HOST_SVC_CHECKS;<host_name>``
 
-Disables active checks of all services on the specified host.
+    Disables active checks of all services on the specified host.
 
 DISABLE_HOST_SVC_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOST_SVC_NOTIFICATIONS;<host_name>``
+    ``DISABLE_HOST_SVC_NOTIFICATIONS;<host_name>``
 
-Disables notifications for all services on the specified host.
+    Disables notifications for all services on the specified host.
 
 DISABLE_HOSTGROUP_HOST_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOSTGROUP_HOST_CHECKS;<hostgroup_name>``
+    ``DISABLE_HOSTGROUP_HOST_CHECKS;<hostgroup_name>``
 
-Disables active checks for all hosts in a particular hostgroup.
+    Disables active checks for all hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOSTGROUP_HOST_NOTIFICATIONS;<hostgroup_name>``
+    ``DISABLE_HOSTGROUP_HOST_NOTIFICATIONS;<hostgroup_name>``
 
-Disables notifications for all hosts in a particular hostgroup. This does not disable notifications for the services associated with the hosts in the hostgroup - see the DISABLE_HOSTGROUP_SVC_NOTIFICATIONS command for that.
+    Disables notifications for all hosts in a particular hostgroup. This does not disable notifications for the services associated with the hosts in the hostgroup - see the DISABLE_HOSTGROUP_SVC_NOTIFICATIONS command for that.
 
 DISABLE_HOSTGROUP_PASSIVE_HOST_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOSTGROUP_PASSIVE_HOST_CHECKS;<hostgroup_name>``
+    ``DISABLE_HOSTGROUP_PASSIVE_HOST_CHECKS;<hostgroup_name>``
 
-Disables passive checks for all hosts in a particular hostgroup.
+    Disables passive checks for all hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_PASSIVE_SVC_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOSTGROUP_PASSIVE_SVC_CHECKS;<hostgroup_name>``
+    ``DISABLE_HOSTGROUP_PASSIVE_SVC_CHECKS;<hostgroup_name>``
 
-Disables passive checks for all services associated with hosts in a particular hostgroup.
+    Disables passive checks for all services associated with hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_SVC_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOSTGROUP_SVC_CHECKS;<hostgroup_name>``
+    ``DISABLE_HOSTGROUP_SVC_CHECKS;<hostgroup_name>``
 
-Disables active checks for all services associated with hosts in a particular hostgroup.
+    Disables active checks for all services associated with hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_SVC_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_HOSTGROUP_SVC_NOTIFICATIONS;<hostgroup_name>``
+    ``DISABLE_HOSTGROUP_SVC_NOTIFICATIONS;<hostgroup_name>``
 
-Disables notifications for all services associated with hosts in a particular hostgroup. This does not disable notifications for the hosts in the hostgroup - see the DISABLE_HOSTGROUP_HOST_NOTIFICATIONS command for that.
+    Disables notifications for all services associated with hosts in a particular hostgroup. This does not disable notifications for the hosts in the hostgroup - see the DISABLE_HOSTGROUP_HOST_NOTIFICATIONS command for that.
 
 DISABLE_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_NOTIFICATIONS``
+    ``DISABLE_NOTIFICATIONS``
 
-Disables host and service notifications on a program-wide basis.
+    Disables host and service notifications on a program-wide basis.
 
 DISABLE_NOTIFICATIONS_EXPIRE_TIME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_NOTIFICATIONS_EXPIRE_TIME;<schedule_time>;<expire_time>``
+    ``DISABLE_NOTIFICATIONS_EXPIRE_TIME;<schedule_time>;<expire_time>``
 
-<schedule_time> has no effect currently, set it to current timestamp in your scripts.
+    <schedule_time> has no effect currently, set it to current timestamp in your scripts.
 
-Disables host and service notifications on a program-wide basis, with given expire time.
+    Disables host and service notifications on a program-wide basis, with given expire time.
 
 DISABLE_PASSIVE_HOST_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_PASSIVE_HOST_CHECKS;<host_name>``
+    ``DISABLE_PASSIVE_HOST_CHECKS;<host_name>``
 
-Disables acceptance and processing of passive host checks for the specified host.
+    Disables acceptance and processing of passive host checks for the specified host.
 
 DISABLE_PASSIVE_SVC_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_PASSIVE_SVC_CHECKS;<host_name>;<service_description>``
+    ``DISABLE_PASSIVE_SVC_CHECKS;<host_name>;<service_description>``
 
-Disables passive checks for the specified service.
+    Disables passive checks for the specified service.
 
 DISABLE_PERFORMANCE_DATA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_PERFORMANCE_DATA``
+    ``DISABLE_PERFORMANCE_DATA``
 
-Disables the processing of host and service performance data on a program-wide basis.
+    Disables the processing of host and service performance data on a program-wide basis.
 
 DISABLE_SERVICE_FRESHNESS_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_SERVICE_FRESHNESS_CHECKS``
+    ``DISABLE_SERVICE_FRESHNESS_CHECKS``
 
-Disables freshness checks of all services on a program-wide basis.
+    Disables freshness checks of all services on a program-wide basis.
 
 DISABLE_SERVICEGROUP_HOST_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_SERVICEGROUP_HOST_CHECKS;<servicegroup_name>``
+    ``DISABLE_SERVICEGROUP_HOST_CHECKS;<servicegroup_name>``
 
-Disables active checks for all hosts that have services that are members of a particular servicegroup.
+    Disables active checks for all hosts that have services that are members of a particular servicegroup.
 
 DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS;<servicegroup_name>``
+    ``DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS;<servicegroup_name>``
 
-Disables notifications for all hosts that have services that are members of a particular servicegroup.
+    Disables notifications for all hosts that have services that are members of a particular servicegroup.
 
 DISABLE_SERVICEGROUP_PASSIVE_HOST_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_SERVICEGROUP_PASSIVE_HOST_CHECKS;<servicegroup_name>``
+    ``DISABLE_SERVICEGROUP_PASSIVE_HOST_CHECKS;<servicegroup_name>``
 
-Disables the acceptance and processing of passive checks for all hosts that have services that are members of a particular service group.
+    Disables the acceptance and processing of passive checks for all hosts that have services that are members of a particular service group.
 
 DISABLE_SERVICEGROUP_PASSIVE_SVC_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``DISABLE_SERVICEGROUP_PASSIVE_SVC_CHECKS;<servicegroup_name>``
+    ``DISABLE_SERVICEGROUP_PASSIVE_SVC_CHECKS;<servicegroup_name>``
 
-Disables the acceptance and processing of passive checks for all services in a particular servicegroup.
+    Disables the acceptance and processing of passive checks for all services in a particular servicegroup.
 
 DISABLE_SERVICEGROUP_SVC_CHECKS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

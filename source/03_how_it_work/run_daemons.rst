@@ -113,6 +113,11 @@ Restart to load a new configuration::
     $ /usr/local/etc/init.d/alignak restart (or /usr/local/etc/rc.d/alignak restart)
 
 
+.. note :: By default, the arbiter starting script uses */usr/local/etc/alignak/alignak.cfg* as a monitoring configuration file. You can use another configuration file if you set the ``ALIGNAKCFG`` shell environment variable.
+
+
+.. note :: It is also possible to define a second monitoring configuration file that will be used by the Alignak arbiter. If your configuration is defined in two separated files, you can define the second configuration file if you set the ``ALIGNAKSPECIFICCFG`` shell environment variable.
+
 
 Log files
 =========

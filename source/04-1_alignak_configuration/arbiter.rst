@@ -7,27 +7,26 @@ Arbiter
 
 The arbiter is the main Alignak daemon. As of it, its configuration part is the most important one.
 
-This part of the configuration is stored by default in the folder *etc/alignak/arbiter/* and it contains:
+This part of the configuration is stored by default in the folder */usr/local/etc/alignak/arbiter/* and it contains:
 
-* the configuration of the daemons and their (external) modules
-* the configuration of the monitored objects
-* the configuration of monitoring resources
+    * the configuration of the daemons and their (external) modules
+    * the configuration of the monitored objects
+    * the configuration of monitoring resources
 
 Each sub-part is stored by default in its own sub-directory:
 
-* *etc/alignak/arbiter/daemons/* for the daemons
-* *etc/alignak/arbiter/modules/* for the modules
-* *etc/alignak/arbiter/templates/* for the objects templates
-* *etc/alignak/arbiter/packs/* for the checks packs
-* *etc/alignak/arbiter/objects/* for the objects
-* *etc/alignak/arbiter/resource.d/* for the resources and global macros
+    * *arbiter/daemons/* for the daemons
+    * *arbiter/modules/* for the modules
+    * *arbiter/templates/* for the objects templates
+    * *arbiter/packs/* for the checks packs
+    * *arbiter/objects/* for the objects
+    * *arbiter/resource.d/* for the resources and global macros
 
 
 Resources configuration
 =======================
 
-The resources part of the configuration is used mainly to define common macros used in the whole
-configuration. The default installed configuration defines the following ones:
+The resources part of the configuration is used mainly to define common macros that are used in the whole configuration. The default installed configuration defines the following ones:
 
 * checks plugins directories
 
@@ -46,18 +45,16 @@ Monitoring objects configuration
 
 This part of the configuration stores all the monitoring objects configuration:
 
-* hosts
-* services
-* contacts
-* commands
-* ...
+    * hosts
+    * services
+    * contacts
+    * commands
+    * ...
 
-Currently this part of the documentation is not yet available but an old version is still available here: `Old documentation`_
+This part of the configuration, probably the most important for Alignak's users, is described in  :ref:`the monitored objects dedicated chapter <monitoring_configuration/index>`.
 
 Daemons configuration
 =====================
-
-These files are stored by default in the folder *etc/alignak/arbiter/daemons/*.
 
 Each daemon has its own configuration file.
 
@@ -560,4 +557,3 @@ Variable Descriptions
 
 == TODO UPDATE THIS PART ==
 
-.. _Old documentation: http://alignak-doc.readthedocs.org/en/old/03_configuration/config.html

@@ -1,4 +1,4 @@
-.. _medium/notification-escalations:
+.. _alignak_features/notifications_escalations:
 
 =============================
 Notifications and escalations

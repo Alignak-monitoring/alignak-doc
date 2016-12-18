@@ -4,21 +4,14 @@
 Default configuration
 =====================
 
-Main information
-================
+The default configuration installed with Alignak is a quite good start to build your own configuration because it defines helpful stuff to set-up a configuration
 
-The default configuration installed with Alignak is a quite good start to build your own configuration
-because it defines helpful stuff to set-up a configuration
+.. note: This configuration allows you to run Alignak "out-of-the-box" because it only includes a *localhost* host that is self-checked and always considered to be in a UP state.
 
-Note that this configuration allows you to run Alignak because it includes a *localhost* host that is self-checked
-
-More information on the content of this configuration and how to adapt to your needs in the `_next chapter<05_extending_alignak/updating_default>`_.
+You will find more information on the content of this configuration and how to adapt to your needs in the :ref:`Alignak configuration chapter<alignak_configuration/index>` and in the :ref:`next chapter<extending/updating_default>`.
 
 
-Folders hierarchy
-=================
-
-The default configuration hierarchy is as following.
+The default configuration is a folders' hierarchy built as following.
 
 Main configuration file
 -----------------------
@@ -37,8 +30,11 @@ Running scripts
         -> init scripts to start, stop, alignak (only on Linux distros)
 
     /usr/local/etc/rc.d
-        -> init scripts to start, stop, alignak (only on non-Linux distros)
+        -> init scripts to start, stop, alignak (only on non-Linux distros (FreeBSD))
 
+The scripts that are included in this directory are an easy means to run Alignak in a simple and standard configuration. They may be used, updated, duplicated to make them suit your needs ;)
+
+More information on how to run Alignak :ref:`is available here<howitworks/run_alignak>`.
 
 Framework configuration
 -----------------------
@@ -80,19 +76,23 @@ files need to be updated to reflect the daemons configuration.
 Arbiter
 ~~~~~~~
 This part of the configuration is used to describe the whole framework environment: daemons, hosts, services, ...
-The Alignak arbiter uses this configuration to dispatch
+
 ::
 
     /usr/local/etc/alignak/arbiter
         -> ... for the main monitoring configuration file (alignak.cfg)
+
     /usr/local/etc/alignak/arbiter/resource.d
         -> ... for the global macros and resources
+
     /usr/local/etc/alignak/arbiter/modules
         -> ... for the installed modules
+
     /usr/local/etc/alignak/arbiter/daemons
         -> ... for the daemons
+
     /usr/local/etc/alignak/arbiter/objects
-        -> ... for the monitored objects
+        -> ... for the default monitored objects (by object type)
     /usr/local/etc/alignak/arbiter/objects/contactgroups
     /usr/local/etc/alignak/arbiter/objects/services
     /usr/local/etc/alignak/arbiter/objects/hostgroups
@@ -111,6 +111,7 @@ The Alignak arbiter uses this configuration to dispatch
     /usr/local/etc/alignak/arbiter/objects/servicegroups
     /usr/local/etc/alignak/arbiter/objects/hosts
     /usr/local/etc/alignak/arbiter/objects/dependencies
+
     /usr/local/etc/alignak/arbiter/templates
         -> ... for the monitored objects templates
 

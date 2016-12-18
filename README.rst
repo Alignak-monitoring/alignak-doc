@@ -18,7 +18,7 @@ For a local build of the documentation, run::
 
     make html
 
-
+To build a PDF version of this documentation
 Documentation
 =============
 

@@ -113,6 +113,51 @@ Restart to load a new configuration::
     $ /usr/local/etc/init.d/alignak restart (or /usr/local/etc/rc.d/alignak restart)
 
 
+.. note :: By default, the arbiter starting script uses */usr/local/etc/alignak/alignak.cfg* as a monitoring configuration file. You can use another configuration file if you set the ``ALIGNAKCFG`` shell environment variable.
+
+
+.. note :: It is also possible to define a second monitoring configuration file that will be used by the Alignak arbiter. If your configuration is defined in two separated files, you can define the second configuration file if you set the ``ALIGNAKSPECIFICCFG`` shell environment variable.
+
+
+Alignak processes list
+======================
+
+The daemons involved in Alignak are strating several processes in the system. All the processes started have a process title set by Alignak to help the user knowing which is which. Several processes types are present in the system processes list:
+
+    * the main daemon process
+        There will alwys be one process for each Alignak daemon type. The process title is the daemon type (eg. *alignak-arbiter*, *alignak-scheduler*,...)
+
+    * the main daemon forked process.
+        Each Alignak daemon forks a new process instance for each daemon instance existing in the configuration. If you defined several schedulers you will get a process for each scheduler instance. Each daemon instance process has a title built with the instance name (eg. *alignak-scheduler scheduler-master*)
+
+    * the external modules processes
+        The daemons that have some external modules attached, like the brokers or receivers, launch new processes for their modules. Those processes titles are made of the daemon instance name and the module alias (eg. *alignak-receiver-master module: nsca*)
+
+    * the satelitte workers processes
+        The satellites daemons that need some worker processes (pollers and reactionners) launch several worker processes to execute their actions (checks or notifications). Those worker processes have a title made of the daemon instance name and the worker label (eg. *alignak-poller-master worker*)
+
+
+ As an exemple, here is the processes list of an Alignak "simple" configuration with no spare daemons and no distributedd configuration::
+
+    alignak   5850  0.7  1.0 867048 43148 ?        Sl   10:54   0:00 alignak-scheduler scheduler-master
+    alignak   5851  0.0  0.9 208644 37076 ?        S    10:54   0:00 alignak-scheduler
+    alignak   5907  0.4  1.0 865080 42516 ?        Sl   10:54   0:00 alignak-poller poller-master
+    alignak   5908  0.0  0.9 495000 37964 ?        Sl   10:54   0:00 alignak-poller
+    alignak   5968  0.4  1.0 864756 42456 ?        Sl   10:54   0:00 alignak-reactionner reactionner-master
+    alignak   5973  0.0  0.9 421272 38044 ?        Sl   10:54   0:00 alignak-reactionner
+    alignak   6078  1.2  1.1 867732 45072 ?        Sl   10:55   0:00 alignak-broker broker-master
+    alignak   6079  0.1  0.9 495276 40048 ?        Sl   10:55   0:00 alignak-broker
+    alignak   6153  0.4  1.0 864576 42036 ?        Sl   10:55   0:00 alignak-receiver receiver-master
+    alignak   6154  0.0  0.9 347940 37736 ?        Sl   10:55   0:00 alignak-receiver
+    alignak   6216  1.6  1.1 867588 44528 ?        Sl   10:55   0:00 alignak-arbiter arbiter-master
+    alignak   6217  0.0  0.9 211000 39376 ?        S    10:55   0:00 alignak-arbiter
+    alignak   6230  0.0  0.9 864184 40452 ?        S    10:55   0:00 alignak-poller-master worker
+    alignak   6240  0.0  1.0 864320 40960 ?        S    10:55   0:00 alignak-receiver-master module: nsca
+    alignak   6250  0.2  1.0 866748 43228 ?        S    10:55   0:00 alignak-broker-master module: backend_broker
+    alignak   6260  0.2  1.0 866748 43072 ?        S    10:55   0:00 alignak-broker-master module: logs
+    alignak   6271  0.0  1.0 864196 40592 ?        S    10:55   0:00 alignak-poller-master worker
+    alignak   6279  0.0  1.0 864188 40544 ?        S    10:55   0:00 alignak-reactionner-master worker
+
 
 Log files
 =========
@@ -125,7 +170,7 @@ Each daemon log file configuration is found in the daemon configuration file (/u
 
 In case of problem, make sure that there is no ERROR and/or WARNING logs in the log files.
 
-The log files are the number one information source about Alignak activity. You will find:
+The log files are the very first information source about Alignak activity. You will find:
 
     * HOST ALERT information
     * SERVICE ALERT information

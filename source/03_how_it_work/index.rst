@@ -4,15 +4,15 @@
 
 .. _how_it_works/index:
 
-How it works
-============
+How does it work
+================
 
 .. raw:: LaTeX
 
     \newpage
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    daemons
    run_daemons

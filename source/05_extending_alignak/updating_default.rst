@@ -10,20 +10,24 @@ What does it include ?
 The default configuration installed with Alignak defines:
 
     * daemons configuration for: one arbiter, one scheduler, one broker, one reactionner, one poller and one receiver
+
     * some templates:
         * a `generic-contact` template that contains the main common contact parameters
         * a `generic-host` template that contains the main common host parameters
         * a `generic-service` template that contains the main common service parameters
         for hosts, services and contacts
+
     * one host (``localhost``) which is always UP
+
     * no services
+
     * two contacts: ``guest`` and ``admin``
 
 This configuration is fully functionnal but it almost does nothing ... except saying that ``localhost`` is UP without even checking if it is true :)
 
 What is important at the moment is to check that the existing configuration is valid and that Alignak is able to use it. For checking the configuration, run::
 
-    alignak-arbiter -V -c /usr/local/etc/alignak/alignak.cfg
+    alignak-arbiter -V -a /usr/local/etc/alignak/alignak.cfg
 
 where ``alignak.cfg`` is the configuration entry point.
 
@@ -164,8 +168,9 @@ Declaring new objects
 
 Declaring new objects in the monitoring configuration follow the rules as they are defined for a Nagios flat-files configuration as they are defined on the `Nagios objects Definition <https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/objectdefinitions.html>`_
 
-The objects defined use the same properties are the one defined in Shinken and `documented here <http://shinken.readthedocs.io/en/latest/03_configuration/configobject.html>`_.
-*** TO BE COMPLETED ***
+The objects defined use the same properties as the one defined in Shinken and `documented here <http://shinken.readthedocs.io/en/latest/03_configuration/configobject.html>`_.
+
+.. warning:: *** TO BE COMPLETED/IMPROVED ***
 
 A new contact
 -------------

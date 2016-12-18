@@ -14,10 +14,13 @@ Contents:
    01_introduction/index
    02_installation/index
    03_how_it_work/index
-   04_configuration/index
+   04-1_alignak_configuration/index
+   04-2_monitoring_configuration/index
    05_extending_alignak/index
-   06_alignak_features/index
+   06_monitoring_features/index
+   07_alignak_features/index
    14_contributing/index
+   20_annexes/index
 
 
 .. only:: html

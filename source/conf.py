@@ -29,8 +29,14 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-]
+extensions = ['rst2pdf.pdfbuilder']
+
+pdf_documents = [('index', u'alignak', u'Alignak documentation', u'Alignak team'), ]
+
+# index - master document
+# rst2pdf - name of the generated pdf
+# Sample rst2pdf doc - title of the pdf
+# Your Name - author name in the pdf
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

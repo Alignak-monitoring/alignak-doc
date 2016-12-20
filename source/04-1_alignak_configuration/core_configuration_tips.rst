@@ -1,4 +1,4 @@
-.. _configuration/main:
+.. _configuration/core_tips:
 
 =============================================
 Main configuration file (alignak.cfg) options
@@ -20,8 +20,8 @@ The main configuration file is named ``alignak.cfg``.
 Default used options
 ====================
 
-.. _configuration/main#cfg_dir:
-.. _configuration/main#cfg_file:
+.. _configuration/core#cfg_dir:
+.. _configuration/core#cfg_file:
 
 Cfg dir and Cfg files
 ---------------------
@@ -40,7 +40,7 @@ Thus, the arbiter handles the main configuration files differently than any othe
 
 
 
-.. _configuration/main#retention_update_interval:
+.. _configuration/core#retention_update_interval:
 
 Automatic state retention update interval
 -----------------------------------------
@@ -62,7 +62,7 @@ If you set this value to 0, it will not save retention data at regular intervals
 If you have disabled state retention (with the :ref:`State Retention Option <configuration/main-advanced#retain_state_information>` option), this option has no effect.
 
 
-.. _configuration/main#max_service_check_spread:
+.. _configuration/core#max_service_check_spread:
 
 Maximum Host/Service check spread
 ---------------------------------
@@ -84,8 +84,8 @@ Default:
 This option determines the maximum number of minutes from when Alignak starts that all hosts/services (that are scheduled to be regularly checked) are checked. This option will ensure that the initial checks of all hosts/services occur within the timeframe you specify. Default value is 30 (minutes).
 
 
-.. _configuration/main#host_check_timeout:
-.. _configuration/main#service_check_timeout:
+.. _configuration/core#host_check_timeout:
+.. _configuration/core#service_check_timeout:
 
 Service/Host check timeout
 --------------------------
@@ -108,7 +108,7 @@ This is the maximum number of seconds that Alignak will allow service/host check
 
 There is often widespread confusion as to what this option really does. It is meant to be used as a last ditch mechanism to kill off plugins which are misbehaving and not exiting in a timely manner. It should be set to something high (like 60 seconds or more), so that each check normally finishes executing within this time limit. If a check runs longer than this limit, Alignak will kill it off thinking it is a runaway processes.
 
-.. _configuration/main#timeout_exit_status:
+.. _configuration/core#timeout_exit_status:
 
 Timeout exit status
 -------------------
@@ -133,7 +133,7 @@ State set by Alignak in case of timeout. The value is a state identifier, thus:
     * 3: UNKNOWN
 
 
-.. _configuration/main#flap_history:
+.. _configuration/core#flap_history:
 
 Flap history
 ------------
@@ -155,7 +155,7 @@ This option is used to set the history size of states keep by the scheduler to m
 The size in memory is for the scheduler daemon : 4Bytes * flap_history * (nb hosts + nb services). For a big environment, it costs 4 * 20 * (1000+10000) - 900Ko. So you can raise it to higher value if you want. To have more information about flapping, you can read :ref:`this <monitoring_features/flapping>`.
 
 
-.. _configuration/main#max_plugins_output_length:
+.. _configuration/core#max_plugins_output_length:
 
 Maximum plugins output length
 -----------------------------
@@ -175,7 +175,7 @@ Default:
 This option is used to set the max size in bytes for the checks plugins output. So if you have some truncated output like for huge disk check when you have a lot of partitions, increase this value.
 
 
-.. _configuration/main#enable_problem_impacts_states_change:
+.. _configuration/core#enable_problem_impacts_states_change:
 
 Enable problem/impacts states change
 ------------------------------------
@@ -195,7 +195,7 @@ Default:
 This option is used to know if we apply or not the state change when a host or service is impacted by a root problem (like the service's host going down or a host's parent being down too). The state will be changed by UNKNONW for a service and UNREACHABLE for a host until their next schedule check. This state change do not count as a attempt, it's just for console so the users know that theses objects got problems and the previous states are not sure.
 
 
-.. _configuration/main#disable_old_nagios_parameters_whining:
+.. _configuration/core#disable_old_nagios_parameters_whining:
 
 Disable old nagios parameters whining
 -------------------------------------
@@ -215,7 +215,7 @@ Default:
 If 1, disable all notice and warning messages when the Arbiter is checking the configuration.
 
 
-.. _configuration/main#use_timezone:
+.. _configuration/core#use_timezone:
 
 Timezone option
 ---------------
@@ -236,7 +236,7 @@ This option allows you to override the default timezone that this instance of Al
 
 
 
-.. _configuration/main#enable_environment_macros:
+.. _configuration/core#enable_environment_macros:
 
 Environment macros option
 -------------------------
@@ -259,7 +259,7 @@ This option determines whether or not the Alignak daemon will make all standard 
   * 1 = Make macros available as environment variables
 
 
-.. _configuration/main#log_initial_states:
+.. _configuration/core#log_initial_states:
 
 Initial states logging option
 -----------------------------
@@ -282,7 +282,7 @@ This variable determines whether or not Alignak will force all initial host and 
   * 1 = Log initial states
 
 
-.. _configuration/main#log_notifications:
+.. _configuration/core#log_notifications:
 
 Notification logging option
 ---------------------------
@@ -305,8 +305,8 @@ This variable determines whether or not notification messages are logged. If you
   * 1 = Log notifications
 
 
-.. _configuration/main#log_service_retries:
-.. _configuration/main#log_host_retries:
+.. _configuration/core#log_service_retries:
+.. _configuration/core#log_host_retries:
 
 Service/Host check retry logging option
 ---------------------------------------
@@ -331,7 +331,7 @@ This variable determines whether or not service/host check retries are logged. S
   * 1 = Log service/host check retries
 
 
-.. _configuration/main#log_event_handlers:
+.. _configuration/core#log_event_handlers:
 
 Event handlers logging option
 -----------------------------
@@ -356,7 +356,7 @@ This variable determines whether or not service and host :ref:`event handlers <m
 
 
 
-.. _configuration/main#log_external_commands:
+.. _configuration/core#log_external_commands:
 
 External commands logging option
 --------------------------------
@@ -379,7 +379,7 @@ This variable determines whether or not Alignak will log :ref:`external commands
   * 1 = Log external commands (default)
 
 
-.. _configuration/main#log_passive_checks:
+.. _configuration/core#log_passive_checks:
 
 Passive checks logging option
 -----------------------------
@@ -402,7 +402,7 @@ This variable determines whether or not Alignak will log :ref:`passive host and 
   * 1 = Log passive checks (default)
 
 
-.. _configuration/main#log_active_checks:
+.. _configuration/core#log_active_checks:
 
 Active checks logging option
 ----------------------------
@@ -425,7 +425,7 @@ This variable determines whether or not Alignak will log :ref:`active host and s
   * 1 = Log active checks
 
 
-.. _configuration/main#log_flappings:
+.. _configuration/core#log_flappings:
 
 Host/Service flapping logging option
 ------------------------------------
@@ -448,7 +448,7 @@ This variable determines whether or not Alignak will log  :ref:`host/service fla
   * 1 = Log snapshots (default)
 
 
-.. _configuration/main#log_snapshots:
+.. _configuration/core#log_snapshots:
 
 Snaphosts logging option
 ------------------------
@@ -471,7 +471,7 @@ This variable determines whether or not Alignak will log the snaphosts it built.
   * 1 = Log snapshots (default)
 
 
-.. _configuration/main#no_event_handlers_during_downtimes:
+.. _configuration/core#no_event_handlers_during_downtimes:
 
 Event Handler during downtimes
 ------------------------------
@@ -498,7 +498,7 @@ This option determines whether or not Alignak will run :ref:`event handlers <mon
 Performance data parameters
 ===========================
 
-.. _configuration/main#process_performance_data:
+.. _configuration/core#process_performance_data:
 
 Performance data processing option
 ----------------------------------
@@ -523,7 +523,7 @@ This value determines whether or not Alignak will process host and service check
 If you want to use tools like PNP, NagiosGrapher or Graphite set it to 1.
 
 
-.. _configuration/main#perfdata_timeout:
+.. _configuration/core#perfdata_timeout:
 
 Performance data processor command timeout
 ------------------------------------------
@@ -543,8 +543,8 @@ Example:
 This is the maximum number of seconds that Alignak will allow a host performance data processor command or service performance data processor command to run. If a command exceeds this time limit it will be killed and a warning will be logged.
 
 
-.. _configuration/main#host_perfdata_command:
-.. _configuration/main#service_perfdata_command:
+.. _configuration/core#host_perfdata_command:
+.. _configuration/core#service_perfdata_command:
 
 Host/Service performance data processing command
 ------------------------------------------------
@@ -563,14 +563,14 @@ Example:
   host_perfdata_command=process-host-perfdata
   service_perfdata_command=process-service-perfdata
 
-This option allows you to specify a command to be run after every host/service check to process host/service :ref:`performance data <advanced/perfdata>` that may be returned from the check. The command argument is the short name of a command definition that you define in your object configuration file. This command is only executed if the :ref:`Performance Data Processing Option <configuration/main#process_performance_data>` option is enabled globally and if the ``process_perf_data`` directive in the host definition is enabled.
+This option allows you to specify a command to be run after every host/service check to process host/service :ref:`performance data <advanced/perfdata>` that may be returned from the check. The command argument is the short name of a command definition that you define in your object configuration file. This command is only executed if the :ref:`Performance Data Processing Option <configuration/core#process_performance_data>` option is enabled globally and if the ``process_perf_data`` directive in the host definition is enabled.
 
 
 Advanced scheduling parameters
 ==============================
 
 
-.. _configuration/main#passive_host_checks_are_soft:
+.. _configuration/core#passive_host_checks_are_soft:
 
 Passive host checks are SOFT option
 -----------------------------------
@@ -595,8 +595,8 @@ This option determines whether or not Alignak will treat :ref:`passive host chec
 .. warning:: This option is not yet implemented.
 
 
-.. _configuration/main#enable_predictive_host_dependency_checks:
-.. _configuration/main#enable_predictive_service_dependency_checks:
+.. _configuration/core#enable_predictive_host_dependency_checks:
+.. _configuration/core#enable_predictive_service_dependency_checks:
 
 Predictive Host/Service dependency checks option
 ------------------------------------------------
@@ -622,8 +622,8 @@ This option determines whether or not Alignak will execute predictive checks of 
 
 .. warning:: This option is not yet implemented.
 
-.. _configuration/main#check_for_orphaned_services:
-.. _configuration/main#check_for_orphaned_hosts:
+.. _configuration/core#check_for_orphaned_services:
+.. _configuration/core#check_for_orphaned_hosts:
 
 Orphaned Host/Service check option
 ----------------------------------
@@ -655,7 +655,7 @@ If this option is enabled and Alignak finds that results for a particular check 
 
 
 
-.. _configuration/main#soft_state_dependencies:
+.. _configuration/core#soft_state_dependencies:
 
 Soft state dependencies option
 ------------------------------
@@ -675,8 +675,8 @@ This option determines whether or not Alignak will use soft state information wh
 Performance tuning
 ===================
 
-.. _configuration/main#cached_host_check_horizon:
-.. _configuration/main#cached_service_check_horizon:
+.. _configuration/core#cached_host_check_horizon:
+.. _configuration/core#cached_service_check_horizon:
 
 Cached Host/Service check horizon
 ---------------------------------
@@ -702,7 +702,7 @@ This option determines the maximum amount of time (in seconds) that the state of
 .. warning:: This option is not yet implemented.
 
 
-.. _configuration/main#use_large_installation_tweaks:
+.. _configuration/core#use_large_installation_tweaks:
 
 Large installation tweaks option
 --------------------------------
@@ -729,7 +729,7 @@ This option determines whether or not the Alignak daemon will take shortcuts to 
 Flapping parameters
 ===================
 
-.. _configuration/main#enable_flap_detection:
+.. _configuration/core#enable_flap_detection:
 
 Flap detection option
 ---------------------
@@ -754,8 +754,8 @@ More information on how flap detection and handling works can be found :ref:`her
   * 1 = Enable flap detection
 
 
-.. _configuration/main#low_host_flap_threshold:
-.. _configuration/main#low_service_flap_threshold:
+.. _configuration/core#low_host_flap_threshold:
+.. _configuration/core#low_service_flap_threshold:
 
 Low Service/Host flap threshold
 -------------------------------
@@ -777,8 +777,8 @@ Example:
 This option is used to set the low threshold for detection of host/service flapping. For more information on how flap detection and handling works (and how this option affects things) read :ref:`this <monitoring_features/flapping>`.
 
 
-.. _configuration/main#high_host_flap_threshold:
-.. _configuration/main#high_service_flap_threshold:
+.. _configuration/core#high_host_flap_threshold:
+.. _configuration/core#high_service_flap_threshold:
 
 High Service/Host flap threshold
 --------------------------------
@@ -802,8 +802,8 @@ This option is used to set the high threshold for detection of host/service flap
 
 
 
-.. _configuration/main#event_handler_timeout:
-.. _configuration/main#notification_timeout:
+.. _configuration/core#event_handler_timeout:
+.. _configuration/core#notification_timeout:
 
 Various commands timeouts
 -------------------------
@@ -832,8 +832,8 @@ There is often widespread confusion as to what this option really does. It is me
 Freshness check
 ===============
 
-.. _configuration/main#check_service_freshness:
-.. _configuration/main#check_host_freshness:
+.. _configuration/core#check_service_freshness:
+.. _configuration/core#check_host_freshness:
 
 Host/Service freshness checking option
 --------------------------------------
@@ -858,8 +858,8 @@ This option determines whether or not Alignak will periodically check the “fre
   * 1 = Check host/service freshness (default)
 
 
-.. _configuration/main#service_freshness_check_interval:
-.. _configuration/main#host_freshness_check_interval:
+.. _configuration/core#service_freshness_check_interval:
+.. _configuration/core#host_freshness_check_interval:
 
 Host/Service freshness check interval
 -------------------------------------
@@ -881,7 +881,7 @@ Example:
 This setting determines how often (in seconds) Alignak will periodically check the “freshness" of host/service check results. If you have disabled host/service freshness checking (with the ``check_service_freshness`` option), this option has no effect. More information on freshness checking can be found :ref:`here <alignak_features/freshness>`.
 
 
-.. _configuration/main#additional_freshness_latency:
+.. _configuration/core#additional_freshness_latency:
 
 Additional freshness threshold latency option
 ---------------------------------------------
@@ -902,7 +902,7 @@ This option determines the number of seconds Alignak will add to any host or ser
 
 
 
-.. _configuration/main#triggers_dir:
+.. _configuration/core#triggers_dir:
 
 Triggers directory
 ------------------
@@ -923,7 +923,7 @@ Used to specify the :ref:`trigger <alignak_features/triggers>` directory. It wil
 
 
 
-.. _configuration/main#enable_notifications:
+.. _configuration/core#enable_notifications:
 
 Notifications option
 --------------------
@@ -947,7 +947,7 @@ Values are as follows:
   * 1 = Enable notifications (default)
 
 
-.. _configuration/main#check_external_commands:
+.. _configuration/core#check_external_commands:
 
 External command check option
 -----------------------------
@@ -973,7 +973,7 @@ This option determines whether or not Alignak will execute the external commands
 Scheduling parameters
 =====================
 
-.. _configuration/main#execute_service_checks:
+.. _configuration/core#execute_service_checks:
 
 Service/Host check execution option
 -----------------------------------
@@ -998,7 +998,7 @@ This option determines whether or not Alignak will execute :ref:`active host/ser
   * 1 = Execute service checks (default)
 
 
-.. _configuration/main#accept_passive_service_checks:
+.. _configuration/core#accept_passive_service_checks:
 
 Passive Host/Service check acceptance option
 --------------------------------------------
@@ -1023,7 +1023,7 @@ This option determines whether or not Alignak will accept :ref:`passive host/ser
   * 1 = Accept passive service/host checks (default)
 
 
-.. _configuration/main#enable_event_handlers:
+.. _configuration/core#enable_event_handlers:
 
 Event handlers option
 ---------------------
@@ -1048,8 +1048,8 @@ This option determines whether or not Alignak will run :ref:`event handlers <mon
 
 
 
-.. _configuration/main#global_host_event_handler:
-.. _configuration/main#global_service_event_handler:
+.. _configuration/core#global_host_event_handler:
+.. _configuration/core#global_service_event_handler:
 
 Global Host/Service event handlers option
 -----------------------------------------
@@ -1068,13 +1068,13 @@ Example:
   global_host_event_handler=log-host-event-to-db
   global_service_event_handler=log-service-event-to-db
 
-This option allows you to specify a host event handler command that is to be run for every host state change. The global event handler is executed immediately prior to the event handler that you have optionally specified in each host definition. The command argument is the short name of a command that you define in your commands definition. The maximum amount of time that this command can run is controlled by the :ref:`Event Handler Timeout <configuration/main#event_handler_timeout>` option. More information on event handlers can be found :ref:`here <monitoring_features/event_handlers>`.
+This option allows you to specify a host event handler command that is to be run for every host state change. The global event handler is executed immediately prior to the event handler that you have optionally specified in each host definition. The command argument is the short name of a command that you define in your commands definition. The maximum amount of time that this command can run is controlled by the :ref:`Event Handler Timeout <configuration/core#event_handler_timeout>` option. More information on event handlers can be found :ref:`here <monitoring_features/event_handlers>`.
 
 Such commands should not be so useful with the new Alignak distributed architecture. If you use it, look if you can avoid it because such commands will kill your performance!
 
 
 
-.. _configuration/main#interval_length:
+.. _configuration/core#interval_length:
 
 Timing interval length
 ----------------------
@@ -1102,7 +1102,7 @@ The default value for this is set to 60, which means that a "unit value" of 1 in
 Naming and macros parameters
 ============================
 
-.. _configuration/main#illegal_object_name_chars:
+.. _configuration/core#illegal_object_name_chars:
 
 Illegal object name characters
 ------------------------------
@@ -1122,7 +1122,7 @@ Example:
 This option allows you to specify illegal characters that cannot be used in host names, service descriptions, or names of other object types. Alignak will allow you to use most characters in object definitions, but we recommend not using the characters shown in the example above because it may give you problems in the web interface, notification commands, etc.
 
 
-.. _configuration/main#illegal_macro_output_chars:
+.. _configuration/core#illegal_macro_output_chars:
 
 Illegal macro output characters
 -------------------------------
@@ -1151,7 +1151,7 @@ This option allows you to specify illegal characters that should be stripped fro
   * "$SERVICEACKCOMMENT$"
 
 
-.. _configuration/main#admin_email:
+.. _configuration/core#admin_email:
 
 Administrator email address
 ---------------------------
@@ -1171,7 +1171,7 @@ Example:
 This is the email address for the administrator of the local machine (i.e. the one that Alignak is running on). This value can be used in notification commands by using the "$ADMINEMAIL$" :ref:`macro <monitoring_features/macros>`.
 
 
-.. _configuration/main#admin_pager:
+.. _configuration/core#admin_pager:
 
 Administrator pager (unused)
 ----------------------------
@@ -1194,7 +1194,7 @@ This is the pager number (or pager email gateway) for the administrator of the l
 Statistics parameters
 =====================
 
-.. _configuration/main#statsd:
+.. _configuration/core#statsd:
 
 Statsd enabled
 --------------

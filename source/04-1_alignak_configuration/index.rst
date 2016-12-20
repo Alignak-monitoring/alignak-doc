@@ -12,23 +12,20 @@ Alignak framework configuration
     \newpage
 
 
-The Alignak framework configuration is splitted in three main parts:
+The Alignak framework configuration is splitted in two main parts:
 
-   - arbiter configuration,
-   - daemons configuration,
-   - external modules configuration.
+   - the core configuration
+   - the modules configuration.
 
-The arbiter configuration part describes the Alignak framework infrastructure (which daemons are used and how they are) and the monitoring objects (what is monitored and how it is).
+All the configurations are stored in the folder */usr/local/etc/alignak/* (or */etc/alignak/*), even the monitoring objects (what is monitored and how it is). Monitoring objects configuration, probably the most important for Alignak's users, is described in  :ref:`the monitored objects dedicated chapter <monitoring_configuration/index>`.
 
-All the configuration is stored in the folder */usr/local/etc/alignak/* (or */etc/alignak/*).
-Each main part of the configuration is described in the following chapters:
+Each main part of the Alignak framework configuration is described in the following chapters :
 
 .. toctree::
    :maxdepth: 1
 
-   arbiter
-   daemons
-   modules
+   core_configuration
+   modules_configuration
 
 This chapter gives information about configuring the inter-deamon communication with SSL.
 
@@ -43,4 +40,4 @@ The last chapters give more information about the default installed configuratio
    :maxdepth: 1
 
    default_configuration
-   main_configuration_file
+   core_configuration_tips.rst

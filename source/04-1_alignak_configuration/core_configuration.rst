@@ -6,12 +6,9 @@ Core configuration
 
 The core configuration part describes the Alignak framework infrastructure (which daemons are used and how they are). 
 
-For historical reasons, the configuration is splited in two kinds of files :
+For historical reasons, the configuration is splitted in two kinds of files. The ini file contains the parameters used by the daemon to communicate with the other daemons in the Alignak framework where as the .cfg file contains parameters dedicated to its role in the whole stuff
 
-    * *.cfg* files for storing settings more binded to the role of the daemon concerned.
-    * *.ini* files for storing settings considered as parameters
-
-In a feature paradise, one .cfg file per daemon should be enougth to configure all settings of the concerned daemon.
+In a feature paradise, one .cfg file per daemon should be enough to configure all settings of the concerned daemon. Currently each daemon has a .cfg and a .ini file for its configuration.
 
 Cfg files
 =========

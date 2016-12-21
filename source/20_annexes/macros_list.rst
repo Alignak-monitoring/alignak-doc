@@ -471,7 +471,7 @@ Misc Macros
 ================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 _`$PROCESSSTARTTIME$`                                            Time stamp in time_t format (seconds since the UNIX epoch) indicating when the Alignak process was last (re)started. You can determine the number of seconds that Alignak has been running (since it was last restarted) by subtracting $PROCESSSTARTTIME$ from :ref:`$TIMET$ <$TIMET$>`.
 _`$EVENTSTARTTIME$`                                              Time stamp in time_t format (seconds since the UNIX epoch) indicating when the Alignak process starting process events (checks, etc.). You can determine the number of seconds that it took for Alignak to startup by subtracting $PROCESSSTARTTIME$ from $EVENTSTARTTIME$.
-_`$ADMINEMAIL$` (unused)                                         Global administrative email address. This value is taken from the :ref:`admin_email <configuration/main#admin_email>` directive.
+_`$ADMINEMAIL$` (unused)                                         Global administrative email address. This value is taken from the :ref:`admin_email <configuration/core#admin_email>` directive.
 _`$ADMINPAGER$` (unused)                                         Global administrative pager number/address. This value is taken from the :ref:`admin_pager <configuration/main#admin_pager>` directive.
 _`$ARGn$`                                                        The nth argument passed to the command (notification, event handler, service check, etc.). Alignak supports up to 32 argument macros ($ARG1$ through $ARG32$).
 _`$USERn$`                                                       The nth user-definable macro. User macros can be defined in one or more :ref:`resource files <configuration/main#resource_file>`. Alignak supports up to 32 user macros ($USER1$ through $USER32$).
@@ -519,5 +519,5 @@ Notes
 
 .. _annexes/macros_list#note10:
 
-  * **10** Summary macros are not available as environment variables if the :ref:`use_large_installation_tweaks <configuration/main#use_large_installation_tweaks>` option is enabled, as they are quite CPU-intensive to calculate.
+  * **10** Summary macros are not available as environment variables if the :ref:`use_large_installation_tweaks <configuration/core#use_large_installation_tweaks>` option is enabled, as they are quite CPU-intensive to calculate.
 

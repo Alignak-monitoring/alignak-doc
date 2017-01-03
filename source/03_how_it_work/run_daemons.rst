@@ -107,14 +107,14 @@ Restart to load a new configuration::
 As default:
 
     - each daemon starts in daemonize mode to be detached from the current shell;
-    - the working directory of each daemon is the current working directory. as such, each daemon will create its pid file in the current directory
+    - the working directory of each daemon is the current working directory. As such, each daemon will create its pid file in the current directory
 
 Specifying the `-d` option will start the daemons in debug mode. Then you will get a log file for each daemon in the current working directory.
 
 Specifying the `-c` option will start the daemons with its own configuration file as defined in *alignak.ini*. In this mode, the daemon will change its working directory according to the values defined in its configuration file. Take care about the defined parameters ;)
 
 
-.. note :: By default, the arbiter starting script uses */usr/local/etc/alignak/alignak.cfg* as a monitoring configuration file. You can use another configuration file if you set the ``ALIGNAKCFG`` shell environment variable.
+.. note :: By default, the arbiter starting script uses the monitoring configuration file defined in the *alignak.ini* file. You can use another configuration file if you set the ``ALIGNAKCFG`` shell environment variable.
 
 
 .. note :: It is also possible to define a second monitoring configuration file that will be used by the Alignak arbiter. If your configuration is defined in two separated files, you can define the second configuration file if you set the ``ALIGNAKSPECIFICCFG`` shell environment variable.
@@ -126,19 +126,20 @@ The `_launch_daemon.sh` script has several command line parameters that may be i
 
     Usage: ./_launch_daemon.sh [-h|--help] [-v|--version] [-d|--debug] [-a|--arbiter] [-n|--no-daemon] [-V|--verify] daemon_name
 
-     -h (--help)        display this message
-     -v (--version)     display alignak version
-     -d (--debug)       start requested daemon in debug mode
-     -c (--config)      start requested daemon with its configuration file
-                        Default is to start with no configuration file to use the default daemon parameters
-                        The pid and log files are stored in the current working directory
-                        When using this option, check the directories declared in its configuration file
-     -n (--no-daemon)   start requested daemon in console mode (do not daemonize)
-     -a (--arbiter)     start requested daemon in arbiter mode
-                        This option adds the monitoring configuration file(s) on the command line
-                        This option will raise an error if the the daemon is not an arbiter.
-     -V (--verify)      start requested daemon in verify mode (only for the arbiter)
-                        This option will raise an error if the the daemon is not an arbiter.
+        -h (--help)        display this message
+        -v (--version)     display alignak version
+        -d (--debug)       start requested daemon in debug mode
+        -c (--config)      start requested daemon without its configuration file
+                           Default is to start with the daemon configuration file
+                           This option allow to use the default daemon parameters and the pid and
+                           log files are stored in the current working directory
+        -r (--replace)     do not replace an existing daemon (if valid pid file exists)
+        -n (--no-daemon)   start requested daemon in console mode (do not daemonize)
+        -a (--arbiter)     start requested daemon in arbiter mode
+                           This option adds the monitoring configuration file(s) on the command line
+                           This option will raise an error if the the daemon is not an arbiter.
+        -V (--verify)      start requested daemon in verify mode (only for the arbiter)
+                           This option will raise an error if the the daemon is not an arbiter.
 
 
 

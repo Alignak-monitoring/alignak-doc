@@ -9,7 +9,7 @@ Introduction
 
 Some requirements are needed to install with sources:
 
-* python 2.6 or 2.7 (recommanded)
+* python 2.6 or 2.7 (recommended)
 * python-dev
 
 
@@ -20,17 +20,27 @@ This is the steps:
 
 * Create user *alignak* member of group *alignak*
 * Add this user to the sudoers
-* Login with this user account
-* Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases 
-* Uncompress the archive
-* cd to alignak folder
-* Run command::
+* Login with this user account::
 
-    sudo pip install -r requirements.txt
+  adduser alignak
+  adduser alignak sudo
+  su - alignak
+
+* Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases ::
+
+    wget https://github.com/Alignak-monitoring/alignak/archive/0.2.tar.gz
+
+* Uncompress the archive ::
+
+    tar -xvf 0.2.tar.gz
+
+* cd to alignak folder ::
+
+    cd alignak-0.2
 
 * Install with python (as sudo)::
 
-    sudo python setup.py install
+    sudo pip install .
 
 
 Install Alignak as python lib
@@ -48,13 +58,3 @@ Or directly on your system ::
   sudo python setup.py install_lib
   python -c 'from alignak.bin import VERSION; print(VERSION)'
 
-
-
-Data directory
-==============
-
-To change the data files installation directory you can run::
-
-    python setup.py install --data-dir /tmp
-
-This command will use */tmp* directory instead of the usual data installation directory determined by the system.

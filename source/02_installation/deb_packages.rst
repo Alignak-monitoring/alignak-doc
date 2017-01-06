@@ -4,25 +4,28 @@
 Installation with DEB
 =====================
 
-You can find packages in a dedicated repository.
+Installing Alignak from ``deb`` packages is the recommended way. You can find packages in an Alignak dedicated repository. To proceed with installation, you must register the alignak repository and store its public key on your system.
 
-Create /etc/apt/sources.list.d/alignak.list with the following content :
+This script is an example how-to adapt your system and install Alignak but it is to be adapted according to your OS:
 
-Debian 8 (jessie) :
+::
 
-  deb http://alignak-monitoring.github.io/repos/deb jessie main
-
-
-Ubuntu 16.04 (Xenial):
-
-  deb http://alignak-monitoring.github.io/repos/deb xenial main
-
-
-Ubuntu 14.04 (trusty):
-
-  deb http://alignak-monitoring.github.io/repos/deb trusty main
+    # create an apt source with the content according to your Linux distribution.
+    echo "___Os___specific___source___" | sudo tee /etc/apt/sources.list.d/alignak.list
+    sudo apt-get update
+    # Get and store the Alignak repos public key
+    wget -O- http://alignak-monitoring.github.io/repos/alignak_pub.key | sudo apt-key add -
+    apt-key list
+    sudo apt-get install alignak
 
 
-Ubuntu 12.04 (precise)
+According to your OS, use the following source:
 
-  deb http://alignak-monitoring.github.io/repos/deb precise main
+    - Debian 8 (jessie): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb jessie main``
+
+    - Ubuntu 16.04 (Xenial): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb xenial main``
+
+    - Ubuntu 14.04 (trusty): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb trusty main``
+
+    - Ubuntu 12.04 (precise) ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb precise main``
+

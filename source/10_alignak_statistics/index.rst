@@ -4,8 +4,8 @@
 
 .. _alignak_statistics/index:
 
-Alignak features
-================
+Alignak statistics
+==================
 
 .. raw:: LaTeX
 

@@ -16,7 +16,7 @@ Monitored objects are all the elements that are involved in the monitoring and n
   * Execution Dependencies
   * Modulations
 
-The monitored objects can be defined in one or more configuration files and/or directories that are specified using the :ref:`main configuration file<configuration/main#cfg_file>` and/or :ref:`cfg_dir <configuration/main#cfg_dir>` properties in the :ref:`main configuration file<configuration/main>`.
+The monitored objects can be defined in one or more configuration files and/or directories that are specified using the :ref:`cfg_file <configuration/core#cfg_file>` and/or :ref:`cfg_dir <configuration/core#cfg_dir>` properties in the :ref:`core configuration <configuration/core>`.
 
 .. note: defining the monitored objects in some configuration flat files is the plain old Nagios/Shinken way of defining the configuration. Alignak introduces a brand new solution thanks to its backend. For more information, see :ref:̀̀`extending/alignak_backend`.
 

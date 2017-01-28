@@ -129,7 +129,7 @@ Submitting passive check results to Alignak
    :scale: 90 %
 
 
-Submitting passive checks to Alignak implies to send an :ref:`external command<monitoring_features/external_commands>` containing the passive check result. The most common solution to submit passive checks are:
+Submitting passive checks to Alignak implies to send an :ref:`external command<monitoring_features/external_commands>`_ containing the passive check result. The most common solution to submit passive checks are:
 
     * use a dedicated protocol such as NSCA
     * use an external commands capable module

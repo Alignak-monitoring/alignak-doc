@@ -16,6 +16,22 @@ Alignak propose an easy way to deal with these operations by providing the most 
 
 *** TO BE COMPLETED ***
 
+Alignak packs
+=============
+
+Alignak contributions propose some prepared checks packs that make it easy to configure new hosts to be monitored with the most current plugins.
+
+All the currently available checks packs:
+
+* can be listed from `the alignak contributions organization on github <https://github.com/Alignak-monitoring-contrib>`_.
+
+* each pack has its own repository named as `alignak-checks-mypack` (search on github with the keyword *checks* to get the full list)
+
+* each pack is easily installable thanks to the Python ``pip`` (eg. `sudo pip install alignak_checks_mypack`).
+
+
+**Note:** all the currently available packs are not introduced in the current doucment. To get the updated most recent list, browse the Alignak contribution organization as explained previsouly;)
+
 Alignak notifications packs
 ===========================
 
@@ -86,12 +102,12 @@ Short story::
 
 
 
-.. _checks/snmp:
+.. _checks/linux-snmp:
 
-Checking with SNMP
-------------------
+Checking Unix/Linux hosts/services with SNMP
+--------------------------------------------
 
-For checking an host and its most common services through SNMP, `install SNMP package <https://github.com/Alignak-monitoring-contrib/alignak-checks-snmp>`_.
+For checking an host and its most common services through SNMP, `install SNMP package <https://github.com/Alignak-monitoring-contrib/alignak-checks-linux-snmp>`_.
 
 Hosts inherit from a check command that gets the host uptime with an SNMP get, this to confirm that the host is alive and that SNMP connection is ok.
 
@@ -106,12 +122,12 @@ Short story::
     }
 
 
-.. _checks/nrpe:
+.. _checks/linux-nrpe:
 
-Checking with NRPE
-------------------
+Checking Unix/Linux hosts/services with NRPE
+--------------------------------------------
 
-For checking an host and its most common services through NRPE, `install NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe>`_.
+For checking an host and its most common services through NRPE, `install NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-linux-nrpe>`_.
 
 Hosts inherit from a check command that gets the host NRPE daemon version, this to confirm that the host is alive and that NRPE connection is ok.
 
@@ -164,6 +180,25 @@ Short story::
     define host{
         use                 windows-nsca
         host_name           nsca_windows_host
+        address             0.0.0.0
+    }
+
+
+
+Active checking Windows with NRPE
+---------------------------------
+
+For checking a Windows host and its most common services through NRPE, `install Windows NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nrpe>`_.
+
+**Note**: this checks pack assumes that your Windows host is using the `NSClient agent`_.
+
+Short story::
+
+    pip install alignak-checks-windows-nrpe
+
+    define host{
+        use                 windows-nrpe
+        host_name           nrpe_windows_host
         address             0.0.0.0
     }
 

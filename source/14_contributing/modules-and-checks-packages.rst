@@ -19,7 +19,7 @@ Some modules examples:
     * backend scheduler module that saves and loads retention data
 
 
-An `Alignak example module`_ exists is available in the `Alignak organization on GitHub`_ .
+An `Alignak example module`_ is available in the `Alignak organization on GitHub`_ .
 This module is documented to explain how to build a module and which information are available into the modules.
 
 The existing modules available in the `Alignak contribution organization on GitHub`_ are also good examples to help digging into the module code.

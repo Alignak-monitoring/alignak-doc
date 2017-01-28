@@ -18,8 +18,9 @@ Individual start / stop
 -----------------------
 All the Alignak daemons have a script that can be launched with command line parameters.
 
-All the command line parameters are optional because default values are used by the aemon when it
-starts but it is recommended to use, at least, a daemon configuration file with the `-c` option.
+All the command line parameters are optional because default values are used by the daemon when it starts but it is recommended to use, at least, a daemon configuration file with the `-c` option.
+
+Without a configuration file, the daemon will create ist pid file in the current working directory.
 
 Other command line parameters are available, but they are use rarely ;)
 
@@ -76,47 +77,204 @@ With the default installed configuration::
     $ alignak-arbiter -c /usr/local/etc/alignak/daemons/arbiterd.ini -a /usr/local/etc/alignak/alignak.cfg
 
 
-Installed scripts
------------------
-Some scripts to start/stop are provided when installing Alignak with its default configuration.
-Those scripts are located in the */usr/local/etc/init.d* or *rc.d* directory. They allow starting
-one instance of each Alignak daemon with:
+Start / stop example scripts
+----------------------------
 
-    - its own configuration file as installed in the default configuration (*-c /usr/local/etc/alignak/daemons/*.ini*)
-    - in daemon mode (*-d*)
-    - for the Arbiter, adding the default monitored configuration (*-a /usr/local/etc/alignak/alignak.cfg*)
+Some scripts to start/stop Alignak daemons are provided with the Alignak source archive.
+
+Those scripts are located in the *dev* directory of the alignak repository. They are delivered as examples to build your own start/stop scripts if you do not use the one provided with an OS installation package.
+
+They are using the *etc/alignak.ini* file to get the Alignak daemons parameters and start the daemons.
+
+The main `_launch_daemon.sh` script is called to launch a daemon which you provide the name. The `launch_arbiter.sh`, `launch_scheduler.sh`, ... scripts are used to start one instance of the each type of daemon. You can start all the daemons at once with the `launch_all.sh` script.
+
+Stopping the launched daemons is possible thanks to the `stop_*.sh` scripts.
 
 You can then start all daemons (as alignak user) like this::
 
-    $ /usr/local/etc/init.d/alignak start (or /usr/local/etc/rc.d/alignak start)
-
-    Starting scheduler:
-       ...done.
-    Starting poller:
-       ...done.
-    Starting reactionner:
-       ...done.
-    Starting broker:
-       ...done.
-    Starting receiver:
-       ...done.
-    Starting arbiter:
-       ...done.
+    $launch_all.sh
 
 Then stop all daemons::
 
-    $ /usr/local/etc/init.d/alignak stop (or /usr/local/etc/rc.d/alignak stop)
+    $stop_all.sh
 
 
 Restart to load a new configuration::
 
-    $ /usr/local/etc/init.d/alignak restart (or /usr/local/etc/rc.d/alignak restart)
+    $restart_all.sh
 
 
-.. note :: By default, the arbiter starting script uses */usr/local/etc/alignak/alignak.cfg* as a monitoring configuration file. You can use another configuration file if you set the ``ALIGNAKCFG`` shell environment variable.
+As default:
+
+    - each daemon starts in daemonize mode to be detached from the current shell;
+    - the working directory of each daemon is the current working directory. As such, each daemon will create its pid file in the current directory
+
+Specifying the `-d` option will start the daemons in debug mode. Then you will get a log file for each daemon in the current working directory.
+
+Specifying the `-c` option will start the daemons with its own configuration file as defined in *alignak.ini*. In this mode, the daemon will change its working directory according to the values defined in its configuration file. Take care about the defined parameters ;)
+
+
+.. note :: By default, the arbiter starting script uses the monitoring configuration file defined in the *alignak.ini* file. You can use another configuration file if you set the ``ALIGNAKCFG`` shell environment variable.
 
 
 .. note :: It is also possible to define a second monitoring configuration file that will be used by the Alignak arbiter. If your configuration is defined in two separated files, you can define the second configuration file if you set the ``ALIGNAKSPECIFICCFG`` shell environment variable.
+
+
+The `_launch_daemon.sh` script has several command line parameters that may be interesting for more specific usage. When calling one of the `launch*.sh` script you can also use those parameters because they will be forwarded to the `launch_daemon.sh` script.
+
+::
+
+    Usage: ./_launch_daemon.sh [-h|--help] [-v|--version] [-d|--debug] [-a|--arbiter] [-n|--no-daemon] [-V|--verify] daemon_name
+
+        -h (--help)        display this message
+        -v (--version)     display alignak version
+        -d (--debug)       start requested daemon in debug mode
+        -c (--config)      start requested daemon without its configuration file
+                           Default is to start with the daemon configuration file
+                           This option allow to use the default daemon parameters and the pid and
+                           log files are stored in the current working directory
+        -r (--replace)     do not replace an existing daemon (if valid pid file exists)
+        -n (--no-daemon)   start requested daemon in console mode (do not daemonize)
+        -a (--arbiter)     start requested daemon in arbiter mode
+                           This option adds the monitoring configuration file(s) on the command line
+                           This option will raise an error if the the daemon is not an arbiter.
+        -V (--verify)      start requested daemon in verify mode (only for the arbiter)
+                           This option will raise an error if the the daemon is not an arbiter.
+
+
+
+Alignak.ini configuration file
+------------------------------
+
+.. note: This part will be moved to the configuration part of this documentation but, as of now, is stays here for a better understanding of the previously described scripts.
+
+The *etc/alignak.ini* configuration aims to define the main information about how Alignak is installed on the current system.
+
+This file will be located by an OS installation package in the Alignak *etc* directory (eg. */etc/alignak/alignak.ini* or */usr/local/etc/alignak/alignak.ini*). This to allow a third party application or alignak extension to locate it easily. Once parsed this file will contain the necessary information about:
+
+    - the alignak installation directories
+    - the alignak daemons and their configuration
+    - the alignak monitoring configuration file
+
+This file is structured as an Ini file:
+
+::
+
+    #
+    # Copyright (C) 2015-2016: Alignak team, see AUTHORS.txt file for contributors
+    #
+    # This file is part of Alignak.
+    #
+    # Alignak is free software: you can redistribute it and/or modify
+    # it under the terms of the GNU Affero General Public License as published by
+    # the Free Software Foundation, either version 3 of the License, or
+    # (at your option) any later version.
+    #
+    # Alignak is distributed in the hope that it will be useful,
+    # but WITHOUT ANY WARRANTY; without even the implied warranty of
+    # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    # GNU Affero General Public License for more details.
+    #
+    # You should have received a copy of the GNU Affero General Public License
+    # along with Alignak.  If not, see <http://www.gnu.org/licenses/>.
+    #
+
+    #
+    # This configuration file is the main Alignak configuration entry point. Each Alignak installer
+    # will adapt the content of this file according to the installation process. This will allow
+    # any Alignak extension or third party application to find where the Alignak components and
+    # files are located on the system.
+    #
+    # ---
+    # This version of the file contains variable that are suitable to run a single node Alignak
+    # with all its daemon using the default configuration existing in the repository.
+    #
+
+    # Main alignak variables:
+    # - BIN is where the launch scripts are located
+    #   (Debian sets to /usr/bin)
+    # - ETC is where we store the configuration files
+    #   (Debian sets to /etc/alignak)
+    # - VAR is where the libraries and plugins files are installed
+    #   (Debian sets to /var/lib/alignak)
+    # - RUN is the daemons working directory and where pid files are stored
+    #   (Debian sets to /var/run/alignak)
+    # - LOG is where we put log files
+    #   (Debian sets to /var/log/alignak)
+    #
+    [DEFAULT]
+    BIN=../alignak/bin
+    ETC=../etc
+    VAR=/tmp
+    RUN=/tmp
+    LOG=/tmp
+
+
+    # We define the name of the 2 main Alignak configuration files.
+    # There may be 2 configuration files because tools like Centreon generate those...
+    [alignak-configuration]
+    # Alignak main configuration file
+    CFG=%(ETC)s/alignak.cfg
+    # Alignak secondary configuration file (none as a default)
+    SPECIFICCFG=
+
+
+    # For each Alignak daemon, this file contains a section with the daemon name. The section
+    # identifier is the corresponding daemon name. This daemon name is built with the daemon
+    # type (eg. arbiter, poller,...) and the daemon name separated with a dash.
+    # This rule ensure that alignak will be able to find all the daemons configuration in this
+    # whatever the number of daemons existing in the configuration
+    #
+    # Each section defines:
+    # - the location of the daemon configuration file
+    # - the daemon launching script
+    # - the location of the daemon pid file
+    # - the location of the daemon debug log file (if any is to be used)
+
+    [arbiter-master]
+    ### ARBITER PART ###
+    PROCESS=alignak-arbiter
+    DAEMON=%(BIN)s/alignak_arbiter.py
+    CFG=%(ETC)s/daemons/arbiterd.ini
+    DEBUGFILE=%(LOG)s/arbiter-debug.log
+
+
+    [scheduler-master]
+    ### SCHEDULER PART ###
+    PROCESS=alignak-scheduler
+    DAEMON=%(BIN)s/alignak_scheduler.py
+    CFG=%(ETC)s/daemons/schedulerd.ini
+    DEBUGFILE=%(LOG)s/scheduler-debug.log
+
+    [poller-master]
+    ### POLLER PART ###
+    PROCESS=alignak-poller
+    DAEMON=%(BIN)s/alignak_poller.py
+    CFG=%(ETC)s/daemons/pollerd.ini
+    DEBUGFILE=%(LOG)s/poller-debug.log
+
+    [reactionner-master]
+    ### REACTIONNER PART ###
+    PROCESS=alignak-reactionner
+    DAEMON=%(BIN)s/alignak_reactionner.py
+    CFG=%(ETC)s/daemons/reactionnerd.ini
+    DEBUGFILE=%(LOG)s/reactionner-debug.log
+
+    [broker-master]
+    ### BROKER PART ###
+    PROCESS=alignak-broker
+    DAEMON=%(BIN)s/alignak_broker.py
+    CFG=%(ETC)s/daemons/brokerd.ini
+    DEBUGFILE=%(LOG)s/broker-debug.log
+
+    [receiver-master]
+    ### RECEIVER PART ###
+    PROCESS=alignak-receiver
+    DAEMON=%(BIN)s/alignak_receiver.py
+    CFG=%(ETC)s/daemons/receiverd.ini
+    DEBUGFILE=%(LOG)s/receiver-debug.log
+
+
 
 
 Alignak processes list

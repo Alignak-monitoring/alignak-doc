@@ -9,69 +9,74 @@ The setup script
 
 The python *setup.py* script used by Alignak does the following:
 
-* test if an `alignak` user and an `alignak` users group exist on the system
+* test if an ``alignak`` user and an ``alignak`` users group exist on the system
 
-* determine the installation directory according to the system (setuptools inner method)
+* determine the installation directory ``prefix`` according to the system (most often it is */usr/local*)
 
-* create a */etc/default/alignak* main configuration file (only on non FreeBSD platform):
-    - copy the *bin/default/alignak.in* file
-    - update the main variable directories according to the used installation directory
+* copy the alignak default configuration files in *prefix/etc/alignak* and update some files:
 
-* copy the alignak default configuration files in */etc/alignak* and update some files:
+    - update the *alignak.ini* file according to the used installation directory
     - update the *alignak.cfg* file according to the used installation directory
     - update the *daemons/*.ini* files according to the used installation directory
     - update the *paths.cfg* file with the Alignak plugins directory
 
-Files / directories lists
-=========================
+Installation procedure
+======================
 
-All the variables introduced here are prefixed with the installation directory. Most often, this intallation directory is */usr/local*.
+First step - installation directories
+-------------------------------------
 
-Variables to update *default/alignak*::
+Some variables are used by the installation script to update some of the installed files. All these variables are prefixed with the installation directory ``prefix``, except for the ``USER`` and ``GROUP`` variables.
 
-    'ETC': '/etc/alignak',
-    'VAR': '/var/lib/alignak',
+Default variables values::
+
+    'USER': 'alignak',
+    'GROUP': 'alignak',
     'BIN': '/bin',
+    'ETC': '/etc/alignak',
+    'VAR': '/var/libexec/alignak',
     'RUN': '/var/run/alignak',
-    'LOG': '/var/log/alignak',
-    'LIB': '/var/libexec/alignak',
+    'LOG': '/var/log/alignak'
+
+If it exists an */etc/default/alignak* or */usr/local/etc/default/alignak* file on the system, the the variables are updated with their existing respective values defined in this file. This file may exist from a former installation of Alignak on a system using the init.d script system. Most often, this file will not exist on your system and the variables will keep their default values!
+
+Second step - updating macro definitions
+----------------------------------------
+
+All the **.cfg* files located in the *etc/alignak* directory and its sub-directories are parsed to be updated. If they contain a line starting with a macro declaration for one of the script variables, this line is replaced with the variable value. As an example:
+::
+
+    #-- Alignak main directories
+    #-- Those macros are automatically updated during the Alignak installation
+    #-- process (eg. python setup.py install)
+    $BIN$=/usr/local/bin
+    $ETC$=/usr/local/alignak/etc
+    $VAR$=/usr/local/var
+    $RUN$=$VAR$/run
+    $LOG$=$VAR$/log
+
+    $USER$=alignak
+    $GROUP$=alignak
+
+This allows to add those macro definition in any configuration located in the Alignak configuration. Currently, only the *etc/alignak/arbiter/resource.d/paths.cfg* file is including those macros.
 
 
-Variables to update *alignak.cfg* and *daemons.ini* files::
+Third step - updating configuration
+-----------------------------------
 
-    'workdir': '/var/run/alignak',
-    'logdir': '/var/log/alignak',
-    'modules_dir': '/var/lib/alignak/modules',
-    'plugins_dir': '/var/libexec/alignak',
+All the **.in* files located in the *etc/alignak* directory are parsed to be updated. If they contain a line starting with one of the script variables, this line is replaced with the variable value. As an example:
+::
 
-    'lock_file': '/var/run/alignak/arbiterd.pid',
-    'local_log': '/var/log/alignak/arbiterd.log',
-    'pidfile': '/var/run/alignak/arbiterd.pid',
-
-    'pack_distribution_file': '/var/lib/alignak/pack_distribution.dat'
-
-    'ca_cert': '/etc/alignak/certs/ca.pem',
-    'server_cert': '/etc/alignak/certs/server.cert',
-    'server_key': '/etc/alignak/certs/server.key',
-
-**Note:** The last three variables concern SSL and they are replaced and stay commented in the configuration files.
+    [DEFAULT]
+    BIN=../alignak/bin
+    ETC=../etc
+    VAR=/tmp
+    RUN=/tmp
+    LOG=/tmp
+    USER=alignak
+    GROUP=alignak
 
 
-Variables to update *alignak.cfg* and *daemons.ini* files with user credentials::
+This allows to add those macro definition in any configuration located in the Alignak configuration. Currently, only the *etc/alignak/alignak.ini* file and all the files located in the *etc/aligank/daemons* directory are concerned.
 
-    'alignak_user'
-    'alignak_group'
-    'user'
-    'group'
-    'ALIGNAKUSER'
-    'ALIGNAKGROUP'
-
-**Note:** Those variables are intended for macro definition and they are replaced with *$name$*.
-
-
-Variables to update *resource.d/paths.cfg*::
-
-    'LOGSDIR': '/var/log/alignak',
-    'PLUGINSDIR': '/var/libexec/alignak',
-
-**Note:** Those variables are intended for macro definition and they are replaced with *$name$*.
+**Note:** For the **.ini* files, the script also replaces the *workdir* , *logdir* and *etcdir* variables and they are respectively replaced with *RUN*, *LOG* and *ETC* variables values.

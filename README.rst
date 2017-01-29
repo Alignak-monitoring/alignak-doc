@@ -4,7 +4,7 @@ Alignak documentation
 *Documentation for the Alignak project - modern Nagios compatible monitoring framework*
 
 .. image:: https://readthedocs.org/projects/alignak-doc/badge/?version=latest
-    :target: http://alignak-backend-client.readthedocs.org/en/latest/?badge=latest
+    :target: http://alignak-doc.readthedocs.org/en/latest/?badge=latest
     :alt: Lastest documentation Status
 
 .. image:: https://readthedocs.org/projects/alignak-doc/badge/?version=update
@@ -47,6 +47,9 @@ For a local build of the documentation, run::
     make html
 
 Go to your Web browser and open ``file:///home/alignak/alignak-doc/build/html/index.html``.
+
+Report an error or request a modification
+-----------------------------------------
 
 The `issue tracker of the project <https://github.com/Alignak-monitoring/alignak-doc/issues>`_ is the preferred channel for reporting errors and submitting pull requests.
 

@@ -95,19 +95,19 @@ port
   This directive is used to define the TCP port used by the daemon. The default value is *7770*.
 
 spare
-  This variable is used to define if the daemon matching this arbiter definition is a spare one or not. The default value is *0* (master/non-spare).
+  This variable is used to define if the daemon matching this arbiter definition is a spare one or not. The default value is *0* (non-spare).
 
 modules
-  This variable is used to define all modules that the arbtier daemon matching this definition will load.
+  This variable is used to define all the modules that the arbiter daemon matching this definition will load.
 
 use_ssl
-  This variable is used to allow communications in securized mode (HTTPS)
+  This variable is used to allow inter-daemons communication in SSL mode (HTTPS)
 
 hard_ssl_name_check
-  This variable is used to force verification of SSL certificate
+  This variable is used to force the checking of the SSL certificate
 
 timeout
-  This variable defines how much time the arbiter will block waiting for the response of a inter-process ping. 3 seconds by default. This operation is non blocking.
+  This variable defines how much time the arbiter will wait for the response of an inter-process ping (default is 3 seconds). This operation is non blocking.
 
 data_timeout
   Data send timeout. When sending data to another process. 120 seconds by default.

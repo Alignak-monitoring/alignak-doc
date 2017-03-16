@@ -1,13 +1,10 @@
 .. _extending/modules:
 
-==================
-Installing modules
-==================
-
-Extending Alignak features is made thanks to daemons modules. Some modules are already packaged in an easy installable package called an **Alignak module package**.
-
+===============
 Alignak modules
 ===============
+
+Extending Alignak features is made thanks to daemons modules. Some modules are already packaged in an easy installable package called an **Alignak module package**.
 
 Configuring daemons with modules
 --------------------------------

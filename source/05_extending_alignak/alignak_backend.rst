@@ -53,7 +53,11 @@ The different installation methods are detailed in the documentation but the mos
 
 Once installed, the backend is ready to run and you can start with::
 
-    ./bin/run.sh
+    # As a single process for test (without uWsgi)
+    alignak-backend
+
+    # As a multi-process uWsgi application
+    alignak-backend-uwsgi
 
 
 Configuring the Alignak backend is made easy thanks to a *settings.json* file.
@@ -92,7 +96,6 @@ Several backend client or libraries exist to use the REST API. They will not be 
 For more information, see:
 
     - http://alignak-backend-client.readthedocs.io/en/latest/, for the Python library
-    -
 
 **To be completed...**
 
@@ -111,11 +114,9 @@ Once this script has finished its execution, you will be able to browse your con
 
 The most often `alignak_backend_import` command is::
 
-    alignak_backend_import -d -m -b http://backend:5000 -u username -p password /etc/my_config/config.cfg
+    alignak_backend_import -d -b http://backend:5000 -u username -p password /etc/my_config/config.cfg
 
-where you specify that you want to delete existing data (*-d*), import the existing templates (*-m*) and indicate where is located you backend (*-b*) and how to log-in (*-u*, *-p*).
+where you specify that you want to delete existing data (*-d*), indicate where is located you backend (*-b*) and how to log-in (*-u*, *-p*).
 
 
 More information is available in this `documentation <http://alignak-backend-import.readthedocs.io/en/latest/>`_.
-
-A backend feeding tutorial exists on the `SysAdmin.cool web site <http://sysadmin.cool/>`_.

@@ -47,7 +47,7 @@ Before starting to dig into Alignak code, you should be able to use git with eas
 If you are already familiar with this, here are some of useful commands we use quite often.
 Consider "origin" the remote branch from Alignak-monitoring organization
 
-Add the fork you have made by pressing the "Fork" button on Github ::
+Add the fork you have made by pressing the "Fork" button on GitHub ::
 
   git remote add <yournick> git@github.com:<yournick>/alignak.git   # Add your remote git
   git fetch <yournick>   # Fetch data from this remote
@@ -105,10 +105,10 @@ The process to contribute to Alignak is quite simple. However, depending on what
 
 Simple fix
 ----------
-If you have a very small to do (typo, doc, one file commit), you'd better use Github. You can click edit in the Alignak repository.
+If you have a very small to do (typo, doc, one file commit), you'd better use GitHub. You can click edit in the Alignak repository.
 It will fork the repository for you and let you edit the file through the Web Interface.
 Once you picked a good commit message (see below for commit message habits) you can push it in a new branch (see below for branch name habits).
-Finally, you can create a new pull request to the Alignak repos (still with Github UI)
+Finally, you can create a new pull request to the Alignak repos (still with GitHub UI)
 
 
 Not so simple fix
@@ -127,7 +127,7 @@ Run Alignak
 ~~~~~~~~~~~
 The *dev* directory of the repository includes several useful scripts to run Alignak daemons on your development platform. The scripts names are self explanatory.
 
-Installing Alignak and its default configuration will create an environement almost identical to the one you will find on your production server. See the `configuration`_ chapter for more information.
+Installing Alignak and its default configuration will create an environment almost identical to the one you will find on your production server. See the `configuration`_ chapter for more information.
 With the default installation your have `init.d` scripts that will allow easy running Alignak...
 
 Run tests
@@ -158,7 +158,7 @@ Commit
 You should be ready to commit now, all new files and modified files are added in "stage"
 If you look at the commit tree, you can notice more or less a pattern in commit message ::
 
-  Enh|Fix|Add: <Generic word to describe> - <Specific word to descript>
+  Enh|Fix|Add: <Generic word to describe> - <Specific word to describe>
 
 Example::
 
@@ -184,7 +184,7 @@ Almost every test uses alignak_test.py module and inherit from AlignakTest class
 
     * scheduler_loop : used to fake a scheduler loop (run check, create broks, raise notification etc..)
     * show_logs : Dump logs (broks with type "log")
-    * show_actions : Dump actions (notification, enventhandler)
+    * show_actions : Dump actions (notification, event handler)
     * assert_log_match / assert_any_log_match / ... : Find regexp into logs
     * add : add a brok or external command
 
@@ -229,8 +229,8 @@ Here are some hints to help reviewers ::
 
     * Explain the issue you encountered, and how you fixed it (short description)
     * Add test cases in a separate commit
-    * Link any Github issue it is related to (if you fix an issue for example)
-    * Mention any limitations of your imlpementation
+    * Link any GitHub issue it is related to (if you fix an issue for example)
+    * Mention any limitations of your implementation
     * Mention any removal of supported feature
 
 

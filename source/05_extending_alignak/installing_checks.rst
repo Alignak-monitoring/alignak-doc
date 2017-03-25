@@ -6,7 +6,7 @@ Installing checks
 
 The default configuration does not include any plugins to check the monitored hosts and services. If we leave it in this state, our system will be really unuseful!
 
-The plugins used to check if an host or service is ok are not part of Alignak. There are litteraly thousands of plugins available to check various systems. To make Alignak use a new plugin to check, you must:
+The plugins used to check if an host or service is ok are not part of Alignak. There are literally thousands of plugins available to check various systems. To make Alignak use a new plugin to check, you must:
 
     * install the plugin
     * declare a new command that specifies how the plugin must be used
@@ -25,12 +25,12 @@ All the currently available checks packs:
 
 * can be listed from `the alignak contributions organization on github <https://github.com/Alignak-monitoring-contrib>`_.
 
-* each pack has its own repository named as `alignak-checks-mypack` (search on github with the keyword *checks* to get the full list)
+* each pack has its own repository named as `alignak-checks-mypack` (search on GitHub with the keyword *checks* to get the full list)
 
 * each pack is easily installable thanks to the Python ``pip`` (eg. `sudo pip install alignak_checks_mypack`).
 
 
-**Note:** all the currently available packs are not introduced in the current doucment. To get the updated most recent list, browse the Alignak contribution organization as explained previsouly;)
+**Note:** all the currently available packs are not introduced in the current document. To get the updated most recent list, browse the Alignak contribution organization as explained previously ;)
 
 Alignak notifications packs
 ===========================

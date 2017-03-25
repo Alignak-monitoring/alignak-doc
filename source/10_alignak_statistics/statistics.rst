@@ -73,7 +73,7 @@ Alignak daemons statistics dictionary:
     - core.get-new-actions (timer) - duration to get the new actions to execute from the scheduler
     - core.manage-returns (timer) - duration to send back to the scheduler the results of executed actions
     - core.worker-%s.queue-size (gauge) - size of the actions queue for each satellite worker
-    - core.wait-ratio (timer) - time waiting for lanched actions to finish
+    - core.wait-ratio (timer) - time waiting for launched actions to finish
     - core.wait-arbiter (timer) - time waiting for arbiter configuration
 
 * all daemons:
@@ -81,7 +81,7 @@ Alignak daemons statistics dictionary:
 
 * arbiter:
     - core.hook.get_objects (timer) - duration spent in the get_objects hook function provided by a module
-    - core.check-alive (timer) - duration to check that alignak daemons are alive
+    - core.check-alive (timer) - duration to check that Alignak daemons are alive
     - core.check-dispatch (timer) - duration to check that the configuration is correctly dispatched
     - core.dispatch (timer) - duration to dispatch the configuration to the daemons
     - core.check-bad-dispatch (timer) - duration to confirm that the configuration is correctly dispatched

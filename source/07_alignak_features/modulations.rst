@@ -4,7 +4,7 @@
 Time period modulations
 =======================
 
-Sometimes you will need to have a different behvior for the Aligna framework depending upon a specific time frame. This is where the modulations are of interest to you.
+Sometimes you will need to have a different behavior for the Alignak framework depending upon a specific time frame. This is where the modulations are of interest to you.
 
 You can adapt the checks, macros or business impact during a specific time period.
 
@@ -97,4 +97,4 @@ Depending on your configuration you may want to change the check_command during 
         checkmodulations                ping_night
     }
 
-With this configuration, the check_ping will command be replaced with check_ping_night for the host localhost.
+With this configuration, the check_ping command will be replaced with check_ping_night for the host localhost.

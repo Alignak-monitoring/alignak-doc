@@ -168,7 +168,7 @@ check_interval
   This directive is used to define the number of “time units" between regularly scheduled checks of the host. Unless you've changed the :ref:`interval_length <configuration/main-advanced#interval_length>` directive from the default value of 60, this number will mean minutes. More information on this value can be found in the :ref:`check scheduling <advanced/checkscheduling>` documentation.
 
 retry_interval
-  This directive is used to define the number of “time units" to wait before scheduling a re-check of the hosts. Hosts are rescheduled at the retry interval when they have changed to a non-UP state. Once the host has been retried **max_check_attempts** times without a change in its status, it will revert to being scheduled at its “normal" rate as defined by the **check_interval** value. Unless you've changed the :ref:`interval_length <configuration/main-advanced#interval_length>` directive from the default value of 60, this number will mean minutes. More information on this value can be found in the :ref:`check cheduling <advanced/checkscheduling>` documentation.
+  This directive is used to define the number of “time units" to wait before scheduling a re-check of the hosts. Hosts are rescheduled at the retry interval when they have changed to a non-UP state. Once the host has been retried **max_check_attempts** times without a change in its status, it will revert to being scheduled at its “normal" rate as defined by the **check_interval** value. Unless you've changed the :ref:`interval_length <configuration/main-advanced#interval_length>` directive from the default value of 60, this number will mean minutes. More information on this value can be found in the :ref:`check scheduling <advanced/checkscheduling>` documentation.
 
 active_checks_enabled
   This directive is used to determine whether or not active checks (either regularly scheduled or on-demand) of this host are enabled. Values: 0 = disable active host checks, 1 = enable active host checks.
@@ -279,12 +279,12 @@ realm
 poller_tag
   This variable is used to define the poller_tag of the host. All checks of this hosts will only take by pollers that have this value in their poller_tags parameter.
 
-  By default the pollerag value is 'None', so all untagged pollers can take it because None is set by default for them.
+  By default the poller_tag value is 'None', so all untagged pollers can take it because None is set by default for them.
 
 reactionner_tag
   This variable is used to define the reactionner_tag of notifications_commands from this service. All of theses notifications will be taken by reactionners that have this value in their reactionner_tags parameter.
 
-  By default there is no reactionner_tag, so all untaggued reactionners can take it.
+  By default there is no reactionner_tag, so all untagged reactionners can take it.
 
 business_impact
   This variable is used to set the importance we gave to this host for the business from the less important (0 = nearly nobody will see if it's in error) to the maximum (5 = you lost your job if it fail). The default value is 2.
@@ -293,10 +293,10 @@ resultmodulations
   This variable is used to link with resultmodulations  objects. It will allow such modulation to apply, like change a warning in critical for this host.
 
 escalations
-  This variable is used to link with escalations objects. It will allow such escalations rules to appy. Look at escalations objects for more details.
+  This variable is used to link with escalations objects. It will allow such escalations rules to apply. Look at escalations objects for more details.
 
 business_impact_modulations
-  This variable is used to link with business_impact_modulations objects. It will allow such modulation to apply (for example if the host is a payd server, it will be important only in a specific timeperiod: near the payd day). Look at business_impact_modulations objects for more details.
+  This variable is used to link with business_impact_modulations objects. It will allow such modulation to apply (for example if the host is a payment server, it will be important only in a specific timeperiod: near the pay day). Look at business_impact_modulations objects for more details.
 
 icon_set
   This variable is used to set the icon in the Alignak Webui. For now, values are only : database, disk, network_service, server
@@ -309,11 +309,11 @@ service_overrides
   This variable may be used to override services directives for a specific host. This is especially useful when services are inherited (for instance from packs), because it allows to have a host attached service set one of its directives a specific value. For example, on a set of web servers, **HTTP** service (inherited from **http** pack) on *production* servers should have notifications enabled **24x7**, and *staging* server should only notify during **workhours**. To do so, staging server should be set the following directive: **service_overrides HTTP,notification_period workhours**. Several overrides may be specified, each override should be written on a single line. *Caution*, *service_overrides* may be inherited (through the **use** directive), but specifying an override on a host overloads all values inherited from parent hosts, it does not append it (as of any single valued attribute). See :ref:`inheritance description<advanced/objectinheritance>` for more details.
 
 service_excludes
-  This variable may be used to *exclude* a service from a host. It addresses the situations where a set of serices is inherited from a pack or attached from a hostgroup, and an identified host should **NOT** have one (or more, comma separated) services defined. This allows to manage exceptions in the service asignment without having to define intermediary templates/hostgroups. See :ref:`inheritance description<advanced/objectinheritance>` for more details.
+  This variable may be used to *exclude* a service from a host. It addresses the situations where a set of services is inherited from a pack or attached from a hostgroup, and an identified host should **NOT** have one (or more, comma separated) services defined. This allows to manage exceptions in the service assignment without having to define intermediary templates/hostgroups. See :ref:`inheritance description<advanced/objectinheritance>` for more details.
   This will be **ignored** if there is *service_includes*
 
 service_includes
-  This variable may be used to *include only* a service from a host. It addresses the situations where a set of serices is inherited from a pack or attached from a hostgroup, and an identified host should **have only** one (or more, comma separated) services defined. This allows to manage exceptions in the service asignment without having to define intermediary templates/hostgroups. See :ref:`inheritance description<advanced/objectinheritance>` for more details.
+  This variable may be used to *include only* a service from a host. It addresses the situations where a set of services is inherited from a pack or attached from a hostgroup, and an identified host should **have only** one (or more, comma separated) services defined. This allows to manage exceptions in the service assignment without having to define intermediary templates/hostgroups. See :ref:`inheritance description<advanced/objectinheritance>` for more details.
   This variable is considered **before** *service_excludes*
 
 labels

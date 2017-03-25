@@ -450,7 +450,7 @@ This variable determines whether or not Alignak will log  :ref:`host/service fla
 
 .. _configuration/core#log_snapshots:
 
-Snaphosts logging option
+Snapshots logging option
 ------------------------
 
 Format:
@@ -465,7 +465,7 @@ Example:
 
   log_snapshots=1
 
-This variable determines whether or not Alignak will log the snaphosts it built.
+This variable determines whether or not Alignak will log the snapshots it built.
 
   * 0 = Don't log snapshots
   * 1 = Log snapshots (default)

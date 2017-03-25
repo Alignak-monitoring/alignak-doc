@@ -20,7 +20,7 @@ All the Alignak daemons have a script that can be launched with command line par
 
 All the command line parameters are optional because default values are used by the daemon when it starts but it is recommended to use, at least, a daemon configuration file with the `-c` option.
 
-Without a configuration file, the daemon will create ist pid file in the current working directory.
+Without a configuration file, the daemon will create its pid file in the current working directory.
 
 Other command line parameters are available, but they are use rarely ;)
 
@@ -280,10 +280,10 @@ This file is structured as an Ini file:
 Alignak processes list
 ======================
 
-The daemons involved in Alignak are strating several processes in the system. All the processes started have a process title set by Alignak to help the user knowing which is which. Several processes types are present in the system processes list:
+The daemons involved in Alignak are starting several processes in the system. All the processes started have a process title set by Alignak to help the user knowing which is which. Several processes types are present in the system processes list:
 
     * the main daemon process
-        There will alwys be one process for each Alignak daemon type. The process title is the daemon type (eg. *alignak-arbiter*, *alignak-scheduler*,...)
+        There will always be one process for each Alignak daemon type. The process title is the daemon type (eg. *alignak-arbiter*, *alignak-scheduler*,...)
 
     * the main daemon forked process.
         Each Alignak daemon forks a new process instance for each daemon instance existing in the configuration. If you defined several schedulers you will get a process for each scheduler instance. Each daemon instance process has a title built with the instance name (eg. *alignak-scheduler scheduler-master*)
@@ -291,11 +291,11 @@ The daemons involved in Alignak are strating several processes in the system. Al
     * the external modules processes
         The daemons that have some external modules attached, like the brokers or receivers, launch new processes for their modules. Those processes titles are made of the daemon instance name and the module alias (eg. *alignak-receiver-master module: nsca*)
 
-    * the satelitte workers processes
+    * the satellite workers processes
         The satellites daemons that need some worker processes (pollers and reactionners) launch several worker processes to execute their actions (checks or notifications). Those worker processes have a title made of the daemon instance name and the worker label (eg. *alignak-poller-master worker*)
 
 
- As an exemple, here is the processes list of an Alignak "simple" configuration with no spare daemons and no distributedd configuration::
+ As an example, here is the processes list of an Alignak "simple" configuration with no spare daemons and no distributed configuration::
 
     alignak   5850  0.7  1.0 867048 43148 ?        Sl   10:54   0:00 alignak-scheduler scheduler-master
     alignak   5851  0.0  0.9 208644 37076 ?        S    10:54   0:00 alignak-scheduler

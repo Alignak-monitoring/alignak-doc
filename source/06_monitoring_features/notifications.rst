@@ -76,7 +76,7 @@ If these two criteria are met, then Alignak will check and make sure the time th
 
 If not enough time elapsed since the last notification, no one gets contacted. If either enough time elapsed and the two criteria for this filter were not met, the notification will be sent out!
 
-Whether or not it is sent to individual contacts is dependending upon another set of filters...
+Whether or not it is sent to individual contacts is depending upon another set of filters...
 
 
 Contact filters

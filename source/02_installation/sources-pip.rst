@@ -9,7 +9,7 @@ Requirements
 
 Some requirements are needed to install from source:
 
-* python 2.6 or 2.7 (recommanded)
+* python 2.6 or 2.7 (recommended)
 * python-dev
 * pip
 * setuptools
@@ -61,7 +61,7 @@ Follow these steps:
 
     wget https://github.com/Alignak-monitoring/alignak/archive/0.2.tar.gz
 
-* Uncompress the archive ::
+* Decompress the archive ::
 
     tar -xvf 0.2.tar.gz
 

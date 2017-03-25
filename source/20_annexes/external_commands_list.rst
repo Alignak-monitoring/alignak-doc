@@ -22,7 +22,7 @@ ACKNOWLEDGE_HOST_PROBLEM
 
         If the "persistent" option is set to one (1), the comment associated with the acknowledgement will remain even after the host recovers.
 
-**Note** contrary to the legacy Nagios behavior, Alignak will automatically set an acknowledge.on all the host services that are currently problems when an host problem is acknowledged.
+**Note** contrary to the legacy Nagios behavior, Alignak will automatically set an acknowledge on all the host services that are currently problems when an host problem is acknowledged.
 
 **Note** that Alignak will always consider an acknowledge as persistent. Thus it will ignore the "persistent" information value.
 
@@ -38,7 +38,7 @@ ACKNOWLEDGE_SVC_PROBLEM
 
     ``ACKNOWLEDGE_SVC_PROBLEM;<host_name>;<service_description>;<sticky>;<notify>;<persistent>;<author>;<comment>``
 
-        Allows you to acknowledge the current problem for the specified service. By acknowledging the current problem, future notifications (for the same servicestate) are disabled.
+        Allows you to acknowledge the current problem for the specified service. By acknowledging the current problem, future notifications (for the same service state) are disabled.
 
         If the "sticky" option is set to two (2), the acknowledgement will remain until the service recovers (returns to an OK state). Otherwise the acknowledgement will automatically be removed when the service changes state.
 
@@ -339,7 +339,7 @@ DELAY_SVC_NOTIFICATION
 
    ``DELAY_SVC_NOTIFICATION;<host_name>;<service_description>;<notification_time>``
 
-      Delays the next notification for a parciular service until "notification_time". The "notification_time" argument is specified in time_t format (seconds since the UNIX epoch). Note that this will only have an affect if the service stays in the same problem state that it is currently in. If the service changes to another state, a new notification may go out before the time you specify in the "notification_time" argument.
+      Delays the next notification for a particular service until "notification_time". The "notification_time" argument is specified in time_t format (seconds since the UNIX epoch). Note that this will only have an affect if the service stays in the same problem state that it is currently in. If the service changes to another state, a new notification may go out before the time you specify in the "notification_time" argument.
 
 DISABLE_ALL_NOTIFICATIONS_BEYOND_HOST
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1017,7 +1017,7 @@ SCHEDULE_HOST_DOWNTIME
 
       The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The specified host downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified host should not be triggered by another downtime entry.
 
-**Note** Alignak will automatically set an acknowledge.on the downtimed host when the downtime is scheduled. Thereby, the host problem and the host services problems will be acknowledged.
+**Note** Alignak will automatically set an acknowledge on the downtimed host when the downtime is scheduled. Thereby, the host problem and the host services problems will be acknowledged.
 
 
 SCHEDULE_HOST_SVC_CHECKS
@@ -1076,7 +1076,7 @@ SCHEDULE_SVC_DOWNTIME
 
       Schedules downtime for a specified service. If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, downtime will begin between the "start" and "end" times and last for "duration" seconds. The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The specified service downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified service should not be triggered by another downtime entry.
 
-**Note** Alignak will automatically set an acknowledge.on the downtimed service.
+**Note** Alignak will automatically set an acknowledge on the downtimed service.
 
 
 SEND_CUSTOM_HOST_NOTIFICATION

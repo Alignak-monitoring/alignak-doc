@@ -44,7 +44,7 @@ The following rule apply:
 Realms are not poller_tags!
 ---------------------------
 
-Make sure to undestand when to use realms and when to use poller_tags.
+Make sure to understand when to use realms and when to use poller_tags.
 
 For some cases ``poller_tag`` functionality could also be done using Realms. The question you need to ask yourself: is a poller_tag "enough", or do you need to fully segregate the scheduler level and use Realms. In realms, schedulers do not communicate with schedulers from other Realms.
 
@@ -70,13 +70,13 @@ For the Arbiter it does not change anything: there is still only one Arbiter and
 Example of realm usage
 ----------------------
 
-Let's take a look at two distributed environnements.
+Let's take a look at two distributed environments.
 
 In the first case the administrator wants totally distinct daemons.
 
-In the second one he just wants the schedulers/pollers to be distincts, but still have one place to send notifications (reactionners) and one place for database export (broker).
+In the second one he just wants the schedulers/pollers to be distinct, but still have one place to send notifications (reactionners) and one place for database export (broker).
 
-Distincts realms :
+Distinct realms :
 
 
 .. image:: /_static/images///official/images/alignak-architecture-isolated-realms.png
@@ -164,7 +164,7 @@ You will have to enable this option in ALL your realms! For example:
       broker_complete_links  1
    }
 
-This will enable the fact that each scehduler will be linked with each brokers. This will make it possible to have dedicated brokers in a same realm; each one for its specific stuff.
+This will enable the fact that each scheduler will be linked with each brokers. This will make it possible to have dedicated brokers in a same realm; each one for its specific stuff.
 
 It will also make it possible to have a common Broker in "All", and one broker in each of its sub-realms (Europe, US and Asia).
 

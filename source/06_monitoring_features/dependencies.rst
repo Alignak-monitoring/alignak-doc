@@ -131,7 +131,7 @@ in a WARNING or UNKNOWN state. If it was the case, the service check would not b
 check would be scheduled for (potential) execution at a later time.
 
 .. warning::  Execution dependencies will limit the load due to useless checks, but can limit some
-              correlation logics, and so should be used only if you trully need them.
+              correlation logics, and so should be used only if you truly need them.
 
 
 Notification Dependencies
@@ -166,7 +166,7 @@ this dependency will also fail.
 
 In the example above, imagine that you want to add a new dependency for service F to make it dependent
 on service A. You could create a new dependency definition that specified service F as the dependent
-service and service A as being the master service (i.e. the service that is being dependend on).
+service and service A as being the master service (i.e. the service that is being depended on).
 You could alternatively modify the dependency definition for services D and F to look like this:
 
 ::

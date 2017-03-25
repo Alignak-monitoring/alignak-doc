@@ -9,7 +9,7 @@ Introduction
 
 Alignak can be used in a high availability environment.
 
-The daemons can be run in 2 differents servers / locations.
+The daemons can be run in 2 different servers / locations.
 
 First instance in normal mode, the second in spare mode.
 
@@ -77,10 +77,10 @@ You run now Alignak with high availability for Scheduler.
 
 You can do the same for other daemons.
 
-Like you see, it's simple to define Alignak in high availibility mode.
+Like you see, it's simple to define Alignak in high availability mode.
 
 Important
 =========
 
-Be careful, if you configure *Arbiter* in high availability, you need to have thensame configuration
+Be careful, if you configure *Arbiter* in high availability, you need to have the same configuration
 files (folder *etc/alignak/arbiter*) on both *Arbiter* servers (master and slave).

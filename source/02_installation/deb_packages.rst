@@ -23,7 +23,7 @@ According to your OS, use the following source:
 
     - Debian 8 (jessie): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb jessie main``
 
-    - Ubuntu 16.04 (Xenial): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb xenial main``
+    - Ubuntu 16.04 (xenial): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb xenial main``
 
     - Ubuntu 14.04 (trusty): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb trusty main``
 

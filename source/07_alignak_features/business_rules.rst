@@ -180,10 +180,10 @@ The supported expressions are described below:
 
   * **a positive percentage**, which means "*at least X percents of hosts/services should be UP/OK*".
   This percentage expression may be combined with grouping expression expansion to build expressions
-  such as "*95 percents of the web front ends shoud be up*". This way, adding hosts in the web
+  such as "*95 percents of the web front ends should be up*". This way, adding hosts in the web
   frontend hostgroup is sufficient, and the QoS remains the same.
 
-  * **a negative integer**, which means "*at most X host/servicices may be down*"
+  * **a negative integer**, which means "*at most X host/services may be down*"
 
   * **a negative percentage**, which means "*at most X percents of hosts/services should may be down*".
   This percentage expression may be combined with grouping expression expansion to build expressions
@@ -582,7 +582,7 @@ the outer or inner part of the template respectively.
 
 To ease writing output template for business rules made of both hosts and services, 3 convenience
 macros having the same meaning for each type may be used: `STATUS`, `SHORTSTATUS`, and
-`FULLNAME`, which expand respectively to the host or service status, its status abreviated form
+`FULLNAME`, which expand respectively to the host or service status, its status abbreviated form
 and its full name (`host_name` for hosts, or `host_name/service_description` for services).
 
 Example:
@@ -602,7 +602,7 @@ You may use a template looking like:
          }
 
 
-The resulting output would look like `Down web services: link1 link2 link3 ...` where `linkN` are urls leading to the problem in the WebUI.
+The resulting output would look like `Down web services: link1 link2 link3 ...` where `linkN` are URLs leading to the problem in the WebUI.
 
 
 .. _ticket: https://github.com/naparuba/shinken/issues/509

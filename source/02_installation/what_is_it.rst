@@ -77,6 +77,6 @@ All the **.in* files located in the *etc/alignak* directory are parsed to be upd
     GROUP=alignak
 
 
-This allows to add those macro definition in any configuration located in the Alignak configuration. Currently, only the *etc/alignak/alignak.ini* file and all the files located in the *etc/aligank/daemons* directory are concerned.
+This allows to add those macro definition in any configuration located in the Alignak configuration. Currently, only the *etc/alignak/alignak.ini* file and all the files located in the *etc/alignak/daemons* directory are concerned.
 
 **Note:** For the **.ini* files, the script also replaces the *workdir* , *logdir* and *etcdir* variables and they are respectively replaced with *RUN*, *LOG* and *ETC* variables values.

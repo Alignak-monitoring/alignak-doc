@@ -57,7 +57,7 @@ The number of cached check results that Alignak can use versus the number of on-
 
 The reliability of cached check result information decreases over time. Higher cache hit rates require that previous check results are considered “valid" for longer periods of time. Things can change quickly in any network scenario, and there's no guarantee that a server that was functioning properly 30 seconds ago isn't on fire right now. There's the tradeoff - reliability versus speed. If you have a large cached check horizon, you risk having unreliable check result values being used in the monitoring logic.
 
-Alignak will eventually determine the correct state of all hosts and services, so even if cached check results prove to unreliably represent their true value, it will only work with incorrect information for a short period of time. Even short periods of unreliable status information can prove to be nosiy for admins, as they may receive notifications about problems which no longer exist.
+Alignak will eventually determine the correct state of all hosts and services, so even if cached check results prove to unreliably represent their true value, it will only work with incorrect information for a short period of time. Even short periods of unreliable status information can prove to be noisy for admins, as they may receive notifications about problems which no longer exist.
 
 There is no standard cached check horizon or cache hit rate that will be acceptable to every users. Some people will want a short horizon timeframe and a low cache hit rate, while others will want a larger horizon timeframe and a larger cache hit rate (with a low reliability rate).
 

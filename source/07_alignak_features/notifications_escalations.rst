@@ -56,7 +56,7 @@ and after one hour and before 4 hours (`last_notification_time`) it will be esca
 *level2* contacts group.
 
 If there is no escalations available (like after 4 hours) it fails back to the default service
-`contact_groups`, in this cas it is *level1*.
+`contact_groups`, in this case it is *level1*.
 
 
 Lower contact groups

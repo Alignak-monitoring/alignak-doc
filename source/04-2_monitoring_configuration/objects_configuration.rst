@@ -97,7 +97,7 @@ Commands define the actions to perform for:
 Objects definition
 ==================
 
-Alignak objects definiion follow the standard and well known Nagios/shinken rules. They will not be developed more in this document :)
+Alignak objects definition follow the standard and well known Nagios/shinken rules. They will not be developed more in this document :)
 
 The detail for each type of object definition is available :ref:`in this document annexes<annexes/index>`.
 
@@ -266,7 +266,7 @@ As an example:
 
 Note that the first definition is not complete it is missing the required ``host_name`` property. We don't need to supply a host name because we just want to use this definition as a generic host template. In order to prevent this definition from being registered with Shinken as a normal host, we set the ``register`` property as 0.
 
-The definitions of hosts *host1* and *host2* inherit their properties from the *base-host* template. The only variable we have choosen to override is the ``address`` variable. Which means that both hosts will have the exact same properties, except for their ``host_name`` and ``address`` properties.
+The definitions of hosts *host1* and *host2* inherit their properties from the *base-host* template. The only variable we have chosen to override is the ``address`` variable. Which means that both hosts will have the exact same properties, except for their ``host_name`` and ``address`` properties.
 
 Once those definition are parsed by Alignak, the resulting configuration will be equivalent to this definition:
 
@@ -387,7 +387,7 @@ Implied inheritance
 
 Usually you have to either explicitly specify the value of a required property in an object definition or inherit it from a template. There are some exceptions to this rule, where Alignak will assume that you want to use a value that comes from a related object.
 
-For example, the values of some service variables will be copied from the host the service is associated with if you don't explicitely specify them.
+For example, the values of some service variables will be copied from the host the service is associated with if you don't explicitly specify them.
 
 The following table lists the object variables that will be implicitly inherited from related objects if you don't explicitly specify their value in your object definition or inherit them from a template.
 
@@ -502,7 +502,7 @@ In the example above, *devweb1* is inheriting properties from the templates: *ge
 
 ::
 
-   # Development web serve
+   # Development web server
    define host{
       host_name               devweb1
       active_checks_enabled   1
@@ -515,7 +515,7 @@ In the example above, *devweb1* is inheriting properties from the templates: *ge
 Precedence with multiple inheritance sources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When using multiple inheritance templates, the property from the first specified template is the one that wil be retained. Since templates can themselves inherit properties from one or more other templates, it can get tricky to figure out which property takes precedence.
+When using multiple inheritance templates, the property from the first specified template is the one that will be retained. Since templates can themselves inherit properties from one or more other templates, it can get tricky to figure out which property takes precedence.
 
 
 Consider the following host definition that references three templates:
@@ -539,7 +539,7 @@ If some of the referenced templates themselves inherit properties from one or mo
 Inheritance overriding
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Inheritance is a core feature allowing to factorize configuration. It is possible from a host or a service template to build a very large set of checks with relatively few lines. The drawback of this approach is that it requires all hosts or services to be consistent. But if it is easy to instanciate new hosts with their own definitions attributes sets, it is generally more complicated with services, because the order of magnitude is larger (hosts * services per host), and because few attributes may come from the host. This is is especially true for packs, which is a generalization of the inheritance usage.
+Inheritance is a core feature allowing to factorize configuration. It is possible from a host or a service template to build a very large set of checks with relatively few lines. The drawback of this approach is that it requires all hosts or services to be consistent. But if it is easy to instantiate new hosts with their own definitions attributes sets, it is generally more complicated with services, because the order of magnitude is larger (hosts * services per host), and because few attributes may come from the host. This is is especially true for packs, which is a generalization of the inheritance usage.
 
 If some hosts require special properties for the services they are hosting (values that are different from those defined at template level), it is generally necessary to define new service.
 
@@ -681,7 +681,7 @@ Example:
 
 In this example, the web server from the front-end cluster uses the value defined in the pack, and the one from the backend cluster has its HTTP service (inherited from the HTTP pack also) enforced its ``notification_options`` directive.
 
-.. important:: The ``service_overrides`` attribute may himself be inherited from an upper host template. This is a multivalued attribute which syntax requires that each value is set on its own line. If you add a line on a host instance, it will not add it to the ones defined at template level, it will overload them. If some of the values on the template level are needed, they have to be explicitely copied.
+.. important:: The ``service_overrides`` attribute may himself be inherited from an upper host template. This is a multivalued attribute which syntax requires that each value is set on its own line. If you add a line on a host instance, it will not add it to the ones defined at template level, it will overload them. If some of the values on the template level are needed, they have to be explicitly copied.
 
 Example:
 
@@ -696,7 +696,7 @@ Example:
   ...
 
   define host {
-         use                     web-fromt
+         use                     web-front
          host_name               web-back-01
          hostgroups              web
          service_overrides       HTTP,notification_options c,r
@@ -712,13 +712,13 @@ Inheritance exclusions
 
 Packs and hostgroups allow to factorize the configuration and greatly reduce the amount of configuration to describe monitoring infrastructures. The drawback is that it forces hosts to be consistent, as the same configuration is applied to a possibly very large set of machines.
 
-Imagine a web servers cluster. All machines except one should be checked its managenent interface (ILO, iDRAC). In the cluster, there is one virtual server that should be checked the exact same services than the others, except the management interface (as checking it on a virtual server has no meaning). The corresponding service comes from a pack.
+Imagine a web servers cluster. All machines except one should be checked its management interface (ILO, iDRAC). In the cluster, there is one virtual server that should be checked the exact same services than the others, except the management interface (as checking it on a virtual server has no meaning). The corresponding service comes from a pack.
 
 In this situation, there is several ways to manage the situation:
 
-   - create an intermadiate template on the pack level to have the management interface check attached to an upper level template
+   - create an intermediate template on the pack level to have the management interface check attached to an upper level template
 
-   - re define all the services for the specifed host.
+   - re define all the services for the specified host.
 
    - use service overrides to set a dummy command on the corresponding service.
 
@@ -822,7 +822,7 @@ Identical services assigned to all the hosts in one or more hostgroups can be sp
 Same service on all hosts
 -------------------------
 
-Identical services assigned to all the hosts in your monitoing configuration is as simple as:
+Identical services assigned to all the hosts in your monitoring configuration is as simple as:
 
 ::
 
@@ -1040,7 +1040,7 @@ To create host escalations for all hosts in one or more hostgroups, use the ``ho
 Excluding some hosts
 --------------------
 
-If you want to create identical host escalations on several hosts or hostgroups, but you wish tp to exclude some hosts from the definition, you can prepend the host or hostgroup with a ``!`` symbol.
+If you want to create identical host escalations on several hosts or hostgroups, but you wish to exclude some hosts from the definition, you can prepend the host or hostgroup with a ``!`` symbol.
 
 
 ::

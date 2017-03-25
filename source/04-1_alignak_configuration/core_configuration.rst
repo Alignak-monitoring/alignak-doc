@@ -6,7 +6,7 @@ Core configuration
 
 The core configuration part describes the Alignak framework infrastructure (which daemons are used and how they are). 
 
-For historical reasons, the configuration is splitted in two kinds of files. The ini file contains the parameters used by the daemon to communicate with the other daemons in the Alignak framework where as the .cfg file contains parameters dedicated to its role in the whole stuff
+For historical reasons, the configuration is split in two kinds of files. The ini file contains the parameters used by the daemon to communicate with the other daemons in the Alignak framework where as the .cfg file contains parameters dedicated to its role in the whole stuff
 
 In a feature paradise, one .cfg file per daemon should be enough to configure all settings of the concerned daemon. Currently each daemon has a .cfg and a .ini file for its configuration.
 
@@ -54,8 +54,8 @@ host_name                            string          yes      hostname
 address                              string          yes      dns name or ip address
 port                                 integer  7770   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
-modules                              string          no       modules list separed by comma
-use_ssl                              boolean  0      no       use ssl for communications
+modules                              string          no       modules list separated by comma
+use_ssl                              boolean  0      no       use SSL for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 timeout                              integer  3      no       number of seconds to block the arbiter waiting for an answer
 data_timeout                         integer  120    no       seconds to wait when sending data to another daemon
@@ -147,11 +147,11 @@ timeout                              integer  3      no       number of seconds 
 data_timeout                         integer  120    no       seconds to wait when sending data to another daemon
 max_check_attempts                   integer  3      no       number of time before node declared failed
 check_interval                       integer  60     no       seconds to wait before issuing a new check
-modules                              string          no       modules list separed by comma
+modules                              string          no       modules list separated by comma
 realm                                string   All    no       it's for multi-datacenter
 skip_initial_broks                   boolean  0      no       set to 1 to skip initial broks creation
 satellitemap                         string          no       define other daemons separated by comma, format: name=ip:port
-use_ssl                              boolean  0      no       use ssl for communications
+use_ssl                              boolean  0      no       use SSL for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 accept_passive_unknown_check_results integer  0      no       set 1 to allow passive check for unknown host
 ==================================== ======= ======= ======== =============================================================
@@ -199,7 +199,7 @@ scheduler_name
   This variable is used to identify the *short name* of the scheduler which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbier can reach this scheduler. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this scheduler. This can be a DNS name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7768*.
@@ -243,8 +243,8 @@ timeout                              integer  3      no       number of seconds 
 data_timeout                         integer  120    no       seconds to wait when sending data to another daemon
 max_check_attempts                   integer  3      no       number of time before node declared failed
 check_interval                       integer  60     no       seconds to wait before issuing a new check
-modules                              string          no       modules list separed by comma
-use_ssl                              boolean  0      no       use ssl for communications
+modules                              string          no       modules list separated by comma
+use_ssl                              boolean  0      no       use SSL for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 realm                                string   All    no       it's for multi-datacenter
 ==================================== ======= ======= ======== =============================================================
@@ -282,7 +282,7 @@ broker_name
   This variable is used to identify the *short name* of the broker which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbier can reach this broker. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this broker. This can be a DNS name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7772*.
@@ -332,10 +332,10 @@ timeout                              integer  3      no       number of seconds 
 data_timeout                         integer  120    no       seconds to wait when sending data to another daemon
 max_check_attempts                   integer  3      no       number of time before node declared failed
 check_interval                       integer  60     no       seconds to wait before issuing a new check
-modules                              string          no       modules list separed by comma
+modules                              string          no       modules list separated by comma
 passive                              boolean  0      no       set 1 to inverse the connections, so scheduler -> poller
-poller_tags                          string   None   no       tags separed by comma. Use None to manage untagged checks
-use_ssl                              boolean  0      no       use ssl for communications
+poller_tags                          string   None   no       tags separated by comma. Use None to manage untagged checks
+use_ssl                              boolean  0      no       use SSL for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 realm                                string   All    no       it's for multi-datacenter
 ==================================== ======= ======= ======== =============================================================
@@ -374,7 +374,7 @@ poller_name
   This variable is used to identify the *short name* of the poller which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbier can reach this poller. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this poller. This can be a DNS name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7771*.
@@ -389,7 +389,7 @@ manage_sub_realms
   This variable is used to define if the poller will take jobs from scheduler from the sub-realms of it's realm. The default value is *0*.
 
 poller_tags
-  This variable is used to define the checks the poller can take. If no poller_tags is defined, poller will take all untagged checks. If at least one tag is defined, it will take only the checks that are also taggued like it.
+  This variable is used to define the checks the poller can take. If no poller_tags is defined, poller will take all untagged checks. If at least one tag is defined, it will take only the checks that are also tagged like it.
   By default, there is no poller_tag, so poller can take all untagged checks (default).
 
 modules
@@ -424,9 +424,9 @@ timeout                              integer  3      no       number of seconds 
 data_timeout                         integer  120    no       seconds to wait when sending data to another daemon
 max_check_attempts                   integer  3      no       number of time before node declared failed
 check_interval                       integer  60     no       seconds to wait before issuing a new check
-modules                              string          no       modules list separed by comma
-reactionner_tags                     string   None   no       tags separed by comma. Use None to manage untagged handlers
-use_ssl                              boolean  0      no       use ssl for communications
+modules                              string          no       modules list separated by comma
+reactionner_tags                     string   None   no       tags separated by comma. Use None to manage untagged handlers
+use_ssl                              boolean  0      no       use SSL for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 realm                                string   All    no       it's for multi-datacenter
 ==================================== ======= ======= ======== =============================================================
@@ -467,7 +467,7 @@ reactionner_name
   This variable is used to identify the *short name* of the reactionner which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbier can reach this reactionner. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this reactionner. This can be a DNS name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7772*.
@@ -485,7 +485,7 @@ modules
   This variable is used to define all modules that the reactionner will load.
 
 reactionner_tags
-  This variable is used to define the checks the reactionner can take. If no reactionner_tags is defined, reactionner  will take all untagged notifications and event handlers. If at least one tag is defined, it will take only the checks that are also taggued like it.
+  This variable is used to define the checks the reactionner can take. If no reactionner_tags is defined, reactionner  will take all untagged notifications and event handlers. If at least one tag is defined, it will take only the checks that are also tagged like it.
 
 By default, there is no reactionner_tag, so reactionner can take all untagged notification/event handlers (default).
 
@@ -513,8 +513,8 @@ timeout                              integer  3      no       number of seconds 
 data_timeout                         integer  120    no       seconds to wait when sending data to another daemon
 max_check_attempts                   integer  3      no       number of time before node declared failed
 check_interval                       integer  60     no       seconds to wait before issuing a new check
-modules                              string          no       modules list separed by comma
-use_ssl                              boolean  0      no       use ssl for communications
+modules                              string          no       modules list separated by comma
+use_ssl                              boolean  0      no       use SSL for communications
 hard_ssl_name_check                  boolean  0      no       set 1 if require a valid certificate
 direct_routing                       boolean  0      no       set 1 to allow scheduler to send command instead me
 realm                                string   All    no       it's for multi-datacenter
@@ -555,7 +555,7 @@ best with your system. The changed variables are:
     - server_cert
     - server_key
 
-Their values are set according to the current plaform (Linux, BSD, ...) and configuration defined
+Their values are set according to the current platform (Linux, BSD, ...) and configuration defined
 in the default alignak configuration.
 
 Arbiter
@@ -575,7 +575,7 @@ group                                string  alignak                        grou
 idontcareaboutsecurity               boolean 0                              set 1 to disable security in daemon (not recommended)
 modulesdir                           string  modules                        define modules directory installation
 daemon_enabled                       boolean 1                              set to 0 if want this daemon not run
-use_ssl                              boolean 0                              set 1 to use ssl for communications
+use_ssl                              boolean 0                              set 1 to use SSL for communications
 ca_cert                              string  /etc/alignak/certs/ca.pem      full path for certificate
 server_cert                          string  /etc/alignak/certs/server.cert full path for certificate
 server_key                           string  /etc/alignak/certs/server.key  full path for certificate key
@@ -601,7 +601,7 @@ group                                string  alignak                        grou
 idontcareaboutsecurity               boolean 0                              set 1 to disable security in daemon (not recommended)
 modulesdir                           string  modules                        define modules directory installation
 daemon_enabled                       boolean 1                              set to 0 if want this daemon not run
-use_ssl                              boolean 0                              set 1 to use ssl for communications
+use_ssl                              boolean 0                              set 1 to use SSL for communications
 ca_cert                              string  /etc/alignak/certs/ca.pem      full path for certificate
 server_cert                          string  /etc/alignak/certs/server.cert full path for certificate
 server_key                           string  /etc/alignak/certs/server.key  full path for certificate key
@@ -626,7 +626,7 @@ pidfile                              string  /var/run/pollerd.pid           PID 
 host                                 string  0.0.0.0                        Set IP daemon listen
 port                                 integer 7771                           port used by the daemon
 idontcareaboutsecurity               boolean 0                              set 1 to disable security in daemon (not recommended)
-use_ssl                              boolean 0                              set 1 to use ssl for communications
+use_ssl                              boolean 0                              set 1 to use SSL for communications
 ca_cert                              string  /etc/alignak/certs/ca.pem      full path for certificate
 server_cert                          string  /etc/alignak/certs/server.cert full path for certificate
 server_key                           string  /etc/alignak/certs/server.key  full path for certificate key
@@ -651,7 +651,7 @@ user                                 string  alignak                        user
 group                                string  alignak                        group to run daemon
 idontcareaboutsecurity               boolean 0                              set 1 to disable security in daemon (not recommended)
 daemon_enabled                       boolean 1                              set to 0 if want this daemon not run
-use_ssl                              boolean 0                              set 1 to use ssl for communications
+use_ssl                              boolean 0                              set 1 to use SSL for communications
 ca_cert                              string  /etc/alignak/certs/ca.pem      full path for certificate
 server_cert                          string  /etc/alignak/certs/server.cert full path for certificate
 server_key                           string  /etc/alignak/certs/server.key  full path for certificate key
@@ -676,7 +676,7 @@ host                                 string  0.0.0.0                        Set 
 port                                 integer 7772                           port used by the daemon
 idontcareaboutsecurity               boolean 0                              set 1 to disable security in daemon (not recommended)
 daemon_enabled                       boolean 1                              set to 0 if want this daemon not run
-use_ssl                              boolean 0                              set 1 to use ssl for communications
+use_ssl                              boolean 0                              set 1 to use SSL for communications
 ca_cert                              string  /etc/alignak/certs/ca.pem      full path for certificate
 server_cert                          string  /etc/alignak/certs/server.cert full path for certificate
 server_key                           string  /etc/alignak/certs/server.key  full path for certificate key
@@ -702,7 +702,7 @@ user                                 string  alignak                        user
 group                                string  alignak                        group to run daemon
 idontcareaboutsecurity               boolean 0                              set 1 to disable security in daemon (not recommended)
 daemon_enabled                       boolean 1                              set to 0 if want this daemon not run
-use_ssl                              boolean 0                              set 1 to use ssl for communications
+use_ssl                              boolean 0                              set 1 to use SSL for communications
 ca_cert                              string  /etc/alignak/certs/ca.pem      full path for certificate
 server_cert                          string  /etc/alignak/certs/server.cert full path for certificate
 server_key                           string  /etc/alignak/certs/server.key  full path for certificate key

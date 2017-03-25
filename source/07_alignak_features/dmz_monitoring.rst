@@ -6,14 +6,14 @@ Monitoring a DMZ
 
 
 There are two ways for monitoring a DMZ network:
-    * have a poller on the LAN, and launch check from it, so the firewall should allow monitoring traffic (like nrpe, snmp, etc)
+    * have a poller on the LAN, and launch check from it, so the firewall should allow monitoring traffic (like NRPE, SNMP, etc.)
     * have a poller into the DMZ, so only the Alignak communication should be opened through the firewall
 
 If you can use the first solution, it is the most simple one, use it :)
 
 If you can't (because of security concerns), use the second one and set a poller into the DMZ.
 
-Pollers are "dumb" things. They get their jobs from the schedulers. So if you just have a poller in the DMZ network aside another one in the LAN, some checks for the DMZ hosts will get catched by the LAN one, and some for the LAN hosts will get catched by the DMZ one.
+Pollers are "dumb" things. They get their jobs from the schedulers. So if you just have a poller in the DMZ network aside another one in the LAN, some checks for the DMZ hosts will be caught by the LAN one, and some for the LAN hosts will be caught by the DMZ one.
 
 
 Tag your hosts and pollers for being "in the DMZ"

@@ -80,7 +80,7 @@ Here's how passive checks work in more detail:
 
 Each service check result is processed in the same manner - regardless of whether the check was active or passive. Alignak may send out notifications, log alerts, etc. depending on the check result information.
 
-Passive checks are conditionned to another parameter: the freshness of the check. What if an external application does not raise any check since a logn time? And what if a passively checked host does not give some news since sevaral hours? Alignak allows to define a freshness threshold to make some decision about what is to be done in this situation.
+Passive checks are conditioned by another parameter: the freshness of the check. What if an external application does not raise any check since a login time? And what if a passively checked host does not give some news since several hours? Alignak allows to define a freshness threshold to make some decision about what is to be done in this situation.
 
 When the freshness threshold is reached, Alignak sets the host or service in its defined freshness state and runs the appropriate actions according to this new state (eg. notifications, event handlers,...).
 
@@ -191,7 +191,7 @@ Passive host checks are normally treated as HARD states, unless the ``passive_ho
 Checks results
 ==============
 
-.. note :: This chapter may seem quite *esoteric* for some of the readers but it uses an algorythm-like style to describe what's Alignak doing when it gets a check result. This may help understanding the framework behavior ;)
+.. note :: This chapter may seem quite *esoteric* for some of the readers but it uses an algorithm-like style to describe what's Alignak doing when it gets a check result. This may help understanding the framework behavior ;)
 
 what does Alignak do when it gets a check result? Here are the steps of the check result processing:
 

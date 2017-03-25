@@ -44,7 +44,7 @@ Those two points involve all the following :
       * RRD
       * GLPI
       * CouchDB
-      * Livestatus  (MK_Livestatus reimplementation)
+      * Livestatus (MK_Livestatus reimplementation)
       * Socket write for other purpose (Splunk, Logstash, Elastic Search)
       * MySQL (NDO reimplementation)
       * Oracle (NDO reimplementation)
@@ -55,7 +55,7 @@ Those two points involve all the following :
       * Thruk
       * Adagios
       * Multisite
-      * Nagvis
+      * NagVis
       * PNP4Nagios
       * NConf
       * Centreon (With NDO, not fully working, not recommended)
@@ -70,15 +70,15 @@ Those two points involve all the following :
 
  * Alignak provide sets of configuration, named packs, for a huge number of services :
 
-      * Databases (Mysql, Oracle, MSSQL, memcached, mongodb, influxdb etc.)
-      * Routers, Switches (Cisco, Nortel, Procurve etc.)
-      * OS (Linux, windows, Aix, HP-UX etc.)
-      * Hypervisors (VMWare, Vsphere)
+      * Databases (MySQL, Oracle, Microsoft SQL Server, Memcached, MongoDB, InfluxDB etc.)
+      * Routers, Switches (Cisco, Nortel, HP ProCurve etc.)
+      * OS (Linux, Windows, AIX, HP-UX etc.)
+      * Hypervisors (VMware, vSphere)
       * Protocols (HTTP, SSH, LDAP, DNS, IMAP, FTP, etc.)
-      * Application (Weblogic, Exchange, Active Directory, Tomcat, Asterisk, etc.)
-      * Storage (IBM-DS, Safekit, Hacmp, etc.)
+      * Application (WebLogic, Exchange, Active Directory, Tomcat, Asterisk, etc.)
+      * Storage (IBM-DS, SafeKit, HACMP, etc.)
 
-  * Smart NRPE polling : The NRPE Booster module is a must have to imprve NRPE checks performance.
+  * Smart NRPE polling : The NRPE Booster module is a must have to improve NRPE checks performance.
 
   * Smart SNMP polling : The SNMP Booster module is a must have if you have a huge infrastructure of routers and switches.
 
@@ -100,11 +100,11 @@ Release cycle
 =============
 
 Alignak has no strict schedule for now on release date. The very first main release is scheduled for December 2016.
-Roadmap is available in a `specific Github issue`_, feature addition can be discussed there.
+Roadmap is available in a `specific GitHub issue`_, feature addition can be discussed there.
 Technical point of view about a specific feature are discussed in a separated issue.
 
 
 .. _Nagios: http://www.nagios.org
 .. _GNU Affero General Public License: http://www.gnu.org/licenses/agpl.txt
 .. _alignak-monitoring organization's page: https://github.com/Alignak-monitoring
-.. _specific Github issue: https://github.com/Alignak-monitoring/alignak/issues/262
+.. _specific GitHub issue: https://github.com/Alignak-monitoring/alignak/issues/262

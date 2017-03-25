@@ -12,7 +12,7 @@ Alignak framework configuration
     \newpage
 
 
-The Alignak framework configuration is splitted in two main parts:
+The Alignak framework configuration is split in two main parts:
 
    - the core configuration
    - the modules configuration.
@@ -27,7 +27,7 @@ Each main part of the Alignak framework configuration is described in the follow
    core_configuration
    modules_configuration
 
-This chapter gives information about configuring the inter-deamon communication with SSL.
+This chapter gives information about configuring the inter-daemon communication with SSL.
 
 .. toctree::
    :maxdepth: 1

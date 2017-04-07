@@ -24,8 +24,11 @@ Alignak implements the NAGIOS legacy features:
    notifications
    downtime
    flapping
+   stalking
+   volatile_services
    dependencies
    event_handlers
+   snapshot
    macros
    external_commands
 

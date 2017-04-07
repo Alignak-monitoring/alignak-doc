@@ -69,7 +69,19 @@ When a host or service is in a period of scheduled downtime, Alignak will not al
 
 When the scheduled downtime is over, Alignak will allow normal notifications to be sent out for the host or service again. A ``DOWNTIMEEND`` notification will be sent out notifying contacts that the scheduled downtime is over, and they will start receiving normal alerts again.
 
-If the scheduled downtime is cancelled prematurely (before it expires), a ``DOWNTIMECANCELLED`` notification will get sent out to the appropriate contacts.
+If the scheduled downtime is cancelled prematurely (before it expires), a ``DOWNTIMECANCELLED`` notification will be sent out to the appropriate contacts.
+
+
+.. _monitoring_features/maintenance_period:
+
+Maintenance period
+------------------
+
+Sometimes you may need to define a recurring downtime period for an host or service.
+
+Let's imagine that you have some regularly scheduled maintenance operations on this host. When your maintenance is happening, your checks will probably raise some problems and all the monitoring alert and  notification stuff will process... to avoid this, you may define some exclusions in the host check period to avoid checking this host/service when you scheduled your maintenance operations.
+
+The *maintenance period* is an easier solution than the time periods with exclusions. Simply define a time period with your maintenance period schedule and set this time period as your host/service ``maintenance_period``. It will be considered the same as a scheduled downtime, so (unlike exclusions in your host/service check period) the checks will still be run during the maintenance period but the problems notifications will not be raised.
 
 
 Overlapping scheduled downtime

@@ -56,77 +56,77 @@ ACKNOWLEDGE_SVC_PROBLEM_EXPIRE
         Allows you to define the time (seconds since the UNIX epoch) when the acknowledgement will expire (will be deleted).
 
 ADD_HOST_COMMENT
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
    ``ADD_HOST_COMMENT;<host_name>;<persistent>;<author>;<comment>``
 
       Adds a comment to a particular host. If the "persistent" field is set to zero (0), the comment will be deleted the next time Alignak is restarted. Otherwise, the comment will persist across program restarts until it is deleted manually.
 
 ADD_SVC_COMMENT
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
    ``ADD_SVC_COMMENT;<host_name>;<service_description>;<persistent>;<author>;<comment>``
 
       Adds a comment to a particular service. If the "persistent" field is set to zero (0), the comment will be deleted the next time Alignak is restarted. Otherwise, the comment will persist across program restarts until it is deleted manually.
 
 CHANGE_CONTACT_HOST_NOTIFICATION_TIMEPERIOD
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``CHANGE_CONTACT_HOST_NOTIFICATION_TIMEPERIOD;<contact_name>;<notification_timeperiod>``
 
       Changes the host notification timeperiod for a particular contact to what is specified by the "notification_timeperiod" option. The "notification_timeperiod" option should be the short name of the timeperiod that is to be used as the contact's host notification timeperiod. The timeperiod must have been configured in Alignak before it was last (re)started.
 
 CHANGE_CONTACT_MODATTR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CONTACT_MODATTR;<contact_name>;<value>``
 
       This command changes the modified attributes value for the specified contact. Modified attributes values are used by Alignak to determine which object properties should be retained across program restarts. Thus, modifying the value of the attributes can affect data retention. This is an advanced option and should only be used by people who are intimately familiar with the data retention logic in Alignak.
 
 CHANGE_CONTACT_MODHATTR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CONTACT_MODHATTR;<contact_name>;<value>``
 
       This command changes the modified host attributes value for the specified contact. Modified attributes values are used by Alignak to determine which object properties should be retained across program restarts. Thus, modifying the value of the attributes can affect data retention. This is an advanced option and should only be used by people who are intimately familiar with the data retention logic in Alignak.
 
 CHANGE_CONTACT_MODSATTR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CONTACT_MODSATTR;<contact_name>;<value>``
 
       This command changes the modified service attributes value for the specified contact. Modified attributes values are used by Alignak to determine which object properties should be retained across program restarts. Thus, modifying the value of the attributes can affect data retention. This is an advanced option and should only be used by people who are intimately familiar with the data retention logic in Alignak.
 
 CHANGE_CONTACT_SVC_NOTIFICATION_TIMEPERIOD
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CONTACT_SVC_NOTIFICATION_TIMEPERIOD;<contact_name>;<notification_timeperiod>``
 
       Changes the service notification timeperiod for a particular contact to what is specified by the "notification_timeperiod" option. The "notification_timeperiod" option should be the short name of the timeperiod that is to be used as the contact's service notification timeperiod. The timeperiod must have been configured in Alignak before it was last (re)started.
 
 CHANGE_CUSTOM_CONTACT_VAR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CUSTOM_CONTACT_VAR;<contact_name>;<varname>;<varvalue>``
 
       Changes the value of a custom contact variable.
 
 CHANGE_CUSTOM_HOST_VAR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CUSTOM_HOST_VAR;<host_name>;<varname>;<varvalue>``
 
       Changes the value of a custom host variable.
 
 CHANGE_CUSTOM_SVC_VAR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_CUSTOM_SVC_VAR;<host_name>;<service_description>;<varname>;<varvalue>``
 
       Changes the value of a custom service variable.
 
 CHANGE_GLOBAL_HOST_EVENT_HANDLER
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_GLOBAL_HOST_EVENT_HANDLER;<event_handler_command>``
 
@@ -135,7 +135,7 @@ CHANGE_GLOBAL_HOST_EVENT_HANDLER
 .. note:: this command is not currently implemented in Alignak
 
 CHANGE_GLOBAL_SVC_EVENT_HANDLER
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ``CHANGE_GLOBAL_SVC_EVENT_HANDLER;<event_handler_command>``
 

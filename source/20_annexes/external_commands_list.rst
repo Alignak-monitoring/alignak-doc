@@ -458,42 +458,42 @@ DISABLE_HOST_SVC_NOTIFICATIONS
     Disables notifications for all services on the specified host.
 
 DISABLE_HOSTGROUP_HOST_CHECKS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ``DISABLE_HOSTGROUP_HOST_CHECKS;<hostgroup_name>``
 
     Disables active checks for all hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_HOST_NOTIFICATIONS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ``DISABLE_HOSTGROUP_HOST_NOTIFICATIONS;<hostgroup_name>``
 
     Disables notifications for all hosts in a particular hostgroup. This does not disable notifications for the services associated with the hosts in the hostgroup - see the DISABLE_HOSTGROUP_SVC_NOTIFICATIONS command for that.
 
 DISABLE_HOSTGROUP_PASSIVE_HOST_CHECKS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ``DISABLE_HOSTGROUP_PASSIVE_HOST_CHECKS;<hostgroup_name>``
 
     Disables passive checks for all hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_PASSIVE_SVC_CHECKS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ``DISABLE_HOSTGROUP_PASSIVE_SVC_CHECKS;<hostgroup_name>``
 
     Disables passive checks for all services associated with hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_SVC_CHECKS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ``DISABLE_HOSTGROUP_SVC_CHECKS;<hostgroup_name>``
 
     Disables active checks for all services associated with hosts in a particular hostgroup.
 
 DISABLE_HOSTGROUP_SVC_NOTIFICATIONS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     ``DISABLE_HOSTGROUP_SVC_NOTIFICATIONS;<hostgroup_name>``
 

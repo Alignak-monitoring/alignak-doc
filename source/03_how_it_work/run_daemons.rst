@@ -22,7 +22,7 @@ All the command line parameters are optional because default values are used by 
 
 Without a configuration file, the daemon will create its pid file in the current working directory.
 
-Other command line parameters are available, but they are use rarely ;)
+Other command line parameters are available, but they are really rarely used ;)
 
 For all the daemons (broker, poller, receiver, reactionner, scheduler)::
 
@@ -94,7 +94,7 @@ You can then start all daemons (as alignak user) like this::
 
     $launch_all.sh
 
-Then stop all daemons::
+And stop all daemons::
 
     $stop_all.sh
 
@@ -275,6 +275,34 @@ This file is structured as an Ini file:
     DEBUGFILE=%(LOG)s/receiver-debug.log
 
 
+
+
+Environment variables
+=====================
+
+Alignak uses some environment variables
+
+.. note: Currently, only one environment variable exist ;)
+
+Log Alignak actions
+-------------------
+
+Defining the ``TEST_LOG_ACTIONS`` environment variable will make Alignak add some information in its daemons log files to inform about the commands that are launched for the checks and the notifications. This is very useful to help setting-up the checks because the launched checks and their results are available as INFO log
+
+As an example:
+::
+
+    # Define environment variable
+    setenv TEST_LOG_ACTIONS 1
+
+    # Start Alignak daemons
+
+    # Tail log files
+    ==> /usr/local/var/log/alignak/pollerd.log <==
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Launch command: '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs'
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check for '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs' exited with return code 0
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check result for '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs': 0, PROCS OK: 0 processes with STATE = Z
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Performance data for '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs': procs=0;5;10;0;
 
 
 Alignak processes list

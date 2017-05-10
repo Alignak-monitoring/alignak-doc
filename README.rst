@@ -7,8 +7,8 @@ Alignak documentation
     :target: http://alignak-doc.readthedocs.org/en/latest/?badge=latest
     :alt: Lastest documentation Status
 
-.. image:: https://readthedocs.org/projects/alignak-doc/badge/?version=update
-    :target: http://alignak-doc.readthedocs.org/en/update/?badge=update
+.. image:: https://readthedocs.org/projects/alignak-doc/badge/?version=develop
+    :target: http://alignak-doc.readthedocs.org/en/update/?badge=develop
     :alt: Update processing documentation Status
 
 .. image:: https://img.shields.io/badge/IRC-%23alignak-1e72ff.svg?style=flat

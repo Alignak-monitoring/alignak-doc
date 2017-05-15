@@ -105,16 +105,16 @@ Backend importation script
 
 The easiest and fastest way to populate data in the Alignak backend is to import your existing configuration into the backend.
 
-The `alignak_backend_import` makes it as easy as::
+The `alignak-backend-import` makes it as easy as::
 
-    alignak_backend_import /etc/my_config/config.cfg
+    alignak-backend-import /etc/my_config/config.cfg
 
 Once this script has finished its execution, you will be able to browse your contacts, hosts, services, ... in the Alignak backend.
 
 
-The most often `alignak_backend_import` command is::
+The most often `alignak-backend-import` command is::
 
-    alignak_backend_import -d -b http://backend:5000 -u username -p password /etc/my_config/config.cfg
+    alignak-backend-import -d -b http://backend:5000 -u username -p password /etc/my_config/config.cfg
 
 where you specify that you want to delete existing data (*-d*), indicate where is located you backend (*-b*) and how to log-in (*-u*, *-p*).
 

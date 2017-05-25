@@ -22,6 +22,8 @@ Some useful information:
 
 Monitoring objects configuration:
 
+   The monitoring objects configuration is available in Nagios/Shinken legacy file format. For more information
+
 .. toctree::
    :maxdepth: 1
 

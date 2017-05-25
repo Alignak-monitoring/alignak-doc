@@ -195,16 +195,16 @@ event_handler_enabled
   This directive is used to determine whether or not the event handler for this host is enabled. Values: 0 = disable host event handler, 1 = enable host event handler.
 
 low_flap_threshold
-  This directive is used to specify the low state change threshold used in flap detection for this host. More information on flap detection can be found :ref:`here <advanced/flapping>`. If you set this directive to a value of 0, the program-wide value specified by the :ref:`low_host_flap_threshold <configuration/main-advanced#low_host_flap_threshold>` directive will be used.
+  This directive is used to specify the low state change threshold used in flap detection for this host. More information on flap detection can be found :ref:`here <monitoring_features/flapping>`. If you set this directive to a value of 0, the program-wide value specified by the :ref:`low_host_flap_threshold <configuration/main-advanced#low_host_flap_threshold>` directive will be used.
 
 high_flap_threshold
-  This directive is used to specify the high state change threshold used in flap detection for this host. More information on flap detection can be found :ref:`here <advanced/flapping>`. If you set this directive to a value of 0, the program-wide value specified by the :ref:`high_host_flap_threshold <configuration/main-advanced#high_host_flap_threshold>` directive will be used.
+  This directive is used to specify the high state change threshold used in flap detection for this host. More information on flap detection can be found :ref:`here <monitoring_features/flapping>`. If you set this directive to a value of 0, the program-wide value specified by the :ref:`high_host_flap_threshold <configuration/main-advanced#high_host_flap_threshold>` directive will be used.
 
 flap_detection_enabled
-  This directive is used to determine whether or not flap detection is enabled for this host. More information on flap detection can be found :ref:`here <advanced/flapping>`. Values: 0 = disable host flap detection, 1 = enable host flap detection.
+  This directive is used to determine whether or not flap detection is enabled for this host. More information on flap detection can be found :ref:`here <monitoring_features/flapping>`. Values: 0 = disable host flap detection, 1 = enable host flap detection.
 
 flap_detection_options
-  This directive is used to determine what host states the :ref:`flap detection logic <advanced/flapping>` will use for this host. Valid options are a combination of one or more of the following: **o** = UP states, **d** = DOWN states, **u** = UNREACHABLE states.
+  This directive is used to determine what host states the :ref:`flap detection logic <monitoring_features/flapping>` will use for this host. Valid options are a combination of one or more of the following: **o** = UP states, **d** = DOWN states, **u** = UNREACHABLE states.
 
 process_perf_data
   This directive is used to determine whether or not the processing of performance data is enabled for this host. Values: 0 = disable performance data processing, 1 = enable performance data processing.
@@ -231,7 +231,7 @@ notification_period
   This directive is used to specify the short name of the :ref:`time period <monitoring_objects/timeperiod>` during which notifications of events for this host can be sent out to contacts. If a host goes down, becomes unreachable, or recoveries during a time which is not covered by the time period, no notifications will be sent out.
 
 notification_options
-  This directive is used to determine when notifications for the host should be sent out. Valid options are a combination of one or more of the following: **d** = send notifications on a DOWN state, **u** = send notifications on an UNREACHABLE state, **r** = send notifications on recoveries (OK state), **f** = send notifications when the host starts and stops :ref:`flapping <advanced/flapping>`, and **s** = send notifications when :ref:`scheduled downtime <advanced/downtime>` starts and ends. If you specify **n** (none) as an option, no host notifications will be sent out. If you do not specify any notification options, Alignak will assume that you want notifications to be sent out for all possible states.
+  This directive is used to determine when notifications for the host should be sent out. Valid options are a combination of one or more of the following: **d** = send notifications on a DOWN state, **u** = send notifications on an UNREACHABLE state, **r** = send notifications on recoveries (OK state), **f** = send notifications when the host starts and stops :ref:`flapping <monitoring_features/flapping>`, and **s** = send notifications when :ref:`scheduled downtime <advanced/downtime>` starts and ends. If you specify **n** (none) as an option, no host notifications will be sent out. If you do not specify any notification options, Alignak will assume that you want notifications to be sent out for all possible states.
 
   If you specify **d,r** in this field, notifications will only be sent out when the host goes DOWN and when it recovers from a DOWN state.
 
@@ -240,7 +240,7 @@ notifications_enabled
   This directive is used to determine whether or not notifications for this host are enabled. Values: 0 = disable host notifications, 1 = enable host notifications.
 
 stalking_options
-  This directive determines which host states "stalking" is enabled for. Valid options are a combination of one or more of the following: **o** = stalk on UP states, **d** = stalk on DOWN states, and **u** = stalk on UNREACHABLE states. More information on state stalking can be found :ref:`here <advanced/stalking>`.
+  This directive determines which host states "stalking" is enabled for. Valid options are a combination of one or more of the following: **o** = stalk on UP states, **d** = stalk on DOWN states, and **u** = stalk on UNREACHABLE states. More information on state stalking can be found :ref:`here <monitoring_features/stalking>`.
 
 notes
   This directive is used to define an optional string of notes pertaining to the host. If you specify a note here, you will see the it in the extended information CGI (when you are viewing information about the specified host).

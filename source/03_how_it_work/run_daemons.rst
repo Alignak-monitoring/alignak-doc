@@ -18,9 +18,13 @@ Individual start / stop
 -----------------------
 All the Alignak daemons have a script that can be launched with command line parameters.
 
-All the command line parameters are optional because default values are used by the daemon when it starts but it is recommended to use, at least, a daemon configuration file with the `-c` option.
+All the command line parameters are optional because default values are used by the daemon when it starts but it is recommended to use a daemon configuration file with the `-c` option.
 
-Without a configuration file, the daemon will create its pid file in the current working directory.
+Without a configuration file, the daemon will use some default values:
+
+    - use a generic prefix for its files except if a daemon name is provided on the command line. the prefix is the daemon name if it is provided, else it is the daemon type with an ending `d` character (eg. brokerd for a broker)
+    - create its pid (prefix.pid) and log (prefix.log) file in the current working directory.
+    - It will also use a default port to listen to the other daemons (arbiter: 7770, scheduler: 7768, broker: 7772, poller: 7771, reactionner: 7769, receiver: 7773).
 
 Other command line parameters are available, but they are really rarely used ;)
 
@@ -30,35 +34,43 @@ For all the daemons (broker, poller, receiver, reactionner, scheduler)::
 
     usage: alignak-broker [-h] [-v] [-c CONFIG_FILE] [-d] [-r]
                           [--debugfile DEBUG_FILE]
+                          [--port PORT] [--local_log LOG_FILE]
 
     optional arguments:
       -h, --help            show this help message and exit
-      -v, --version         show program's version number and exit
+      -v, --version         show programs version number and exit
       -c CONFIG_FILE, --config CONFIG_FILE
                             Daemon configuration file
       -d, --daemon          Run as a daemon
       -r, --replace         Replace previous running daemon
       --debugfile DEBUG_FILE
                             File to dump debug logs
+      --port PORT
+                            TCP port the daemon is listening to
+                            Useful if no ini file is provided, else this overrides
+                            the port defined in the configuration file
+      --local_log LOG_FILE
+                            File to dump daemon logs
 
 
 The arbiter is slightly different because it needs to receive the monitoring configuration that is to be loaded::
 
     $ alignak-arbiter -h
 
-    usage: alignak-arbiter [-h] [-v] -a MONITORING_FILES [-V] [-n CONFIG_NAME]
+    usage: alignak-arbiter [-h] [-v] -a MONITORING_FILES [-V] [-k CONFIG_NAME]
                            [-c CONFIG_FILE] [-d] [-r] [--debugfile DEBUG_FILE]
 
     optional arguments:
       -h, --help            show this help message and exit
-      -v, --version         show program's version number and exit
+      -v, --version         show programs version number and exit
       -a MONITORING_FILES, --arbiter MONITORING_FILES
                             Monitored configuration file(s),multiple -a can be
                             used, and they will be concatenated.
       -V, --verify-config   Verify config file and exit
-      -n CONFIG_NAME, --config-name CONFIG_NAME
-                            Use name of arbiter defined in the configuration files
-                            (default arbiter-master)
+      -k CONFIG_NAME, --config-name CONFIG_NAME
+                            Use the name of the arbiter defined in the configuration files
+                            (default is arbiter-master)
+                            This is useful for launching a spare-arbiter
       -c CONFIG_FILE, --config CONFIG_FILE
                             Daemon configuration file
       -d, --daemon          Run as a daemon
@@ -299,10 +311,10 @@ As an example:
 
     # Tail log files
     ==> /usr/local/var/log/alignak/pollerd.log <==
-    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Launch command: '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs'
-    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check for '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs' exited with return code 0
-    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check result for '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs': 0, PROCS OK: 0 processes with STATE = Z
-    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Performance data for '/usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs': procs=0;5;10;0;
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Launch command: /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs exited with return code 0
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check result for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs: 0, PROCS OK: 0 processes with STATE = Z
+    [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Performance data for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs: procs=0;5;10;0;
 
 
 Alignak processes list

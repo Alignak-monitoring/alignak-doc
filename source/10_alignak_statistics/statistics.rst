@@ -4,6 +4,8 @@
 Alignak Statistics
 ==================
 
+**NOTE**: this list needs to be updated according to some recent modifications in the scheduler daemon statistics. There are much more thant the counters listed hereunder...
+
 Alignak daemons statistics dictionary:
 
 * scheduler:

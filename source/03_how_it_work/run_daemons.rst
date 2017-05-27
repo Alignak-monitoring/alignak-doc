@@ -294,12 +294,69 @@ Environment variables
 
 Alignak uses some environment variables
 
-.. note: Currently, only one environment variable exist ;)
+
+Log Scheduling loop
+-------------------
+
+Defining the ``TEST_LOG_LOOP`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the checks that are scheduled.
+
+As an example:
+::
+
+    # Define environment variable
+    setenv TEST_LOG_LOOP 1
+
+    # Start Alignak daemons
+
+    # Tail scheduler log files
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] --- 64
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Items (loop): broks: 0, notifications: 0, checks: 0, internal checks: 0, event handlers: 0, external commands: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Items (total): broks: 52, notifications: 0, checks: 13, internal checks: 0, event handlers: 0, external commands: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Actions 'eventhandler/total': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Results 'eventhandler/total': total: 0,
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Actions 'eventhandler/loop': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Results 'eventhandler/loop': total: 0,
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Actions 'notification/total': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Results 'notification/total': total: 0,
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Actions 'notification/loop': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Results 'notification/loop': total: 0,
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Actions 'check/total': launched: 2, timeout: 0, executed: 2
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Results 'check/total': total: 4, done: 4,
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Actions 'check/loop': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Results 'check/loop': total: 2, done: 2,
+    [2017-05-27 07:32:49 CEST] INFO: [alignak.scheduler] Checks (loop): total: 12 (scheduled: 11, launched: 0, in poller: 0, timeout: 0, done: 0, zombies: 0)
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Elapsed time, current loop: 0.00, from start: 63.20 (64 loops)
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Check average (loop) = 0 checks results, 0.00 checks/s
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Check average (total) = 13 checks results, 0.21 checks/s
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] +++ 64
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] --- 65
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Items (loop): broks: 0, notifications: 0, checks: 0, internal checks: 0, event handlers: 0, external commands: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Items (total): broks: 52, notifications: 0, checks: 13, internal checks: 0, event handlers: 0, external commands: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Actions 'eventhandler/total': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Results 'eventhandler/total': total: 0,
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Actions 'eventhandler/loop': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Results 'eventhandler/loop': total: 0,
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Actions 'notification/total': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Results 'notification/total': total: 0,
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Actions 'notification/loop': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Results 'notification/loop': total: 0,
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Actions 'check/total': launched: 2, timeout: 0, executed: 2
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Results 'check/total': total: 4, done: 4,
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Actions 'check/loop': launched: 0, timeout: 0, executed: 0
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Results 'check/loop': total: 2, done: 2,
+    [2017-05-27 07:32:50 CEST] INFO: [alignak.scheduler] Checks (loop): total: 12 (scheduled: 11, launched: 0, in poller: 0, timeout: 0, done: 0, zombies: 0)
+    [2017-05-27 07:32:51 CEST] INFO: [alignak.scheduler] Elapsed time, current loop: 0.01, from start: 64.21 (65 loops)
+    [2017-05-27 07:32:51 CEST] INFO: [alignak.scheduler] Check average (loop) = 0 checks results, 0.00 checks/s
+    [2017-05-27 07:32:51 CEST] INFO: [alignak.scheduler] Check average (total) = 13 checks results, 0.20 checks/s
+    [2017-05-27 07:32:51 CEST] INFO: [alignak.scheduler] +++ 65
+
 
 Log Alignak actions
 -------------------
 
 Defining the ``TEST_LOG_ACTIONS`` environment variable will make Alignak add some information in its daemons log files to inform about the commands that are launched for the checks and the notifications. This is very useful to help setting-up the checks because the launched checks and their results are available as INFO log
+
+If this variable is set to 'WARNING', the logs will be at the WARNING level, else INFO.
 
 As an example:
 ::
@@ -315,6 +372,14 @@ As an example:
     [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs exited with return code 0
     [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Check result for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs: 0, PROCS OK: 0 processes with STATE = Z
     [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Performance data for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs: procs=0;5;10;0;
+
+
+Log Alignak alerts and notifications
+------------------------------------
+
+Defining the ``TEST_LOG_ALERTS`` ``TEST_LOG_NOTIFICATIONS`` environment variables will make Alignak add some information in its daemons log files to inform about the alerts and notifications that are raised for the monitored hosts and services.
+
+If these variables are set to 'WARNING', the logs will be at the WARNING level, else INFO.
 
 
 Alignak processes list

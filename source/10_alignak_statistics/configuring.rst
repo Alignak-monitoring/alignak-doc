@@ -4,7 +4,7 @@
 Statistics parameters
 =====================
 
-The Alignak main configuration file allows to enable and set the Alignak interface to a StatsD daemon. See :ref:`Alignak StatsD configuration<configuration/core#statsd>`_.
+The Alignak main configuration file allows to enable and set the Alignak interface to a StatsD daemon. See :ref:`Alignak StatsD configuration <configuration/core#statsd>`.
 
 As a sum-up, you must set the following parameters if you installed a local StatsD:
 ::

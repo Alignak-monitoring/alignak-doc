@@ -57,9 +57,9 @@ Here is a configuration example for an ERP service, attached to a dummy host nam
 That's all!
 
 .. note::  A complete service delivery view should include an aggregated view of the end user
-availability perspective states, end user performance perspective states, IT component states,
-application error states, application performance states. This aggregated state can then be used
-as a metric for Service Management (basis for defining an SLA).
+   availability perspective states, end user performance perspective states, IT component states,
+   application error states, application performance states. This aggregated state can then be used
+   as a metric for Service Management (basis for defining an SLA).
 
 
 The OR rule

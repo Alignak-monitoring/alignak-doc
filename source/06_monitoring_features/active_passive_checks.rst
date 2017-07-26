@@ -76,11 +76,11 @@ Here's how passive checks work in more detail:
     * An external application checks the status of an host or service.
     * The external application notifies the result of the check to Alignak with an external command.
     * Alignak gets the external command and places the result of all passive checks into a queue for processing by the Alignak framework.
-    * Alignak will execute a each second and scan the check result queue.
+    * Alignak will execute a poll each second and scan the check result queue.
 
 Each service check result is processed in the same manner - regardless of whether the check was active or passive. Alignak may send out notifications, log alerts, etc. depending on the check result information.
 
-Passive checks are conditioned by another parameter: the freshness of the check. What if an external application does not raise any check since a login time? And what if a passively checked host does not give some news since several hours? Alignak allows to define a freshness threshold to make some decision about what is to be done in this situation.
+Passive checks are conditioned by another parameter: the freshness of the check. What if an external application does not raise any check since a long time? And what if a passively checked host does not give some news since several hours? Alignak allows to define a freshness threshold to make some decision about what is to be done in this situation.
 
 When the freshness threshold is reached, Alignak sets the host or service in its defined freshness state and runs the appropriate actions according to this new state (eg. notifications, event handlers,...).
 
@@ -129,7 +129,7 @@ Submitting passive check results to Alignak
    :scale: 90 %
 
 
-Submitting passive checks to Alignak implies to send an :ref:`external command<monitoring_features/external_commands>`_ containing the passive check result. The most common solution to submit passive checks are:
+Submitting passive checks to Alignak implies to send an :ref:`external command <monitoring_features/external_commands>` containing the passive check result. The most common solution to submit passive checks are:
 
     * use a dedicated protocol such as NSCA
     * use an external commands capable module

@@ -74,7 +74,7 @@ CRITICAL      DOWN
 UNKNOWN       DOWN
 ============= ======================
 
-If the preliminary host state is DOWN, Alignak will attempt to see if the host is really DOWN or if it is UNREACHABLE. The distinction between DOWN and UNREACHABLE host states is important, as it allows admins to determine root cause of network outages faster. The :ref:`host reachability logic<monitoring_features/network_reachability>` defines
+If the preliminary host state is DOWN, Alignak will attempt to see if the host is really DOWN or if it is UNREACHABLE. The distinction between DOWN and UNREACHABLE host states is important, as it allows admins to determine root cause of network outages faster. The :ref:`host reachability logic<monitoring_features/network_reachability>` defines this distinction.
 
 The following table shows how Alignak makes a final state determination based on the state of the hosts parent(s). A host's parents are defined in the parents directive in host definition.
 

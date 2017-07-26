@@ -51,7 +51,7 @@ Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== ============================================================
 arbiter_name                         string          yes      Name of arbiter
 host_name                            string          yes      hostname
-address                              string          yes      dns name or ip address
+address                              string          yes      fully qualified domain name or ip address
 port                                 integer  7770   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
 modules                              string          no       modules list separated by comma
@@ -89,7 +89,7 @@ host_name
   This variable is used by the arbiters daemons to define which 'arbiter' object they are: all theses daemons on different servers use the same configuration, so the only difference is their server name. This value must be equal to the name of the server (like with the hostname command). If none is defined, the arbiter daemon will put the name of the server where it's launched, but this will not be tolerated with more than one arbiter (because each daemons will think it's the master).
 
 address
-  This directive is used to define the address from where the main arbiter can reach this arbiter (that can be itself). This can be a DNS name or an IP address.
+  This directive is used to define the address from where the main arbiter can reach this arbiter (that can be itself). This can be a fully qualified domain name or an IP address.
 
 port
   This directive is used to define the TCP port used by the daemon. The default value is *7770*.
@@ -139,7 +139,7 @@ The configuration is defined in this style::
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
 scheduler_name                       string          yes      Name of scheduler
-address                              string          yes      dns name or ip address
+address                              string          yes      fully qualified domain name or ip address
 port                                 integer  7768   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
 weight                               integer  1      no       some schedulers can manage more hosts than other
@@ -199,7 +199,7 @@ scheduler_name
   This variable is used to identify the *short name* of the scheduler which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbiter can reach this scheduler. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this scheduler. This can be a fully qualified domain name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7768*.
@@ -234,7 +234,7 @@ The configuration is defined in this style::
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
 broker_name                          string          yes      Name of broker
-address                              string          yes      dns name or ip address
+address                              string          yes      fully qualified domain name or ip address
 port                                 integer  7772   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
 manage_arbiters                      boolean  1      no       set 1 to take data from Arbiter
@@ -282,7 +282,7 @@ broker_name
   This variable is used to identify the *short name* of the broker which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbiter can reach this broker. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this broker. This can be a fully qualified domain name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7772*.
@@ -320,7 +320,7 @@ The configuration is defined in this style::
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
 poller_name                          string          yes      Name of poller
-address                              string          yes      dns name or ip address
+address                              string          yes      fully qualified domain name or ip address
 port                                 integer  7771   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
 manage_sub_realms                    boolean  0      no       set 1 to take jobs from schedulers of sub-realms
@@ -374,7 +374,7 @@ poller_name
   This variable is used to identify the *short name* of the poller which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbiter can reach this poller. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this poller. This can be a fully qualified domain name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7771*.
@@ -413,7 +413,7 @@ The configuration is defined in this style::
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
 reactionner_name                     string          yes      Name of reactionner
-address                              string          yes      dns name or ip address
+address                              string          yes      fully qualified domain name or ip address
 port                                 integer  7769   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
 manage_sub_realms                    boolean  0      no       set 1 to take jobs from schedulers of sub-realms
@@ -467,7 +467,7 @@ reactionner_name
   This variable is used to identify the *short name* of the reactionner which the data is associated with.
 
 address
-  This directive is used to define the address from where the main arbiter can reach this reactionner. This can be a DNS name or a IP address.
+  This directive is used to define the address from where the main arbiter can reach this reactionner. This can be a fully qualified domain name or a IP address.
 
 port
   This directive is used to define the TCP port used bu the daemon. The default value is *7772*.
@@ -506,7 +506,7 @@ The configuration is defined in this style::
 Variable name                        Type    default Required Short description
 ==================================== ======= ======= ======== =============================================================
 receiver_name                        string          yes      Name of receiver
-address                              string          yes      dns name or ip address
+address                              string          yes      fully qualified domain name or ip address
 port                                 integer  7773   no       port of the daemon
 spare                                boolean  0      no       set 1 if it's a spare
 timeout                              integer  3      no       number of seconds to block the arbiter waiting for an answer

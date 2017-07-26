@@ -107,7 +107,7 @@ Short story::
 Checking Unix/Linux hosts/services with SNMP
 --------------------------------------------
 
-For checking an host and its most common services through SNMP, `install SNMP package <https://github.com/Alignak-monitoring-contrib/alignak-checks-linux-snmp>`_.
+For checking an host and its most common services through SNMP, `install SNMP package <https://github.com/Alignak-monitoring-contrib/alignak-checks-snmp>`_.
 
 Hosts inherit from a check command that gets the host uptime with an SNMP get, this to confirm that the host is alive and that SNMP connection is ok.
 
@@ -127,7 +127,7 @@ Short story::
 Checking Unix/Linux hosts/services with NRPE
 --------------------------------------------
 
-For checking an host and its most common services through NRPE, `install NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-linux-nrpe>`_.
+For checking an host and its most common services through NRPE, `install NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe>`_.
 
 Hosts inherit from a check command that gets the host NRPE daemon version, this to confirm that the host is alive and that NRPE connection is ok.
 
@@ -188,7 +188,7 @@ Short story::
 Active checking Windows with NRPE
 ---------------------------------
 
-For checking a Windows host and its most common services through NRPE, `install Windows NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-windows-nrpe>`_.
+For checking a Windows host and its most common services through NRPE, `install Windows NRPE package <https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe>`_.
 
 **Note**: this checks pack assumes that your Windows host is using the `NSClient agent`_.
 

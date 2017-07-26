@@ -29,7 +29,7 @@ You can generate your own self-signed certificate. The commands are::
     openssl genrsa -passout pass:the_password_you_want -out certificate_test.key 2048
     openssl req -new -x509 -days 3650 -key certificate_test.key -out certificate_test.csr
 
-When generating the `certificate_test.csr` (last command), if your run Alignak locally, you can use *Common Name* and the *localhost* value for the server name, otherwise enter the server DNS name where the daemon is running.
+When generating the `certificate_test.csr` (last command), if your run Alignak locally, you can use *Common Name* and the *localhost* value for the server name, otherwise enter the server fully qualified domain name where the daemon is running.
 
 
 Daemons configuration

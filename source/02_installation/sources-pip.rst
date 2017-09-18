@@ -27,9 +27,9 @@ Follow these steps:
 * Add this user to the sudoers
 * Login with this user account::
 
-  adduser alignak
-  adduser alignak sudo
-  su - alignak
+   adduser alignak
+   adduser alignak sudo
+   su - alignak
 
 * Clone the Alignak repository::
 
@@ -41,7 +41,7 @@ Follow these steps:
 
 * Install with python (sudo needed)::
 
-    sudo pip install .
+    sudo pip install . -e
 
 
 Installation from the source
@@ -53,26 +53,27 @@ Follow these steps:
 * Add this user to the sudoers
 * Login with this user account::
 
-  adduser alignak
-  adduser alignak sudo
-  su - alignak
+   adduser alignak
+   adduser alignak sudo
+   su - alignak
 
 * Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases ::
 
-    wget https://github.com/Alignak-monitoring/alignak/archive/0.2.tar.gz
+   wget https://github.com/Alignak-monitoring/alignak/archive/1.0.0.tar.gz
 
-* Decompress the archive ::
+* Uncompress the archive ::
 
-    tar -xvf 0.2.tar.gz
+    tar -xvf 1.0.0.tar.gz
 
 * cd to alignak folder ::
 
-    cd alignak-0.2
+    cd alignak-1.0.0
 
-* Install with python (sudo needed)::
+* Install with python pip (**sudo needed**)::
 
     sudo pip install .
 
+**Important note:** because of some pip specific behavior, installing Alignak requires to be connected as a user (and not as root) to run the pip command. To install from a root account, use ``pip install . -v --install-option='--prefix=/usr/local'``
 
 Install as a python lib
 =======================

@@ -295,6 +295,13 @@ Environment variables
 Alignak uses some environment variables
 
 
+Log system health
+-----------------
+
+Defining the ``TEST_LOG_MONITORING`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the system CPU and memory consumption.
+
+On each scheduling loop end, the Alignak scheduler gets the current cpu and memory information from the OS dans dumps them to the information log.
+
 Log Scheduling loop
 -------------------
 

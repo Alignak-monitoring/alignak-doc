@@ -22,62 +22,67 @@ All the command line parameters are optional because default values are used by 
 
 Without a configuration file, the daemon will use some default values:
 
-    - use a generic prefix for its files except if a daemon name is provided on the command line. the prefix is the daemon name if it is provided, else it is the daemon type with an ending `d` character (eg. brokerd for a broker)
-    - create its pid (prefix.pid) and log (prefix.log) file in the current working directory.
+    - use a generic prefix for its files except if a daemon name is provided on the command line. The prefix is the daemon name if it is provided, else it is the daemon type with an ending `d` character (eg. brokerd for a broker)
+    - the default daemon name is the daemon type (eg. *broker* for a broker daemon)
+    - create its pid (*prefix.pid*) and log (*prefix.log*) file in the current working directory.
     - It will also use a default port to listen to the other daemons (arbiter: 7770, scheduler: 7768, broker: 7772, poller: 7771, reactionner: 7769, receiver: 7773).
 
 Other command line parameters are available, but they are really rarely used ;)
 
 For all the daemons (broker, poller, receiver, reactionner, scheduler)::
 
-    $ alignak-broker -h
+   $ alignak-broker -h
+   usage: alignak-broker [-h] [-v] [-n DAEMON_NAME] [-c CONFIG_FILE] [-d] [-r]
+                         [-f DEBUG_FILE] [-p PORT] [-l LOCAL_LOG]
 
-    usage: alignak-broker [-h] [-v] [-c CONFIG_FILE] [-d] [-r]
-                          [--debugfile DEBUG_FILE]
-                          [--port PORT] [--local_log LOG_FILE]
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -v, --version         show programs version number and exit
-      -c CONFIG_FILE, --config CONFIG_FILE
-                            Daemon configuration file
-      -d, --daemon          Run as a daemon
-      -r, --replace         Replace previous running daemon
-      --debugfile DEBUG_FILE
-                            File to dump debug logs
-      --port PORT
-                            TCP port the daemon is listening to
-                            Useful if no ini file is provided, else this overrides
-                            the port defined in the configuration file
-      --local_log LOG_FILE
-                            File to dump daemon logs
+   optional arguments:
+     -h, --help            show this help message and exit
+     -v, --version         show program's version number and exit
+     -n DAEMON_NAME, --name DAEMON_NAME
+                           Daemon unique name. Must be unique for the same daemon
+                           type.
+     -c CONFIG_FILE, --config CONFIG_FILE
+                           Daemon configuration file
+     -d, --daemon          Run as a daemon
+     -r, --replace         Replace previous running daemon
+     -f DEBUG_FILE, --debugfile DEBUG_FILE
+                           File to dump debug logs
+     -p PORT, --port PORT  Port used by the daemon
+     -l LOCAL_LOG, --local_log LOCAL_LOG
+                           File to use for daemon log
 
 
 The arbiter is slightly different because it needs to receive the monitoring configuration that is to be loaded::
 
-    $ alignak-arbiter -h
+   $ alignak-arbiter -h
+   usage: alignak-arbiter [-h] [-v] -a MONITORING_FILES [-V] [-k ALIGNAK_NAME]
+                          [-n DAEMON_NAME] [-c CONFIG_FILE] [-d] [-r]
+                          [-f DEBUG_FILE] [-p PORT] [-l LOCAL_LOG]
 
-    usage: alignak-arbiter [-h] [-v] -a MONITORING_FILES [-V] [-k CONFIG_NAME]
-                           [-c CONFIG_FILE] [-d] [-r] [--debugfile DEBUG_FILE]
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -v, --version         show programs version number and exit
-      -a MONITORING_FILES, --arbiter MONITORING_FILES
-                            Monitored configuration file(s),multiple -a can be
-                            used, and they will be concatenated.
-      -V, --verify-config   Verify config file and exit
-      -k CONFIG_NAME, --config-name CONFIG_NAME
-                            Use the name of the arbiter defined in the configuration files
-                            (default is arbiter-master)
-                            This is useful for launching a spare-arbiter
-      -c CONFIG_FILE, --config CONFIG_FILE
-                            Daemon configuration file
-      -d, --daemon          Run as a daemon
-      -r, --replace         Replace previous running daemon
-      --debugfile DEBUG_FILE
-                            File to dump debug logs
-
+   optional arguments:
+     -h, --help            show this help message and exit
+     -v, --version         show program's version number and exit
+     -a MONITORING_FILES, --arbiter MONITORING_FILES
+                           Monitored configuration file(s), (multiple -a can be
+                           used, and they will be concatenated to make a global
+                           configuration file)
+     -V, --verify-config   Verify configuration file(s) and exit
+     -k ALIGNAK_NAME, --alignak-name ALIGNAK_NAME
+                           Set the name of the arbiter to pick in the
+                           configuration files For a spare arbiter, this
+                           parameter must contain its name!
+     -n DAEMON_NAME, --name DAEMON_NAME
+                           Daemon unique name. Must be unique for the same daemon
+                           type.
+     -c CONFIG_FILE, --config CONFIG_FILE
+                           Daemon configuration file
+     -d, --daemon          Run as a daemon
+     -r, --replace         Replace previous running daemon
+     -f DEBUG_FILE, --debugfile DEBUG_FILE
+                           File to dump debug logs
+     -p PORT, --port PORT  Port used by the daemon
+     -l LOCAL_LOG, --local_log LOCAL_LOG
+                           File to use for daemon log
 
 With the default installed configuration::
 
@@ -288,6 +293,7 @@ This file is structured as an Ini file:
 
 
 
+.. note :: in future version, the role of this file will be extended to contain all the daemons configuration in place of each file used for each daemon.
 
 Environment variables
 =====================
@@ -295,12 +301,48 @@ Environment variables
 Alignak uses some environment variables
 
 
+Alignak internal metrics
+------------------------
+
+If some environment variables exist the Alignak internal metrics will be logged to a file in append mode:
+    ``ALIGNAK_STATS_FILE``
+        the file name
+
+    ``ALIGNAK_STATS_FILE_LINE_FMT``
+        defaults to [#date#] #counter# #value# #uom#\n'
+
+    ``ALIGNAK_STATS_FILE_DATE_FMT``
+        defaults to '%Y-%m-%d %H:%M:%S'
+        date is UTC
+        if configured as an empty string, the date will be output as a UTC timestamp
+
+
 Log system health
 -----------------
 
-Defining the ``TEST_LOG_MONITORING`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the system CPU and memory consumption.
+Defining the ``TEST_LOG_MONITORING`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the system CPU, memory and disk consumption.
 
-On each scheduling loop end, the Alignak scheduler gets the current cpu and memory information from the OS dans dumps them to the information log.
+On each scheduling loop end, if the report period ia happening, the Alignak scheduler gets the current cpu, memory and disk information from the OS and dumps them to the information log. The dump is formatted as a Nagios plugin output with performance data.
+
+When this variable is defined, the default report period is set to 5. As such, each 5 scheduling loop, there is a report in the information log. If this variable contains an integer value, this value will define the report period.
+::
+
+   # Define environment variable
+   setenv TEST_LOG_MONITORING 5
+
+
+   [2017-09-19 15:54:36 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master cpu|'cpu_count'=4 'cpu_1_percent'=42.20% 'cpu_2_percent'=38.40% 'cpu_3_percent'=35.40% 'cpu_4_percent'=48.10% 'cpu_1_user_percent'=37.90% 'cpu_1_nice_percent'=0.00% 'cpu_1_system_percent'=4.20% 'cpu_1_idle_percent'=57.80% 'cpu_1_irq_percent'=0.00% 'cpu_2_user_percent'=31.80% 'cpu_2_nice_percent'=0.00% 'cpu_2_system_percent'=6.10% 'cpu_2_idle_percent'=61.60% 'cpu_2_irq_percent'=0.50% 'cpu_3_user_percent'=31.00% 'cpu_3_nice_percent'=0.00% 'cpu_3_system_percent'=4.20% 'cpu_3_idle_percent'=64.60% 'cpu_3_irq_percent'=0.20% 'cpu_4_user_percent'=38.90% 'cpu_4_nice_percent'=0.00% 'cpu_4_system_percent'=9.20% 'cpu_4_idle_percent'=51.90% 'cpu_4_irq_percent'=0.00%
+   [2017-09-19 15:54:36 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master disks|'disk_/_total'=952725065728B 'disk_/_used'=93761236992B 'disk_/_free'=858963828736B 'disk_/_percent_used'=9.80%
+   [2017-09-19 15:54:36 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master memory|'swap_total'=2621424B 'swap_used'=33514B 'swap_free'=2587910B 'swap_used_percent'=1.30% 'swap_sin'=2687B 'swap_sout'=12851708B
+   [2017-09-19 15:54:41 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master cpu|'cpu_count'=4 'cpu_1_percent'=34.00% 'cpu_2_percent'=37.40% 'cpu_3_percent'=36.10% 'cpu_4_percent'=25.10% 'cpu_1_user_percent'=26.90% 'cpu_1_nice_percent'=0.00% 'cpu_1_system_percent'=7.00% 'cpu_1_idle_percent'=66.00% 'cpu_1_irq_percent'=0.00% 'cpu_2_user_percent'=30.10% 'cpu_2_nice_percent'=0.00% 'cpu_2_system_percent'=7.20% 'cpu_2_idle_percent'=62.60% 'cpu_2_irq_percent'=0.20% 'cpu_3_user_percent'=30.40% 'cpu_3_nice_percent'=0.00% 'cpu_3_system_percent'=5.60% 'cpu_3_idle_percent'=63.90% 'cpu_3_irq_percent'=0.20% 'cpu_4_user_percent'=19.20% 'cpu_4_nice_percent'=0.00% 'cpu_4_system_percent'=5.80% 'cpu_4_idle_percent'=74.90% 'cpu_4_irq_percent'=0.20%
+   [2017-09-19 15:54:41 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master disks|'disk_/_total'=952725061632B 'disk_/_used'=93761646592B 'disk_/_free'=858963415040B 'disk_/_percent_used'=9.80%
+   [2017-09-19 15:54:41 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master memory|'swap_total'=2621424B 'swap_used'=33514B 'swap_free'=2587910B 'swap_used_percent'=1.30% 'swap_sin'=2687B 'swap_sout'=12851710B
+   [2017-09-19 15:54:46 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master cpu|'cpu_count'=4 'cpu_1_percent'=28.70% 'cpu_2_percent'=24.60% 'cpu_3_percent'=36.40% 'cpu_4_percent'=41.00% 'cpu_1_user_percent'=21.20% 'cpu_1_nice_percent'=0.00% 'cpu_1_system_percent'=7.50% 'cpu_1_idle_percent'=71.30% 'cpu_1_irq_percent'=0.00% 'cpu_2_user_percent'=17.70% 'cpu_2_nice_percent'=0.00% 'cpu_2_system_percent'=6.80% 'cpu_2_idle_percent'=75.40% 'cpu_2_irq_percent'=0.20% 'cpu_3_user_percent'=27.90% 'cpu_3_nice_percent'=0.00% 'cpu_3_system_percent'=8.20% 'cpu_3_idle_percent'=63.60% 'cpu_3_irq_percent'=0.30% 'cpu_4_user_percent'=33.60% 'cpu_4_nice_percent'=0.00% 'cpu_4_system_percent'=7.10% 'cpu_4_idle_percent'=59.00% 'cpu_4_irq_percent'=0.30%
+   [2017-09-19 15:54:46 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master disks|'disk_/_total'=952725045248B 'disk_/_used'=93762039808B 'disk_/_free'=858963005440B 'disk_/_percent_used'=9.80%
+   [2017-09-19 15:54:46 CEST] INFO: [alignak.scheduler] Scheduler scheduler-master memory|'swap_total'=2621424B 'swap_used'=33514B 'swap_free'=2587910B 'swap_used_percent'=1.30% 'swap_sin'=2687B 'swap_sout'=12851716B
+
+
+.. note :: this feature allows to have some information about the system load with a running Alignak scheduler.
 
 Log Scheduling loop
 -------------------

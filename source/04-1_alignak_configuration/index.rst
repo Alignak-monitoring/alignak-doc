@@ -24,20 +24,21 @@ Each main part of the Alignak framework configuration is described in the follow
 .. toctree::
    :maxdepth: 1
 
-   core_configuration
-   modules_configuration
+   01_logger_configuration
+   02_core_configuration
+   03_modules_configuration
 
 This chapter gives information about configuring the inter-daemon communication with SSL.
 
 .. toctree::
    :maxdepth: 1
 
-   ssl_certificate
+   04_ssl_certificate
 
 The last chapters give more information about the default installed configuration and some specific objects configuration features.
 
 .. toctree::
    :maxdepth: 1
 
-   default_configuration
-   core_configuration_tips.rst
+   05_default_configuration
+   06_core_configuration_tips.rst

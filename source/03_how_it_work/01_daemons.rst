@@ -14,8 +14,13 @@ It is made of 6 daemons which features may be extended thanks to modules. Each d
 
 A picture says a thousand words:
 
-.. image:: /_static/images///official/images/alignak-architecture.png
+.. figure:: /_static/images/official/images/alignak-architecture.png
    :scale: 90 %
+   :alt: Alignak daemons architecture
+
+   Alignak framework daemons synthetic view.
+
+   **Note** that this image is inherited from Shinken and it has not yet been updated. The livestatus API mentionned on this picture is not implemented at all in Alignak that uses another approach to feedback the *happy* user ;)
 
 
 
@@ -34,7 +39,7 @@ The *Arbiter* daemon has several features:
 
     * Forwarding failed daemons configuration to spare daemons
 
-There can have only one active Arbiter, other arbiters acting as standby spares.
+There can have only one active Arbiter, other arbiters (if they exist in the configuration) are acting as standby spares.
 
 Scheduler
 ---------

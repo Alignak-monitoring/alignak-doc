@@ -17,6 +17,7 @@ Alignak has some rich features:
 .. toctree::
    :maxdepth: 1
 
+   monitoring_log
    cached_checks
    realms
    dmz_monitoring

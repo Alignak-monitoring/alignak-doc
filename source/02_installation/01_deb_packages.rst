@@ -19,7 +19,7 @@ This script is an example how-to adapt your system and install Alignak but it is
     sudo apt-get install alignak
 
 
-According to your OS, use the following source:
+According to your OS, use the following source in place of `___Os___specific___source___` in the former script example:
 
     - Debian 8 (jessie): ``deb [arch=amd64] http://alignak-monitoring.github.io/repos/deb jessie main``
 

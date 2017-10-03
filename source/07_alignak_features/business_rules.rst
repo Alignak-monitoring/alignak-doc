@@ -505,7 +505,7 @@ It is possible in a business rule expression to include macros, as you would do 
 check command definition. You may for instance define a custom macro on the host or service
 holding the business rule, and use it in the expression.
 
-Combined with :ref:`macro modulation <advanced/macro-modulations>`, this allows to define
+Combined with :ref:`macro modulation <alignak_features/macro-modulations>`, this allows to define
 consolidated services with variable fault tolerance thresholds depending on the timeperiod.
 
 Imagine your web frontend cluster composed of dozens servers serving the web site. If one is
@@ -604,5 +604,3 @@ You may use a template looking like:
 
 The resulting output would look like `Down web services: link1 link2 link3 ...` where `linkN` are URLs leading to the problem in the WebUI.
 
-
-.. _ticket: https://github.com/naparuba/shinken/issues/509

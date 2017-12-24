@@ -16,7 +16,7 @@ This script is an example how-to adapt your system and install Alignak but it is
     # Get and store the Alignak repos public key
     wget -O- http://alignak-monitoring.github.io/repos/alignak_pub.key | sudo apt-key add -
     apt-key list
-    sudo apt-get install alignak
+    sudo apt-get install alignak-all
 
 
 According to your OS, use the following source:

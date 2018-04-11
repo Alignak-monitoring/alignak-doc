@@ -49,14 +49,6 @@ Installation from the source
 
 Follow these steps:
 
-* Create user *alignak* member of group *alignak*
-* Add this user to the sudoers
-* Login with this user account::
-
-   adduser alignak
-   adduser alignak sudo
-   su - alignak
-
 * Get source archive on this page: https://github.com/Alignak-monitoring/alignak/releases ::
 
    wget https://github.com/Alignak-monitoring/alignak/archive/1.0.0.tar.gz
@@ -72,6 +64,20 @@ Follow these steps:
 * Install with python pip (**sudo needed**)::
 
     sudo pip install .
+
+Once Alignak is installed, it is recommended to have an *alignak* user account and grant the permissions to this user on the Alignak installed directories. A shell script exists in the *./dev* directory of the repository to achieve this.
+
+::
+
+    # Create alignak user/group and set correct permissions on installed configuration files
+    sudo ./dev/set_permissions.sh
+
+    # Change default user account name and / or files location
+    # Default user name: alignak
+    # Default files location prefix: /usr/local
+    sudo ./dev/set_permissions.sh user_account /usr
+
+
 
 **Important note:** because of some pip specific behavior, installing Alignak requires to be connected as a user (and not as root) to run the pip command. To install from a root account, use ``pip install . -v --install-option='--prefix=/usr/local'``
 

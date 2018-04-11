@@ -12,15 +12,15 @@ Below you will find descriptions of each external command.
 ACKNOWLEDGE_HOST_PROBLEM
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-    ACKNOWLEDGE_HOST_PROBLEM;<host_name>;<sticky>;<notify>;<persistent>;<author>;<comment>
+    ``ACKNOWLEDGE_HOST_PROBLEM;<host_name>;<sticky>;<notify>;<persistent>;<author>;<comment>``
 
         Allows you to acknowledge the current problem for the specified host. By acknowledging the current problem, future notifications (for the same host state) are disabled.
 
-        If the "sticky" option is set to two (2), the acknowledgement will remain until the host recovers (returns to an UP state). Otherwise the acknowledgement will automatically be removed when the host changes state.
+        If the "sticky" option is set to two (2), the acknowledgement will remain until the host recovers (returns to an UP state). Otherwise (value different of 2)the acknowledgement will automatically be removed when the host changes state.
 
-        If the "notify" option is set to one (1), a notification will be sent out to contacts indicating that the current host problem has been acknowledged, if set to null (0) there will be no notification.
+        If the "notify" option is set to one (1), a notification will be sent out to contacts indicating that the current host problem has been acknowledged, if not set (0) there will be no notification.
 
-        If the "persistent" option is set to one (1), the comment associated with the acknowledgement will remain even after the host recovers.
+        *If the "persistent" option is set to one (1), the comment associated with the acknowledgement will remain even after the host recovers.*
 
 **Note** contrary to the legacy Nagios behavior, Alignak will automatically set an acknowledge on all the host services that are currently problems when an host problem is acknowledged.
 
@@ -40,11 +40,11 @@ ACKNOWLEDGE_SVC_PROBLEM
 
         Allows you to acknowledge the current problem for the specified service. By acknowledging the current problem, future notifications (for the same service state) are disabled.
 
-        If the "sticky" option is set to two (2), the acknowledgement will remain until the service recovers (returns to an OK state). Otherwise the acknowledgement will automatically be removed when the service changes state.
+        If the "sticky" option is set to two (2), the acknowledgement will remain until the service recovers (returns to an OK state). Otherwise (value different of 2) the acknowledgement will automatically be removed when the service changes state.
 
         If the "notify" option is set to one (1), a notification will be sent out to contacts indicating that the current service problem has been acknowledged, if set to null (0) there will be no notification.
 
-        If the "persistent" option is set to one (1), the comment associated with the acknowledgement will remain even after the service recovers.
+        *If the "persistent" option is set to one (1), the comment associated with the acknowledgement will remain even after the service recovers.*
 
 **Note** that Alignak will always consider an acknowledge as persistent. Thus it will ignore the "persistent" information value.
 
@@ -1013,7 +1013,7 @@ SCHEDULE_HOST_DOWNTIME
 
       Schedules a downtime for a specified host.
 
-      If the "fixed" argument is set to one (1), the downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, the downtime will begin between the "start" and "end" times and will last for "duration" seconds.
+      If the "fixed" argument is set to one (1), the downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise (0), the downtime will begin between the "start" and "end" times and will last for "duration" seconds.
 
       The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The specified host downtime can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the specified host should not be triggered by another downtime entry.
 
@@ -1032,7 +1032,9 @@ SCHEDULE_HOST_SVC_DOWNTIME
 
    ``SCHEDULE_HOST_SVC_DOWNTIME;<host_name>;<start_time>;<end_time>;<fixed>;<trigger_id>;<duration>;<author>;<comment>``
 
-      Schedules downtime for all services associated with a particular host. If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise, downtime will begin between the "start" and "end" times and last for "duration" seconds. The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The service downtime entries can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the services should not be triggered by another downtime entry.
+      Schedules downtime for all services associated with a particular host. If the "fixed" argument is set to one (1), downtime will start and end at the times specified by the "start" and "end" arguments. Otherwise (0), downtime will begin between the "start" and "end" times and last for "duration" seconds.
+
+      The "start" and "end" arguments are specified in time_t format (seconds since the UNIX epoch). The service downtime entries can be triggered by another downtime entry if the "trigger_id" is set to the ID of another scheduled downtime entry. Set the "trigger_id" argument to zero (0) if the downtime for the services should not be triggered by another downtime entry.
 
 SCHEDULE_HOSTGROUP_HOST_DOWNTIME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

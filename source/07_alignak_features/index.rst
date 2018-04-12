@@ -24,5 +24,6 @@ Alignak has some rich features:
    business_rules
    notifications_escalations
    modulations
+   web_service_api
 
 The next chapters explain those specific features.

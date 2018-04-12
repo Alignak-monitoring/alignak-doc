@@ -12,6 +12,10 @@ Thanks to this implementation all the Python logger features are available with 
 
 The default shipped configuration file is */usr/local/etc/alignak/alignak-logger.json* and it defines a logger for the Alignak daemons and a logger for the monitoring events log.
 
+The Alignak daemons log are stored in daily rotated files located in the */usr/local/var/log/alignak* directory and which names are prefixed with the daemon name. these files are kept for seven days.
+
+The Alignak monitoring log is stored in daily rotated files located in a sub-directory named *monitoring-log* and are kept for 365 days.
+
 If a problem is raised before the logger configuration took place, a default */tmp/alignak.log* is used to log the raised errors.
 
 The default logger configuration is:
@@ -58,7 +62,7 @@ The default logger configuration is:
                 "class": "logging.handlers.TimedRotatingFileHandler",
                 "level": "INFO",
                 "formatter": "monitoring-log",
-                "filename": "%(logdir)s/monitoring-logs.log",
+                "filename": "%(logdir)s/monitoring-log/monitoring-logs.log",
                 "when": "midnight",
                 "interval": 1,
                 "backupCount": 365,

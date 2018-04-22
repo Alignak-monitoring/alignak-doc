@@ -126,7 +126,7 @@ As an example:
 Log Alignak actions
 -------------------
 
-Defining the ``TEST_LOG_ACTIONS`` environment variable will make Alignak add some information in its daemons log files to inform about the commands that are launched for the checks and the notifications. This is very useful to help setting-up the checks because the launched checks and their results are available as INFO log
+Defining the ``ALIGNAK_LOG_ACTIONS`` environment variable will make Alignak add some information in its daemons log files to inform about the commands that are launched for the checks and the notifications. This is very useful to help setting-up the checks because the launched checks and their results are available as INFO log in the Alignak daemons log files;)
 
 If this variable is set to 'WARNING', the logs will be at the WARNING level, else INFO.
 
@@ -134,7 +134,9 @@ As an example:
 ::
 
     # Define environment variable
-    setenv TEST_LOG_ACTIONS 1
+    setenv ALIGNAK_LOG_ACTIONS 1
+    # Or
+    export ALIGNAK_LOG_ACTIONS='WARNING'
 
     # Start Alignak daemons
 
@@ -146,10 +148,17 @@ As an example:
     [2017-04-26 16:23:57 UTC] INFO: [alignak.action] Performance data for /usr/local/libexec/nagios/check_nrpe -H 93.93.47.81 -t 10 -u -n -c check_zombie_procs: procs=0;5;10;0;
 
 
+Log Alignak checks results
+--------------------------
+
+Defining the ``ALIGNAK_LOG_CHECKS`` environment variable will make Alignak add some information in its daemons log files to log the check results. This is also very useful to help understanding why some check results are not ok.
+
+According to the check plugin exit code, a log will be emitted with a certain level: 'info', 'warning', 'error', or 'critical'. As an example, this will add a warning log for a plugin with an exit code of 1, an error log for 2, and a critical log for any value greater than or equal to 3.
+
 Log Alignak alerts and notifications
 ------------------------------------
 
-Defining the ``TEST_LOG_ALERTS`` ``TEST_LOG_NOTIFICATIONS`` environment variables will make Alignak add some information in its daemons log files to inform about the alerts and notifications that are raised for the monitored hosts and services.
+Defining the ``ALIGNAK_LOG_ALERTS`` ``ALIGNAK_LOG_NOTIFICATIONS`` environment variables will make Alignak add some information in its daemons log files to inform about the alerts and notifications that are raised for the monitored hosts and services.
 
 If these variables are set to 'WARNING', the logs will be at the WARNING level, else INFO.
 

@@ -966,7 +966,7 @@ Example:
 
 This option determines whether or not Alignak will execute the external commands that it receives. More information on external commands can be found :ref:`here <monitoring_features/extcommands>`.
 
-  * 0 = Don't check external commands (default)
+  * 0 = Don't check external commands
   * 1 = Check external commands (default)
 
 

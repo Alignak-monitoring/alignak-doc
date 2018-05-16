@@ -18,10 +18,9 @@ Enabling external commands
    :scale: 90 %
 
 
-In order to have Alignak process external commands, make sure you do the following:
+In order to have Alignak process external commands, make sure you enabled external command checking with the ``check_external_commands`` parameter in the monitoring configuration file.
 
-    * Enable external command checking with the ``check_external_commands`` parameter in the monitoring configuration file.
-    * Install an external commands capable module near the Alignak receiver daemon.
+**Note** that the Arbiter is able to manage the external commands by itself and that it is not necessary to use an external module... but you may install an external commands capable module near the Alignak receiver daemon. This will be a more interesting configuration to balance the commands load if you are using many passive checks!
 
 An external commands capable module implements a solution to provide the external commands to Alignak.
 

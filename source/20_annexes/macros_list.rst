@@ -521,5 +521,5 @@ Notes
 
 .. _annexes/macros_list#note10:
 
-  * **10** Summary macros are not available as environment variables if the :ref:`use_large_installation_tweaks <configuration/core#use_large_installation_tweaks>` option is enabled, as they are quite CPU-intensive to calculate.
+  * **10** Summary macros are not available as environment variables if the :ref:`use_large_installation_tweaks <configuration/core>` option is enabled, as they are quite CPU-intensive to calculate.
 

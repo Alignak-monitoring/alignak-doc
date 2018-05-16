@@ -1,8 +1,8 @@
 .. _monitoring_features/downtime:
 
-==================
-Scheduled downtime
-==================
+========================================
+Problems, acknowledgements and downtimes
+========================================
 
 
 Introduction 
@@ -11,7 +11,9 @@ Introduction
 .. image:: /_static/images///official/images/downtime.png
    :scale: 90 %
 
-Alignak allows you to schedule downtime periods for hosts and service that you're monitoring. This is useful in the event that you actually know you're going to be taking a server down for an upgrade, etc.
+When an host/service problem is detected by Alignak, some actions are possible with Alignak to manage the problems.
+
+allows you to schedule downtime periods for hosts and service that you're monitoring. This is useful in the event that you actually know you're going to be taking a server down for an upgrade, etc.
 
 
 Downtime vs Acknowledge
@@ -21,11 +23,11 @@ Acknowledging a problem for an host or service is simply an information that you
 
 **Note** that acknowledging an host problem will also acknowledge all its services problems.
 
-If the acknowledge is "sticky", the acknowledgement will remain until the host/service returns to an UP/OK state. Otherwise the acknowledgement will automatically be removed when the host changes state.
+If the acknowledge is "sticky", the acknowledgement will remain until the host/service returns to an UP/OK state. Otherwise the acknowledgement will automatically be removed when the host changes state whatever the new state is.
 
-If the "notify" option is set for the acknowledge, a notification will be sent out to the host/service contacts indicating that the current host problem has been acknowledged.
+If the "notify" option is set for the acknowledge, a notification will be sent out to the host/service contacts indicating that the current host problem has been acknowledged. A notification will also be sent when the acknowledge is unset.
 
-**Note** that the acknowledgements are always persistent with Alignak (not as Nagios legacy acknowledgements).
+**Note** that the acknowledgements are always persistent with Alignak (not as the Nagios legacy acknowledgements).
 
 Scheduling downtime
 -------------------

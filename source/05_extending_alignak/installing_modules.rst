@@ -143,6 +143,8 @@ This module allows Alignak framework (like Nagios *and al.*) to reacts to extern
 
 Thanks to this module the receiver daemon periodically reads the content of a configured file and builds an external command with the information read from this file. This also allows Alignak to :ref:`receive passive checks<monitoring_features/passive_checks>`.
 
+**Note** that the Arbiter is able to manage the external commands by itself and that it is not necessary to use an external module...
+
 Short story::
 
     pip install alignak-module-external-commands
@@ -176,6 +178,9 @@ Web services
 ------------
 
 This module exposes Web services to get information about the Alignak framework and to notify external commands from a third-party application.
+
+**Note** that the Arbiter is able to manage the external commands by itself and that it is not necessary to use an external module...
+
 
 This also allows Alignak to :ref:`receive passive checks<monitoring_features/passive_checks>`.
 

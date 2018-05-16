@@ -6,15 +6,13 @@ Installing checks
 
 The default configuration does not include any plugins to check the monitored hosts and services. If we leave it in this state, our system will be really unuseful!
 
-The plugins used to check if an host or service is ok are not part of Alignak. There are literally thousands of plugins available to check various systems. To make Alignak use a new plugin to check, you must:
+The plugins used to check an host or service state are not part of Alignak. There are literally thousands of plugins available to check various systems. To make Alignak use a new plugin to check, you must:
 
     * install the plugin
     * declare a new command that specifies how the plugin must be used
     * declare a new service on the monitored host
 
 Alignak propose an easy way to deal with these operations by providing the most common checks plugins already packaged in an easy installable package called an **Alignak checks package**.
-
-*** TO BE COMPLETED ***
 
 Alignak packs
 =============
@@ -32,8 +30,37 @@ All the currently available checks packs:
 
 **Note:** all the currently available packs are not introduced in the current document. To get the updated most recent list, browse the Alignak contribution organization as explained previously ;)
 
-Alignak notifications packs
-===========================
+Old school configuration files
+------------------------------
+All the packs include *old school* legacy configuration files which declare some templates, groups, ... to use the checks in an existing configuration.
+
+The configuration files are copied, when installing, in the */usr/local/etc/alignak/arbiter/packs* directory and they will be *de facto* include in the default configuration shipped with alignak
+
+Alignak backend feeding files
+-----------------------------
+All the packs include backend feeding configuration files which declare some templates, groups, ... that will be made available in the Alignak backend to use the checks in an existing configuration.
+
+The configuration files are copied, when installing, in the */usr/local/etc/alignak/backend-json/* directory. A *setup.sh* script is shipped aicht each checks package to import the date into an Alginak backend. when installing this script is run and, if your backend is available on http://127.0.0.1:5000 with the default credentials, the data are imported.
+
+Anyway, you can run the *setup.sh* script individually with parameters according to your backend configuration to import the data:::
+
+   $ /usr/local/etc/alignak/backend-json/notifications/setup.sh -h
+
+   The script you are running has basename setup.sh, dirname /usr/local/etc/alignak/backend-json/notifications
+   The present working directory is /home/alignak/alignak-doc
+
+   Usage: /usr/local/etc/alignak/backend-json/notifications/setup.sh [-h|--help] [-b|--backend] [-u|--username] [-p|--password]
+
+   -h (--help)        display this message
+   -v (--verbose)     verbose mode
+   -b (--backend)     Alignak backend URI (default is http://127.0.0.1:5000)
+   -u (--username)    Alignak backend username (default is admin)
+   -p (--password)    Alignak backend password (default is admin)
+   -f (--files)       Directory where the Json files are located
+
+
+Alignak notifications pack
+==========================
 
 All the Alignak notifications packs have their own repository and are easily installable thanks to the Python ``pip``.
 
@@ -51,13 +78,14 @@ This pack include several scripts that can be used to send notifications from Al
 
     * simple printf sent to sendmail
     * python script to send HTML mail
-    * python script to send XMPP notifications
+    * python script to send Slack notifications
 
 
 Short story::
 
    pip install alignak-notifications
 
+   # Old configuration file format
    define contact{
       contact_name                     hotline
       use                              generic-contact
@@ -70,6 +98,9 @@ Short story::
       service_notification_commands    notify-service-by-email-html
       host_notification_commands       notify-host-by-email-html
    }
+
+   # Alignak backend feeding
+   /usr/local/etc/alignak/backend-json/notifications/setup.sh
 
 
 

@@ -7,18 +7,44 @@ Environment variables
 Alignak uses some environment variables. These variables, if defined, always take precedence over the usual configuration parameters.
 
 
+Alignak main configuration file
+-------------------------------
+
+An environment variable exist to define the Alignak main configuration file:
+
+    ``ALIGNAK_CONFIGURATION_FILE``
+        the main ini environment configuration file
+
+When Alignak is started with system services, :ref:`see how to declare this variable <run_alignak/services>`.
+
+Alignak running user/group
+--------------------------
+
+Environment variables exist to define the Alignak user/group running account:
+
+    ``ALIGNAK_USER`` and ``ALIGNAK_GROUP``
+        the user account used to run Alignak daemons
+
+When Alignak is started with system services, :ref:`see how to declare these variables <run_alignak/services>`.
+
+These variables override the corresponding `user` and `group` :ref:`configuration variables <configuration/core#user_group>`.
+
 Alignak logger configuration
 ----------------------------
 
-An environment variable may exist to define the Alignak logger configuration file:
+An environment variable exist to define the Alignak logger configuration file:
+
     ``ALIGNAK_LOGGER_CONFIGURATION``
         the Json formatted logger configuration file
+
+This variable overrides the corresponding `logger_configuration` :ref:`configuration variable <configuration/core#logger_configuration>`.
 
 
 Alignak internal metrics
 ------------------------
 
 If some environment variables exist the Alignak internal metrics will be logged to a file in append mode:
+
     ``ALIGNAK_STATS_FILE``
         the file name
 
@@ -38,8 +64,7 @@ Defining the ``ALIGNAK_SYSTEM_MONITORING`` environment variable will make Aligna
 
 On each activity loop end, if the report period is happening, the arbiter gets the current cpu, memory and disk information from the OS and dumps them to the information log. The dump is formatted as a Nagios plugin output with performance data.
 
-When this variable is defined, the default report period is set to 5. As such, each 5 loop turn, there is a report in the information log. If this variable contains an integer value, this value will define the report period in seconds.
-::
+When this variable is defined, the default report period is set to 5. As such, each 5 loop turn, there is a report in the information log. If this variable contains an integer value, this value will define the report period in seconds.::
 
    # Define environment variable
    setenv ALIGNAK_SYSTEM_MONITORING 5
@@ -70,13 +95,13 @@ When this environment variable is defined, the default report period is set to 1
 Log Scheduling loop
 -------------------
 
-Defining the ``TEST_LOG_LOOP`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the checks that are scheduled.
+Defining the ``ALIGNAK_LOG_LOOP`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the checks that are scheduled.
 
 As an example:
 ::
 
     # Define environment variable
-    setenv TEST_LOG_LOOP 1
+    export TEST_LOG_LOOP=1
 
     # Start Alignak daemons
 
@@ -123,6 +148,42 @@ As an example:
     [2017-05-27 07:32:51 CEST] INFO: [alignak.scheduler] +++ 65
 
 
+Log Alignak daemons loop
+------------------------
+
+Defining the ``ALIGNAK_LOG_ACTIVITY`` environment variable will make Alignak daemons periodically log an information log as a keep alive. The integer value of this variable defines the period count. Each period count, an information log is raised::
+
+      ==> /usr/local/var/log/alignak/receiver-master.log <==
+      [2018-06-16 17:16:37] INFO: [receiver-master.alignak.daemon] Daemon receiver-master is living: loop #18001 ;)
+
+      ==> /usr/local/var/log/alignak/scheduler-master.log <==
+      [2018-06-16 17:16:37] INFO: [scheduler-master.alignak.daemon] Daemon scheduler-master is living: loop #18001 ;)
+
+      ==> /usr/local/var/log/alignak/poller-master.log <==
+      [2018-06-16 17:16:37] INFO: [poller-master.alignak.daemon] Daemon poller-master is living: loop #18001 ;)
+
+      ==> /usr/local/var/log/alignak/broker-master.log <==
+      [2018-06-16 17:16:38] INFO: [broker-master.alignak.daemon] Daemon broker-master is living: loop #18001 ;)
+
+      ==> /usr/local/var/log/alignak/arbiter-master.log <==
+      [2018-06-16 17:16:42] INFO: [arbiter-master.alignak.daemon] Daemon arbiter-master is living: loop #18001 ;)
+
+      ==> /usr/local/var/log/alignak/reactionner-master.log <==
+      [2018-06-16 17:26:37] INFO: [reactionner-master.alignak.daemon] Daemon reactionner-master is living: loop #18601 ;)
+
+      ==> /usr/local/var/log/alignak/receiver-master.log <==
+      [2018-06-16 17:26:37] INFO: [receiver-master.alignak.daemon] Daemon receiver-master is living: loop #18601 ;)
+
+      ==> /usr/local/var/log/alignak/poller-master.log <==
+      [2018-06-16 17:26:38] INFO: [poller-master.alignak.daemon] Daemon poller-master is living: loop #18601 ;)
+
+      ==> /usr/local/var/log/alignak/scheduler-master.log <==
+      [2018-06-16 17:26:38] INFO: [scheduler-master.alignak.daemon] Daemon scheduler-master is living: loop #18601 ;)
+
+      ==> /usr/local/var/log/alignak/broker-master.log <==
+      [2018-06-16 17:26:38] INFO: [broker-master.alignak.daemon] Daemon broker-master is living: loop #18601 ;)
+
+
 Log Alignak actions
 -------------------
 
@@ -130,8 +191,7 @@ Defining the ``ALIGNAK_LOG_ACTIONS`` environment variable will make Alignak add 
 
 If this variable is set to 'WARNING', the logs will be at the WARNING level, else INFO.
 
-As an example:
-::
+As an example::
 
     # Define environment variable
     setenv ALIGNAK_LOG_ACTIONS 1
@@ -162,3 +222,7 @@ Defining the ``ALIGNAK_LOG_ALERTS`` ``ALIGNAK_LOG_NOTIFICATIONS`` environment va
 
 If these variables are set to 'WARNING', the logs will be at the WARNING level, else INFO.
 
+Disable internal commands
+-------------------------
+
+Defining the ``ALIGNAK_MANAGE_INTERNAL`` environment variable to a value different of ``1`` will make Alignak ignore the internal commands execution. This is to be used with much caution because it will disable the business rules computation and disable the business correlator. But it may be interesting if you do not use this feature because it will reduce the scheduler load and improve performance...

@@ -10,86 +10,94 @@ The Alignak logger configuration is defined thanks to a JSON Python logger confi
 
 Thanks to this implementation all the Python logger features are available with a simple configuration in this file: changing the log format, sending log to several destination, logging to a file, logging through email, http,... For more information, see `the Python logging cookbook <https://docs.python.org/2/howto/logging-cookbook.html>`_. All is not possible, but many scenario are yet ;)
 
-The default shipped configuration file is */usr/local/etc/alignak/alignak-logger.json* and it defines a logger for the Alignak daemons and a logger for the monitoring events log.
+The default shipped configuration file is */usr/local/share/alignak/etc/alignak-logger.json* and it defines a logger for the Alignak daemons and a logger for :ref:`the monitoring events log<alignak_features/monitoring_log>`.
 
-The Alignak daemons log are stored in daily rotated files located in the */usr/local/var/log/alignak* directory and which names are prefixed with the daemon name. these files are kept for seven days.
+The Alignak daemons log are stored in daily rotated files located in the */usr/local/var/log/alignak* directory. The log file names are prefixed with the daemon name. These files are kept for seven (default) days.
 
-The Alignak monitoring log is stored in daily rotated files located in a sub-directory named *monitoring-log* and are kept for 365 days.
+The Alignak monitoring events log is stored in a daily rotated file named *alignak-events-log* in the same directory. As per default, this file is kept for 365 days.
 
-If a problem is raised before the logger configuration took place, a default */tmp/alignak.log* is used to log the raised errors.
+If a problem is raised before the logger configuration is set-up, a default */tmp/alignak.log* is used to log the raised errors.
 
-The default logger configuration is:
-::
+.. tip:: If you meet some problems when starting an Alignak daemon, think about having a look to this file, it may help understanding the problem!
 
-    {
-        "version": 1,
-        "disable_existing_loggers": false,
-        "formatters": {
-            "alignak": {
-                "format": "[%(asctime)s] %(levelname)s: [%(daemon)s.%(name)s] %(message)s"
-                ,"datefmt": "%Y-%m-%d %H:%M:%S"
-            },
-            "monitoring-log": {
-                "format": "[%(asctime)s] %(levelname)s: %(message)s"
-            ,"datefmt": "%Y-%m-%d %H:%M:%S"
-            }
-        },
+The default shipped logger configuration is::
 
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-                "level": "DEBUG",
-                "formatter": "alignak",
-                "stream": "ext://sys.stdout"
-            },
-            "color_console": {
-                "class": "alignak.log.ColorStreamHandler",
-                "level": "DEBUG",
-                "formatter": "alignak",
-                "stream": "ext://sys.stdout"
-            },
-            "daemons": {
-                "class": "logging.handlers.TimedRotatingFileHandler",
-                "level": "DEBUG",
-                "formatter": "alignak",
-                "filename": "%(logdir)s/%(daemon)s.log",
-                "when": "midnight",
-                "interval": 1,
-                "backupCount": 7,
-                "encoding": "utf8"
-            },
-            "monitoring_logs": {
-                "class": "logging.handlers.TimedRotatingFileHandler",
-                "level": "INFO",
-                "formatter": "monitoring-log",
-                "filename": "%(logdir)s/monitoring-log/monitoring-logs.log",
-                "when": "midnight",
-                "interval": 1,
-                "backupCount": 365,
-                "encoding": "utf8"
-            }
-        },
+   {
+       "version": 1,
+       "disable_existing_loggers": false,
+       "formatters": {
+           "alignak": {
+               "format": "[%(asctime)s] %(levelname)s: [%(daemon)s.%(name)s] %(message)s",
+               "datefmt": "%Y-%m-%d %H:%M:%S"
+           },
+           "monitoring-log": {
+               "format": "[%(my_date)s] %(levelname)s: %(message)s",
+               "datefmt": "%Y-%m-%d %H:%M:%S"
+           }
+       },
 
-        "loggers": {
-            "alignak": {
-                "level": "INFO",
-                "handlers": ["color_console", "daemons"],
-                "propagate": "no"
-            },
-            "monitoring-log": {
-                "level": "DEBUG",
-                "handlers": ["console", "monitoring_logs"],
-                "propagate": "no"
-            }
-        },
+       "handlers": {
+           "unit_tests": {
+               "class": "alignak.log.CollectorHandler",
+               "level": "DEBUG",
+               "formatter": "alignak"
+           },
+           "console": {
+               "class": "logging.StreamHandler",
+               "level": "DEBUG",
+               "formatter": "alignak",
+               "stream": "ext://sys.stdout"
+           },
+           "color_console": {
+               "class": "alignak.log.ColorStreamHandler",
+               "level": "DEBUG",
+               "formatter": "alignak",
+               "stream": "ext://sys.stdout"
+           },
+           "daemons": {
+               "class": "logging.handlers.TimedRotatingFileHandler",
+               "level": "DEBUG",
+               "formatter": "alignak",
+               "filename": "%(logdir)s/%(daemon)s.log",
+               "when": "midnight",
+               "interval": 1,
+               "backupCount": 7
+           },
+           "event_log": {
+               "class": "logging.handlers.TimedRotatingFileHandler",
+               "level": "INFO",
+               "formatter": "monitoring-log",
+               "filename": "%(logdir)s/alignak-events.log",
+               "when": "midnight",
+               "interval": 1,
+               "backupCount": 365
+           }
+       },
 
-        "root": {
-            "level": "ERROR",
-            "handlers": []
-        }
-    }
+       "loggers": {
+           "alignak": {
+               "level": "INFO",
+               "handlers": ["color_console", "daemons"],
+               "propagate": "no"
+           },
+           "monitoring-log": {
+               "level": "DEBUG",
+               "handlers": ["console", "event_log"],
+               "propagate": "no"
+           }
+       },
+
+       "root": {
+           "level": "ERROR",
+           "handlers": []
+       }
+   }
 
 When this file is loaded by an Alignak daemon, its content is parsed and the `%(logdir)s` and `%(daemon)s` variables are respectively replaced with the log directory configuration parameter and the daemon name.
+
+The monitoring log event date is not the time when the log is emitted to the logger but the time when the event is raised by the originating daemon. The arbiter periodically collects all the events near all its satellites and raises the log with the creation time date.
+
+.. note:: that the formatter used for the monitoring log uses a ``%(my_date)s`` variable which is not a standard logger date.
 
 
 Specific CherryPy logging

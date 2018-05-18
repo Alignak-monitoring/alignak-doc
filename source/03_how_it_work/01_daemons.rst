@@ -14,71 +14,62 @@ It is made of 6 daemons which features may be extended thanks to modules. Each d
 
 A picture says a thousand words:
 
-.. figure:: /_static/images/official/images/alignak-architecture.png
+.. figure:: /_static/images/Alignak-architecture-1.png
    :scale: 90 %
    :alt: Alignak daemons architecture
 
    Alignak framework daemons synthetic view.
-
-   **Note** that this image is inherited from Shinken and it has not yet been updated. The livestatus API mentionned on this picture is not implemented at all in Alignak that uses another approach to feedback the *happy* user ;)
 
 
 
 Arbiter
 -------
 
-The *Arbiter* daemon has several features:
+The *Arbiter* daemon role:
 
-    * Loading the configuration:
-        - monitoring objects configuration (hosts, services, contacts, ...)
-        - other daemons list and configuration (address, port, spare, modules...)
+   * Loading the Alignak own configuration (daemons, behavior, ...)
 
-    * Dispatching the whole framework configuration to the other daemons
+   * Loading the monitored system objects configuration (hosts, services, contacts, ...), loaded from Nagios legacy configuration files or from the Alignak backend database
 
-    * Managing daemons connections and monitoring the state of the other daemons
+   * Dispatching the whole framework configuration to the other daemons
 
-    * Forwarding failed daemons configuration to spare daemons
+   * Managing daemons connections and monitoring the state of the other daemons
+
+   * Forwarding failed daemons configuration to spare daemons
+
+   * Receiving external commands
+
+   * Reporting Alignak state
 
 There can have only one active Arbiter, other arbiters (if they exist in the configuration) are acting as standby spares.
+
 
 Scheduler
 ---------
 
-The *Scheduler* daemon:
+The *Scheduler* daemon role:
 
-    * schedules the checks to run
+    * scheduling the checks to launch
 
     * determines action to execute (notifications, acknowledges, ...)
 
     * dispatches the checks and actions to execute to the pollers and reactionners
 
-It is connected to the other daemons:
+There can have many schedulers for load-balancing; each scheduler is managing its own hosts list.
 
-    * Arbiter
-    * Poller
-    * Receiver
-    * Broker
-    * Reactionner
-
-There can have many schedulers for load-balancing or standby spares.
 
 Poller
 ------
 
 The *Poller* runs active checks required by the *Scheduler*.
 
-It is connected to the other daemons:
+There can have many pollers for load-balancing.
 
-    * Arbiter
-    * Scheduler
-    * Broker
-
-There can have many pollers for load-balancing or standby spares.
 
 Receiver
 --------
 
-The *Receiver* daemon receives the passive checks an external commands
+The *Receiver* daemon receives the passive checks and external commands
 
 It is connected to the other daemons:
 
@@ -86,32 +77,20 @@ It is connected to the other daemons:
     * Scheduler
     * Broker
 
-There can have many receivers for load-balancing or standby spares.
+There can have many receivers for load-balancing.
 
 Broker
 ------
 
-The *Broker* daemon gets all events from scheduler
+The *Broker* daemon gets all monitoring events from the scheduler. It propagates the events to the specialized modules installed on the configuration (eg. Alignak backend database storage, ...)
 
-It is connected to the other daemons:
+There can have many brokes for load-balancing.
 
-    * Arbiter
-    * Poller
-    * Scheduler
-    * Receiver
-    * Reactionner
-
-There can have many brokers for standby spares.
 
 Reactionner
 -----------
 
-The *Reactionner* daemon sends the notifications to the users
+The *Reactionner* daemon runs the event handlers and sends the notifications to the users.
 
-It is connected to the other daemons:
+There can have many reactionners for load-balancing.
 
-    * Arbiter
-    * Scheduler
-    * Broker
-
-There can have many reactionners for load-balancing or standby spares.

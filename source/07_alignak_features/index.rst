@@ -15,15 +15,18 @@ Alignak features
 Alignak has some rich features:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   monitoring_log
-   cached_checks
-   realms
-   dmz_monitoring
-   business_rules
-   notifications_escalations
-   modulations
-   web_service_api
+   01_monitoring_log
+   02_web_service_api
+   03_statistics
+   04_realms
+   05_dmz_monitoring
+   06_business_rules
+   07_notifications_escalations
+   08_modulations
+   09_problems-and-impacts
+   10_cached_checks
+   11_integrated_protocols
 
 The next chapters explain those specific features.

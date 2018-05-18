@@ -12,7 +12,9 @@ How to contribute
     \newpage
 
 .. toctree::
+   :maxdepth: 2
 
-    links-to-know
-    how-to-contribute
-    modules-and-checks-packages
+   01_links-to-know
+   02_how-to-contribute
+   03_step-by-step-contribution
+   04_modules-and-checks-packages

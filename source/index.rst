@@ -19,7 +19,6 @@ Contents:
    05_extending_alignak/index
    06_monitoring_features/index
    07_alignak_features/index
-   10_alignak_statistics/index
    14_contributing/index
    20_annexes/index
 

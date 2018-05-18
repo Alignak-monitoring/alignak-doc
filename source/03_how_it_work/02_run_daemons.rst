@@ -4,19 +4,105 @@
 Running Alignak
 ===============
 
-If you installed Alignak with a distro packaging (DEB, RPM...), see the package documentation for the best solution to
-configure the daemons and to start/stop Alignak.
-
-*Note*: Almost surely, the distro packaging will propose to set Alignak daemons as system services... anyway the information in the next section are still of interest for the reader even if Alignak is not installed from the source code ;)
+.. note:: this documentation is assuming that the Alignak configuration used for running is the default shipped configuration. Thus all examples are using */usr/local/share/alignak" directory... adapt the example scripts to your own configuration.
 
 
-Starting Alignak framework - daemons individual start
-=====================================================
+.. _run_alignak/services:
+.. _run_alignak/services_systemd:
 
-Starting each daemon individually is the old plain start method inherited from Shinken and from the very first Alignak version. It is still the method that is assumed with the default installed configuration.
+Systemd services
+================
 
-Running all the Alignak daemons requires these commands:
-::
+If your system is a recent Linux distribution (Debian 7, Ubuntu 16) using *systemctl*, and you installed from the distro packaging, you should have installed some system services that allow starting Alignak daemons with the standard `systemctl` command.
+
+All you need to do is to inform Alignak daemons where they should find the main configuration file. Using the ``ALIGNAK_CONFIGURATION_FILE`` environment variable is the simplest solution.
+
+This variable is configured, as default, in the Alignak service units::
+
+   [Service]
+   # Environment variables - may be overriden in the /etc/default/alignak
+   Environment=ALIGNAK_CONFIGURATION_FILE=/usr/local/share/alignak/etc/alignak.ini
+   Environment=ALIGNAK_USER=alignak
+   Environment=ALIGNAK_GROUP=alignak
+   EnvironmentFile=-/etc/default/alignak
+
+To change its value, you can create an environment configuration file in */etc/default/alignak*::
+
+   ALIGNAK_CONFIGURATION_FILE=/usr/local/etc/my-alignak.ini
+   ALIGNAK_USER=my-alignak
+   ALIGNAK_GROUP=my-alignak
+
+.. note:: that the Alignak user/group information are also configurable thanks to this feature. If you did not created the default proposed user account, you must update the default information.
+
+To make Alignak start automatically when the system boots up::
+
+   # Enable Alignak on system start
+   sudo systemctl enable alignak.service
+
+And to manage Alignak services::
+
+   # Start Alignak daemons
+   sudo systemctl start alignak
+
+   # Stop Alignak daemons
+   sudo systemctl stop alignak
+
+The target and templating features of systemctl are used to declare all the daemons that need to be started before starting the Arbiter. See the service units installed files in */lib/systemd/system/* for more information and configuration.
+
+.. note:: the *alignak.service* defines the daemons that will be involved in the monitoring configuration. Especially, this file allows to define several instances of each daemon that use each daemon type service template.
+
+.. _run_alignak/services_freebsd:
+
+FreeBSD services
+================
+
+The alignak repository contains an rc.d script that allows running Alignak daemons as system services. See the *bin/rc.d* directory in the project repository. the *alignak-daemon* file is commented to explain about its installation and usage. This script is able to operate on several alignak daemons instances. Defining which daemons are to be started is made thanks to configuration variables.
+
+All you need to do is to inform Alignak daemons where they should find the main configuration file. Using the ``ALIGNAK_CONFIGURATION_FILE`` environment variable is the simplest solution.
+
+This variable is configured, as default, in the Alignak service units::
+
+      [Service]
+      # Environment variables - may be overriden in the /etc/default/alignak
+      Environment=ALIGNAK_CONFIGURATION_FILE=/usr/local/share/alignak/etc/alignak.ini
+      Environment=ALIGNAK_USER=alignak
+      Environment=ALIGNAK_GROUP=alignak
+      EnvironmentFile=-/etc/default/alignak
+
+To change its value, you can create an environment configuration file in */etc/default/alignak*::
+
+      ALIGNAK_CONFIGURATION_FILE=/usr/local/etc/my-alignak.ini
+      ALIGNAK_USER=my-alignak
+      ALIGNAK_GROUP=my-alignak
+
+.. note:: that the Alignak user/group information are also configurable thanks to this feature. If you did not created the default proposed user account, you must update the default information.
+
+To make Alignak start automatically when the system boots up::
+
+      # Enable Alignak on system start
+      sudo systemctl enable alignak.service
+
+And to manage Alignak services::
+
+      # Start Alignak daemons
+      sudo systemctl start alignak
+
+      # Stop Alignak daemons
+      sudo systemctl stop alignak
+
+The target and templating features of systemctl are used to declare all the daemons that need to be started before starting the Arbiter. See the service units installed files in */lib/systemd/system/* for more information and configuration.
+
+.. note:: the *alignak.service* defines the daemons that will be involved in the monitoring configuration. Especially, this file allows to define several instances of each daemon that use each daemon type service template.
+
+
+.. _run_alignak/shell:
+
+Shell script
+============
+
+Starting each daemon individually is the old plain start method inherited from Shinken and from the very first Alignak version.
+
+Running all the Alignak daemons::
 
     $ alignak-broker -n broker-master -e /usr/local/etc/alignak/alignak.ini
     $ alignak-scheduler -n scheduler-master -e /usr/local/etc/alignak/alignak.ini
@@ -27,26 +113,116 @@ Running all the Alignak daemons requires these commands:
     # And the last, but not the least...
     $ alignak-arbiter -e /usr/local/etc/alignak/alignak.ini
 
-This, because the default shipped configuration file is built in a manner that considers that the daemons are still started when the arbiter starts.
+This, because the default shipped configuration file is built in a manner that it considers all the other the daemons are still started when the arbiter starts.
 
 It is possible to start only the arbiter and make it start all the other daemons by itself. Edit the *alignak.ini*  configuration file and set the `alignak_launched` variable to 1. This can be configured for all the daemons or on a per-daemon basis ... see :ref:`core configuration <configuration/core>` for more information.
 
-When the arbiter is started with the `alignak_launched` variable set, it will start / stop the other configured daemons. While it is running the arbiter daemon will check if all the other daemons processes are still runnig and it will restart them if they exit. As such, running the Alignak framework is only:
-::
+When the arbiter is started with the `alignak_launched` variable set, it will start / stop the other configured daemons. While it is running the arbiter daemon will check if all the other daemons processes are still running and it will restart them if they exit. As such, running the Alignak framework is only::
 
     $ alignak-arbiter -e /usr/local/etc/alignak/alignak.ini
 
+Starting a daemon
+-----------------
+
+As an example, starting a daemon from the shell::
+
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] -----
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Alignak 1.1.0rc5 - scheduler-master daemon
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Copyright (c) 2015-2018: Alignak Team
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] License: AGPL
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] -----
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] My pid: 10948
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Daemon 'scheduler-master' is started with an environment file: /usr/local/share/alignak/etc/alignak.ini
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Daemon 'scheduler-master' pid file: /usr/local/var/run/alignak/scheduler-master.pid
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Using working directory: /usr/local/var/run/alignak
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Daemonizing...
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Do not close fd: 3
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] We are now fully daemonized :) pid=10948
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Setting up HTTP daemon (0.0.0.0:7768), 32 threads
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.http.daemon] Configured HTTP server on http://0.0.0.0:7768, 32 threads
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Starting http_daemon thread
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] HTTP daemon thread started
+   [2018-06-18 14:42:02] INFO: [scheduler-master.alignak.daemon] Waiting for initial configuration
+
+After a first initialization phase, the daemon stops its execution unitl it receives a configuration sent by the arbiter. Once received, the daemon loads the configuration::
+
+   [2018-06-18 14:42:03] INFO: [scheduler-master.alignak.scheduler] Disabling the scheduling loop...
+   [2018-06-18 14:42:03] INFO: [scheduler-master.alignak.http.generic_interface] My Arbiter wants me to wait for a new configuration.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemon] Got initial configuration, waited for: 2.01
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.satellite] Received a new configuration (arbiters / schedulers)
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.satellite] My Alignak instance: My Alignak
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Monitored configuration <Config Config_2 - Alignak global configuration (0) /> received at 1529325724. Un-serialized in 0 secs
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Scheduler received configuration : <Config Config_2 - Alignak global configuration (0) />
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] - received PollerLink_1 - poller: poller-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] I got a new pollers satellite: <PollerLink_1 - poller/poller-master, http//127.0.0.1:7771, rid: 0, spare: False, managing:  () />
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] - received ReactionnerLink_1 - reactionner: reactionner-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] I got a new reactionners satellite: <ReactionnerLink_1 - reactionner/reactionner-master, http//127.0.0.1:7769, rid: 0, spare: False, managing:  () />
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] - received BrokerLink_1 - broker: broker-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] I got a new brokers satellite: <BrokerLink_1 - broker/broker-master, http//127.0.0.1:7772, rid: 0, spare: False, managing:  () />
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Modules configuration: []
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] I do not have modules
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Loading configuration...
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Scheduling loop reset
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] loading my configuration (SchedulerLink_1 / Config_2):
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Set my scheduler instance: SchedulerLink_1 - scheduler-master - None
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Loaded: <Config Config_2 - Alignak global configuration (0) />
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Retention data loaded: 0.00 seconds
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Initializing connection with my satellites:
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] - : broker/broker-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.objects.satellitelink]   get the running identifier for broker broker-master.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.objects.satellitelink]   -> got the running identifier for broker broker-master: 1529325722.54579368.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] - : poller/poller-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.objects.satellitelink]   get the running identifier for poller poller-master.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.objects.satellitelink]   -> got the running identifier for poller poller-master: 1529325722.43028172.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] - : reactionner/reactionner-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.objects.satellitelink]   get the running identifier for reactionner reactionner-master.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.objects.satellitelink]   -> got the running identifier for reactionner reactionner-master: 1529325722.78737948.
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] Loaded: <Config Config_2 - Alignak global configuration (0) />
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Enabling the scheduling loop...
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemon] pause duration: 0.50
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemon] maximum expected loop duration: 1.00
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Disabling the scheduling loop...
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemon] starting main loop: 1529325724.44
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] First scheduling launched
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemons.schedulerdaemon] First scheduling done
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Enabling the scheduling loop...
+
+Then, the daemon start its background loop::
+
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.daemon] Daemon scheduler-master is living: loop #1 ;)
+
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.http.scheduler_interface] A new broker just connected : broker-master
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Filling initial broks for: broker-master (7478fa0a-4549-4bfe-9522-7683fe1e36e5)
+   [2018-06-18 14:42:04] INFO: [scheduler-master.alignak.scheduler] Created 7 initial broks for broker-master
+
+On stop request, the daemon runs its ending phase::
+
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] received a signal: SIGINT
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] request to stop the daemon
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] Someone asked us to stop now
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.scheduler] Retention data saved: 0.00 seconds
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] Stopping scheduler-master...
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] Shutting down synchronization manager...
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] received a signal: SIGINT
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] request to stop the daemon
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] Shutting down modules manager...
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.modulesmanager] Shutting down modules...
+   [2018-06-18 14:44:35] INFO: [scheduler-master.alignak.daemon] Shutting down HTTP daemon...
+   [2018-06-18 14:44:40] INFO: [scheduler-master.alignak.daemon] Checking HTTP thread...
+   [2018-06-18 14:44:40] INFO: [scheduler-master.alignak.daemon] Stopped scheduler-master.
+
+
 
 Daemons command line parameters
-===============================
+-------------------------------
 All the Alignak daemons have a startup script that can be launched with command line parameters. These scripts have been installed by the Python installation process (or the distro packaging).
 
 All the Alignak daemons need to be started with high privileges (root or sudo) that they will downgrade to a configured user/group account. The user they will use will need to have some permissions on the daemon working directory. See :ref:`core configuration <configuration/core>` for more information.
 
 The only necessary configuration to provide to the daemons when they get started is:
 
-    - the daemon name for the daemon to be able to find out its configuration
-    - the *alignak.ini* file installed by the setup process.
+    - the daemon name for the daemon to be able to find out its configuration (`-n`)
+    - the *alignak.ini* file installed by the setup process (`-e`).
 
 Where to find the *alignak.ini* file:
 
@@ -54,135 +230,159 @@ Where to find the *alignak.ini* file:
 
 Except for the environment file and the daemon name, all other command line parameters are optional because default values are used by the daemon when it starts.
 
-The daemon will get its configuration parameters from the *alignak.ini* environment file in the section named as *[daemon.daemon-name]*.
-The daemon will also use some default values if they are not defined:
+The daemon will get its configuration parameters from the *alignak.ini* environment file in the section named as *[daemon.daemon-name]*. The daemon will also use some default values if they are not defined:
 
     - it will create its pid (*daemon-name.pid*) and log (*daemon-name.log*) file in the current working directory.
-    - It will also use a default port to listen to the other daemons (arbiter: 7770, scheduler: 7768, broker: 7772, poller: 7771, reactionner: 7769, receiver: 7773).
+    - it will also use a default port to listen to the other daemons (arbiter: 7770, scheduler: 7768, broker: 7772, poller: 7771, reactionner: 7769, receiver: 7773).
 
 For all the daemons (broker, poller, receiver, reactionner, scheduler)::
 
-    $ alignak-broker -h
-    usage: alignak-broker [-h] [-v] -n DAEMON_NAME [-c CONFIG_FILE] [-d] [-r]
-                          [-f DEBUG_FILE] [-o HOST] [-p PORT] [-l LOG_FILENAME]
-                          [-i PID_FILENAME] -e ENV_FILE
+   $ alignak-broker -h
+      usage: alignak-broker [-h] -n DAEMON_NAME [-c CONFIG_FILE] [-d] [-r] [-vv]
+                            [-v] [-o HOST] [-p PORT] [-l LOG_FILENAME]
+                            [-i PID_FILENAME] -e ENV_FILE
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      -v, --version         show program's version number and exit
-      -n DAEMON_NAME, --name DAEMON_NAME
-                            Daemon unique name. Must be unique for the same daemon
-                            type.
-      -c CONFIG_FILE, --config CONFIG_FILE
-                            Daemon configuration file. Deprecated parameter, do
-                            not use it anymore!
-      -d, --daemon          Run as a daemon. Fork the launched process and
-                            daemonize.
-      -r, --replace         Replace previous running daemon if any pid file is
-                            found.
-      -f DEBUG_FILE, --debugfile DEBUG_FILE
-                            File to dump debug logs. Not of any interest, will be
-                            deprecated!
-      -o HOST, --host HOST  Host interface used by the daemon. Default is 0.0.0.0
-                            (all interfaces).
-      -p PORT, --port PORT  Port used by the daemon. Default is set according to
-                            the daemon type.
-      -l LOG_FILENAME, --log_file LOG_FILENAME
-                            File used for the daemon log. Set as empty to disable
-                            log file.
-      -i PID_FILENAME, --pid_file PID_FILENAME
-                            File used to store the daemon pid
-      -e ENV_FILE, --environment ENV_FILE
-                            Alignak global environment file. This file defines all
-                            the daemons of this Alignak instance and their
-                            configuration. Each daemon configuration is defined in
-                            a specifc section of this file.
+      Alignak daemon launching
+
+      optional arguments:
+        -h, --help            show this help message and exit
+        -n DAEMON_NAME, --name DAEMON_NAME
+                              Daemon unique name. Must be unique for the same daemon
+                              type.
+        -c CONFIG_FILE, --config CONFIG_FILE
+                              Daemon configuration file. Deprecated parameter, do
+                              not use it anymore!
+        -d, --daemon          Run as a daemon. Fork the launched process and
+                              daemonize.
+        -r, --replace         Replace previous running daemon if any pid file is
+                              found.
+        -vv, --debug          Set log level to debug mode (DEBUG)
+        -v, --verbose         Set log level to verbose mode (INFO)
+        -o HOST, --host HOST  Host interface used by the daemon. Default is 0.0.0.0
+                              (all interfaces).
+        -p PORT, --port PORT  Port used by the daemon. Default is set according to
+                              the daemon type.
+        -l LOG_FILENAME, --log_file LOG_FILENAME
+                              File used for the daemon log. Set as empty to disable
+                              log file.
+        -i PID_FILENAME, --pid_file PID_FILENAME
+                              File used to store the daemon pid
+        -e ENV_FILE, --environment ENV_FILE
+                              Alignak global environment file. This file defines all
+                              the daemons of this Alignak instance and their
+                              configuration. Each daemon configuration is defined in
+                              a specifc section of this file.
+
+      And that's it!
+
 
 
 The arbiter is slightly different because it manages some extra parameters::
 
-    $ alignak-arbiter -h
-    usage: alignak-arbiter [-h] [-v] [-a MONITORING_FILES] [-V] [-k ALIGNAK_NAME]
-                           [-n DAEMON_NAME] [-c CONFIG_FILE] [-d] [-r]
-                           [-f DEBUG_FILE] [-o HOST] [-p PORT] [-l LOG_FILENAME]
-                           [-i PID_FILENAME] -e ENV_FILE
+   $ alignak-arbiter -h
+      usage: alignak-arbiter [-h] [-a LEGACY_CFG_FILES] [-V] [-k ALIGNAK_NAME]
+                             [-n DAEMON_NAME] [-c CONFIG_FILE] [-d] [-r] [-vv] [-v]
+                             [-o HOST] [-p PORT] [-l LOG_FILENAME] [-i PID_FILENAME]
+                             -e ENV_FILE
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      -v, --version         show program's version number and exit
-      -a MONITORING_FILES, --arbiter MONITORING_FILES
-                            Monitored configuration file(s). This option is still
-                            available but is is preferable to declare the
-                            monitored objects files in the alignak-configuration
-                            section of the environment file specified with the -e
-                            option.Multiple -a can be used, and they will be
-                            concatenated to make a global configuration file.
-      -V, --verify-config   Verify the configuration file(s) and exit
-      -k ALIGNAK_NAME, --alignak-name ALIGNAK_NAME
-                            Set the name of the Alignak instance. If not set, the
-                            arbiter name will be used in place. Note that if an
-                            alignak_name variable is defined in the configuration,
-                            it will overwrite this parameter.For a spare arbiter,
-                            this parameter must contain its name!
-      -n DAEMON_NAME, --name DAEMON_NAME
-                            Daemon unique name. Must be unique for the same daemon
-                            type.
-      -c CONFIG_FILE, --config CONFIG_FILE
-                            Daemon configuration file. Deprecated parameter, do
-                            not use it anymore!
-      -d, --daemon          Run as a daemon. Fork the launched process and
-                            daemonize.
-      -r, --replace         Replace previous running daemon if any pid file is
-                            found.
-      -f DEBUG_FILE, --debugfile DEBUG_FILE
-                            File to dump debug logs. Not of any interest, will be
-                            deprecated!
-      -o HOST, --host HOST  Host interface used by the daemon. Default is 0.0.0.0
-                            (all interfaces).
-      -p PORT, --port PORT  Port used by the daemon. Default is set according to
-                            the daemon type.
-      -l LOG_FILENAME, --log_file LOG_FILENAME
-                            File used for the daemon log. Set as empty to disable
-                            log file.
-      -i PID_FILENAME, --pid_file PID_FILENAME
-                            File used to store the daemon pid
-      -e ENV_FILE, --environment ENV_FILE
-                            Alignak global environment file. This file defines all
-                            the daemons of this Alignak instance and their
-                            configuration. Each daemon configuration is defined in
-                            a specifc section of this file.
+      Alignak daemon launching
 
+      optional arguments:
+        -h, --help            show this help message and exit
+        -a LEGACY_CFG_FILES, --arbiter LEGACY_CFG_FILES
+                              Legacy configuration file(s). This option is still
+                              available but is is preferable to declare the Nagios-
+                              like objects files in the alignak-configuration
+                              section of the environment file specified with the -e
+                              option.Multiple -a can be used to include several
+                              configuration files.
+        -V, --verify-config   Verify the configuration file(s) and exit
+        -k ALIGNAK_NAME, --alignak-name ALIGNAK_NAME
+                              Set the name of the Alignak instance. If not set, the
+                              arbiter name will be used in place. Note that if an
+                              alignak_name variable is defined in the configuration,
+                              it will overwrite this parameter.For a spare arbiter,
+                              this parameter must contain its name!
+        -n DAEMON_NAME, --name DAEMON_NAME
+                              Daemon unique name. Must be unique for the same daemon
+                              type.
+        -c CONFIG_FILE, --config CONFIG_FILE
+                              Daemon configuration file. Deprecated parameter, do
+                              not use it anymore!
+        -d, --daemon          Run as a daemon. Fork the launched process and
+                              daemonize.
+        -r, --replace         Replace previous running daemon if any pid file is
+                              found.
+        -vv, --debug          Set log level to debug mode (DEBUG)
+        -v, --verbose         Set log level to verbose mode (INFO)
+        -o HOST, --host HOST  Host interface used by the daemon. Default is 0.0.0.0
+                              (all interfaces).
+        -p PORT, --port PORT  Port used by the daemon. Default is set according to
+                              the daemon type.
+        -l LOG_FILENAME, --log_file LOG_FILENAME
+                              File used for the daemon log. Set as empty to disable
+                              log file.
+        -i PID_FILENAME, --pid_file PID_FILENAME
+                              File used to store the daemon pid
+        -e ENV_FILE, --environment ENV_FILE
+                              Alignak global environment file. This file defines all
+                              the daemons of this Alignak instance and their
+                              configuration. Each daemon configuration is defined in
+                              a specifc section of this file.
+
+      And that's it!
 
 As a sump up:
 
-    All daemons:
-        '-n', "--name": Set the name of the daemon to pick in the configuration files.
-        This allows an arbiter to find its own configuration in the whole Alignak configuration
-        Using this parameter is mandatory for all the daemons except for the arbiter
-        (defaults to arbiter-master). If several arbiters are existing in the
-        configuration this will allow to determine which one is the master/spare.
-        The spare arbiter must be launched with this parameter!
+   All daemons:
+      **'-n', "--name":**
 
-        '-e', '--environment': Alignak environment file - the most important and mandatory
-        parameter to define the name of the alignak.ini configuration file
+      Set the name of the daemon to pick in the configuration files.
 
-        '-c', '--config': Daemon configuration file (ini file) - deprecated! This parameter is still managed to alert about its deprecation and to maintain compatibility with former daemon startup scripts.
-        '-d', '--daemon': Run as a daemon
-        '-r', '--replace': Replace previous running daemon
-        '-f', '--debugfile': File to dump debug logs.
+      This allows the daemon to find its own configuration in the whole Alignak configuration
+      Using this parameter is mandatory for all the daemons except for the arbiter (defaults to arbiter-master). If several arbiters are existing in the configuration this will allow to determine which one is the master/spare. The spare arbiter must be launched with this parameter!
 
-        These parameters allow to override the one defined in the Alignak configuration file:
-            '-o', '--host': interface the daemon will listen to
-            '-p', '--port': port the daemon will listen to
+      **'-e', '--environment':**
 
-            '-l', '--log_file': set the daemon log file name
-            '-i', '--pid_file': set the daemon pid file name
+      Alignak environment file - the most important and mandatory parameter to define the name of the alignak.ini configuration file
 
-    Arbiter only:
-            "-a", "--arbiter": Monitored configuration file(s),
-            (multiple -a can be used, and they will be concatenated to make a global configuration
-            file) - Note that this parameter is not necessary anymore
-            "-V", "--verify-config": Verify configuration file(s) and exit
+      **'-c', '--config':**
+
+      Old daemon configuration file (ini file) - deprecated! This parameter is still managed to alert about its deprecation and to maintain compatibility with former daemon startup scripts.
+
+      **'-v', '--verbose':**
+
+      Set the daemon log to level INFO
+
+      **'-vv', '--debug':**
+
+      Set the daemon log to level DEBUG
+
+      **'-d', '--daemon':**
+
+      Run as a daemon. The launched process will fork itself to run as a system daemon
+
+      **'-r', '--replace':**
+
+      Replace previous running daemon if it exists. Read the PID file end kills the corresponding process
+
+      **'-o', '--host':** interface the daemon will listen to
+      **'-p', '--port':** port the daemon will listen to
+      **'-l', '--log_file':** set the daemon log file name
+      **'-i', '--pid_file':** set the daemon pid file name
+
+      These parameters allow to override the one defined in the Alignak configuration file
+
+   Arbiter only:
+      **"-a", "--arbiter":** Legacy configuration file(s),
+
+      (multiple -a can be used, and they will be concatenated to make a global configuration file)
+
+      Note that this parameter is not necessary anymore because the Nagios legacy configuration files may be defined in the alignak.ini configuration file
+
+      **"-V", "--verify-config":** Verify configuration file(s) and exit
+
+      This is very useful to check the configuration file after some modificationsand before starting Alignak.
 
 
 Arbiter daemon exit codes
@@ -190,18 +390,20 @@ Arbiter daemon exit codes
 
 The arbiter dameon has some process exit code. Their meaning is:
 
-    - 0: everything ok. Arbiter requested to stop and stopped as expected
-    - 1: provided configuration parsing error detected and the arbiter stopped
-    - 2: some necessary files declared in the configuration are missing
-    - 3: an error was raised during the daemon initialization/fork
-    - 4: running daemons connection problems when checking daemon communication or dispatching the configuration
+   - 0: everything ok. Arbiter requested to stop and stopped as expected
+   - 1: provided configuration parsing error detected and the arbiter stopped
+   - 2: some necessary files declared in the configuration are missing
+   - 3: an error was raised during the daemon initialization/fork
+   - 4: running daemons connection problems when checking daemon communication or dispatching the configuration
+   - 99: the provided environment configuration file is not available
 
 
+.. _run_alignak/ps:
 
 Alignak processes list
 ======================
 
-The daemons involved in Alignak are starting several processes in the system. All the processes started have a process title set by Alignak to help the user knowing which is which. Several processes types are present in the system processes list:
+The daemons involved in Alignak are starting several processes in the system. All the processes started have a process title set by Alignak to help the user know which is which. Several processes types are present in the system processes list:
 
     * the main daemon process
         There will always be one process for each Alignak daemon type. The process title is built with the daemon type and the daemon name (eg. *alignak-arbiter arbiter-master*, *alignak-scheduler scheduler-other*,...)
@@ -216,7 +418,28 @@ The daemons involved in Alignak are starting several processes in the system. Al
         The satellites daemons that need some worker processes (pollers and reactionners) launch several worker processes to execute their actions (checks or notifications). Those worker processes have a title made of the daemon instance name and the worker label (eg. *alignak-poller-master worker*)
 
 
- As an example, here is the processes list of an Alignak configuration with several daemons of each type and some modules attached to some of the deamons::
+Each daemon is also starting some threads for its HTTP interface.
+
+As an example, the processes list of an Alignak configuration with one instance of each daemon started in daemonized mode::
+
+   11921 alignak   20   0  983360  46752   5004 S  0,4  2,3   0:01.96  `- alignak-receiver receiver-master                                                     1
+   11923 alignak   20   0  171564  39836   3588 S  0,0  1,9   0:00.00      `- alignak-receiver receiver-master                                             11921
+   11924 alignak   20   0  984632  52236   5460 S  0,7  2,5   0:03.90  `- alignak-arbiter arbiter-master                                                       1
+   11927 alignak   20   0  171636  39156   2860 S  0,0  1,9   0:00.00      `- alignak-arbiter arbiter-master                                               11924
+   11925 alignak   20   0  984212  49528   5040 S  1,2  2,4   0:04.95  `- alignak-scheduler scheduler-master                                                   1
+   11931 alignak   20   0  171588  39368   2956 S  0,0  1,9   0:00.00      `- alignak-scheduler scheduler-master                                           11925
+   11932 alignak   20   0  983768  49152   5196 S  1,7  2,4   0:07.44  `- alignak-broker broker-master                                                         1
+   11933 alignak   20   0  171576  39296   3016 S  0,0  1,9   0:00.00      `- alignak-broker broker-master                                                 11932
+   11935 alignak   20   0  983640  49160   5076 S  0,9  2,4   0:03.67  `- alignak-poller poller-master                                                         1
+   11938 alignak   20   0  171568  39748   3504 S  0,0  1,9   0:00.00      `- alignak-poller poller-master                                                 11935
+   12152 alignak   20   0  983384  47100   3128 S  0,0  2,3   0:00.06      `- alignak-poller-master worker fork_1                                          11935
+   11939 alignak   20   0  983636  49248   4996 S  0,9  2,4   0:03.78  `- alignak-reactionner reactionner-master                                               1
+   11975 alignak   20   0  171564  39748   3512 S  0,0  1,9   0:00.00      `- alignak-reactionner reactionner-master                                       11939
+   12153 alignak   20   0  983380  47572   3444 S  0,0  2,3   0:00.06      `- alignak-reactionner-master worker fork_1                                     11939
+
+.. note:: the parent PI (PPID) of the main process of each daemon is 1!
+
+As an example, here is the processes list of an Alignak configuration with several daemons of each type and some modules attached to some of the deamons::
 
     $ ps -aux | grep alignak-
     alignak   3432 10.2  0.5 1063940 64728 pts/2   Sl+  13:57   0:02 alignak-arbiter arbiter-master
@@ -260,3 +483,30 @@ The daemons involved in Alignak are starting several processes in the system. Al
     alignak   3530  6.5  0.4 1061668 59836 pts/2   Sl+  13:57   0:01 alignak-broker broker-other
     alignak   3632  0.2  0.3 617960 44540 pts/2    Sl+  13:57   0:00 alignak-broker broker-other
     alignak   3729  0.4  0.4 1061808 49176 pts/2   S+   13:57   0:00 alignak-broker-other module: backend_broker
+
+
+.. _run_alignak/signals:
+
+Alignak system signals
+======================
+
+The Alignak daemons listen some system signals:
+
+    * SIGHUP
+        configuration reload
+
+    * SIGKILL
+        daemon forced stop
+
+    * SIGTERM
+        daemon stop
+
+    * SIGUSR1
+         Alignak environment dump. The daemon receiving the SIGUSR1 signal will dump its loaded environment to a file in the system temporary files directory. the file name is formated as ``dump-env-%s-%s-%d.ini`` with the daemon type, daemon name and a timestamp.
+      .. note:: that all the daemons should write a file with the same content;)
+
+    * SIGUSR2
+         The scheduler daemon receiving the SIGUSR2 signal will dump its monitored objects to a file in the system temporary files directory. The file name is formated as ``dump-cfg-scheduler-%s-%d.ini`` with the daemon name and a timestamp.
+
+         The scheduler daemon will dump its inner objects (checks, actions) to a file in the system temporary files directory. The file name is formated as ``dump-obj-scheduler-%s-%d.json`` file with the daemon name and a timestamp.
+      .. note:: that the scheduler daemons are the only concerned daemons

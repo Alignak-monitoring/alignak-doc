@@ -4,15 +4,18 @@
 Log files
 =========
 
-When running, the Alignak daemons are logging their activity in log files that can be found (per default) in the
-*/usr/local/var/log/* (or */var/log*) directory. Each daemon has its own log file. Log files are kept on the system
-for a default period of 7 rotating days.
+Daemons log
+-----------
+When running, the Alignak daemons are logging their activity in log files that can be found (per default) in the */usr/local/var/log/* (or */var/log*) directory. Each daemon has its own log file. Log files are kept on the system for a default period of 7 rotating days.
 
-Each daemon log file configuration is found in the daemon configuration file (/usr/local/etc/alignak/daemons/*.ini*).
+Thanks to the Alignak logger configuration (see the :ref:`logger configuration <configuration/logger>`), the daemons log may be configured differently.
 
-In case of problem, make sure that there is no ERROR and/or WARNING logs in the log files.
+In case of any problem with Alignak, first make sure that there is no ERROR and/or WARNING logs in the log files.
 
-The log files are the very first information source about Alignak activity. You will find:
+Monitoring log
+--------------
+
+The monitorig log is the very first information source about Alignak activity. You will find:
 
     * HOST ALERT information
     * SERVICE ALERT information
@@ -20,7 +23,9 @@ The log files are the very first information source about Alignak activity. You 
 
 to keep you informed about your system state.
 
-As an example, the *schedulerd.log* file some few minutes after start::
+The events that are logged in this file can be defined in the :ref:`main configuration file <configuration/core#monitoring_log>`.
+
+As an example, the *scheduler-master.log* file some few minutes after start::
 
     [1474548490] INFO: [Alignak] Loading configuration.
     [1474548490] INFO: [Alignak] New configuration loaded

@@ -73,12 +73,12 @@ Format::
    ; Default is to get this file in the same directory as the alignak.ini
    logger_configuration=./alignak-logger.json
 
-This variable defines the configuration of the damon Python logger.
+This variable defines the configuration of the daemon Python logger.
 
 
 .. _configuration/core#alignak_monitoring:
 
-Algnak monitoring
+Alignak monitoring
 -----------------
 
 **Alignak new!**

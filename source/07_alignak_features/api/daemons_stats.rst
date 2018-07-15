@@ -5,10 +5,10 @@
 Alignak daemons statistics
 ==========================
 
-Daemon type: poller
--------------------
+Daemon type: receiver
+---------------------
 
-A poller daemon statistics example:
+A receiver daemon statistics example:
  ::
 
     {
@@ -17,23 +17,25 @@ A poller daemon statistics example:
         "broks": 0,
         "events": 0,
         "external-commands": 0,
+        "external-commands-unprocessed": 0,
         "modules": 0,
-        "satellites.arbiters": 0,
+        "satellites.arbiters": 1,
         "satellites.schedulers": 1,
-        "satellites.workers": 2
+        "satellites.workers": 0
     },
-    "load": 0.8932060826392618,
+    "load": 0.8907917912480041,
     "metrics": [],
     "modules": {
         "external": {},
         "internal": {}
     },
-    "name": "poller-master",
-    "program_start": 1529900993.322783,
+    "name": "receiver-master",
+    "program_start": 1534237165.25945,
+    "running_id": "1534237165.49084404",
     "spare": false,
-    "start_time": 1529900993,
-    "type": "poller",
-    "version": "1.1.0rc7"
+    "start_time": 1534237165,
+    "type": "receiver",
+    "version": "2.0.0rc2"
 }
 
 
@@ -63,7 +65,7 @@ A arbiter daemon statistics example:
         "escalations": 0,
         "external-commands": 0,
         "hostdependencies": 0,
-        "hostgroups": 3,
+        "hostgroups": 5,
         "hosts": 13,
         "hostsextinfo": 0,
         "macromodulations": 0,
@@ -86,7 +88,7 @@ A arbiter daemon statistics example:
             "active": true,
             "alive": true,
             "configuration_sent": true,
-            "last_check": 1529900998.7657082,
+            "last_check": 1534237171.968572,
             "livestate": 0,
             "livestate_output": "broker/broker-master is up and running.",
             "manage_sub_realms": true,
@@ -104,7 +106,7 @@ A arbiter daemon statistics example:
             "active": true,
             "alive": true,
             "configuration_sent": true,
-            "last_check": 1529900998.7582424,
+            "last_check": 1534237171.9596844,
             "livestate": 0,
             "livestate_output": "poller/poller-master is up and running.",
             "manage_sub_realms": true,
@@ -122,7 +124,7 @@ A arbiter daemon statistics example:
             "active": true,
             "alive": true,
             "configuration_sent": true,
-            "last_check": 1529900998.74952,
+            "last_check": 1534237171.9512877,
             "livestate": 0,
             "livestate_output": "reactionner/reactionner-master is up and running.",
             "manage_sub_realms": true,
@@ -140,7 +142,7 @@ A arbiter daemon statistics example:
             "active": true,
             "alive": true,
             "configuration_sent": true,
-            "last_check": 1529900998.786808,
+            "last_check": 1534237171.9824684,
             "livestate": 0,
             "livestate_output": "receiver/receiver-master is up and running.",
             "manage_sub_realms": true,
@@ -158,7 +160,7 @@ A arbiter daemon statistics example:
             "active": true,
             "alive": true,
             "configuration_sent": true,
-            "last_check": 1529900998.793909,
+            "last_check": 1534237171.9889188,
             "livestate": 0,
             "livestate_output": "scheduler/scheduler-master is up and running.",
             "manage_sub_realms": true,
@@ -183,20 +185,21 @@ A arbiter daemon statistics example:
         },
         "output": "all daemons are up and running.",
         "state": 0,
-        "timestamp": 1529901001
+        "timestamp": 1534237174
     },
-    "load": 0.7197991030075386,
+    "load": 0.6959144899451211,
     "metrics": [],
     "modules": {
         "external": {},
         "internal": {}
     },
     "name": "arbiter-master",
-    "program_start": 1529900989.9218647,
+    "program_start": 1534237163.3206577,
+    "running_id": "1534237163.58716598",
     "spare": false,
-    "start_time": 1529900989,
+    "start_time": 1534237163,
     "type": "arbiter",
-    "version": "1.1.0rc7"
+    "version": "2.0.0rc2"
 }
 
 
@@ -217,18 +220,19 @@ A reactionner daemon statistics example:
         "satellites.schedulers": 1,
         "satellites.workers": 1
     },
-    "load": 0.8942220659216491,
+    "load": 0.8278832937496876,
     "metrics": [],
     "modules": {
         "external": {},
         "internal": {}
     },
     "name": "reactionner-master",
-    "program_start": 1529900992.9968927,
+    "program_start": 1534237165.3795972,
+    "running_id": "1534237165.85748172",
     "spare": false,
-    "start_time": 1529900992,
+    "start_time": 1534237165,
     "type": "reactionner",
-    "version": "1.1.0rc7"
+    "version": "2.0.0rc2"
 }
 
 
@@ -252,25 +256,26 @@ A broker daemon statistics example:
         "satellites.receivers": 1,
         "satellites.schedulers": 1
     },
-    "load": 0.8902093877229311,
+    "load": 0.8269539405320478,
     "metrics": [],
     "modules": {
         "external": {},
         "internal": {}
     },
     "name": "broker-master",
-    "program_start": 1529900993.3720996,
+    "program_start": 1534237165.6222887,
+    "running_id": "1534237165.31324091",
     "spare": false,
-    "start_time": 1529900993,
+    "start_time": 1534237165,
     "type": "broker",
-    "version": "1.1.0rc7"
+    "version": "2.0.0rc2"
 }
 
 
-Daemon type: receiver
----------------------
+Daemon type: poller
+-------------------
 
-A receiver daemon statistics example:
+A poller daemon statistics example:
  ::
 
     {
@@ -279,24 +284,24 @@ A receiver daemon statistics example:
         "broks": 0,
         "events": 0,
         "external-commands": 0,
-        "external-commands-unprocessed": 0,
         "modules": 0,
         "satellites.arbiters": 0,
         "satellites.schedulers": 1,
-        "satellites.workers": 0
+        "satellites.workers": 2
     },
-    "load": 0.9424491016464911,
+    "load": 0.8269462984091107,
     "metrics": [],
     "modules": {
         "external": {},
         "internal": {}
     },
-    "name": "receiver-master",
-    "program_start": 1529900993.143938,
+    "name": "poller-master",
+    "program_start": 1534237165.425305,
+    "running_id": "1534237165.67645452",
     "spare": false,
-    "start_time": 1529900993,
-    "type": "receiver",
-    "version": "1.1.0rc7"
+    "start_time": 1534237165,
+    "type": "poller",
+    "version": "2.0.0rc2"
 }
 
 
@@ -307,16 +312,17 @@ A scheduler daemon statistics example:
  ::
 
     {
+    "_freshness": 1534237174,
     "alignak": "My Alignak",
     "counters": {
         "actions.count": 0,
-        "actions.in_poller": 1,
-        "actions.scheduled": 110,
+        "actions.in_poller": 5,
+        "actions.scheduled": 107,
         "actions.zombie": 0,
         "brokers": 1,
-        "checks.count": 111,
-        "checks.in_poller": 1,
-        "checks.scheduled": 110,
+        "checks.count": 112,
+        "checks.in_poller": 5,
+        "checks.scheduled": 107,
         "checks.zombie": 0,
         "external-commands": 0,
         "modules": 0,
@@ -359,7 +365,7 @@ A scheduler daemon statistics example:
         "services_warning_hard": 0,
         "services_warning_soft": 0
     },
-    "load": 0.8919040414318031,
+    "load": 0.8928079710206434,
     "metrics": [],
     "modules": {
         "external": {},
@@ -376,7 +382,7 @@ A scheduler daemon statistics example:
         "escalations": 0,
         "hostdependencies": 0,
         "hostescalations": 0,
-        "hostgroups": 3,
+        "hostgroups": 5,
         "hosts": 13,
         "hostsextinfo": 0,
         "macromodulations": 0,
@@ -396,9 +402,10 @@ A scheduler daemon statistics example:
         "timeperiods": 4
     },
     "name": "scheduler-master",
-    "program_start": 1529900993.3263967,
+    "program_start": 1534237165.786159,
+    "running_id": "1534237165.64076814",
     "spare": false,
-    "start_time": 1529900993,
+    "start_time": 1534237165,
     "type": "scheduler",
-    "version": "1.1.0rc7"
+    "version": "2.0.0rc2"
 }

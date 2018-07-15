@@ -28,5 +28,6 @@ Alignak has some rich features:
    09_problems-and-impacts
    10_cached_checks
    11_integrated_protocols
+   12_internal_checks
 
 The next chapters explain those specific features.

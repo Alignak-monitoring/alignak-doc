@@ -56,6 +56,12 @@ Service state determination
 Service checks are performed by plugins which can return a status code of OK, WARNING, UNKNOWN, or CRITICAL. These plugins exit codes directly translate to service states. For example, a plugin which returns a WARNING state will cause a service to have a WARNING state.
 
 
+Internal services check command
+-------------------------------
+
+Alignak allows to define a ``check_command`` that do not require executing a plugin to make the service state change. For more information see the :ref:`internal checks documentation<alignak_features/internal_checks>`.
+
+
 Services state changes
 ----------------------
 

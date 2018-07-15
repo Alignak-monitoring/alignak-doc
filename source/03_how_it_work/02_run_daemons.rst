@@ -56,43 +56,199 @@ The target and templating features of systemctl are used to declare all the daem
 FreeBSD services
 ================
 
-The alignak repository contains an rc.d script that allows running Alignak daemons as system services. See the *bin/rc.d* directory in the project repository. the *alignak-daemon* file is commented to explain about its installation and usage. This script is able to operate on several alignak daemons instances. Defining which daemons are to be started is made thanks to configuration variables.
+The alignak repository contains an rc.d script that allows running Alignak daemons as system services. See the *bin/rc.d* directory in the project repository. the *alignak* file is commented to explain about its installation and usage. This script is able to operate on several alignak daemons instances. Defining which daemon is to be started is made thanks to configuration variables.
 
-All you need to do is to inform Alignak daemons where they should find the main configuration file. Using the ``ALIGNAK_CONFIGURATION_FILE`` environment variable is the simplest solution.
+The *alignak* file is shipped by the installation process in the */usr/local/share/alignak/bin/rc.d* directory.Its header is commented to explain which configuration variables are available and what they are made for::
 
-This variable is configured, as default, in the Alignak service units::
+   #!/bin/sh
 
-      [Service]
-      # Environment variables - may be overriden in the /etc/default/alignak
-      Environment=ALIGNAK_CONFIGURATION_FILE=/usr/local/share/alignak/etc/alignak.ini
-      Environment=ALIGNAK_USER=alignak
-      Environment=ALIGNAK_GROUP=alignak
-      EnvironmentFile=-/etc/default/alignak
+   # Configuration settings for an alignak-daemon instance in /etc/rc.conf:
+   # $FreeBSD$
+   #
+   # PROVIDE: alignak
+   # REQUIRE: LOGIN
+   # KEYWORD: shutdown
+   #
+   # alignak_enable (bool):
+   #   Default value: "NO"
+   #   Flag that determines whether Alignak is enabled.
+   #
+   # alignak_prefix (string):
+   #   Default value: "/usr/local"
+   #   Alignak default installation prefix
+   #
+   # alignak_user (string):
+   #   Default value: "alignak"
+   #   Alignak default user - if set an ALIGNAK_USER environment variable will be defined
+   #   Set a value to override the user configured in the Alignak configuration file
+   #   If you are using the FreeBSD daemon, it will use this value to start the Alignak daemon
+   #
+   # alignak_group (string):
+   #   Default value: "alignak"
+   #   Alignak default user group - same as the user variable
+   #
+   # alignak_configuration (string):
+   #   Default value: "/usr/local/share/alignak/etc/alignak.ini"
+   #   Alignak configuration file name
+   #
+   # alignak_log_file (string):
+   #   Default value: "/tmp/alignak.log"
+   #   Alignak default log file name (used for configuration check reporting)
+   #
+   # alignak_pid_file (string):
+   #   Default value: "/tmp/alignak.pid"
+   #   Alignak default pid file name (used for configuration check reporting)
+   #
+   # alignak_daemonize (bool):
+   #   Default value: "NO"
+   #   Use the daemon FreeBSD utility to start the Alignak daemons
+   #
+   # alignak_daemon (bool):
+   #   Default value: "YES"
+   #   Start in daemon mode - each deamon will fork itself to daemonize
+   #
+   # alignak_replace (bool):
+   #   Default value: "YES"
+   #   Start in replace mode - replaces an existing daemon if a stale pid file exists
+   #
+   # alignak_flags (string):
+   #   Default value: ""
+   #   Extra parameters to be provided to the started script
+   #
+   # alignak_alignak_name (string):
+   #   Default value: ""
+   #   Alignak instance name
+   #   Default is empty to get this parameter in the configuration file
+   #
+   # alignak_host (string):
+   #   Default value: ""
+   #   Interface listened to by the Alignak arbiter.
+   #   Default is empty to get this parameter in the configuration file
+   #
+   # alignak_port (integer):
+   #   Default value:
+   #   Port listened to by the Alignak arbiter.
+   #   Default is empty to get this parameter in the configuration file
+   #
+   # -------------------------------------------------------------------------------------------------
+   # alignak rc.d script is able to operate on several alignak daemons instances
+   # Defining which daemons are to be started is made thanks to these configuration variables:
+   #
+   # alignak_types (string list):
+   #   Defines the daemons types to be started
+   #   Default is all the daemon types: arbiter scheduler poller broker receiver reactionner
+   #
+   # alignak_arbiter_instances (string list):
+   #   Defines the daemon instances to be started
+   #   Default is all only one master instance: arbiter-master
+   #
+   # alignak_scheduler_instances (string list):
+   #   Defines the daemon instances to be started
+   #   Default is all only one master instance: scheduler-master
+   #
+   # alignak_broker_instances (string list):
+   #   Defines the daemon instances to be started
+   #
+   # alignak_poller_instances (string list):
+   #   Defines the daemon instances to be started
+   #   Default is all only one master instance: poller-master
+   #
+   # alignak_reactionner_instances (string list):
+   #   Defines the daemon instances to be started
+   #   Default is all only one master instance: reactionner-master
+   #
+   # alignak_receiver_instances (string list):
+   #   Defines the daemon instances to be started
+   #   Default is all only one master instance: receiver-master
+   #
+   # -------------------------------------------------------------------------------------------------
+   # Defining a specific Alignak daemons configuration is quite easy:
+   # 1- define the daemons instances list
+   # alignak_types="scheduler broker receiver"
+   # 2- define each daemon instance for each daemons type
+   # alignak_scheduler_instances="scheduler-realm-1 scheduler-realm-2"
+   # alignak_broker_instances="broker-realm-1"
+   # alignak_receiver_instances="receiver-realm-1 receiver-realm-2"
+   # 3- define each daemon instance specific parameters
+   # alignak_scheduler_realm_1_flags="-n scheduler-realm-1 -p 10000"
+   # alignak_scheduler_realm_2_flags="-n scheduler-realm-2 -p 10001"
+   # alignak_broker_realm_1_flags="-n broker-realm-1 -p 10002"
+   # alignak_broker_realm_2_flags="-n broker-realm-2 -p 10003"
+   # alignak_receiver_realm_1_flags="-n receiver-realm-1 -p 10004"
+   # alignak_receiver_realm_2_flags="-n receiver-realm-2 -p 10005"
 
-To change its value, you can create an environment configuration file in */etc/default/alignak*::
+   # -------------------------------------------------------------------------------------------------
+   # The default configuration is to have one instance for each daemon type:
+   # alignak_types="broker poller reactionner receiver scheduler arbiter"
+   # alignak_arbiter_instances="arbiter-master"
+   # alignak_scheduler_instances="scheduler-master"
+   # alignak_broker_instances="broker-master"
+   # alignak_poller_instances="poller-master"
+   # alignak_reactionner_instances="reactionner-master"
+   # alignak_receiver_instances="receiver-master"
 
-      ALIGNAK_CONFIGURATION_FILE=/usr/local/etc/my-alignak.ini
-      ALIGNAK_USER=my-alignak
-      ALIGNAK_GROUP=my-alignak
+   # Each daemon instance has its own specific port
+   # alignak_arbiter_arbiter_master_port="7770"
+   # alignak_scheduler_scheduler_master_port="7768"
+   # alignak_broker_broker_master_port="7772"
+   # alignak_poller_poller_master_port="7771"
+   # alignak_reactionner_reactionner_master_port="7769"
+   # alignak_receiver_receiver_master_port="7773"
+   # -------------------------------------------------------------------------------------------------
 
-.. note:: that the Alignak user/group information are also configurable thanks to this feature. If you did not created the default proposed user account, you must update the default information.
+   #
+   # -------------------------------------------------------------------------------------------------
+   # When types and instances are specified, the non-type specific parameters defined
+   # previously (upper) become the default values for the type/instance specific parameters.
+   #
+   # Example:
+   # If no specific "alignak_arbiter_arbiter_master_host" variable is defined then the default
+   # "alignak_host" variable value will be used the the arbiter arbiter-master daemon host
+   # variable.
 
-To make Alignak start automatically when the system boots up::
 
-      # Enable Alignak on system start
-      sudo systemctl enable alignak.service
+Configure the ``alignak`` system service in the */etc/rc.conf* file::
 
-And to manage Alignak services::
+   # Simply use the default parameters
+   echo 'alignak="YES"' >> /etc/rc.conf
+   # And define your own configuration file
+   echo 'alignak_configuration="/usr/local/etc/my_alignak_configuration.ini"' >> /etc/rc.conf
+
+As an example, the content of an */etc/rc.conf.d/alignak*::
+
+   #rc_debug="YES"
+   # Information in the service script
+   rc_info="YES"
+   alignak_enable="YES"
+   # No /usr/local prefix (eg. /var/log/alignak for the log files)
+   alignak_prefix=""
+   alignak_config="/usr/local/share/alignak/etc/alignak.ini"
+   # Declare 3 schedulers
+   alignak_scheduler_instances="scheduler-master scheduler-master-2 scheduler-master-3"
+   alignak_scheduler_scheduler_master_port="7768"
+   alignak_scheduler_scheduler_master_2="17768"
+   alignak_scheduler_scheduler_master_3="27768"
+   # Declare 2 receivers
+   alignak_receiver_instances="receiver-master receiver-nsca"
+   alignak_receiver_receiver_nsca="17773"
+
+
+.. tip:: rather than updatnig the */etc/rc.conf* file, you can create an */etc/rc.conf.d/alignak* file for all the configuration variables!
+
+.. tip:: configure ``rc_info=YES`` in the */etc/rc.conf* file to have some information message on the console and in the system log. You can also configure the ``rc_debug=YES`` to have more detailed information about each alignak daemon configuration!
+
+To manage Alignak services::
 
       # Start Alignak daemons
-      sudo systemctl start alignak
+      sudo service alignak start
 
       # Stop Alignak daemons
-      sudo systemctl stop alignak
+      sudo service alignak stop
 
-The target and templating features of systemctl are used to declare all the daemons that need to be started before starting the Arbiter. See the service units installed files in */lib/systemd/system/* for more information and configuration.
+      # Check Alignak configuration
+      sudo service alignak check
+      # Creates a /tmp/alignak/log file with the configuration parsing result
 
-.. note:: the *alignak.service* defines the daemons that will be involved in the monitoring configuration. Especially, this file allows to define several instances of each daemon that use each daemon type service template.
 
 
 .. _run_alignak/shell:
@@ -412,10 +568,10 @@ The daemons involved in Alignak are starting several processes in the system. Al
         Each Alignak daemon forks a new process instance for each daemon instance existing in the configuration. If you defined several schedulers you will get a process for each scheduler instance. Each daemon instance process has a title built with the instance name (eg. *alignak-scheduler scheduler-master*)
 
     * the external modules processes
-        The daemons that have some external modules attached, like brokers or receivers, launch new processes for their modules. Those processes titles are made of the daemon instance name and the module alias (eg. *alignak-receiver-master module: nsca*)
+        The daemons that have some external modules attached, like brokers or receivers, launch new processes for their modules. These processes titles are made of the daemon instance name and the module alias (eg. *alignak-receiver-master module: nsca*)
 
     * the satellite workers processes
-        The satellites daemons that need some worker processes (pollers and reactionners) launch several worker processes to execute their actions (checks or notifications). Those worker processes have a title made of the daemon instance name and the worker label (eg. *alignak-poller-master worker*)
+        The satellites daemons that need some worker processes (pollers and reactionners) launch several worker processes to execute their actions (checks, event handlers or notifications). These worker processes have a title made of the daemon instance name and the worker label (eg. *alignak-poller-master worker*)
 
 
 Each daemon is also starting some threads for its HTTP interface.

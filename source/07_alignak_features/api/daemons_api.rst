@@ -79,71 +79,179 @@ Python source code documentation
         :return: dict
         
 
-/do_not_run
-~~~~~~~~~~~
+/dump
+~~~~~
 
 Python source code documentation
  ::
 
-    The master arbiter tells to its spare arbiters to not run.
+    Dump an host (all hosts) from the arbiter.
 
-        A master arbiter will ignore this request
+        The arbiter will get the host (all hosts) information from all its schedulers.
 
-        :return: None
-        
+        This gets the main host information from the scheduler. If details is set, then some
+        more information are provided. This will not get all the host known attributes but only
+        a reduced set that will inform about the host and its services status
 
-/get_alignak_status
-~~~~~~~~~~~~~~~~~~~
+        If raw is set the information are provided in two string lists formated as CSV strings.
+        The first list element contains the hosts information and the second one contains the
+        services information.
 
-Python source code documentation
- ::
+        If an host name is provided, this function will get only this host information, else
+        all the scheduler hosts are returned.
 
-    Get the overall alignak status
-
-        Returns a list of the satellites as in:
+        As an example (in raw format):
         {
-            'scheduler': ['Scheduler1']
-            'poller': ['Poller1', 'Poller2']
-            ...
-        }
+            scheduler-master-3: [
+                [
+                    "type;host;name;last_check;state_id;state;state_type;is_problem;
+                    is_impact;output",
+                    "localhost;host;localhost;1532451740;0;UP;HARD;False;False;
+                    Host assumed to be UP",
+                    "host_2;host;host_2;1532451988;1;DOWN;HARD;True;False;I am always Down"
+                ],
+                [
+                    "type;host;name",
+                    "host_2;service;dummy_no_output;1532451981;0;OK;HARD;False;True;
+                    Service internal check result: 0",
+                    "host_2;service;dummy_warning;1532451960;4;UNREACHABLE;HARD;False;True;
+                    host_2-dummy_warning-1",
+                    "host_2;service;dummy_unreachable;1532451987;4;UNREACHABLE;HARD;False;True;
+                    host_2-dummy_unreachable-4",
+                    "host_2;service;dummy_random;1532451949;4;UNREACHABLE;HARD;False;True;
+                    Service internal check result: 2",
+                    "host_2;service;dummy_ok;1532452002;0;OK;HARD;False;True;host_2",
+                    "host_2;service;dummy_critical;1532451953;4;UNREACHABLE;HARD;False;True;
+                    host_2-dummy_critical-2",
+                    "host_2;service;dummy_unknown;1532451945;4;UNREACHABLE;HARD;False;True;
+                    host_2-dummy_unknown-3",
+                    "host_2;service;dummy_echo;1532451973;4;UNREACHABLE;HARD;False;True;"
+                ]
+            ],
+            scheduler-master-2: [
+            [
+                "type;host;name;last_check;state_id;state;state_type;is_problem;is_impact;output",
+                "host_0;host;host_0;1532451993;0;UP;HARD;False;False;I am always Up",
+                "BR_host;host;BR_host;1532451991;0;UP;HARD;False;False;Host assumed to be UP"
+            ],
+            [
+                "type;host;name;last_check;state_id;state;state_type;is_problem;is_impact;output",
+                "host_0;service;dummy_no_output;1532451970;0;OK;HARD;False;False;
+                Service internal check result: 0",
+                "host_0;service;dummy_unknown;1532451964;3;UNKNOWN;HARD;True;False;
+                host_0-dummy_unknown-3",
+                "host_0;service;dummy_random;1532451991;1;WARNING;HARD;True;False;
+                Service internal check result: 1",
+                "host_0;service;dummy_warning;1532451945;1;WARNING;HARD;True;False;
+                host_0-dummy_warning-1",
+                "host_0;service;dummy_unreachable;1532451986;4;UNREACHABLE;HARD;True;False;
+                host_0-dummy_unreachable-4",
+                "host_0;service;dummy_ok;1532452012;0;OK;HARD;False;False;host_0",
+                "host_0;service;dummy_critical;1532451987;2;CRITICAL;HARD;True;False;
+                host_0-dummy_critical-2",
+                "host_0;service;dummy_echo;1532451963;0;OK;HARD;False;False;",
+                "BR_host;service;dummy_critical;1532451970;2;CRITICAL;HARD;True;False;
+                BR_host-dummy_critical-2",
+                "BR_host;service;BR_Simple_And;1532451895;1;WARNING;HARD;True;True;",
+                "BR_host;service;dummy_unreachable;1532451981;4;UNREACHABLE;HARD;True;False;
+                BR_host-dummy_unreachable-4",
+                "BR_host;service;dummy_no_output;1532451975;0;OK;HARD;False;False;
+                Service internal check result: 0",
+                "BR_host;service;dummy_unknown;1532451955;3;UNKNOWN;HARD;True;False;
+                BR_host-dummy_unknown-3",
+                "BR_host;service;dummy_echo;1532451981;0;OK;HARD;False;False;",
+                "BR_host;service;dummy_warning;1532451972;1;WARNING;HARD;True;False;
+                BR_host-dummy_warning-1",
+                "BR_host;service;dummy_random;1532451976;4;UNREACHABLE;HARD;True;False;
+                Service internal check result: 4",
+                "BR_host;service;dummy_ok;1532451972;0;OK;HARD;False;False;BR_host"
+            ]
+        ],
+        ...
 
-        :param details: Details are required (different from 0)
-        :type details str
+        More information are available in the scheduler correponding API endpoint.
 
-        :return: dict with key *daemon_type* and value list of daemon name
-        :rtype: dict
+        :param o_type: searched object type
+        :type o_type: str
+        :param o_name: searched object name (or uuid)
+        :type o_name: str
+        :return: serialized object information
+        :rtype: str
         
 
-/get_broks
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the broks from the daemon
-
-        This is used by the brokers to get the broks list of a daemon
-
-        :return: Brok list serialized
-        :rtype: dict
-        
-
-/get_events
+/events_log
 ~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the monitoring events from the daemon
+    Get the most recent Alignak events
 
-        This is used by the arbiter to get the monitoring events from all its satellites
+        The arbiter maintains a list of the most recent Alignak events. This endpoint
+        provides this list.
 
-        :return: Events list serialized
+        The default format is:
+        [
+            "2018-07-23 15:14:43 - E - SERVICE NOTIFICATION: guest;host_0;dummy_random;CRITICAL;1;
+            notify-service-by-log;Service internal check result: 2",
+            "2018-07-23 15:14:43 - E - SERVICE NOTIFICATION: admin;host_0;dummy_random;CRITICAL;1;
+            notify-service-by-log;Service internal check result: 2",
+            "2018-07-23 15:14:42 - E - SERVICE ALERT: host_0;dummy_critical;CRITICAL;SOFT;1;
+            host_0-dummy_critical-2",
+            "2018-07-23 15:14:42 - E - SERVICE ALERT: host_0;dummy_random;CRITICAL;HARD;2;
+            Service internal check result: 2",
+            "2018-07-23 15:14:42 - I - SERVICE ALERT: host_0;dummy_unknown;UNKNOWN;HARD;2;
+            host_0-dummy_unknown-3"
+        ]
+
+        If you request on this endpoint with the *details* parameter (whatever its value...),
+        you will get a detailed JSON output:
+        [
+            {
+                timestamp: "2018-07-23 15:16:35",
+                message: "SERVICE ALERT: host_11;dummy_echo;UNREACHABLE;HARD;2;",
+                level: "info"
+            },
+            {
+                timestamp: "2018-07-23 15:16:32",
+                message: "SERVICE NOTIFICATION: guest;host_0;dummy_random;OK;0;
+                notify-service-by-log;Service internal check result: 0",
+                level: "info"
+            },
+            {
+                timestamp: "2018-07-23 15:16:32",
+                message: "SERVICE NOTIFICATION: admin;host_0;dummy_random;OK;0;
+                notify-service-by-log;Service internal check result: 0",
+                level: "info"
+            },
+            {
+                timestamp: "2018-07-23 15:16:32",
+                message: "SERVICE ALERT: host_0;dummy_random;OK;HARD;2;
+                Service internal check result: 0",
+                level: "info"
+            },
+            {
+                timestamp: "2018-07-23 15:16:19",
+                message: "SERVICE ALERT: host_11;dummy_random;OK;HARD;2;
+                Service internal check result: 0",
+                level: "info"
+            }
+        ]
+
+        In this example, only the 5 most recent events are provided whereas the default value is
+        to provide the 100 last events. This default counter may be changed thanks to the
+        ``events_log_count`` configuration variable or
+        ``ALIGNAK_EVENTS_LOG_COUNT`` environment variable.
+
+        The date format may also be changed thanks to the ``events_date_format`` configuration
+        variable.
+
+        :return: list of the most recent events
         :rtype: list
         
 
-/get_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
+/external_commands
+~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
@@ -156,8 +264,23 @@ Python source code documentation
         :rtype: str
         
 
-/get_id
-~~~~~~~
+/get_log_level
+~~~~~~~~~~~~~~
+
+Python source code documentation
+ ::
+
+    Get the current daemon log level
+
+        Returns an object with the daemon identity and a `log_level` property.
+
+        running_id
+        :return: current log level
+        :rtype: str
+        
+
+/identity
+~~~~~~~~~
 
 Python source code documentation
  ::
@@ -174,15 +297,29 @@ Python source code documentation
         :rtype: dict
         
 
-/get_livesynthesis
-~~~~~~~~~~~~~~~~~~
+/index
+~~~~~~
+
+Python source code documentation
+ ::
+
+    Wrapper to call api from /
+
+        This will return the daemon identity and main information
+
+        :return: function list
+        
+
+/livesynthesis
+~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
     Get Alignak live synthesis
 
-        This will return an object containing the properties of the `get_id`, plus a `livesynthesis`
+        This will return an object containing the properties of the `identity`, plus a
+        `livesynthesis`
         object which contains 2 properties for each known scheduler:
         - _freshness, which is the timestamp when the provided data were fetched
         - livesynthesis, which is an object with the scheduler live synthesis.
@@ -266,32 +403,17 @@ Python source code documentation
         :rtype: dict
         
 
-/get_log_level
-~~~~~~~~~~~~~~
+/managed_configurations
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the current daemon log level
-
-        Returns an object with the daemon identity and a `log_level` property.
-
-        running_id
-        :return: current log level
-        :rtype: str
-        
-
-/get_managed_configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the scheduler configuration managed by the daemon
+    Get the arbiter configuration managed by the daemon
 
         For an arbiter daemon, it returns an empty object
 
-        For all other daemons it returns a dcitionary formated list of the scheduler
+        For all other daemons it returns a dictionary formated list of the scheduler
         links managed by the daemon:
         {
             'instance_id': {
@@ -301,19 +423,22 @@ Python source code documentation
             }
         }
 
+        If a daemon returns an empty list, it means that it has not yet received its configuration
+        from the arbiter.
+
         :return: managed configuration
         :rtype: list
         
 
-/get_monitoring_problems
-~~~~~~~~~~~~~~~~~~~~~~~~
+/monitoring_problems
+~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
     Get Alignak detailed monitoring status
 
-        This will return an object containing the properties of the `get_id`, plus a `problems`
+        This will return an object containing the properties of the `identity`, plus a `problems`
         object which contains 2 properties for each known scheduler:
         - _freshness, which is the timestamp when the provided data were fetched
         - problems, which is an object with the scheduler known problems:
@@ -361,61 +486,202 @@ Python source code documentation
         :rtype: dict
         
 
-/get_objects_properties
-~~~~~~~~~~~~~~~~~~~~~~~
+/object
+~~~~~~~
 
 Python source code documentation
  ::
 
-    'Dump all objects of the required type existing in the configuration:
-            - hosts, services, contacts,
-            - hostgroups, servicegroups, contactgroups
-            - commands, timeperiods
-            - ...
+    Get a monitored object from the arbiter.
 
-        :param table: table name
-        :type table: str
-        :return: list all properties of all objects
-        :rtype: list
-        
+        Indeed, the arbiter requires the object from its schedulers. It will iterate in
+        its schedulers list until a matching object is found. Else it will return a Json
+        structure containing _status and _message properties.
 
-/get_results
-~~~~~~~~~~~~
+        When found, the result is a serialized object which is a Json structure containing:
+        - content: the serialized object content
+        - __sys_python_module__: the python class of the returned object
 
-Python source code documentation
- ::
+        The Alignak unserialize function of the alignak.misc.serialization package allows
+        to restore the initial object.
 
-    Get the results of the executed actions for the scheduler which instance id is provided
+        .. code-block:: python
 
-        Calling this method for daemons that are not configured as passive do not make sense.
-        Indeed, this service should only be exposed on poller and reactionner daemons.
+            from alignak.misc.serialization import unserialize
+            from alignak.objects.hostgroup import Hostgroup
+            raw_data = req.get("http://127.0.0.1:7768/object/hostgroup/allhosts")
+            print("Got: %s / %s" % (raw_data.status_code, raw_data.content))
+            assert raw_data.status_code == 200
+            object = raw_data.json()
+            group = unserialize(object, True)
+            assert group.__class__ == Hostgroup
+            assert group.get_name() == 'allhosts'
 
-        :param scheduler_instance_id: instance id of the scheduler
-        :type scheduler_instance_id: string
-        :return: serialized list
+        As an example:
+        {
+            "__sys_python_module__": "alignak.objects.hostgroup.Hostgroup",
+            "content": {
+                "uuid": "32248642-97dd-4f39-aaa2-5120112a765d",
+                "name": "",
+                "hostgroup_name": "allhosts",
+                "use": [],
+                "tags": [],
+                "alias": "All Hosts",
+                "notes": "",
+                "definition_order": 100,
+                "register": true,
+                "unknown_members": [],
+                "notes_url": "",
+                "action_url": "",
+
+                "imported_from": "unknown",
+                "conf_is_correct": true,
+                "configuration_errors": [],
+                "configuration_warnings": [],
+                "realm": "",
+                "downtimes": {},
+                "hostgroup_members": [],
+                "members": [
+                    "553d47bc-27aa-426c-a664-49c4c0c4a249",
+                    "f88093ca-e61b-43ff-a41e-613f7ad2cea2",
+                    "df1e2e13-552d-43de-ad2a-fe80ad4ba979",
+                    "d3d667dd-f583-4668-9f44-22ef3dcb53ad"
+                ]
+            }
+        }
+
+        :param o_type: searched object type
+        :type o_type: str
+        :param o_name: searched object name (or uuid)
+        :type o_name: str
+        :return: serialized object information
         :rtype: str
         
 
-/get_running_id
-~~~~~~~~~~~~~~~
+/problems
+~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the current running identifier of the daemon
+    Alias for monitoring_problems
 
-        The running identifier of the daemon is a float number made of its start timestamp
-        (integer part) and a random number (decimal part). This make it unique and allows
-        to get sure that the daemon did not changed since the last communication.
+/realms
+~~~~~~~
 
-        Returns an object with the daemon identity and a `running_id` property.
+Python source code documentation
+ ::
 
-        :return: running identifier
+    Return the realms / satellites configuration
+
+        Returns an object containing the hierarchical realms configuration with the main
+        information about each realm:
+        {
+            All: {
+                satellites: {
+                    pollers: [
+                        "poller-master"
+                    ],
+                    reactionners: [
+                        "reactionner-master"
+                    ],
+                    schedulers: [
+                        "scheduler-master", "scheduler-master-3", "scheduler-master-2"
+                    ],
+                    brokers: [
+                    "broker-master"
+                    ],
+                    receivers: [
+                    "receiver-master", "receiver-nsca"
+                    ]
+                },
+                children: { },
+                name: "All",
+                members: [
+                    "host_1", "host_0", "host_3", "host_2", "host_11", "localhost"
+                ],
+                level: 0
+            },
+            North: {
+                ...
+            }
+        }
+
+        Sub realms defined inside a realm are provided in the `children` property of their
+        parent realm and they contain the same information as their parent..
+        The `members` realm contain the list of the hosts members of the realm.
+
+        If ``details`` is required, each realm will contain more information about each satellite
+        involved in the realm management:
+        {
+            All: {
+                satellites: {
+                    pollers: [
+                        {
+                            passive: false,
+                            name: "poller-master",
+                            livestate_output: "poller/poller-master is up and running.",
+                            reachable: true,
+                            uri: "http://127.0.0.1:7771/",
+                            alive: true,
+                            realm_name: "All",
+                            manage_sub_realms: true,
+                            spare: false,
+                            polling_interval: 5,
+                            configuration_sent: true,
+                            active: true,
+                            livestate: 0,
+                            max_check_attempts: 3,
+                            last_check: 1532242300.593074,
+                            type: "poller"
+                        }
+                    ],
+                    reactionners: [
+                        {
+                            passive: false,
+                            name: "reactionner-master",
+                            livestate_output: "reactionner/reactionner-master is up and running.",
+                            reachable: true,
+                            uri: "http://127.0.0.1:7769/",
+                            alive: true,
+                            realm_name: "All",
+                            manage_sub_realms: true,
+                            spare: false,
+                            polling_interval: 5,
+                            configuration_sent: true,
+                            active: true,
+                            livestate: 0,
+                            max_check_attempts: 3,
+                            last_check: 1532242300.587762,
+                            type: "reactionner"
+                        }
+                    ]
+
+        :return: dict containing realms / satellites
         :rtype: dict
         
 
-/get_satellites_configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/reload_configuration
+~~~~~~~~~~~~~~~~~~~~~
+
+Python source code documentation
+ ::
+
+    Ask to the arbiter to reload the monitored configuration
+
+        **Note** tha the arbiter will not reload its main configuration file (eg. alignak.ini)
+        but it will reload the monitored objects from the Nagios legacy files or from the
+        Alignak backend!
+
+        In case of any error, this function returns an object containing some properties:
+        '_status': 'ERR' because of the error
+        `_message`: some more explanations about the error
+
+        :return: True if configuration reload is accepted
+        
+
+/satellites_configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
@@ -436,8 +702,8 @@ Python source code documentation
         :rtype: dict
         
 
-/get_satellites_list
-~~~~~~~~~~~~~~~~~~~~
+/satellites_list
+~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
@@ -446,164 +712,42 @@ Python source code documentation
 
         Returns a list of the satellites as in:
         {
-            'scheduler': ['Scheduler1']
-            'poller': ['Poller1', 'Poller2']
-            ...
+            reactionner: [
+                "reactionner-master"
+            ],
+            broker: [
+                "broker-master"
+            ],
+            arbiter: [
+                "arbiter-master"
+            ],
+            scheduler: [
+                "scheduler-master-3",
+                "scheduler-master",
+                "scheduler-master-2"
+            ],
+            receiver: [
+                "receiver-nsca",
+                "receiver-master"
+            ],
+            poller: [
+                "poller-master"
+            ]
         }
 
-        If a specific daemon type is requested, the list is reduced to this unique daemon type.
+        If a specific daemon type is requested, the list is reduced to this unique daemon type:
+        {
+            scheduler: [
+                "scheduler-master-3",
+                "scheduler-master",
+                "scheduler-master-2"
+            ]
+        }
 
         :param daemon_type: daemon type to filter
         :type daemon_type: str
         :return: dict with key *daemon_type* and value list of daemon name
         :rtype: dict
-        
-
-/get_start_time
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the start time of the daemon
-
-        The start timestamp of a daemon is the integer timestamp got from the system
-        when the daemon started.
-
-        Returns an object with the daemon identity and a `start_time` property.
-
-        :return: start timestamp
-        :rtype: dict
-        
-
-/get_stats
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get statistics and information from the daemon
-
-        Returns an object with the daemon identity, the daemon start_time
-        and some extra properties depending upon the daemon type.
-
-        All daemons provide these ones:
-        - program_start: the Alignak start timestamp
-        - spare: to indicate if the daemon is a spare one
-        - load: the daemon load
-        - modules: the daemon modules information
-        - counters: the specific daemon counters
-
-        :param details: Details are required (different from 0)
-        :type details str
-
-        :return: daemon stats
-        :rtype: dict
-        
-
-/have_conf
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon current configuration state
-
-        If the daemon has received a configuration from its arbiter, this will
-        return True
-
-        If a `magic_hash` is provided it is compared with the one included in the
-        daemon configuration and this function returns True only if they match!
-
-        :return: boolean indicating if the daemon has a configuration
-        :rtype: bool
-        
-
-/index
-~~~~~~
-
-Python source code documentation
- ::
-
-    Wrapper to call api from /
-
-        :return: function list
-        
-
-/ping
-~~~~~
-
-Python source code documentation
- ::
-
-    Test the connection to the daemon.
-
-        This function always returns the string 'pong'
-
-        :return: string 'pong'
-        :rtype: str
-        
-
-/push_actions
-~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Push actions to the poller/reactionner
-
-        This function is used by the scheduler to send the actions to get executed to
-        the poller/reactionner
-
-        {'actions': actions, 'instance_id': scheduler_instance_id}
-
-        :return:None
-        
-
-/push_configuration
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Send a new configuration to the daemon
-
-        Used by the master arbiter to send its configuration to a spare arbiter
-
-        This function is not intended for external use. It is quite complex to
-        build a configuration for a daemon and it is the arbter dispatcher job ;)
-
-        :param pushed_configuration: new conf to send
-        :return: None
-        
-
-/push_external_command
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Only to maintain ascending compatibility... this function uses the inner
-        *command* endpoint.
-
-        :param command: Alignak external command
-        :type command: string
-        :return: None
-        
-
-/reload_configuration
-~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Ask to the arbiter to reload the monitored configuration
-
-        In case of any error, this function returns an object containing some properties:
-        '_status': 'ERR' because of the error
-        `_message`: some more explanations about the error
-
-        :return: True if configuration reload is accepted
         
 
 /set_log_level
@@ -628,6 +772,108 @@ Python source code documentation
         :rtype: dict
         
 
+/stats
+~~~~~~
+
+Python source code documentation
+ ::
+
+    Get statistics and information from the daemon
+
+        Returns an object with the daemon identity, the daemon start_time
+        and some extra properties depending upon the daemon type.
+
+        All daemons provide these ones:
+        - program_start: the Alignak start timestamp
+        - spare: to indicate if the daemon is a spare one
+        - load: the daemon load
+        - modules: the daemon modules information
+        - counters: the specific daemon counters
+
+        :param details: Details are required (different from 0)
+        :type details str
+
+        :return: daemon stats
+        :rtype: dict
+        
+
+/status
+~~~~~~~
+
+Python source code documentation
+ ::
+
+    Get the overall alignak status
+
+        Returns a list of the satellites as in:
+        {
+            services: [
+                {
+                    livestate: {
+                        perf_data: "",
+                        timestamp: 1532106561,
+                        state: "ok",
+                        long_output: "",
+                        output: "all daemons are up and running."
+                    },
+                    name: "arbiter-master"
+                },
+                {
+                    livestate: {
+                        name: "poller_poller-master",
+                        timestamp: 1532106561,
+                        long_output: "Realm: (True). Listening on: http://127.0.0.1:7771/",
+                        state: "ok",
+                        output: "daemon is alive and reachable.",
+                        perf_data: "last_check=1532106560.17"
+                    },
+                    name: "poller-master"
+                },
+                ...
+                ...
+            ],
+            variables: { },
+            livestate: {
+                timestamp: 1532106561,
+                long_output: "broker-master - daemon is alive and reachable.
+                poller-master - daemon is alive and reachable.
+                reactionner-master - daemon is alive and reachable.
+                receiver-master - daemon is alive and reachable.
+                receiver-nsca - daemon is alive and reachable.
+                scheduler-master - daemon is alive and reachable.
+                scheduler-master-2 - daemon is alive and reachable.
+                scheduler-master-3 - daemon is alive and reachable.",
+                state: "up",
+                output: "All my daemons are up and running.",
+                perf_data: "
+                    'servicesextinfo'=0 'businessimpactmodulations'=0 'hostgroups'=2
+                    'resultmodulations'=0 'escalations'=0 'schedulers'=3 'hostsextinfo'=0
+                    'contacts'=2 'servicedependencies'=0 'servicegroups'=1 'pollers'=1
+                    'arbiters'=1 'receivers'=2 'macromodulations'=0 'reactionners'=1
+                    'contactgroups'=2 'brokers'=1 'realms'=3 'services'=32 'commands'=11
+                    'notificationways'=2 'timeperiods'=4 'modules'=0 'checkmodulations'=0
+                    'hosts'=6 'hostdependencies'=0"
+            },
+            name: "My Alignak",
+            template: {
+                notes: "",
+                alias: "My Alignak",
+                _templates: [
+                    "alignak",
+                    "important"
+                ],
+                active_checks_enabled: false,
+                passive_checks_enabled: true
+            }
+        }
+
+        :param details: Details are required (different from 0)
+        :type details bool
+
+        :return: dict with key *daemon_type* and value list of daemon name
+        :rtype: dict
+        
+
 /stop_request
 ~~~~~~~~~~~~~
 
@@ -645,15 +891,99 @@ Python source code documentation
         :return: None
         
 
-/wait_new_conf
-~~~~~~~~~~~~~~
+/system
+~~~~~~~
 
 Python source code documentation
  ::
 
-    Ask the daemon to drop its configuration and wait for a new one
+    Return the realms / satellites configuration
 
-        :return: None
+        Returns an object containing the hierarchical realms configuration with the main
+        information about each realm:
+        {
+            All: {
+                satellites: {
+                    pollers: [
+                        "poller-master"
+                    ],
+                    reactionners: [
+                        "reactionner-master"
+                    ],
+                    schedulers: [
+                        "scheduler-master", "scheduler-master-3", "scheduler-master-2"
+                    ],
+                    brokers: [
+                    "broker-master"
+                    ],
+                    receivers: [
+                    "receiver-master", "receiver-nsca"
+                    ]
+                },
+                children: { },
+                name: "All",
+                members: [
+                    "host_1", "host_0", "host_3", "host_2", "host_11", "localhost"
+                ],
+                level: 0
+            },
+            North: {
+                ...
+            }
+        }
+
+        Sub realms defined inside a realm are provided in the `children` property of their
+        parent realm and they contain the same information as their parent..
+        The `members` realm contain the list of the hosts members of the realm.
+
+        If ``details`` is required, each realm will contain more information about each satellite
+        involved in the realm management:
+        {
+            All: {
+                satellites: {
+                    pollers: [
+                        {
+                            passive: false,
+                            name: "poller-master",
+                            livestate_output: "poller/poller-master is up and running.",
+                            reachable: true,
+                            uri: "http://127.0.0.1:7771/",
+                            alive: true,
+                            realm_name: "All",
+                            manage_sub_realms: true,
+                            spare: false,
+                            polling_interval: 5,
+                            configuration_sent: true,
+                            active: true,
+                            livestate: 0,
+                            max_check_attempts: 3,
+                            last_check: 1532242300.593074,
+                            type: "poller"
+                        }
+                    ],
+                    reactionners: [
+                        {
+                            passive: false,
+                            name: "reactionner-master",
+                            livestate_output: "reactionner/reactionner-master is up and running.",
+                            reachable: true,
+                            uri: "http://127.0.0.1:7769/",
+                            alive: true,
+                            realm_name: "All",
+                            manage_sub_realms: true,
+                            spare: false,
+                            polling_interval: 5,
+                            configuration_sent: true,
+                            active: true,
+                            livestate: 0,
+                            max_check_attempts: 3,
+                            last_check: 1532242300.587762,
+                            type: "reactionner"
+                        }
+                    ]
+
+        :return: dict containing realms / satellites
+        :rtype: dict
         
 
 Daemon type: broker
@@ -667,66 +997,6 @@ Python source code documentation
     List the methods available on the daemon Web service interface
 
         :return: a list of methods and parameters
-        :rtype: dict
-        
-
-/get_broks
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the broks from the daemon
-
-        This is used by the brokers to get the broks list of a daemon
-
-        :return: Brok list serialized
-        :rtype: dict
-        
-
-/get_events
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the monitoring events from the daemon
-
-        This is used by the arbiter to get the monitoring events from all its satellites
-
-        :return: Events list serialized
-        :rtype: list
-        
-
-/get_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the external commands from the daemon
-
-        Use a lock for this function to protect
-
-        :return: serialized external command list
-        :rtype: str
-        
-
-/get_id
-~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon identity
-
-        This will return an object containing some properties:
-        - alignak: the Alignak instance name
-        - version: the Alignak version
-        - type: the daemon type
-        - name: the daemon name
-
-        :return: daemon identity
         :rtype: dict
         
 
@@ -745,123 +1015,22 @@ Python source code documentation
         :rtype: str
         
 
-/get_managed_configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/identity
+~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the scheduler configuration managed by the daemon
+    Get the daemon identity
 
-        For an arbiter daemon, it returns an empty object
+        This will return an object containing some properties:
+        - alignak: the Alignak instance name
+        - version: the Alignak version
+        - type: the daemon type
+        - name: the daemon name
 
-        For all other daemons it returns a dcitionary formated list of the scheduler
-        links managed by the daemon:
-        {
-            'instance_id': {
-                'hash': ,
-                'push_flavor': ,
-                'managed_conf_id':
-            }
-        }
-
-        :return: managed configuration
-        :rtype: list
-        
-
-/get_results
-~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the results of the executed actions for the scheduler which instance id is provided
-
-        Calling this method for daemons that are not configured as passive do not make sense.
-        Indeed, this service should only be exposed on poller and reactionner daemons.
-
-        :param scheduler_instance_id: instance id of the scheduler
-        :type scheduler_instance_id: string
-        :return: serialized list
-        :rtype: str
-        
-
-/get_running_id
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the current running identifier of the daemon
-
-        The running identifier of the daemon is a float number made of its start timestamp
-        (integer part) and a random number (decimal part). This make it unique and allows
-        to get sure that the daemon did not changed since the last communication.
-
-        Returns an object with the daemon identity and a `running_id` property.
-
-        :return: running identifier
+        :return: daemon identity
         :rtype: dict
-        
-
-/get_start_time
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the start time of the daemon
-
-        The start timestamp of a daemon is the integer timestamp got from the system
-        when the daemon started.
-
-        Returns an object with the daemon identity and a `start_time` property.
-
-        :return: start timestamp
-        :rtype: dict
-        
-
-/get_stats
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get statistics and information from the daemon
-
-        Returns an object with the daemon identity, the daemon start_time
-        and some extra properties depending upon the daemon type.
-
-        All daemons provide these ones:
-        - program_start: the Alignak start timestamp
-        - spare: to indicate if the daemon is a spare one
-        - load: the daemon load
-        - modules: the daemon modules information
-        - counters: the specific daemon counters
-
-        :param details: Details are required (different from 0)
-        :type details str
-
-        :return: daemon stats
-        :rtype: dict
-        
-
-/have_conf
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon current configuration state
-
-        If the daemon has received a configuration from its arbiter, this will
-        return True
-
-        If a `magic_hash` is provided it is compared with the one included in the
-        daemon configuration and this function returns True only if they match!
-
-        :return: boolean indicating if the daemon has a configuration
-        :rtype: bool
         
 
 /index
@@ -872,67 +1041,36 @@ Python source code documentation
 
     Wrapper to call api from /
 
+        This will return the daemon identity and main information
+
         :return: function list
         
 
-/ping
-~~~~~
+/managed_configurations
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Test the connection to the daemon.
+    Get the arbiter configuration managed by the daemon
 
-        This function always returns the string 'pong'
+        For an arbiter daemon, it returns an empty object
 
-        :return: string 'pong'
-        :rtype: str
-        
+        For all other daemons it returns a dictionary formated list of the scheduler
+        links managed by the daemon:
+        {
+            'instance_id': {
+                'hash': ,
+                'push_flavor': ,
+                'managed_conf_id':
+            }
+        }
 
-/push_actions
-~~~~~~~~~~~~~
+        If a daemon returns an empty list, it means that it has not yet received its configuration
+        from the arbiter.
 
-Python source code documentation
- ::
-
-    Push actions to the poller/reactionner
-
-        This function is used by the scheduler to send the actions to get executed to
-        the poller/reactionner
-
-        {'actions': actions, 'instance_id': scheduler_instance_id}
-
-        :return:None
-        
-
-/push_broks
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Push the provided broks objects to the broker daemon
-
-        Only used on a Broker daemon by the Arbiter
-
-        :param: broks
-        :type: list
-        :return: None
-        
-
-/push_configuration
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Send a new configuration to the daemon
-
-        This function is not intended for external use. It is quite complex to
-        build a configuration for a daemon and it is the arbiter dispatcher job ;)
-
-        :param pushed_configuration: new conf to send
-        :return: None
+        :return: managed configuration
+        :rtype: list
         
 
 /set_log_level
@@ -957,6 +1095,31 @@ Python source code documentation
         :rtype: dict
         
 
+/stats
+~~~~~~
+
+Python source code documentation
+ ::
+
+    Get statistics and information from the daemon
+
+        Returns an object with the daemon identity, the daemon start_time
+        and some extra properties depending upon the daemon type.
+
+        All daemons provide these ones:
+        - program_start: the Alignak start timestamp
+        - spare: to indicate if the daemon is a spare one
+        - load: the daemon load
+        - modules: the daemon modules information
+        - counters: the specific daemon counters
+
+        :param details: Details are required (different from 0)
+        :type details str
+
+        :return: daemon stats
+        :rtype: dict
+        
+
 /stop_request
 ~~~~~~~~~~~~~
 
@@ -971,17 +1134,6 @@ Python source code documentation
 
         :param stop_now: stop now or go to stop wait mode
         :type stop_now: bool
-        :return: None
-        
-
-/wait_new_conf
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Ask the daemon to drop its configuration and wait for a new one
-
         :return: None
         
 
@@ -999,50 +1151,23 @@ Python source code documentation
         :rtype: dict
         
 
-/get_broks
-~~~~~~~~~~
+/get_log_level
+~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the broks from the daemon
+    Get the current daemon log level
 
-        This is used by the brokers to get the broks list of a daemon
+        Returns an object with the daemon identity and a `log_level` property.
 
-        :return: Brok list serialized
-        :rtype: dict
-        
-
-/get_events
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the monitoring events from the daemon
-
-        This is used by the arbiter to get the monitoring events from all its satellites
-
-        :return: Events list serialized
-        :rtype: list
-        
-
-/get_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the external commands from the daemon
-
-        Use a lock for this function to protect
-
-        :return: serialized external command list
+        running_id
+        :return: current log level
         :rtype: str
         
 
-/get_id
-~~~~~~~
+/identity
+~~~~~~~~~
 
 Python source code documentation
  ::
@@ -1059,32 +1184,30 @@ Python source code documentation
         :rtype: dict
         
 
-/get_log_level
-~~~~~~~~~~~~~~
+/index
+~~~~~~
 
 Python source code documentation
  ::
 
-    Get the current daemon log level
+    Wrapper to call api from /
 
-        Returns an object with the daemon identity and a `log_level` property.
+        This will return the daemon identity and main information
 
-        running_id
-        :return: current log level
-        :rtype: str
+        :return: function list
         
 
-/get_managed_configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/managed_configurations
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the scheduler configuration managed by the daemon
+    Get the arbiter configuration managed by the daemon
 
         For an arbiter daemon, it returns an empty object
 
-        For all other daemons it returns a dcitionary formated list of the scheduler
+        For all other daemons it returns a dictionary formated list of the scheduler
         links managed by the daemon:
         {
             'instance_id': {
@@ -1094,159 +1217,11 @@ Python source code documentation
             }
         }
 
+        If a daemon returns an empty list, it means that it has not yet received its configuration
+        from the arbiter.
+
         :return: managed configuration
         :rtype: list
-        
-
-/get_results
-~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the results of the executed actions for the scheduler which instance id is provided
-
-        Calling this method for daemons that are not configured as passive do not make sense.
-        Indeed, this service should only be exposed on poller and reactionner daemons.
-
-        :param scheduler_instance_id: instance id of the scheduler
-        :type scheduler_instance_id: string
-        :return: serialized list
-        :rtype: str
-        
-
-/get_running_id
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the current running identifier of the daemon
-
-        The running identifier of the daemon is a float number made of its start timestamp
-        (integer part) and a random number (decimal part). This make it unique and allows
-        to get sure that the daemon did not changed since the last communication.
-
-        Returns an object with the daemon identity and a `running_id` property.
-
-        :return: running identifier
-        :rtype: dict
-        
-
-/get_start_time
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the start time of the daemon
-
-        The start timestamp of a daemon is the integer timestamp got from the system
-        when the daemon started.
-
-        Returns an object with the daemon identity and a `start_time` property.
-
-        :return: start timestamp
-        :rtype: dict
-        
-
-/get_stats
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get statistics and information from the daemon
-
-        Returns an object with the daemon identity, the daemon start_time
-        and some extra properties depending upon the daemon type.
-
-        All daemons provide these ones:
-        - program_start: the Alignak start timestamp
-        - spare: to indicate if the daemon is a spare one
-        - load: the daemon load
-        - modules: the daemon modules information
-        - counters: the specific daemon counters
-
-        :param details: Details are required (different from 0)
-        :type details str
-
-        :return: daemon stats
-        :rtype: dict
-        
-
-/have_conf
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon current configuration state
-
-        If the daemon has received a configuration from its arbiter, this will
-        return True
-
-        If a `magic_hash` is provided it is compared with the one included in the
-        daemon configuration and this function returns True only if they match!
-
-        :return: boolean indicating if the daemon has a configuration
-        :rtype: bool
-        
-
-/index
-~~~~~~
-
-Python source code documentation
- ::
-
-    Wrapper to call api from /
-
-        :return: function list
-        
-
-/ping
-~~~~~
-
-Python source code documentation
- ::
-
-    Test the connection to the daemon.
-
-        This function always returns the string 'pong'
-
-        :return: string 'pong'
-        :rtype: str
-        
-
-/push_actions
-~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Push actions to the poller/reactionner
-
-        This function is used by the scheduler to send the actions to get executed to
-        the poller/reactionner
-
-        {'actions': actions, 'instance_id': scheduler_instance_id}
-
-        :return:None
-        
-
-/push_configuration
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Send a new configuration to the daemon
-
-        This function is not intended for external use. It is quite complex to
-        build a configuration for a daemon and it is the arbiter dispatcher job ;)
-
-        :param pushed_configuration: new conf to send
-        :return: None
         
 
 /set_log_level
@@ -1271,6 +1246,31 @@ Python source code documentation
         :rtype: dict
         
 
+/stats
+~~~~~~
+
+Python source code documentation
+ ::
+
+    Get statistics and information from the daemon
+
+        Returns an object with the daemon identity, the daemon start_time
+        and some extra properties depending upon the daemon type.
+
+        All daemons provide these ones:
+        - program_start: the Alignak start timestamp
+        - spare: to indicate if the daemon is a spare one
+        - load: the daemon load
+        - modules: the daemon modules information
+        - counters: the specific daemon counters
+
+        :param details: Details are required (different from 0)
+        :type details str
+
+        :return: daemon stats
+        :rtype: dict
+        
+
 /stop_request
 ~~~~~~~~~~~~~
 
@@ -1285,17 +1285,6 @@ Python source code documentation
 
         :param stop_now: stop now or go to stop wait mode
         :type stop_now: bool
-        :return: None
-        
-
-/wait_new_conf
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Ask the daemon to drop its configuration and wait for a new one
-
         :return: None
         
 
@@ -1313,50 +1302,23 @@ Python source code documentation
         :rtype: dict
         
 
-/get_broks
-~~~~~~~~~~
+/get_log_level
+~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the broks from the daemon
+    Get the current daemon log level
 
-        This is used by the brokers to get the broks list of a daemon
+        Returns an object with the daemon identity and a `log_level` property.
 
-        :return: Brok list serialized
-        :rtype: dict
-        
-
-/get_events
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the monitoring events from the daemon
-
-        This is used by the arbiter to get the monitoring events from all its satellites
-
-        :return: Events list serialized
-        :rtype: list
-        
-
-/get_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the external commands from the daemon
-
-        Use a lock for this function to protect
-
-        :return: serialized external command list
+        running_id
+        :return: current log level
         :rtype: str
         
 
-/get_id
-~~~~~~~
+/identity
+~~~~~~~~~
 
 Python source code documentation
  ::
@@ -1373,32 +1335,30 @@ Python source code documentation
         :rtype: dict
         
 
-/get_log_level
-~~~~~~~~~~~~~~
+/index
+~~~~~~
 
 Python source code documentation
  ::
 
-    Get the current daemon log level
+    Wrapper to call api from /
 
-        Returns an object with the daemon identity and a `log_level` property.
+        This will return the daemon identity and main information
 
-        running_id
-        :return: current log level
-        :rtype: str
+        :return: function list
         
 
-/get_managed_configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/managed_configurations
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the scheduler configuration managed by the daemon
+    Get the arbiter configuration managed by the daemon
 
         For an arbiter daemon, it returns an empty object
 
-        For all other daemons it returns a dcitionary formated list of the scheduler
+        For all other daemons it returns a dictionary formated list of the scheduler
         links managed by the daemon:
         {
             'instance_id': {
@@ -1408,159 +1368,11 @@ Python source code documentation
             }
         }
 
+        If a daemon returns an empty list, it means that it has not yet received its configuration
+        from the arbiter.
+
         :return: managed configuration
         :rtype: list
-        
-
-/get_results
-~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the results of the executed actions for the scheduler which instance id is provided
-
-        Calling this method for daemons that are not configured as passive do not make sense.
-        Indeed, this service should only be exposed on poller and reactionner daemons.
-
-        :param scheduler_instance_id: instance id of the scheduler
-        :type scheduler_instance_id: string
-        :return: serialized list
-        :rtype: str
-        
-
-/get_running_id
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the current running identifier of the daemon
-
-        The running identifier of the daemon is a float number made of its start timestamp
-        (integer part) and a random number (decimal part). This make it unique and allows
-        to get sure that the daemon did not changed since the last communication.
-
-        Returns an object with the daemon identity and a `running_id` property.
-
-        :return: running identifier
-        :rtype: dict
-        
-
-/get_start_time
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the start time of the daemon
-
-        The start timestamp of a daemon is the integer timestamp got from the system
-        when the daemon started.
-
-        Returns an object with the daemon identity and a `start_time` property.
-
-        :return: start timestamp
-        :rtype: dict
-        
-
-/get_stats
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get statistics and information from the daemon
-
-        Returns an object with the daemon identity, the daemon start_time
-        and some extra properties depending upon the daemon type.
-
-        All daemons provide these ones:
-        - program_start: the Alignak start timestamp
-        - spare: to indicate if the daemon is a spare one
-        - load: the daemon load
-        - modules: the daemon modules information
-        - counters: the specific daemon counters
-
-        :param details: Details are required (different from 0)
-        :type details str
-
-        :return: daemon stats
-        :rtype: dict
-        
-
-/have_conf
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon current configuration state
-
-        If the daemon has received a configuration from its arbiter, this will
-        return True
-
-        If a `magic_hash` is provided it is compared with the one included in the
-        daemon configuration and this function returns True only if they match!
-
-        :return: boolean indicating if the daemon has a configuration
-        :rtype: bool
-        
-
-/index
-~~~~~~
-
-Python source code documentation
- ::
-
-    Wrapper to call api from /
-
-        :return: function list
-        
-
-/ping
-~~~~~
-
-Python source code documentation
- ::
-
-    Test the connection to the daemon.
-
-        This function always returns the string 'pong'
-
-        :return: string 'pong'
-        :rtype: str
-        
-
-/push_actions
-~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Push actions to the poller/reactionner
-
-        This function is used by the scheduler to send the actions to get executed to
-        the poller/reactionner
-
-        {'actions': actions, 'instance_id': scheduler_instance_id}
-
-        :return:None
-        
-
-/push_configuration
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Send a new configuration to the daemon
-
-        This function is not intended for external use. It is quite complex to
-        build a configuration for a daemon and it is the arbiter dispatcher job ;)
-
-        :param pushed_configuration: new conf to send
-        :return: None
         
 
 /set_log_level
@@ -1585,6 +1397,31 @@ Python source code documentation
         :rtype: dict
         
 
+/stats
+~~~~~~
+
+Python source code documentation
+ ::
+
+    Get statistics and information from the daemon
+
+        Returns an object with the daemon identity, the daemon start_time
+        and some extra properties depending upon the daemon type.
+
+        All daemons provide these ones:
+        - program_start: the Alignak start timestamp
+        - spare: to indicate if the daemon is a spare one
+        - load: the daemon load
+        - modules: the daemon modules information
+        - counters: the specific daemon counters
+
+        :param details: Details are required (different from 0)
+        :type details str
+
+        :return: daemon stats
+        :rtype: dict
+        
+
 /stop_request
 ~~~~~~~~~~~~~
 
@@ -1599,17 +1436,6 @@ Python source code documentation
 
         :param stop_now: stop now or go to stop wait mode
         :type stop_now: bool
-        :return: None
-        
-
-/wait_new_conf
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Ask the daemon to drop its configuration and wait for a new one
-
         :return: None
         
 
@@ -1627,50 +1453,23 @@ Python source code documentation
         :rtype: dict
         
 
-/get_broks
-~~~~~~~~~~
+/get_log_level
+~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the broks from the daemon
+    Get the current daemon log level
 
-        This is used by the brokers to get the broks list of a daemon
+        Returns an object with the daemon identity and a `log_level` property.
 
-        :return: Brok list serialized
-        :rtype: dict
-        
-
-/get_events
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the monitoring events from the daemon
-
-        This is used by the arbiter to get the monitoring events from all its satellites
-
-        :return: Events list serialized
-        :rtype: list
-        
-
-/get_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the external commands from the daemon
-
-        Use a lock for this function to protect
-
-        :return: serialized external command list
+        running_id
+        :return: current log level
         :rtype: str
         
 
-/get_id
-~~~~~~~
+/identity
+~~~~~~~~~
 
 Python source code documentation
  ::
@@ -1687,32 +1486,30 @@ Python source code documentation
         :rtype: dict
         
 
-/get_log_level
-~~~~~~~~~~~~~~
+/index
+~~~~~~
 
 Python source code documentation
  ::
 
-    Get the current daemon log level
+    Wrapper to call api from /
 
-        Returns an object with the daemon identity and a `log_level` property.
+        This will return the daemon identity and main information
 
-        running_id
-        :return: current log level
-        :rtype: str
+        :return: function list
         
 
-/get_managed_configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/managed_configurations
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the scheduler configuration managed by the daemon
+    Get the arbiter configuration managed by the daemon
 
         For an arbiter daemon, it returns an empty object
 
-        For all other daemons it returns a dcitionary formated list of the scheduler
+        For all other daemons it returns a dictionary formated list of the scheduler
         links managed by the daemon:
         {
             'instance_id': {
@@ -1722,159 +1519,11 @@ Python source code documentation
             }
         }
 
+        If a daemon returns an empty list, it means that it has not yet received its configuration
+        from the arbiter.
+
         :return: managed configuration
         :rtype: list
-        
-
-/get_results
-~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the results of the executed actions for the scheduler which instance id is provided
-
-        Calling this method for daemons that are not configured as passive do not make sense.
-        Indeed, this service should only be exposed on poller and reactionner daemons.
-
-        :param scheduler_instance_id: instance id of the scheduler
-        :type scheduler_instance_id: string
-        :return: serialized list
-        :rtype: str
-        
-
-/get_running_id
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the current running identifier of the daemon
-
-        The running identifier of the daemon is a float number made of its start timestamp
-        (integer part) and a random number (decimal part). This make it unique and allows
-        to get sure that the daemon did not changed since the last communication.
-
-        Returns an object with the daemon identity and a `running_id` property.
-
-        :return: running identifier
-        :rtype: dict
-        
-
-/get_start_time
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the start time of the daemon
-
-        The start timestamp of a daemon is the integer timestamp got from the system
-        when the daemon started.
-
-        Returns an object with the daemon identity and a `start_time` property.
-
-        :return: start timestamp
-        :rtype: dict
-        
-
-/get_stats
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get statistics and information from the daemon
-
-        Returns an object with the daemon identity, the daemon start_time
-        and some extra properties depending upon the daemon type.
-
-        All daemons provide these ones:
-        - program_start: the Alignak start timestamp
-        - spare: to indicate if the daemon is a spare one
-        - load: the daemon load
-        - modules: the daemon modules information
-        - counters: the specific daemon counters
-
-        :param details: Details are required (different from 0)
-        :type details str
-
-        :return: daemon stats
-        :rtype: dict
-        
-
-/have_conf
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon current configuration state
-
-        If the daemon has received a configuration from its arbiter, this will
-        return True
-
-        If a `magic_hash` is provided it is compared with the one included in the
-        daemon configuration and this function returns True only if they match!
-
-        :return: boolean indicating if the daemon has a configuration
-        :rtype: bool
-        
-
-/index
-~~~~~~
-
-Python source code documentation
- ::
-
-    Wrapper to call api from /
-
-        :return: function list
-        
-
-/ping
-~~~~~
-
-Python source code documentation
- ::
-
-    Test the connection to the daemon.
-
-        This function always returns the string 'pong'
-
-        :return: string 'pong'
-        :rtype: str
-        
-
-/push_actions
-~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Push actions to the poller/reactionner
-
-        This function is used by the scheduler to send the actions to get executed to
-        the poller/reactionner
-
-        {'actions': actions, 'instance_id': scheduler_instance_id}
-
-        :return:None
-        
-
-/push_configuration
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Send a new configuration to the daemon
-
-        This function is not intended for external use. It is quite complex to
-        build a configuration for a daemon and it is the arbiter dispatcher job ;)
-
-        :param pushed_configuration: new conf to send
-        :return: None
         
 
 /set_log_level
@@ -1899,306 +1548,8 @@ Python source code documentation
         :rtype: dict
         
 
-/stop_request
-~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Request the daemon to stop
-
-        If `stop_now` is set to '1' the daemon will stop now. Else, the daemon
-        will enter the stop wait mode. In this mode the daemon stops its activity and
-        waits until it receives a new `stop_now` request to stop really.
-
-        :param stop_now: stop now or go to stop wait mode
-        :type stop_now: bool
-        :return: None
-        
-
-/wait_new_conf
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Ask the daemon to drop its configuration and wait for a new one
-
-        :return: None
-        
-
-Daemon type: scheduler
-----------------------
-/api
-~~~~
-
-Python source code documentation
- ::
-
-    List the methods available on the daemon Web service interface
-
-        :return: a list of methods and parameters
-        :rtype: dict
-        
-
-/fill_initial_broks
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get initial_broks from the scheduler
-
-        This is used by the brokers to prepare the initial status broks
-
-        This do not send broks, it only makes scheduler internal processing. Then the broker
-        must use the *get_broks* API to get all the stuff
-
-        :param broker_name: broker name, used to filter broks
-        :type broker_name: str
-        :return: None
-        
-
-/get_broks
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the broks from a scheduler, used by brokers
-
-        This is used by the brokers to get the broks list of a scheduler
-
-        :param broker_name: broker name, used to filter broks
-        :type broker_name: str
-        :return: serialized brok list
-        :rtype: dict
-        
-
-/get_checks
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get checks from scheduler, used by poller or reactionner when they are
-        in active mode (passive = False)
-
-        This function is not intended for external use. Let the poller and reactionner
-        manage all this stuff by themselves ;)
-
-        :param do_checks: used for poller to get checks
-        :type do_checks: bool
-        :param do_actions: used for reactionner to get actions
-        :type do_actions: bool
-        :param poller_tags: poller tags to filter on this poller
-        :type poller_tags: list
-        :param reactionner_tags: reactionner tags to filter on this reactionner
-        :type reactionner_tags: list
-        :param worker_name: Worker name asking (so that the scheduler add it to actions objects)
-        :type worker_name: str
-        :param module_types: Module type to filter actions/checks
-        :type module_types: list
-        :return: serialized check/action list
-        :rtype: str
-        
-
-/get_events
-~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the monitoring events from the daemon
-
-        This is used by the arbiter to get the monitoring events from all its satellites
-
-        :return: Events list serialized
-        :rtype: list
-        
-
-/get_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the external commands from the daemon
-
-        Use a lock for this function to protect
-
-        :return: serialized external command list
-        :rtype: str
-        
-
-/get_host
-~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get host configuration from the scheduler, used mainly by the receiver
-
-        :param host_name: searched host name
-        :type host_name: str
-        :return: serialized host information
-        :rtype: str
-        
-
-/get_hostgroup
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get hostgroup configuration from the scheduler, used mainly by the receiver
-
-        :param hostgroup_name: searched host name
-        :type hostgroup_name: str
-        :return: serialized hostgroup information
-        :rtype: str
-        
-
-/get_id
-~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the daemon identity
-
-        This will return an object containing some properties:
-        - alignak: the Alignak instance name
-        - version: the Alignak version
-        - type: the daemon type
-        - name: the daemon name
-
-        :return: daemon identity
-        :rtype: dict
-        
-
-/get_log_level
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the current daemon log level
-
-        Returns an object with the daemon identity and a `log_level` property.
-
-        running_id
-        :return: current log level
-        :rtype: str
-        
-
-/get_managed_configurations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the scheduler configuration managed by the daemon
-
-        For an arbiter daemon, it returns an empty object
-
-        For all other daemons it returns a dcitionary formated list of the scheduler
-        links managed by the daemon:
-        {
-            'instance_id': {
-                'hash': ,
-                'push_flavor': ,
-                'managed_conf_id':
-            }
-        }
-
-        :return: managed configuration
-        :rtype: list
-        
-
-/get_monitoring_problems
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get Alignak scheduler monitoring status
-
-        Returns an object with the scheduler livesynthesis
-        and the known problems
-
-        :return: scheduler live synthesis
-        :rtype: dict
-        
-
-/get_realm
-~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get realm configuration from the scheduler, used mainly by the receiver
-
-        :param realm_name: searched host name
-        :type realm_name: str
-        :return: serialized host information
-        :rtype: str
-        
-
-/get_results
-~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the results of the executed actions for the scheduler which instance id is provided
-
-        Calling this method for daemons that are not configured as passive do not make sense.
-        Indeed, this service should only be exposed on poller and reactionner daemons.
-
-        :param scheduler_instance_id: instance id of the scheduler
-        :type scheduler_instance_id: string
-        :return: serialized list
-        :rtype: str
-        
-
-/get_running_id
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the current running identifier of the daemon
-
-        The running identifier of the daemon is a float number made of its start timestamp
-        (integer part) and a random number (decimal part). This make it unique and allows
-        to get sure that the daemon did not changed since the last communication.
-
-        Returns an object with the daemon identity and a `running_id` property.
-
-        :return: running identifier
-        :rtype: dict
-        
-
-/get_start_time
-~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Get the start time of the daemon
-
-        The start timestamp of a daemon is the integer timestamp got from the system
-        when the daemon started.
-
-        Returns an object with the daemon identity and a `start_time` property.
-
-        :return: start timestamp
-        :rtype: dict
-        
-
-/get_stats
-~~~~~~~~~~
+/stats
+~~~~~~
 
 Python source code documentation
  ::
@@ -2222,22 +1573,165 @@ Python source code documentation
         :rtype: dict
         
 
-/have_conf
-~~~~~~~~~~
+/stop_request
+~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Get the daemon current configuration state
+    Request the daemon to stop
 
-        If the daemon has received a configuration from its arbiter, this will
-        return True
+        If `stop_now` is set to '1' the daemon will stop now. Else, the daemon
+        will enter the stop wait mode. In this mode the daemon stops its activity and
+        waits until it receives a new `stop_now` request to stop really.
 
-        If a `magic_hash` is provided it is compared with the one included in the
-        daemon configuration and this function returns True only if they match!
+        :param stop_now: stop now or go to stop wait mode
+        :type stop_now: bool
+        :return: None
+        
 
-        :return: boolean indicating if the daemon has a configuration
-        :rtype: bool
+Daemon type: scheduler
+----------------------
+/api
+~~~~
+
+Python source code documentation
+ ::
+
+    List the methods available on the daemon Web service interface
+
+        :return: a list of methods and parameters
+        :rtype: dict
+        
+
+/dump
+~~~~~
+
+Python source code documentation
+ ::
+
+    Dump an host (all hosts) from the scheduler.
+
+        This gets the main host information from the scheduler. If details is set, then some
+        more information are provided. This will not get all the host known attributes but only
+        a reduced set that will inform about the host and its services status
+
+        If raw is set the information are provided in two string lists formated as CSV strings.
+        The first list element contains the hosts information and the second one contains the
+        services information.
+
+        If an host name is provided, this function will get only this host information, else
+        all the scheduler hosts are returned.
+
+        As an example (raw format):
+        [
+            [   # Host information
+                "type;host;name;last_check;state_id;state;state_type;is_problem;is_impact;output",
+                "BR_host;host;BR_host;1532451511;0;UP;HARD;False;False;Host assumed to be UP"
+            ],
+            [   # Services information
+                "type;host;name;last_check;state_id;state;state_type;is_problem;is_impact;output",
+                "BR_host;service;dummy_critical;1532451490;2;CRITICAL;SOFT;False;False;
+                BR_host-dummy_critical-2",
+                "BR_host;service;BR_Simple_And;0;0;OK;HARD;False;False;",
+                "BR_host;service;dummy_unreachable;1532451501;4;UNREACHABLE;SOFT;False;False;
+                BR_host-dummy_unreachable-4",
+                "BR_host;service;dummy_no_output;1532451495;0;OK;HARD;False;False;
+                Service internal check result: 0",
+                "BR_host;service;dummy_unknown;1532451475;3;UNKNOWN;SOFT;False;False;
+                BR_host-dummy_unknown-3",
+                "BR_host;service;dummy_echo;1532451501;0;OK;HARD;False;False;",
+                "BR_host;service;dummy_warning;1532451492;1;WARNING;SOFT;False;False;
+                BR_host-dummy_warning-1",
+                "BR_host;service;dummy_random;1532451496;2;CRITICAL;SOFT;False;False;
+                Service internal check result: 2",
+                "BR_host;service;dummy_ok;1532451492;0;OK;HARD;False;False;BR_host"
+            ]
+        ]
+
+        As an example (json format):
+        {
+            is_impact: false,
+            name: "BR_host",
+            state: "UP",
+            last_check: 1532451811,
+            state_type: "HARD",
+            host: "BR_host",
+            output: "Host assumed to be UP",
+            services: [
+                {
+                    is_impact: false,
+                    name: "dummy_critical",
+                    state: "CRITICAL",
+                    last_check: 1532451790,
+                    state_type: "HARD",
+                    host: "BR_host",
+                    output: "BR_host-dummy_critical-2",
+                    state_id: 2,
+                    type: "service",
+                    is_problem: true
+                },
+                {
+                    is_impact: true,
+                    name: "BR_Simple_And",
+                    state: "WARNING",
+                    last_check: 1532451775,
+                    state_type: "SOFT",
+                    host: "BR_host",
+                    output: "",
+                    state_id: 1,
+                    type: "service",
+                    is_problem: false
+                },
+                ....
+                ....
+            },
+            state_id: 0,
+            type: "host",
+            is_problem: false
+        }
+
+        :param o_name: searched host name (or uuid)
+        :type o_name: str
+        :param details: less or more details
+        :type details: bool
+        :param raw: json or raw text format
+        :type raw: bool
+        :return: list of host and services information
+        :rtype: list
+        
+
+/get_log_level
+~~~~~~~~~~~~~~
+
+Python source code documentation
+ ::
+
+    Get the current daemon log level
+
+        Returns an object with the daemon identity and a `log_level` property.
+
+        running_id
+        :return: current log level
+        :rtype: str
+        
+
+/identity
+~~~~~~~~~
+
+Python source code documentation
+ ::
+
+    Get the daemon identity
+
+        This will return an object containing some properties:
+        - alignak: the Alignak instance name
+        - version: the Alignak version
+        - type: the daemon type
+        - name: the daemon name
+
+        :return: daemon identity
+        :rtype: dict
         
 
 /index
@@ -2248,52 +1742,119 @@ Python source code documentation
 
     Wrapper to call api from /
 
+        This will return the daemon identity and main information
+
         :return: function list
         
 
-/ping
-~~~~~
+/managed_configurations
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Python source code documentation
  ::
 
-    Test the connection to the daemon.
+    Get the arbiter configuration managed by the daemon
 
-        This function always returns the string 'pong'
+        For an arbiter daemon, it returns an empty object
 
-        :return: string 'pong'
+        For all other daemons it returns a dictionary formated list of the scheduler
+        links managed by the daemon:
+        {
+            'instance_id': {
+                'hash': ,
+                'push_flavor': ,
+                'managed_conf_id':
+            }
+        }
+
+        If a daemon returns an empty list, it means that it has not yet received its configuration
+        from the arbiter.
+
+        :return: managed configuration
+        :rtype: list
+        
+
+/monitoring_problems
+~~~~~~~~~~~~~~~~~~~~
+
+Python source code documentation
+ ::
+
+    Get Alignak scheduler monitoring status
+
+        Returns an object with the scheduler livesynthesis
+        and the known problems
+
+        :return: scheduler live synthesis
+        :rtype: dict
+        
+
+/object
+~~~~~~~
+
+Python source code documentation
+ ::
+
+    Get an object from the scheduler.
+
+        The result is a serialized object which is a Json structure containing:
+        - content: the serialized object content
+        - __sys_python_module__: the python class of the returned object
+
+        The Alignak unserialize function of the alignak.misc.serialization package allows
+        to restore the initial object.
+
+        .. code-block:: python
+
+            from alignak.misc.serialization import unserialize
+            from alignak.objects.hostgroup import Hostgroup
+            raw_data = req.get("http://127.0.0.1:7768/object/hostgroup/allhosts")
+            print("Got: %s / %s" % (raw_data.status_code, raw_data.content))
+            assert raw_data.status_code == 200
+            object = raw_data.json()
+            group = unserialize(object, True)
+            assert group.__class__ == Hostgroup
+            assert group.get_name() == 'allhosts'
+
+        As an example:
+        {
+            "__sys_python_module__": "alignak.objects.hostgroup.Hostgroup",
+            "content": {
+                "uuid": "32248642-97dd-4f39-aaa2-5120112a765d",
+                "name": "",
+                "hostgroup_name": "allhosts",
+                "use": [],
+                "tags": [],
+                "alias": "All Hosts",
+                "notes": "",
+                "definition_order": 100,
+                "register": true,
+                "unknown_members": [],
+                "notes_url": "",
+                "action_url": "",
+
+                "imported_from": "unknown",
+                "conf_is_correct": true,
+                "configuration_errors": [],
+                "configuration_warnings": [],
+                "realm": "",
+                "downtimes": {},
+                "hostgroup_members": [],
+                "members": [
+                    "553d47bc-27aa-426c-a664-49c4c0c4a249",
+                    "f88093ca-e61b-43ff-a41e-613f7ad2cea2",
+                    "df1e2e13-552d-43de-ad2a-fe80ad4ba979",
+                    "d3d667dd-f583-4668-9f44-22ef3dcb53ad"
+                ]
+            }
+        }
+
+        :param o_type: searched object type
+        :type o_type: str
+        :param o_name: searched object name (or uuid)
+        :type o_name: str
+        :return: serialized object information
         :rtype: str
-        
-
-/push_actions
-~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Push actions to the poller/reactionner
-
-        This function is used by the scheduler to send the actions to get executed to
-        the poller/reactionner
-
-        {'actions': actions, 'instance_id': scheduler_instance_id}
-
-        :return:None
-        
-
-/push_configuration
-~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Send a new configuration to the daemon
-
-        This function is not intended for external use. It is quite complex to
-        build a configuration for a daemon and it is the arbiter dispatcher job ;)
-
-        :param pushed_configuration: new conf to send
-        :return: None
         
 
 /put_results
@@ -2316,18 +1877,6 @@ Python source code documentation
         :rtype: bool
         
 
-/run_external_commands
-~~~~~~~~~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Post external_commands to scheduler (from arbiter)
-        Wrapper to to app.sched.run_external_commands method
-
-        :return: None
-        
-
 /set_log_level
 ~~~~~~~~~~~~~~
 
@@ -2350,6 +1899,31 @@ Python source code documentation
         :rtype: dict
         
 
+/stats
+~~~~~~
+
+Python source code documentation
+ ::
+
+    Get statistics and information from the daemon
+
+        Returns an object with the daemon identity, the daemon start_time
+        and some extra properties depending upon the daemon type.
+
+        All daemons provide these ones:
+        - program_start: the Alignak start timestamp
+        - spare: to indicate if the daemon is a spare one
+        - load: the daemon load
+        - modules: the daemon modules information
+        - counters: the specific daemon counters
+
+        :param details: Details are required (different from 0)
+        :type details str
+
+        :return: daemon stats
+        :rtype: dict
+        
+
 /stop_request
 ~~~~~~~~~~~~~
 
@@ -2364,16 +1938,5 @@ Python source code documentation
 
         :param stop_now: stop now or go to stop wait mode
         :type stop_now: bool
-        :return: None
-        
-
-/wait_new_conf
-~~~~~~~~~~~~~~
-
-Python source code documentation
- ::
-
-    Ask the scheduler to drop its configuration and wait for a new one
-
         :return: None
         

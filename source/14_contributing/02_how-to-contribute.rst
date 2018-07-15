@@ -330,3 +330,8 @@ To proceed with installation, you must register the alignak repository and store
 
 
 The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are `available on this page <contributing/release_cycle>`_.
+
+For Travis build deploying to Bintray:
+   - let the ``alignak`` subject in the bintray json files
+   - create a secure key with the ``travis encrypt`` tool. Use yor Bintray API key to generate the key, see https://docs.travis-ci.com/user/deployment/bintray/
+   - copy the secure key into the *travis.yml* file

@@ -39,6 +39,8 @@ The *Arbiter* daemon role:
 
    * Receiving external commands
 
+   * Collecting the monitoring events log
+
    * Reporting Alignak state
 
 There can have only one active Arbiter, other arbiters (if they exist in the configuration) are acting as standby spares.
@@ -61,7 +63,7 @@ There can have many schedulers for load-balancing; each scheduler is managing it
 Poller
 ------
 
-The *Poller* runs active checks required by the *Scheduler*.
+The *Poller* runs the :ref:`active checks<monitoring_features/active_checks>` required by the *Scheduler*.
 
 There can have many pollers for load-balancing.
 
@@ -69,28 +71,22 @@ There can have many pollers for load-balancing.
 Receiver
 --------
 
-The *Receiver* daemon receives the passive checks and external commands
-
-It is connected to the other daemons:
-
-    * Arbiter
-    * Scheduler
-    * Broker
+The *Receiver* daemon receives the :ref:`passive checks<monitoring_features/passive_checks>` and :ref:`external commands<monitoring_features/external_commands>`.
 
 There can have many receivers for load-balancing.
 
 Broker
 ------
 
-The *Broker* daemon gets all monitoring events from the scheduler. It propagates the events to the specialized modules installed on the configuration (eg. Alignak backend database storage, ...)
+The *Broker* daemon gets all the broks from the other daemons. It propagates the events to its specialized modules (eg. Alignak backend database storage, ...)
 
-There can have many brokes for load-balancing.
+There can have many brokers for load-balancing.
 
 
 Reactionner
 -----------
 
-The *Reactionner* daemon runs the event handlers and sends the notifications to the users.
+The *Reactionner* daemon runs the :ref:`event handlers<monitoring_features/event_handlers>` and sends the :ref:`notifications<monitoring_features/notifications>` to the users.
 
 There can have many reactionners for load-balancing.
 

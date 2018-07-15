@@ -190,6 +190,8 @@ Notification Macros:
 :ref:`$NOTIFICATIONAUTHORNAME$ <$NOTIFICATIONAUTHORNAME$>`                                                                            No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
 :ref:`$NOTIFICATIONAUTHORALIAS$ <$NOTIFICATIONAUTHORALIAS$>`                                                                          No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
 :ref:`$NOTIFICATIONCOMMENT$ <$NOTIFICATIONCOMMENT$>`                                                                                  No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
+:ref:`$NOTIFICATIONNUMBER$ <$NOTIFICATIONNUMBER$>`                                                                            No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
+:ref:`$NOTIFICATIONID$ <$NOTIFICATIONID$>`                                                                                    No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
 :ref:`$HOSTNOTIFICATIONNUMBER$ <$HOSTNOTIFICATIONNUMBER$>`                                                                            No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
 :ref:`$HOSTNOTIFICATIONID$ <$HOSTNOTIFICATIONID$>`                                                                                    No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
 :ref:`$SERVICENOTIFICATIONNUMBER$ <$SERVICENOTIFICATIONNUMBER$>`                                                                      No                                                           Yes                                                          No                                                           Yes                                                          No                                                                                                                No                                                                                                             No                No
@@ -242,65 +244,212 @@ Macro Descriptions
 Host Macros :ref:`03 <annexes/macros_list#note3>`
 -------------------------------------------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$HOSTNAME$`                                                    Short name for the host (i.e. "biglinuxbox"). This value is taken from the host_name directive in the host definition.
-_`$HOSTDISPLAYNAME$`                                             An alternate display name for the host. This value is taken from the display_name directive in the host definition.
-_`$HOSTALIAS$`                                                   Long name/description for the host. This value is taken from the alias directive in the host definition.
-_`$HOSTADDRESS$`                                                 Address of the host. This value is taken from the address directive in the host definition.
-_`$HOSTSTATE$`                                                   A string indicating the current state of the host ("UP", "DOWN", or "UNREACHABLE").
-_`$HOSTSTATEID$`                                                 A number that corresponds to the current state of the host: 0=UP, 1=DOWN, 2=UNREACHABLE.
-_`$LASTHOSTSTATE$`                                               A string indicating the last state of the host ("UP", "DOWN", or "UNREACHABLE").
-_`$LASTHOSTSTATEID$`                                             A number that corresponds to the last state of the host: 0=UP, 1=DOWN, 2=UNREACHABLE.
-_`$HOSTSTATETYPE$`                                               A string indicating the :ref:`state type <monitoring_features/statetypes>` for the current host check ("HARD" or "SOFT").
-_`$HOSTATTEMPT$`                                                 The number of the current host check retry. For instance, if this is the second time that the host is being rechecked, this will be the number two. Current attempt number is really only useful when writing host event handlers for "soft" states that take a specific action based on the host retry number.
-_`$MAXHOSTATTEMPTS$`                                             The max check attempts as defined for the current host. Useful when writing host event handlers for "soft" states that take a specific action based on the host retry number.
-_`$HOSTEVENTID$`                                                 A globally unique number associated with the host's current state. Every time a host (or service) experiences a state change, a global event ID number is incremented by one (1). If a host has experienced no state changes, this macro will be set to zero (0).
-_`$LASTHOSTEVENTID$`                                             The previous (globally unique) event number that was given to the host.
-_`$HOSTPROBLEMID$`                                               A globally unique number associated with the host's current problem state. Every time a host (or service) transitions from an UP or OK state to a problem state, a global problem ID number is incremented by one (1). This macro will be non-zero if the host is currently a non-UP state. State transitions between non-UP states (e.g. DOWN to UNREACHABLE) do not cause this problem id to increase. If the host is currently in an UP state, this macro will be set to zero (0). Combined with event handlers, this macro could be used to automatically open trouble tickets when hosts first enter a problem state.
-_`$LASTHOSTPROBLEMID$`                                           The previous (globally unique) problem number that was given to the host. Combined with event handlers, this macro could be used for automatically closing trouble tickets, etc. when a host recovers to an UP state.
-_`$HOSTLATENCY$`                                                 A (floating point) number indicating the number of seconds that a scheduled host check lagged behind its scheduled check time. For instance, if a check was scheduled for 03:14:15 and it didn't get executed until 03:14:17, there would be a check latency of 2.0 seconds. On-demand host checks have a latency of zero seconds.
-_`$HOSTEXECUTIONTIME$`                                           A (floating point) number indicating the number of seconds that the host check took to execute (i.e. the amount of time the check was executing).
-_`$HOSTDURATION$`                                                A string indicating the amount of time that the host has spent in its current state. Format is "XXh YYm ZZs", indicating hours, minutes and seconds.
-_`$HOSTDURATIONSEC$`                                             A number indicating the number of seconds that the host has spent in its current state.
-_`$HOSTDOWNTIME$`                                                A number indicating the current "downtime depth" for the host. If this host is currently in a period of scheduled downtime, the value will be greater than zero. If the host is not currently in a period of downtime, this value will be zero.
-_`$HOSTPERCENTCHANGE$`                                           A (floating point) number indicating the percent state change the host has undergone. Percent state change is used by the :ref:`flap detection <monitoring_features/flapping>` algorithm.
-_`$HOSTGROUPNAME$`                                               The short name of the hostgroup that this host belongs to. This value is taken from the hostgroup_name directive in the hostgroup definition. If the host belongs to more than one hostgroup this macro will contain the name of just one of them.
-_`$HOSTGROUPNAMES$`                                              A comma separated list of the short names of all the hostgroups that this host belongs to.
-_`$LASTHOSTCHECK$`                                               This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which a check of the host was last performed.
-_`$LASTHOSTSTATECHANGE$`                                         This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time the host last changed state.
-_`$LASTHOSTUP$`                                                  This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the host was last detected as being in an UP state.
-_`$LASTHOSTDOWN$`                                                This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the host was last detected as being in a DOWN state.
-_`$LASTHOSTUNREACHABLE$`                                         This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the host was last detected as being in an UNREACHABLE state.
-_`$HOSTOUTPUT$`                                                  The first line of text output from the last host check (i.e. "Ping OK").
-_`$LONGHOSTOUTPUT$`                                              The full text output (aside from the first line) from the last host check.
-_`$HOSTPERFDATA$`                                                This macro contains any performance data that may have been returned by the last host check.
-_`$HOSTCHECKCOMMAND$`                                            This macro contains the name of the command (along with any arguments passed to it) used to perform the host check.
-_`$HOSTACKAUTHOR$`  :ref:`08 <annexes/macros_list#note8>`        A string containing the name of the user who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$HOSTACKAUTHORNAME$`  :ref:`08 <annexes/macros_list#note8>`    A string containing the short name of the contact (if applicable) who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$HOSTACKAUTHORALIAS$`  :ref:`08 <annexes/macros_list#note8>`   A string containing the alias of the contact (if applicable) who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$HOSTACKCOMMENT$`  :ref:`08 <annexes/macros_list#note8>`       A string containing the acknowledgement comment that was entered by the user who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$HOSTACTIONURL$`                                               Action URL for the host. This macro may contain other macros (e.g. $HOSTNAME$), which can be useful when you want to pass the host name to a web page.
-_`$HOSTNOTESURL$`                                                Notes URL for the host. This macro may contain other macros (e.g. $HOSTNAME$), which can be useful when you want to pass the host name to a web page.
-_`$HOSTNOTES$`                                                   Notes for the host. This macro may contain other macros (e.g. $HOSTNAME$), which can be useful when you want to host-specific status information, etc. in the description.
-_`$HOSTBUSINESSIMPACT$`                                          A number indicating the business impact for the host.
-_`$TOTALHOSTSERVICES$`                                           The total number of services associated with the host.
-_`$TOTALHOSTSERVICESOK$`                                         The total number of services associated with the host that are in an OK state.
-_`$TOTALHOSTSERVICESWARNING$`                                    The total number of services associated with the host that are in a WARNING state.
-_`$TOTALHOSTSERVICESUNKNOWN$`                                    The total number of services associated with the host that are in an UNKNOWN state.
-_`$TOTALHOSTSERVICESCRITICAL$`                                   The total number of services associated with the host that are in a CRITICAL state.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$HOSTNAME$`
+
+Short name for the host (i.e. "biglinuxbox"). This value is taken from the host_name directive in the host definition.
+
+_`$HOSTDISPLAYNAME$`
+
+An alternate display name for the host. This value is taken from the display_name directive in the host definition.
+
+_`$HOSTALIAS$`
+
+Long name/description for the host. This value is taken from the alias directive in the host definition.
+
+_`$HOSTADDRESS$`
+
+Address of the host. This value is taken from the address directive in the host definition.
+
+_`$HOSTSTATE$`
+
+A string indicating the current state of the host ("UP", "DOWN", or "UNREACHABLE").
+
+_`$HOSTSTATEID$`
+
+A number that corresponds to the current state of the host: 0=UP, 1=DOWN, 2=UNREACHABLE.
+
+_`$LASTHOSTSTATE$`
+
+A string indicating the last state of the host ("UP", "DOWN", or "UNREACHABLE").
+
+_`$LASTHOSTSTATEID$`
+
+A number that corresponds to the last state of the host: 0=UP, 1=DOWN, 2=UNREACHABLE.
+
+_`$HOSTSTATETYPE$`
+
+A string indicating the :ref:`state type <monitoring_features/statetypes>` for the current host check ("HARD" or "SOFT").
+
+_`$HOSTATTEMPT$`
+
+The number of the current host check retry. For instance, if this is the second time that the host is being rechecked, this will be the number two. Current attempt number is really only useful when writing host event handlers for "soft" states that take a specific action based on the host retry number.
+
+_`$MAXHOSTATTEMPTS$`
+
+The max check attempts as defined for the current host. Useful when writing host event handlers for "soft" states that take a specific action based on the host retry number.
+
+_`$HOSTEVENTID$`
+
+A globally unique number associated with the host's current state. Every time a host (or service) experiences a state change, a global event ID number is incremented by one (1). If a host has experienced no state changes, this macro will be set to zero (0).
+
+_`$LASTHOSTEVENTID$`
+
+The previous (globally unique) event number that was given to the host.
+
+_`$HOSTPROBLEMID$`
+
+A globally unique number associated with the host's current problem state. Every time a host (or service) transitions from an UP or OK state to a problem state, a global problem ID number is incremented by one (1). This macro will be non-zero if the host is currently a non-UP state. State transitions between non-UP states (e.g. DOWN to UNREACHABLE) do not cause this problem id to increase. If the host is currently in an UP state, this macro will be set to zero (0). Combined with event handlers, this macro could be used to automatically open trouble tickets when hosts first enter a problem state.
+
+_`$LASTHOSTPROBLEMID$`
+
+The previous (globally unique) problem number that was given to the host. Combined with event handlers, this macro could be used for automatically closing trouble tickets, etc. when a host recovers to an UP state.
+
+_`$HOSTLATENCY$`
+
+A (floating point) number indicating the number of seconds that a scheduled host check lagged behind its scheduled check time. For instance, if a check was scheduled for 03:14:15 and it didn't get executed until 03:14:17, there would be a check latency of 2.0 seconds. On-demand host checks have a latency of zero seconds.
+
+_`$HOSTEXECUTIONTIME$`
+
+A (floating point) number indicating the number of seconds that the host check took to execute (i.e. the amount of time the check was executing).
+
+_`$HOSTDURATION$`
+
+A string indicating the amount of time that the host has spent in its current state. Format is "XXh YYm ZZs", indicating hours, minutes and seconds.
+
+_`$HOSTDURATIONSEC$`
+
+A number indicating the number of seconds that the host has spent in its current state.
+
+_`$HOSTDOWNTIME$`
+
+A number indicating the current "downtime depth" for the host. If this host is currently in a period of scheduled downtime, the value will be greater than zero. If the host is not currently in a period of downtime, this value will be zero.
+
+_`$HOSTPERCENTCHANGE$`
+
+A (floating point) number indicating the percent state change the host has undergone. Percent state change is used by the :ref:`flap detection <monitoring_features/flapping>` algorithm.
+
+_`$HOSTGROUPNAME$`
+
+The short name of the hostgroup that this host belongs to. This value is taken from the hostgroup_name directive in the hostgroup definition. If the host belongs to more than one hostgroup this macro will contain the name of just one of them.
+
+_`$HOSTGROUPNAMES$`
+
+A comma separated list of the short names of all the hostgroups that this host belongs to.
+
+_`$LASTHOSTCHECK$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which a check of the host was last performed.
+
+_`$LASTHOSTSTATECHANGE$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time the host last changed state.
+
+_`$LASTHOSTUP$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the host was last detected as being in an UP state.
+
+_`$LASTHOSTDOWN$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the host was last detected as being in a DOWN state.
+
+_`$LASTHOSTUNREACHABLE$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the host waslast detected as being in an UNREACHABLE state.
+
+_`$HOSTOUTPUT$`
+
+The first line of text output from the last host check (i.e. "Ping OK").
+
+_`$LONGHOSTOUTPUT$`
+
+The full text output (aside from the first line) from the last host check.
+
+_`$HOSTPERFDATA$`
+
+This macro contains any performance data that may have been returned by the last host check.
+
+_`$HOSTCHECKCOMMAND$`
+
+This macro contains the name of the command (along with any arguments passed to it) used to perform the host check.
+
+_`$HOSTACKAUTHOR$`  :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the name of the user who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$HOSTACKAUTHORNAME$`  :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the short name of the contact (if applicable) who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$HOSTACKAUTHORALIAS$`  :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the alias of the contact (if applicable) who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$HOSTACKCOMMENT$`  :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the acknowledgement comment that was entered by the user who acknowledged the host problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$HOSTACTIONURL$`
+
+Action URL for the host. This macro may contain other macros (e.g. $HOSTNAME$), which can be useful when you want to pass the host name to a web page.
+
+_`$HOSTNOTESURL$`
+
+Notes URL for the host. This macro may contain other macros (e.g. $HOSTNAME$), which can be useful when you want to pass the host name to a web page.
+
+_`$HOSTNOTES$`
+
+Notes for the host. This macro may contain other macros (e.g. $HOSTNAME$), which can be useful when you want to host-specific status information, etc. in the description.
+
+_`$HOSTBUSINESSIMPACT$`
+
+A number indicating the business impact for the host.
+
+_`$TOTALHOSTSERVICES$`
+
+The total number of services associated with the host.
+
+_`$TOTALHOSTSERVICESOK$`
+
+The total number of services associated with the host that are in an OK state.
+
+_`$TOTALHOSTSERVICESWARNING$`
+
+The total number of services associated with the host that are in a WARNING state.
+
+_`$TOTALHOSTSERVICESUNKNOWN$`
+
+The total number of services associated with the host that are in an UNKNOWN state.
+
+_`$TOTALHOSTSERVICESUNREACHABLE$`
+
+The total number of services associated with the host that are in an UNREACHABLE state.
+
+_`$TOTALHOSTSERVICESCRITICAL$`
+The total number of services associated with the host that are in a CRITICAL state.
 
 
 Host Group Macros :ref:`05 <annexes/macros_list#note5>`
 -------------------------------------------------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$HOSTGROUPALIAS$`  :ref:`05 <annexes/macros_list#note5>`       The long name / alias of either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the alias directive in the hostgroup definition.
-_`$HOSTGROUPMEMBERS$`  :ref:`05 <annexes/macros_list#note5>`     A comma-separated list of all hosts that belong to either 1) the hostgroup name passed as an on-demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on-demand macro).
-_`$HOSTGROUPNOTES$`  :ref:`05 <annexes/macros_list#note5>`       The notes associated with either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the notes directive in the hostgroup definition.
-_`$HOSTGROUPNOTESURL$`  :ref:`05 <annexes/macros_list#note5>`    The notes URL associated with either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the notes_url directive in the hostgroup definition.
-_`$HOSTGROUPACTIONURL$`  :ref:`05 <annexes/macros_list#note5>`   The action URL associated with either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the action_url directive in the hostgroup definition.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$HOSTGROUPALIAS$`  :ref:`05 <annexes/macros_list#note5>`
+
+The long name / alias of either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the alias directive in the hostgroup definition.
+
+_`$HOSTGROUPMEMBERS$`  :ref:`05 <annexes/macros_list#note5>`
+
+A comma-separated list of all hosts that belong to either 1) the hostgroup name passed as an on-demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on-demand macro).
+
+_`$HOSTGROUPNOTES$`  :ref:`05 <annexes/macros_list#note5>`
+
+The notes associated with either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the notes directive in the hostgroup definition.
+
+_`$HOSTGROUPNOTESURL$`  :ref:`05 <annexes/macros_list#note5>`
+
+The notes URL associated with either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the notes_url directive in the hostgroup definition.
+
+_`$HOSTGROUPACTIONURL$`  :ref:`05 <annexes/macros_list#note5>`
+
+The action URL associated with either 1) the hostgroup name passed as an on_demand macro argument or 2) the primary hostgroup associated with the current host (if not used in the context of an on_demand macro). This value is taken from the action_url directive in the hostgroup definition.
 
 
 .. _annexes/macros_list#longserviceoutput:
@@ -309,138 +458,420 @@ _`$HOSTGROUPACTIONURL$`  :ref:`05 <annexes/macros_list#note5>`   The action URL 
 Service Macros
 --------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$SERVICEDESC$`                                                 The long name/description of the service (i.e. "Main Website"). This value is taken from the description directive of the service definition.
-_`$SERVICEDISPLAYNAME$`                                          An alternate display name for the service. This value is taken from the display_name directive in the service definition.
-_`$SERVICESTATE$`                                                A string indicating the current state of the service ("OK", "WARNING", "UNKNOWN", or "CRITICAL").
-_`$SERVICESTATEID$`                                              A number that corresponds to the current state of the service: 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN.
-_`$LASTSERVICESTATE$`                                            A string indicating the last state of the service ("OK", "WARNING", "UNKNOWN", or "CRITICAL").
-_`$LASTSERVICESTATEID$`                                          A number that corresponds to the last state of the service: 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN.
-_`$SERVICESTATETYPE$`                                            A string indicating the state type of the current service check ("HARD" or "SOFT").
-_`$SERVICEATTEMPT$`                                              The number of the current service check retry. For instance, if this is the second time that the service is being rechecked, this will be the number two. Current attempt number is really only useful when writing service event handlers for "soft" states that take a specific action based on the service retry number.
-_`$MAXSERVICEATTEMPTS$`                                          The max check attempts as defined for the current service. Useful when writing host event handlers for "soft" states that take a specific action based on the service retry number.
-_`$SERVICEISVOLATILE$`                                           Indicates whether the service is marked as being volatile or not: 0 = not volatile, 1 = volatile.
-_`$SERVICEEVENTID$`                                              A globally unique number associated with the service's current state. Every time a a service (or host) experiences a state change, a global event ID number is incremented by one (1). If a service has experienced no state changes, this macro will be set to zero (0).
-_`$LASTSERVICEEVENTID$`                                          The previous (globally unique) event number that given to the service.
-_`$SERVICEPROBLEMID$`                                            A globally unique number associated with the service's current problem state. Every time a service (or host) transitions from an OK or UP state to a problem state, a global problem ID number is incremented by one (1). This macro will be non-zero if the service is currently a non-OK state. State transitions between non-OK states (e.g. WARNING to CRITICAL) do not cause this problem id to increase. If the service is currently in an OK state, this macro will be set to zero (0). Combined with event handlers, this macro could be used to automatically open trouble tickets when services first enter a problem state.
-_`$LASTSERVICEPROBLEMID$`                                        The previous (globally unique) problem number that was given to the service. Combined with event handlers, this macro could be used for automatically closing trouble tickets, etc. when a service recovers to an OK state.
-_`$SERVICELATENCY$`                                              A (floating point) number indicating the number of seconds that a scheduled service check lagged behind its scheduled check time. For instance, if a check was scheduled for 03:14:15 and it didn't get executed until 03:14:17, there would be a check latency of 2.0 seconds.
-_`$SERVICEEXECUTIONTIME$`                                        A (floating point) number indicating the number of seconds that the service check took to execute (i.e. the amount of time the check was executing).
-_`$SERVICEDURATION$`                                             A string indicating the amount of time that the service has spent in its current state. Format is "XXh YYm ZZs", indicating hours, minutes and seconds.
-_`$SERVICEDURATIONSEC$`                                          A number indicating the number of seconds that the service has spent in its current state.
-_`$SERVICEDOWNTIME$`                                             A number indicating the current "downtime depth" for the service. If this service is currently in a period of scheduled downtime, the value will be greater than zero. If the service is not currently in a period of downtime, this value will be zero.
-_`$SERVICEPERCENTCHANGE$`                                        A (floating point) number indicating the percent state change the service has undergone. Percent state change is used by the :ref:`flap detection <monitoring_features/flapping>` algorithm.
-_`$SERVICEGROUPNAME$`                                            The short name of the servicegroup that this service belongs to. This value is taken from the servicegroup_name directive in the servicegroup definition. If the service belongs to more than one servicegroup this macro will contain the name of just one of them.
-_`$SERVICEGROUPNAMES$`                                           A comma separated list of the short names of all the servicegroups that this service belongs to.
-_`$LASTSERVICECHECK$`                                            This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which a check of the service was last performed.
-_`$LASTSERVICESTATECHANGE$`                                      This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time the service last changed state.
-_`$LASTSERVICEOK$`                                               This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in an OK state.
-_`$LASTSERVICEWARNING$`                                          This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in a WARNING state.
-_`$LASTSERVICEUNKNOWN$`                                          This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in an UNKNOWN state.
-_`$LASTSERVICECRITICAL$`                                         This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in a CRITICAL state.
-_`$SERVICEOUTPUT$`                                               The first line of text output from the last service check (i.e. "Ping OK").
-_`$LONGSERVICEOUTPUT$`                                           The full text output (aside from the first line) from the last service check.
-_`$SERVICEPERFDATA$`                                             This macro contains any performance data that may have been returned by the last service check.
-_`$SERVICECHECKCOMMAND$`                                         This macro contains the name of the command (along with any arguments passed to it) used to perform the service check.
-_`$SERVICEACKAUTHOR$` :ref:`08 <annexes/macros_list#note8>`      A string containing the name of the user who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$SERVICEACKAUTHORNAME$` :ref:`08 <annexes/macros_list#note8>`  A string containing the short name of the contact (if applicable) who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$SERVICEACKAUTHORALIAS$` :ref:`08 <annexes/macros_list#note8>` A string containing the alias of the contact (if applicable) who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$SERVICEACKCOMMENT$` :ref:`08 <annexes/macros_list#note8>`     A string containing the acknowledgement comment that was entered by the user who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
-_`$SERVICEACTIONURL$`                                            Action URL for the service. This macro may contain other macros (e.g. $HOSTNAME$ or $SERVICEDESC$), which can be useful when you want to pass the service name to a web page.
-_`$SERVICENOTESURL$`                                             Notes URL for the service. This macro may contain other macros (e.g. $HOSTNAME$ or $SERVICEDESC$), which can be useful when you want to pass the service name to a web page.
-_`$SERVICENOTES$`                                                Notes for the service. This macro may contain other macros (e.g. $HOSTNAME$ or $SERVICESTATE$), which can be useful when you want to service-specific status information, etc. in the description
-_`$SERVICEBUSINESSIMPACT$`                                       A number indicating the business impact for the service.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+$SERVICEDESC$`
+
+The long name/description of the service (i.e. "Main Website"). This value is taken from the description directive of the service definition.
+
+
+_`$SERVICEDISPLAYNAME$`
+
+An alternate display name for the service. This value is taken from the display_name directive in the service definition.
+
+
+_`$SERVICESTATE$`
+
+A string indicating the current state of the service ("OK", "WARNING", "UNKNOWN", or "CRITICAL").
+
+
+_`$SERVICESTATEID$`
+
+A number that corresponds to the current state of the service: 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN.
+
+
+_`$LASTSERVICESTATE$`
+
+A string indicating the last state of the service ("OK", "WARNING", "UNKNOWN", or "CRITICAL").
+
+
+_`$LASTSERVICESTATEID$`
+
+A number that corresponds to the last state of the service: 0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN.
+
+_`$SERVICESTATETYPE$`
+
+A string indicating the state type of the current service check ("HARD" or "SOFT").
+
+_`$SERVICEATTEMPT$`
+
+The number of the current service check retry. For instance, if this is the second time that the service is being rechecked, this will be the number two. Current attempt number is really only useful when writing service event handlers for "soft" states that take a specific action based on the service retry number.
+
+_`$MAXSERVICEATTEMPTS$`
+
+The max check attempts as defined for the current service. Useful when writing host event handlers for "soft" states that take a specific action based on the service retry number.
+
+_`$SERVICEISVOLATILE$`
+
+Indicates whether the service is marked as being volatile or not: 0 = not volatile, 1 = volatile.
+
+_`$SERVICEEVENTID$`
+
+A globally unique number associated with the service's current state. Every time a a service (or host) experiences a state change, a global event ID number is incremented by one (1). If a service has experienced no state changes, this macro will be set to zero (0).
+
+_`$LASTSERVICEEVENTID$`
+
+The previous (globally unique) event number that given to the service.
+
+_`$SERVICEPROBLEMID$`
+
+A globally unique number associated with the service's current problem state. Every time a service (or host) transitions from an OK or UP state to a problem state, a global problem ID number is incremented by one (1). This macro will be non-zero if the service is currently a non-OK state. State transitions between non-OK states (e.g. WARNING to CRITICAL) do not cause this problem id to increase. If the service is currently in an OK state, this macro will be set to zero (0). Combined with event handlers, this macro could be used to automatically open trouble tickets when services first enter a problem state.
+
+_`$LASTSERVICEPROBLEMID$`
+
+The previous (globally unique) problem number that was given to the service. Combined with event handlers, this macro could be used for automatically closing trouble tickets, etc. when a service recovers to an OK state.
+
+_`$SERVICELATENCY$`
+
+A (floating point) number indicating the number of seconds that a scheduled service check lagged behind its scheduled check time. For instance, if a check was scheduled for 03:14:15 and it didn't get executed until 03:14:17, there would be a check latency of 2.0 seconds.
+
+_`$SERVICEEXECUTIONTIME$`
+
+A (floating point) number indicating the number of seconds that the service check took to execute (i.e. the amount of time the check was executing).
+
+_`$SERVICEDURATION$`
+
+A string indicating the amount of time that the service has spent in its current state. Format is "XXh YYm ZZs", indicating hours, minutes and seconds.
+
+_`$SERVICEDURATIONSEC$`
+
+A number indicating the number of seconds that the service has spent in its current state.
+
+_`$SERVICEDOWNTIME$`
+
+A number indicating the current "downtime depth" for the service. If this service is currently in a period of scheduled downtime, the value will be greater than zero. If the service is not currently in a period of downtime, this value will be zero.
+
+_`$SERVICEPERCENTCHANGE$`
+
+A (floating point) number indicating the percent state change the service has undergone. Percent state change is used by the :ref:`flap detection <monitoring_features/flapping>` algorithm.
+
+_`$SERVICEGROUPNAME$`
+
+The short name of the servicegroup that this service belongs to. This value is taken from the servicegroup_name directive in the servicegroup definition. If the service belongs to more than one servicegroup this macro will contain the name of just one of them.
+
+_`$SERVICEGROUPNAMES$`
+
+A comma separated list of the short names of all the servicegroups that this service belongs to.
+
+_`$LASTSERVICECHECK$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which a check of the service was last performed.
+
+_`$LASTSERVICESTATECHANGE$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time the service last changed state.
+
+_`$LASTSERVICEOK$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in an OK state.
+
+_`$LASTSERVICEWARNING$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in a WARNING state.
+
+_`$LASTSERVICEUNKNOWN$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in an UNKNOWN state.
+
+_`$LASTSERVICEUNREACHABLE$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in an UNREACHABLE state.
+
+_`$LASTSERVICECRITICAL$`
+
+This is a timestamp in time_t format (seconds since the UNIX epoch) indicating the time at which the service was last detected as being in a CRITICAL state.
+
+_`$SERVICEOUTPUT$`
+
+The first line of text output from the last service check (i.e. "Ping OK").
+
+_`$LONGSERVICEOUTPUT$`
+
+The full text output (aside from the first line) from the last service check.
+
+_`$SERVICEPERFDATA$`
+
+This macro contains any performance data that may have been returned by the last service check.
+
+_`$SERVICECHECKCOMMAND$`
+
+This macro contains the name of the command (along with any arguments passed to it) used to perform the service check.
+
+_`$SERVICEACKAUTHOR$` :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the name of the user who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$SERVICEACKAUTHORNAME$` :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the short name of the contact (if applicable) who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$SERVICEACKAUTHORALIAS$` :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the alias of the contact (if applicable) who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$SERVICEACKCOMMENT$` :ref:`08 <annexes/macros_list#note8>`
+
+A string containing the acknowledgement comment that was entered by the user who acknowledged the service problem. This macro is only valid in notifications where the $NOTIFICATIONTYPE$ macro is set to "ACKNOWLEDGEMENT".
+
+_`$SERVICEACTIONURL$`
+
+Action URL for the service. This macro may contain other macros (e.g. $HOSTNAME$ or $SERVICEDESC$), which can be useful when you want to pass the service name to a web page.
+
+_`$SERVICENOTESURL$`
+
+Notes URL for the service. This macro may contain other macros (e.g. $HOSTNAME$ or $SERVICEDESC$), which can be useful when you want to pass the service name to a web page.
+
+_`$SERVICENOTES$`
+
+Notes for the service. This macro may contain other macros (e.g. $HOSTNAME$ or $SERVICESTATE$), which can be useful when you want to service-specific status information, etc. in the description
+
+_`$SERVICEBUSINESSIMPACT$`
+
+A number indicating the business impact for the service.
 
 
 Service Group Macros :ref:`06 <annexes/macros_list#note6>`
 -----------------------------------------------------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$SERVICEGROUPALIAS$` :ref:`06 <annexes/macros_list#note6>`     The long name / alias of either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the alias directive in the servicegroup definition.
-_`$SERVICEGROUPMEMBERS$` :ref:`06 <annexes/macros_list#note6>`   A comma-separated list of all services that belong to either 1) the servicegroup name passed as an on-demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on-demand macro).
-_`$SERVICEGROUPNOTES$` :ref:`06 <annexes/macros_list#note6>`     The notes associated with either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the notes directive in the servicegroup definition.
-_`$SERVICEGROUPNOTESURL$` :ref:`06 <annexes/macros_list#note6>`  The notes URL associated with either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the notes_url directive in the servicegroup definition.
-_`$SERVICEGROUPACTIONURL$` :ref:`06 <annexes/macros_list#note6>` The action URL associated with either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the action_url directive in the servicegroup definition.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$SERVICEGROUPALIAS$` :ref:`06 <annexes/macros_list#note6>`
+
+The long name / alias of either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the alias directive in the servicegroup definition.
+
+_`$SERVICEGROUPMEMBERS$` :ref:`06 <annexes/macros_list#note6>`
+
+A comma-separated list of all services that belong to either 1) the servicegroup name passed as an on-demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on-demand macro).
+
+_`$SERVICEGROUPNOTES$` :ref:`06 <annexes/macros_list#note6>`
+
+The notes associated with either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the notes directive in the servicegroup definition.
+
+_`$SERVICEGROUPNOTESURL$` :ref:`06 <annexes/macros_list#note6>`
+
+The notes URL associated with either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the notes_url directive in the servicegroup definition.
+
+_`$SERVICEGROUPACTIONURL$` :ref:`06 <annexes/macros_list#note6>`
+
+The action URL associated with either 1) the servicegroup name passed as an on_demand macro argument or 2) the primary servicegroup associated with the current service (if not used in the context of an on_demand macro). This value is taken from the action_url directive in the servicegroup definition.
 
 
 Contact Macros
 --------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$CONTACTNAME$`                                                 Short name for the contact (i.e. "jdoe") that is being notified of a host or service problem. This value is taken from the contact_name directive in the contact definition.
-_`$CONTACTALIAS$`                                                Long name/description for the contact (i.e. "John Doe") being notified. This value is taken from the alias directive in the contact definition.
-_`$CONTACTEMAIL$`                                                Email address of the contact being notified. This value is taken from the email directive in the contact definition.
-_`$CONTACTPAGER$`                                                Pager number/address of the contact being notified. This value is taken from the pager directive in the contact definition.
-_`$CONTACTADDRESSn$`                                             Address of the contact being notified. Each contact can have six different addresses (in addition to email address and pager number). The macros for these addresses are $CONTACTADDRESS1$ - $CONTACTADDRESS6$. This value is taken from the addressx directive in the contact definition.
-_`$CONTACTGROUPNAME$`                                            The short name of the contactgroup that this contact is a member of. This value is taken from the contactgroup_name directive in the contactgroup definition. If the contact belongs to more than one contactgroup this macro will contain the name of just one of them.
-_`$CONTACTGROUPNAMES$`                                           A comma separated list of the short names of all the contactgroups that this contact is a member of.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$CONTACTNAME$`
+
+Short name for the contact (i.e. "jdoe") that is being notified of a host or service problem. This value is taken from the contact_name directive in the contact definition.
+
+_`$CONTACTALIAS$`
+
+Long name/description for the contact (i.e. "John Doe") being notified. This value is taken from the alias directive in the contact definition.
+
+_`$CONTACTEMAIL$`
+
+Email address of the contact being notified. This value is taken from the email directive in the contact definition.
+
+_`$CONTACTPAGER$`
+
+Pager number/address of the contact being notified. This value is taken from the pager directive in the contact definition.
+
+_`$CONTACTADDRESSn$`
+
+Address of the contact being notified. Each contact can have six different addresses (in addition to email address and pager number). The macros for these addresses are $CONTACTADDRESS1$ - $CONTACTADDRESS6$. This value is taken from the addressx directive in the contact definition.
+
+_`$CONTACTGROUPNAME$`
+
+The short name of the contactgroup that this contact is a member of. This value is taken from the contactgroup_name directive in the contactgroup definition. If the contact belongs to more than one contactgroup this macro will contain the name of just one of them.
+
+_`$CONTACTGROUPNAMES$`
+
+A comma separated list of the short names of all the contactgroups that this contact is a member of.
 
 
 Contact Group Macros :ref:`05 <annexes/macros_list#note5>`
 -----------------------------------------------------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$CONTACTGROUPALIAS$`  :ref:`07 <annexes/macros_list#note7>`    The long name / alias of either 1) the contactgroup name passed as an on_demand macro argument or 2) the primary contactgroup associated with the current contact (if not used in the context of an on_demand macro). This value is taken from the alias directive in the contactgroup definition.
-_`$CONTACTGROUPMEMBERS$`  :ref:`07 <annexes/macros_list#note7>`  A comma-separated list of all contacts that belong to either 1) the contactgroup name passed as an on-demand macro argument or 2) the primary contactgroup associated with the current contact (if not used in the context of an on-demand macro).
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$CONTACTGROUPALIAS$`  :ref:`07 <annexes/macros_list#note7>`
+
+The long name / alias of either 1) the contactgroup name passed as an on_demand macro argument or 2) the primary contactgroup associated with the current contact (if not used in the context of an on_demand macro). This value is taken from the alias directive in the contactgroup definition.
+
+_`$CONTACTGROUPMEMBERS$`  :ref:`07 <annexes/macros_list#note7>`
+
+A comma-separated list of all contacts that belong to either 1) the contactgroup name passed as an on-demand macro argument or 2) the primary contactgroup associated with the current contact (if not used in the context of an on-demand macro).
 
 
 Summary Macros
 --------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$TOTALHOSTSUP$`                                                This macro reflects the total number of hosts that are currently in an UP state.
-_`$TOTALHOSTSDOWN$`                                              This macro reflects the total number of hosts that are currently in a DOWN state.
-_`$TOTALHOSTSUNREACHABLE$`                                       This macro reflects the total number of hosts that are currently in an UNREACHABLE state.
-_`$TOTALHOSTSDOWNUNHANDLED$`                                     This macro reflects the total number of hosts that are currently in a DOWN state that are not currently being "handled". Unhandled host problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-_`$TOTALHOSTSUNREACHABLEUNHANDLED$`                              This macro reflects the total number of hosts that are currently in an UNREACHABLE state that are not currently being "handled". Unhandled host problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-_`$TOTALHOSTPROBLEMS$`                                           This macro reflects the total number of hosts that are currently either in a DOWN or an UNREACHABLE state.
-_`$TOTALHOSTPROBLEMSUNHANDLED$`                                  This macro reflects the total number of hosts that are currently either in a DOWN or an UNREACHABLE state that are not currently being "handled". Unhandled host problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-_`$TOTALSERVICESOK$`                                             This macro reflects the total number of services that are currently in an OK state.
-_`$TOTALSERVICESWARNING$`                                        This macro reflects the total number of services that are currently in a WARNING state.
-_`$TOTALSERVICESCRITICAL$`                                       This macro reflects the total number of services that are currently in a CRITICAL state.
-_`$TOTALSERVICESUNKNOWN$`                                        This macro reflects the total number of services that are currently in an UNKNOWN state.
-_`$TOTALSERVICESWARNINGUNHANDLED$`                               This macro reflects the total number of services that are currently in a WARNING state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-_`$TOTALSERVICESCRITICALUNHANDLED$`                              This macro reflects the total number of services that are currently in a CRITICAL state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-_`$TOTALSERVICESUNKNOWNUNHANDLED$`                               This macro reflects the total number of services that are currently in an UNKNOWN state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-_`$TOTALSERVICEPROBLEMS$`                                        This macro reflects the total number of services that are currently either in a WARNING, CRITICAL, or UNKNOWN state.
-_`$TOTALSERVICEPROBLEMSUNHANDLED$`                               This macro reflects the total number of services that are currently either in a WARNING, CRITICAL, or UNKNOWN state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$TOTALHOSTSUP$`
+
+This macro reflects the total number of hosts that are currently in an UP state.
+
+_`$TOTALHOSTSDOWN$`
+
+This macro reflects the total number of hosts that are currently in a DOWN state.
+
+_`$TOTALHOSTSUNREACHABLE$`
+
+This macro reflects the total number of hosts that are currently in an UNREACHABLE state.
+
+_`$TOTALHOSTSDOWNUNHANDLED$`
+
+This macro reflects the total number of hosts that are currently in a DOWN state that are not currently being "handled". Unhandled host problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
+
+_`$TOTALHOSTSUNREACHABLEUNHANDLED$`
+
+This macro reflects the total number of hosts that are currently in an UNREACHABLE state that are not currently being "handled". Unhandled host problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
+
+_`$TOTALHOSTPROBLEMS$`
+
+This macro reflects the total number of hosts that are currently either in a DOWN or an UNREACHABLE state.
+
+_`$TOTALHOSTPROBLEMSUNHANDLED$`
+
+This macro reflects the total number of hosts that are currently either in a DOWN or an UNREACHABLE state that are not currently being "handled". Unhandled host problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
+
+_`$TOTALSERVICESOK$`
+
+This macro reflects the total number of services that are currently in an OK state.
+
+_`$TOTALSERVICESWARNING$`
+
+This macro reflects the total number of services that are currently in a WARNING state.
+
+_`$TOTALSERVICESCRITICAL$`
+
+This macro reflects the total number of services that are currently in a CRITICAL state.
+
+_`$TOTALSERVICESUNKNOWN$`
+
+This macro reflects the total number of services that are currently in an UNKNOWN state.
+
+_`$TOTALSERVICESUNREACHABLE$`
+
+This macro reflects the total number of services that are currently in an UNREACHABLE state.
+
+_`$TOTALSERVICESWARNINGUNHANDLED$`
+
+
+This macro reflects the total number of services that are currently in a WARNING state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
+
+_`$TOTALSERVICESCRITICALUNHANDLED$`
+
+This macro reflects the total number of services that are currently in a CRITICAL state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
+
+_`$TOTALSERVICESUNKNOWNUNHANDLED$`
+
+This macro reflects the total number of services that are currently in an UNKNOWN state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
+
+_`$TOTALSERVICEPROBLEMS$`
+
+This macro reflects the total number of services that are currently either in a WARNING, CRITICAL, or UNKNOWN state.
+
+_`$TOTALSERVICEPROBLEMSUNHANDLED$`
+
+This macro reflects the total number of services that are currently either in a WARNING, CRITICAL, or UNKNOWN state that are not currently being "handled". Unhandled services problems are those that are not acknowledged, are not currently in scheduled downtime, and for which checks are currently enabled.
 
 
 Notification Macros
 -------------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$NOTIFICATIONTYPE$`                                            A string identifying the type of notification that is being sent ("PROBLEM", "RECOVERY", "ACKNOWLEDGEMENT", "FLAPPINGSTART", "FLAPPINGSTOP", "FLAPPINGDISABLED", "DOWNTIMESTART", "DOWNTIMEEND", or "DOWNTIMECANCELLED").
-_`$NOTIFICATIONRECIPIENTS$`                                      A comma-separated list of the short names of all contacts that are being notified about the host or service.
-_`$NOTIFICATIONISESCALATED$`                                     An integer indicating whether this was sent to normal contacts for the host or service or if it was escalated. 0 = Normal (non-escalated) notification , 1 = Escalated notification.
-_`$NOTIFICATIONAUTHOR$`                                          A string containing the name of the user who authored the notification. If the $NOTIFICATIONTYPE$ macro is set to "DOWNTIMESTART" or "DOWNTIMEEND", this will be the name of the user who scheduled downtime for the host or service. If the $NOTIFICATIONTYPE$ macro is "ACKNOWLEDGEMENT", this will be the name of the user who acknowledged the host or service problem. If the $NOTIFICATIONTYPE$ macro is "CUSTOM", this will be name of the user who initiated the custom host or service notification.
-_`$NOTIFICATIONAUTHORNAME$`                                      A string containing the short name of the contact (if applicable) specified in the $NOTIFICATIONAUTHOR$ macro.
-_`$NOTIFICATIONAUTHORALIAS$`                                     A string containing the alias of the contact (if applicable) specified in the $NOTIFICATIONAUTHOR$ macro.
-_`$NOTIFICATIONCOMMENT$`                                         A string containing the comment that was entered by the notification author. If the $NOTIFICATIONTYPE$ macro is set to "DOWNTIMESTART" or "DOWNTIMEEND", this will be the comment entered by the user who scheduled downtime for the host or service. If the $NOTIFICATIONTYPE$ macro is "ACKNOWLEDGEMENT", this will be the comment entered by the user who acknowledged the host or service problem. If the $NOTIFICATIONTYPE$ macro is "CUSTOM", this will be comment entered by the user who initiated the custom host or service notification.
-_`$HOSTNOTIFICATIONNUMBER$`                                      The current notification number for the host. The notification number increases by one (1) each time a new notification is sent out for the host (except for acknowledgements). The notification number is reset to 0 when the host recovers (after the recovery notification has gone out). Acknowledgements do not cause the notification number to increase, nor do notifications dealing with flap detection or scheduled downtime.
-_`$HOSTNOTIFICATIONID$`                                          A unique number identifying a host notification. Notification ID numbers are unique across both hosts and service notifications, so you could potentially use this unique number as a primary key in a notification database. Notification ID numbers should remain unique across restarts of the Alignak process, so long as you have state retention enabled. The notification ID number is incremented by one (1) each time a new host notification is sent out, and regardless of how many contacts are notified.
-_`$SERVICENOTIFICATIONNUMBER$`                                   The current notification number for the service. The notification number increases by one (1) each time a new notification is sent out for the service (except for acknowledgements). The notification number is reset to 0 when the service recovers (after the recovery notification has gone out). Acknowledgements do not cause the notification number to increase, nor do notifications dealing with flap detection or scheduled downtime.
-_`$SERVICENOTIFICATIONID$`                                       A unique number identifying a service notification. Notification ID numbers are unique across both hosts and service notifications, so you could potentially use this unique number as a primary key in a notification database. Notification ID numbers should remain unique across restarts of the Alignak process, so long as you have state retention enabled. The notification ID number is incremented by one (1) each time a new service notification is sent out, and regardless of how many contacts are notified.
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$NOTIFICATIONTYPE$`
+
+A string identifying the type of notification that is being sent ("PROBLEM", "RECOVERY", "ACKNOWLEDGEMENT", "FLAPPINGSTART", "FLAPPINGSTOP", "FLAPPINGDISABLED", "DOWNTIMESTART", "DOWNTIMEEND", or "DOWNTIMECANCELLED").
+
+_`$NOTIFICATIONRECIPIENTS$`
+
+A comma-separated list of the short names of all contacts that are being notified about the host or service.
+
+_`$NOTIFICATIONISESCALATED$`
+
+An integer indicating whether this was sent to normal contacts for the host or service or if it was escalated. 0 = Normal (non-escalated) notification , 1 = Escalated notification.
+
+_`$NOTIFICATIONAUTHOR$`
+
+A string containing the name of the user who authored the notification. If the $NOTIFICATIONTYPE$ macro is set to "DOWNTIMESTART" or "DOWNTIMEEND", this will be the name of the user who scheduled downtime for the host or service. If the $NOTIFICATIONTYPE$ macro is "ACKNOWLEDGEMENT", this will be the name of the user who acknowledged the host or service problem. If the $NOTIFICATIONTYPE$ macro is "CUSTOM", this will be name of the user who initiated the custom host or service notification.
+
+_`$NOTIFICATIONAUTHORNAME$`
+
+A string containing the short name of the contact (if applicable) specified in the $NOTIFICATIONAUTHOR$ macro.
+
+_`$NOTIFICATIONAUTHORALIAS$`
+
+A string containing the alias of the contact (if applicable) specified in the $NOTIFICATIONAUTHOR$ macro.
+
+_`$NOTIFICATIONCOMMENT$`
+
+A string containing the comment that was entered by the notification author.
+
+If the $NOTIFICATIONTYPE$ macro is set to "DOWNTIMESTART" or "DOWNTIMEEND", this will be the comment entered by the user who scheduled downtime for the host or service.
+
+If the $NOTIFICATIONTYPE$ macro is "ACKNOWLEDGEMENT", this will be the comment entered by the user who acknowledged the host or service problem.
+
+If the $NOTIFICATIONTYPE$ macro is "CUSTOM", this will be comment entered by the user who initiated the custom host or service notification.
+
+_`$NOTIFICATIONNUMBER$`
+
+The current notification number for the host/service. You can use this macro in place of the $HOSTNOTIFICATIONNUMBER$ and $SERVICENOTIFICATIONNUMBER$.
+
+_`$NOTIFICATIONID$`
+
+A unique number identifying a notification. You can use this macro in place of the $HOSTNOTIFICATIONID$ and $SERVICENOTIFICATIONID$.
+
+_`$HOSTNOTIFICATIONNUMBER$`
+
+The current notification number for the host. The notification number increases by one (1) each time a new notification is sent out for the host (except for acknowledgements).
+
+The notification number is reset to 0 when the host recovers (after the recovery notification has gone out). Acknowledgements do not cause the notification number to increase, nor do notifications dealing with flap detection or scheduled downtime.
+
+_`$HOSTNOTIFICATIONID$`
+
+A unique number identifying a host notification.
+
+Notification ID numbers are unique across both hosts and service notifications, so you could potentially use this unique number as a primary key in a notification database. Notification ID numbers should remain unique across restarts of the Alignak process, so long as you have state retention enabled.
+
+The notification ID number is incremented by one (1) each time a new host notification is sent out, and regardless of how many contacts are notified.
+
+_`$SERVICENOTIFICATIONNUMBER$`
+
+The current notification number for the service. The notification number increases by one (1) each time a new notification is sent out for the service (except for acknowledgements).
+
+The notification number is reset to 0 when the service recovers (after the recovery notification has gone out). Acknowledgements do not cause the notification number to increase, nor do notifications dealing with flap detection or scheduled downtime.
+
+_`$SERVICENOTIFICATIONID$`
+
+A unique number identifying a service notification.
+
+Notification ID numbers are unique across both hosts and service notifications, so you could potentially use this unique number as a primary key in a notification database. Notification ID numbers should remain unique across restarts of the Alignak process, so long as you have state retention enabled.
+
+The notification ID number is incremented by one (1) each time a new service notification is sent out, and regardless of how many contacts are notified.
 
 
 Date/Time Macros
 ----------------
 
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$LONGDATETIME$`                                                Current date/time stamp (i.e. Fri Oct 13 00:30:28 CDT 2000).
-_`$SHORTDATETIME$`                                               Current date/time stamp (i.e. 10-13-2000 00:30:28).
-_`$DATE$`                                                        Date stamp (i.e. 10-13-2000).
-_`$TIME$`                                                        Current time stamp (i.e. 00:30:28).
-_`$TIMET$`                                                       Current time stamp in time_t format (seconds since the UNIX epoch).
-_`$ISVALIDTIME$`  :ref:`09 <annexes/macros_list#note9>`          This is a special on_demand macro that returns a 1 or 0 depending on whether or not a particular time is valid within a specified timeperiod. There are two ways of using this macro:     _ $ISVALIDTIME:24x7$ will be set to "1" if the current time is valid within the "24x7" timeperiod. If not, it will be set to "0".   _ $ISVALIDTIME:24x7:timestamp$ will be set to "1" if the time specified by the "timestamp" argument (which must be in time_t format) is valid within the "24x7" timeperiod. If not, it will be set to "0".
-_`$NEXTVALIDTIME$`  :ref:`09 <annexes/macros_list#note9>`        This is a special on_demand macro that returns the next valid time (in time_t format) for a specified timeperiod. There are two ways of using this macro:     _ $NEXTVALIDTIME:24x7$ will return the next valid time _ from and including the current time _ in the "24x7" timeperiod.   _ $NEXTVALIDTIME:24x7:timestamp$ will return the next valid time - from and including the time specified by the "timestamp" argument (which must be specified in time_t format) - in the "24x7" timeperiod.If a next valid time cannot be found in the specified timeperiod, the macro will be set to "0".
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+_`$LONGDATETIME$`
+
+Current date/time stamp (i.e. Fri Oct 13 00:30:28 CDT 2000).
+
+_`$SHORTDATETIME$`
+
+Current date/time stamp (i.e. 10-13-2000 00:30:28).
+
+_`$DATE$`
+
+Date stamp (i.e. 10-13-2000).
+
+_`$TIME$`
+
+Current time stamp (i.e. 00:30:28).
+_`$TIMET$`
+
+Current time stamp in time_t format (seconds since the UNIX epoch).
+
+_`$ISVALIDTIME$`  :ref:`09 <annexes/macros_list#note9>`
+
+This is a special on_demand macro that returns a 1 or 0 depending on whether or not a particular time is valid within a specified timeperiod. There are two ways of using this macro:     _ $ISVALIDTIME:24x7$ will be set to "1" if the current time is valid within the "24x7" timeperiod. If not, it will be set to "0".   _ $ISVALIDTIME:24x7:timestamp$ will be set to "1" if the time specified by the "timestamp" argument (which must be in time_t format) is valid within the "24x7" timeperiod. If not, it will be set to "0".
+
+_`$NEXTVALIDTIME$`  :ref:`09 <annexes/macros_list#note9>`
+
+This is a special on_demand macro that returns the next valid time (in time_t format) for a specified timeperiod. There are two ways of using this macro:     _ $NEXTVALIDTIME:24x7$ will return the next valid time _ from and including the current time _ in the "24x7" timeperiod.   _ $NEXTVALIDTIME:24x7:timestamp$ will return the next valid time - from and including the time specified by the "timestamp" argument (which must be specified in time_t format) - in the "24x7" timeperiod.If a next valid time cannot be found in the specified timeperiod, the macro will be set to "0".
 
 
 File Macros
@@ -470,14 +901,29 @@ _`$SERVICEPERFDATAFILE$`                                         Not available
 Misc Macros
 -----------
 **Note** this list needs to be updated!
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-_`$PROCESSSTARTTIME$`                                            Time stamp in time_t format (seconds since the UNIX epoch) indicating when the Alignak process was last (re)started. You can determine the number of seconds that Alignak has been running (since it was last restarted) by subtracting $PROCESSSTARTTIME$ from :ref:`$TIMET$ <$TIMET$>`.
-_`$EVENTSTARTTIME$`                                              Time stamp in time_t format (seconds since the UNIX epoch) indicating when the Alignak process starting process events (checks, etc.). You can determine the number of seconds that it took for Alignak to startup by subtracting $PROCESSSTARTTIME$ from $EVENTSTARTTIME$.
-_`$ADMINEMAIL$` (unused)                                         Not available
-_`$ADMINPAGER$` (unused)                                         Not available
-_`$ARGn$`                                                        The nth argument passed to the command (notification, event handler, service check, etc.). Alignak supports up to 32 argument macros ($ARG1$ through $ARG32$).
-_`$USERn$`                                                       The nth user-definable macro. Alignak supports up to 32 user macros ($USER1$ through $USER32$).
-================================================================ ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+_`$PROCESSSTARTTIME$`
+
+Time stamp in time_t format (seconds since the UNIX epoch) indicating when the Alignak process was last (re)started. You can determine the number of seconds that Alignak has been running (since it was last restarted) by subtracting $PROCESSSTARTTIME$ from :ref:`$TIMET$ <$TIMET$>`.
+
+_`$EVENTSTARTTIME$`
+
+Time stamp in time_t format (seconds since the UNIX epoch) indicating when the Alignak process starting process events (checks, etc.). You can determine the number of seconds that it took for Alignak to startup by subtracting $PROCESSSTARTTIME$ from $EVENTSTARTTIME$.
+
+_`$ADMINEMAIL$` (unused)
+
+Not available
+
+_`$ADMINPAGER$` (unused)
+Not available
+
+_`$ARGn$`
+
+The nth argument passed to the command (notification, event handler, service check, etc.). Alignak supports up to 32 argument macros ($ARG1$ through $ARG32$).
+
+_`$USERn$`
+
+The nth user-definable macro. Alignak supports up to 32 user macros ($USER1$ through $USER32$).
 
 
 Notes

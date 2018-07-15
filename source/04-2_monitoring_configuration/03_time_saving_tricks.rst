@@ -47,7 +47,7 @@ Identical services assigned to all the hosts in your monitoring configuration is
     define service{
         host_name               *
         service_description     SOMESERVICE
-        #other service properties ...
+        # other service properties ...
     }
 
 
@@ -63,7 +63,7 @@ If you want to create identical services on numerous hosts or hostgroups, but wo
         host_name             HOST1,HOST2,!HOST3,!HOST4,...,HOSTN
         hostgroup_name        HOSTGROUP1,HOSTGROUP2,!HOSTGROUP3,!HOSTGROUP4,...,HOSTGROUPN
         service_description   SOMESERVICE
-        other service properties ...
+        # other service properties ...
     }
 
 

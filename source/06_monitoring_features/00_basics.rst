@@ -72,7 +72,7 @@ Alignak plugin API is fully compatible with the Nagios one. Thaks to this compat
   * Nagios Downloads Page: http://www.nagios.org/download/
   * NagiosExchange.org: http://www.nagiosexchange.org/
 
-Alignak also provides some chakcks packages. See :ref:`this page for more information <contributing/create-and-push-packs>`.
+Alignak also provides some checks packages. See :ref:`this page for more information <contributing/modules-and-checks-packages>`.
 
 
 How do I use plugin X?

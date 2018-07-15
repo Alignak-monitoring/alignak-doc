@@ -100,25 +100,7 @@ If no ``check_command`` is defined for an host it means that no host check will 
 Internal hosts check command
 ----------------------------
 
-Alignak allows to defined a ``check_command`` that makes it consider an host to have always the same state. Defining the **_host_internal_check** command as the host ``check_command`` will make the host always have the same state and output.
-
-The **_host_internal_check** must be specified with 2 parameters:
-- host state: 0 (Up), 1 (Down), 2 (Down), 3 (Unknown), 4 (Unreachable)
-- host output: string
-
- ::
-
-   define host{
-      host_name                      always-up
-      address                        192.168.1.254
-      check_command                  _host_internal_check!0!I am always Up and running
-   }
-
-   define host{
-      host_name                      always-up
-      address                        192.168.1.254
-      check_command                  _host_internal_check!2!I am always Down
-   }
+Alignak allows to define a ``check_command`` that do not require executing a plugin to make the host state change. For more information see the :ref:`internal checks documentation<alignak_features/internal_checks>`.
 
 
 Host state changes

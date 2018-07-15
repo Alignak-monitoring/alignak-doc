@@ -4,9 +4,9 @@
 Default configuration
 =====================
 
-The default configuration shipped with Alignak is a quite good start to build your own configuration because it defines helpful stuff to set-up a monitoring configuration from scratch.
+The default configuration shipped with Alignak is a quite good start to build your own configuration because it defines helpful stuff to set-up a monitoring configuration from scratch...
 
-.. note: This configuration allows you to run Alignak "out-of-the-box" because it only includes a *localhost* host that is self-checked and always considered to be in a UP state.
+.. note: This configuration allows you to run Alignak "out-of-the-box" because it only includes few hosts that are self-checked thanks to some Alignak internal checks commands.
 
 You will find more information on the content of this configuration and how to adapt to your needs in the :ref:`Alignak configuration chapter<configuration/core>` and in the :ref:`next chapter<extending/updating_default>`.
 
@@ -23,16 +23,16 @@ Main configuration file (alignak.ini)
 -------------------------------------
 The default file shipped when installing is largely commented to explain more about the configuration variables.::
 
-   #
-   # This configuration file is the main Alignak configuration entry point. Each Alignak installer
-   # will adapt the content of this file according to the installation process. This will allow
-   # any Alignak extension or third party application to find where the Alignak components and
-   # files are located on the system.
-   #
-   # ---
-   # This version of the file contains variable that are suitable to run a single node Alignak
-   # with all its daemon using the default configuration existing in the repository.
-   #
+   ;
+   ; This configuration file is the main Alignak configuration entry point. Each Alignak installer
+   ; will adapt the content of this file according to the installation process. This will allow
+   ; any Alignak extension or third party application to find where the Alignak components and
+   ; files are located on the system.
+   ;
+   ; ---
+   ; This version of the file contains variable that are suitable to run a single node Alignak
+   ; with all its daemon using the default configuration existing in the repository.
+   ;
 
 
    ; Declaring script macros
@@ -53,6 +53,11 @@ The default file shipped when installing is largely commented to explain more ab
    ; Two main interests for this section:
    ; - define the global Alignak configuration parameters
    ; - define the common parameters to all the Alignak configuration daemons
+   ;
+   ; -----
+   ; NOTE that defining all the parameters in the DEFAULT section is an easy solution but it will make
+   ; these parameters available in all the daemons. It is also possible to define only the daemon
+   ; specific parameters in the daemon own section
    ;
    [DEFAULT]
    ; --------------------------------------------------------------------
@@ -111,8 +116,12 @@ The default file shipped when installing is largely commented to explain more ab
    ; The Arbiter will report the Alignak status as a passive host check. The Alignak daemons
    ; are considered as some services of an host named with the alignak_name
 
+   ; Even if no reporting is configured, Alignak will raise an event log if log_alignak_checks is set
+
    ; Default is no reporting - else set the monitor URL
    ;alignak_monitor = http://127.0.0.1:7773/ws
+   ; Report every alignak_monitor_period seconds
+   ;alignak_monitor_period=60
    ; Set the username and password to use for the authentication
    ; If not set, no authentication will be used
    ;alignak_monitor_username = admin
@@ -288,14 +297,16 @@ The default file shipped when installing is largely commented to explain more ab
    ; --------------------------------------------------------------------
    ; Retention configuration
    ; ---
+   ; Set this variable to activate the Alignak inner retention module
+   ;retain_state_information=true
+   ; Alignak will persist its live state in a Json file which name is defined in this variable
+   ;state_retention_file=
    ; Number of minutes between 2 retention save, default is 60 minutes
    ; This is only used if retention is enabled
    ; todo: move this parameter to the retention aware modules?
    ; If 0, the retention is disabled, else retention is enabled and the retention period is
    ; defined in the scheduler ticks parameters (see later)
    ;retention_update_interval=60
-   ; Old Nagios unused parameter.
-   ;state_retention_file=
    ; --------------------------------------------------------------------
 
 
@@ -441,11 +452,6 @@ The default file shipped when installing is largely commented to explain more ab
    ; Note that alerts and downtimes are always logged
    ; ---
    ; --------------------------------------------------------------------
-   ; Does a monitoring log raise a brok?
-   ; Set to 1 if you intend to use a broker module that need to subscribe to the monitoring log broks
-   ; Do not set this parameter except if needed
-   ;monitoring_log_broks=0
-
    ; Notifications
    ;log_notifications=1
 
@@ -468,12 +474,17 @@ The default file shipped when installing is largely commented to explain more ab
    ;log_external_commands=1
 
    ; Active checks
-   ; Default it not logging this event, because it makes a quite verbose log
+   ; Default is not logging this event, because it makes a quite verbose log
    ;log_active_checks=0
 
    ; Passive checks
-   ; Default it not logging this event, because it makes a quite verbose log
+   ; Default is not logging this event, because it makes a quite verbose log
    ;log_passive_checks=0
+
+   ; Alignak self checks
+   ; Default is not logging this event, because it makes a quite verbose log
+   ; Note that whatever this variable value, alerts will always be raised
+   ;log_alignak_checks=0
 
    ; Initial states
    ; Default it not logging this event, because it makes a quite verbose log
@@ -522,7 +533,7 @@ The default file shipped when installing is largely commented to explain more ab
    ; - on stop request, the arbiter will inform the daemons that stopping will happen soon
    ; - after the daemons_stop_timeout period, the arbiter will force kill the daemons
    ; that it launched and inform the other daemons that stopping is now effective
-   ;daemons_stop_timeout=15
+   ;daemons_stop_timeout=5
    ;
    ; Delay after daemons got started by the Arbiter
    ; The arbiter will pause a maximum delay of daemons_start_timeout or 0.5 seconds per
@@ -622,9 +633,9 @@ The default file shipped when installing is largely commented to explain more ab
    ; be parsed according to the Nagios parsing rules
    ; ---
    ; First configuration file
-   ;CFG=%(etcdir)s/alignak.cfg
+   ;cfg=%(etcdir)s/alignak.cfg
    ; Second configuration file
-   ;CFG2=%(etcdir)s/macros.cfg
+   ;cfg2=%(etcdir)s/macros.cfg
 
 
 Daemons configuration

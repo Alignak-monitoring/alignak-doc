@@ -57,6 +57,13 @@ If some environment variables exist the Alignak internal metrics will be logged 
         if configured as an empty string, the date will be output as a UTC timestamp
 
 
+Alignak events log
+------------------
+
+The Alignak arbiter stores the most recent monitoring events (eg. alerts, notifications, ...) to be able to provide them on the *alignak_log* HTTP endpoint. The default events stored count is 100. You can change this value thanks to the ``ALIGNAK_EVENTS_LOG_COUNT`` environment variable.
+
+
+
 Log system health
 -----------------
 
@@ -97,8 +104,7 @@ Log Scheduling loop
 
 Defining the ``ALIGNAK_LOG_LOOP`` environment variable will make Alignak add some log in the scheduler daemons log files to inform about the checks that are scheduled.
 
-As an example:
-::
+As an example::
 
     # Define environment variable
     export TEST_LOG_LOOP=1

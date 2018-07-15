@@ -8,7 +8,7 @@ The core configuration part describes the Alignak framework infrastructure (whic
 
 The Alignak environment file (*alignak.ini*) aims to contain all the Alignak configuration, except the monitored system that may be configured separately in Nagios legacy configuration (cfg) files or in the Alignak backend.
 
-If your monitored system configuration is stored in the Alignak backend, the *alignak.ini* file is the only configuration file you will have to manage ;)
+If your monitored system configuration is stored in the Alignak backend, the *alignak.ini* file is (almost) the only configuration file you will have to manage ;)
 
 The Alignak environment file contains the necessary information about:
 
@@ -23,7 +23,7 @@ All the Alignak configuration variables are commented  in the default shipped co
 
 When an Alignak daemon loads its configuration, it will try to open the file which name is provided on the command line with the `-e` / `--environment` parameter. If it exists an *alignak.d* sub-directory in the same directory as the environment file, all the **.ini* files located in this sub-directory will also be loaded and parsed.
 
-When updating the configuration with a new daemon or a new, it is cleaner/easier to add a new file in the *alignak.d* rather than modifying a unique configuration file;)
+When updating the configuration with a new daemon or new parameters, it is cleaner/easier to add a new file in the *alignak.d* rather than modifying a unique configuration file;)
 
 The default shipped example configuration is structured as::
 
@@ -31,6 +31,8 @@ The default shipped example configuration is structured as::
     alignak.d/
         daemons.ini
         modules.ini
+
+.. warning:: all the default shipped files may be updated when you will update Alignak. As such, all the modifications you did in these files will be lost!
 
 Configuration sections
 ----------------------

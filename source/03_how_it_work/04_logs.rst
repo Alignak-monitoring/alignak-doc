@@ -15,7 +15,7 @@ In case of any problem with Alignak, first make sure that there is no ERROR and/
 Monitoring log
 --------------
 
-The monitorig log is the very first information source about Alignak activity. You will find:
+The Alignak event log is the very first information source about Alignak activity. You will find:
 
     * HOST ALERT information
     * SERVICE ALERT information

@@ -1,8 +1,10 @@
 .. _annexes/plugin_api:
 
-==================
-Alignak plugin API
-==================
+=========================
+Alignak check plugins API
+=========================
+
+Alignak aims at maintaining compatibilty with Nagios. As such, all Nagios available plugins are fully compatible and can be used with Alignak.
 
 
 Some resources

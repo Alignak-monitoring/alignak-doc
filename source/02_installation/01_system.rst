@@ -7,7 +7,6 @@ Installation with system packages
 
 Alignak packaging and download repositories for Linux/Unix is done thanks to the `Bintray software distribution <https://bintray.com/alignak/>`_.
 
-**Note:** We are using a private repository on bintray and did not yet set-up all the authentication stuff... coming soon.
 
 .. _Installation/requirements:
 
@@ -285,7 +284,7 @@ The alignak repository contains an rc.d script that allows running Alignak daemo
 
 To install the system service startup script you must::
 
-      sudo cp /usr/local/share/alignak/bin/rc.d/alignak-daemon /usr/local/etc/rc.d/
+      sudo cp /usr/local/share/alignak/bin/rc.d/alignak /usr/local/etc/rc.d/
 
 You can also run the post-installation script that is shipped with the application. Run::
 

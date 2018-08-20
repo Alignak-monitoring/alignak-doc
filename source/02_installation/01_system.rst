@@ -251,11 +251,13 @@ This will install the Alignak required Python packages. This script is copied du
 
 .. note:: as stated :ref:`formerly in this document <Installation/requirements>`, this hack is necessary to be sure that we use the expected versions of the needed Python libraries...
 
+.. _Installation/services:
+
 To terminate the installation of the system services you must::
 
-   sudo cp /usr/local/share/alignak/bin/systemd/alignak* /lib/systemd/system
+   sudo cp /usr/local/share/alignak/bin/systemd/alignak* /etc/systemd/system
 
-   ll /lib/systemd/system
+   ll /etc/systemd/system
       -rw-r--r--. 1 root root  777 May 24 17:48 /lib/systemd/system/alignak-arbiter@.service
       -rw-r--r--. 1 root root  770 May 24 17:48 /lib/systemd/system/alignak-broker@.service
       -rw-r--r--. 1 root root  770 May 24 17:48 /lib/systemd/system/alignak-poller@.service

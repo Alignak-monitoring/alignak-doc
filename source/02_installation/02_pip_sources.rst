@@ -14,7 +14,11 @@ If your system does not yet include the Python pip tool, here is an installation
 **For Debian-like Linux**
  ::
 
+    # Python 2
     sudo apt install python-pip
+
+    # Python 3
+    sudo apt install python3-pip
 
 
 **For RHEL-like Linux**
@@ -26,7 +30,11 @@ On a RHEL (CentOS, Oracle Linux,...), the Python pip installer tool is not inclu
     sudo yum install epel-release
     sudo yum -y update
 
+    # Python 2
     sudo yum install python-pip
+
+    # Python 3
+    sudo yum install python3-pip
 
 
     # On some older versions, it may be necessary to install extra compiler tools for the python *psutil* package::
@@ -47,19 +55,21 @@ Installation with pip
 
 The installation from the PyPi repository is very simple, use this command::
 
-      sudo pip install alignak
+    # Python 2
+    sudo pip install alignak
+    # Python 3
+    sudo pip3 install alignak
 
 This will get and install the most recent `alignak` package found on your default PyPi configuration.
 
+After the installation, some files are shipped in the */usr/local/share/alignak* directory: a default configuration, system service units files, man pages, ...
 
-If you wish a specific version, specify the version requirements on the command line::
-
-      sudo pip install alignak==1.1.0rc6
+.. note:: If you wish a specific version, specify the version requirements on the command line: ``sudo pip install alignak==2.0.0rc3``
 
 
-No matter why, but you may need to resinstall all the Python Alignak dependencies. You can easily do it with this command line::
+No matter why, but you may need to reinstall all the Python Alignak dependencies. You can easily do it with this command line::
 
-      sudo pip install -r /usr/local/share/alignak/requirements.txt
+    sudo pip install -r /usr/local/share/alignak/requirements.txt
 
 
 .. tip:: The Alignak project team maintains Alignak and all the Alignak related stuff on its `PyPI page <https://pypi.org/user/Alignak/>`_. All the published versions are available on the `PyPI repository <https://pypi.org/search/?q=alignak>`_ and are tagged ``alignak``.
@@ -88,7 +98,7 @@ Get the source archive on the project `GitHub releases page <https://github.com/
     ...
     Successfully installed ......
 
-To start Alignak as system services, you must install the shipped service units. The procedure is documented :ref: `here<Installation/services>`.
+To start Alignak as system services, you must install the shipped service units. The procedure is documented :ref:`here<Installation/services>`.
 
 .. note:: because of some `pip` specific behavior, installing Alignak requires to be connected as a user (and not as root) to run the `pip` command. If you really need to install from a root account, use ``pip install . -v --install-option='--prefix=/usr/local'``
 

@@ -116,13 +116,20 @@ You get this error::
       Error message: Error changing to working directory: /usr/local//var/run/alignak. Error: [Errno 2] No such file or directory: '/usr/local//var/run/alignak'. Check the existence of /usr/local//var/run/alignak and the alignak/alignak account permissions on this directory.
 
 
+Alignak arbiter is trying to create some directories (*/usr/local/var/log/alignak* and * /usr/local/var/run/alignak*) but it is not allowed to because of the current user account credentials.
+
+If you are usually using the Aligak system services, you should already have some existing directories: */var/log/alignak* and */var/run/alignak*. You only have ti update the configuration file accordingly::
+
+    _dist_RUN=/var/run/alignak
+    _dist_LOG=/var/log/alignak
+
 Create the directories and make sure that the current user account is allowed to write in those directories. The best solution is to::
 
    sudo mkdir /usr/local/var/run/alignak
-   chown alignak:wheel /usr/local/var/run/alignak
-   chmod 775 /usr/local/var/run/alignak
+   sudo chown alignak:wheel /usr/local/var/run/alignak
+   sudo chmod 775 /usr/local/var/run/alignak
    sudo mkdir /usr/local/var/log/alignak
    chown alignak:wheel /usr/local/var/log/alignak
    chmod 775 /usr/local/var/log/alignak
 
-Because your current user account is ``sudo`` enabled, make the group
+Because your current user account is ``sudo`` enabled, use the *wheel* group.

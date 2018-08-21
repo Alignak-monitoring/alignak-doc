@@ -18,7 +18,7 @@ Some system requirements are needed to install Alignak:
    * python 2.7 or 3.5/3.6
    * python pip
 
-The Python `pip` tool is necessary to install the Python dependencies needed by Alignak. This tricky hack is necessary because all the required packages are not always avalable in the distribution repositories. Installing Python pip on different systems is :ref:`documented here <Installation/python_pip>`.
+The Python `pip` tool is necessary to install the Python dependencies needed by Alignak. Installing Python pip on different systems is :ref:`documented here <Installation/python_pip>`.
 
 .. note:: for sure, the required Python packages should be made available in the Alignak repositories, but it is quite a lot of work and we do not have enough time for this... any help appreciated for this;)
 
@@ -99,11 +99,11 @@ Once the download sources are set, you can simply use the standard package tool 
 
 Or you can simply use the standard package tool to install Alignak::
 
-   sudo apt install alignak
+    sudo apt install alignak
 
-   # Check Alignak installation
-   # It copied the default shipped files and sample configuration.
-   ll /usr/local/share/alignak/
+    # Check Alignak installation
+    # It copied the default shipped files and sample configuration.
+    ll /usr/local/share/alignak/
       total 24
       drwxrwxr-x 4 root root 4096 juin  19 19:53 ./
       drwxr-xr-x 9 root root 4096 juin  19 19:53 ../
@@ -112,8 +112,11 @@ Or you can simply use the standard package tool to install Alignak::
       -rwxrwxr-x 1 root root  531 juin  19 09:49 post-install.sh*
       -rw-rw-r-- 1 root root 1889 juin  19 09:49 requirements.txt
 
-   # It installed the Alignak systemctl services
-   ll /lib/systemd/system/alignak*
+    # Install the man pages
+    sudo cp /usr/local/share/alignak/bin/manpages/manpages/* /usr/share/man/man8
+
+    # It installed the Alignak systemctl services
+    ll /lib/systemd/system/alignak*
       -rw-r--r-- 1 root root  777 juin  19 09:50 /lib/systemd/system/alignak-arbiter@.service
       -rw-r--r-- 1 root root  770 juin  19 09:50 /lib/systemd/system/alignak-broker@.service
       -rw-r--r-- 1 root root  770 juin  19 09:50 /lib/systemd/system/alignak-poller@.service
@@ -122,9 +125,9 @@ Or you can simply use the standard package tool to install Alignak::
       -rw-r--r-- 1 root root  791 juin  19 09:50 /lib/systemd/system/alignak-scheduler@.service
       -rw-r--r-- 1 root root 1286 juin  19 09:50 /lib/systemd/system/alignak.service
 
-   # Alignak service status
-   sudo systemctl status alignak
-   ● alignak.service - Alignak daemons instance
+    # Alignak service status
+    sudo systemctl status alignak
+    ● alignak.service - Alignak daemons instance
       Loaded: loaded (/lib/systemd/system/alignak.service; enabled; vendor preset: enabled)
       Active: inactive (dead) since mar. 2018-06-19 19:53:33 CEST; 7min ago
      Process: 13321 ExecStart=/bin/echo Starting Alignak daemons... (code=exited, status=0/SUCCESS)
@@ -182,7 +185,6 @@ If you wish to use the non-stable versions (eg. current develop or any other spe
    enabled=1
 
 The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are `available on this page <contributing/release_cycle>`_.
-
 
 
 Once the download sources are set, you can simply use the standard package tool to have more information about Alignak packages and available versions.
@@ -243,37 +245,9 @@ Or you can simply use the standard package tool to install Alignak and its depen
       -rwxrwxr-x. 1 root root 2179 Jun 22  2018 post-install.sh
       -rw-rw-r--. 1 root root 1889 Jun 22  2018 requirements.txt
 
-Contrary to the debian installer, no post-installation script is started nor system services are installed. You must then::
+Contrary to the debian installer, no system services are installed. You must then::
 
    sudo /usr/local/share/alignak/post-install.sh
-
-This will install the Alignak required Python packages. This script is copied during the installation in the default installation directory: */usr/local/share/alignak*. It is using the Python pip tool to get the Python packages listed in the default installation directory *requirements.txt* file.
-
-.. note:: as stated :ref:`formerly in this document <Installation/requirements>`, this hack is necessary to be sure that we use the expected versions of the needed Python libraries...
-
-.. _Installation/services:
-
-To terminate the installation of the system services you must::
-
-   sudo cp /usr/local/share/alignak/bin/systemd/alignak* /etc/systemd/system
-
-   ll /etc/systemd/system
-      -rw-r--r--. 1 root root  777 May 24 17:48 /lib/systemd/system/alignak-arbiter@.service
-      -rw-r--r--. 1 root root  770 May 24 17:48 /lib/systemd/system/alignak-broker@.service
-      -rw-r--r--. 1 root root  770 May 24 17:48 /lib/systemd/system/alignak-poller@.service
-      -rw-r--r--. 1 root root  805 May 24 17:48 /lib/systemd/system/alignak-reactionner@.service
-      -rw-r--r--. 1 root root  784 May 24 17:48 /lib/systemd/system/alignak-receiver@.service
-      -rw-r--r--. 1 root root  791 May 24 17:48 /lib/systemd/system/alignak-scheduler@.service
-      -rw-r--r--. 1 root root 1286 May 24 17:48 /lib/systemd/system/alignak.service
-
-   sudo systemctl enable alignak
-      Created symlink from /etc/systemd/system/multi-user.target.wants/alignak.service to /usr/lib/systemd/system/alignak.service.
-
-.. note:: more information about the default shipped configuration is available :ref: `on this page <configuration/default_configuration>`.
-
-
-Once you achieved this tricky part, running Alignak daemons is easy. All you need is to inform the Alignak daemons where they will find the configuration to use and start the `alignak` system service. All this is explained :ref:`in this chapter <run_alignak/services_systemd>`.
-
 
 .. _Installation/freebsd:
 

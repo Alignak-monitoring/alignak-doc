@@ -4,7 +4,7 @@
 Running Alignak
 ===============
 
-.. note:: this documentation is assuming that the Alignak configuration used for running is the default shipped configuration. Thus all examples are using */usr/local/share/alignak" directory... adapt the example scripts to your own configuration.
+.. note:: this documentation is assuming that the Alignak configuration used for running is the default shipped configuration. Thus all examples are using */usr/local/share/alignak* directory... please adapt the example scripts to your own configuration.
 
 
 .. _run_alignak/services:
@@ -13,11 +13,44 @@ Running Alignak
 Systemd services
 ================
 
-If your system is a recent Linux distribution (Debian 7, Ubuntu 16) using *systemctl*, and you installed from the distro packaging, you should have installed some system services that allow starting Alignak daemons with the standard `systemctl` command.
+If your system is a recent Linux distribution (Debian 7, Ubuntu 16, CentOS 7) using *systemd*, and you installed from the distro packaging, you should have installed some system services that allow starting Alignak daemons with the standard `systemctl` command.
 
-All you need to do is to inform Alignak daemons where they should find the main configuration file. Using the ``ALIGNAK_CONFIGURATION_FILE`` environment variable is the simplest solution.
+Installing systemd units
+------------------------
+.. _Installation/services:
 
-This variable is configured, as default, in the Alignak service units::
+The Alignak installation process ships some systemd unit files in the */usr/local/share/alignak/bin* directory. To install the services, if not yet installed), you must::
+
+    # Install the man pages
+    sudo cp /usr/local/share/alignak/bin/manpages/manpages/* /usr/share/man/man8
+
+    # Copy the systemd unitshtop
+    sudo cp /usr/local/share/alignak/bin/systemd/alignak* /etc/systemd/system
+
+    ll /etc/systemd/system
+      -rw-r--r--. 1 root root  777 May 24 17:48 /lib/systemd/system/alignak-arbiter@.service
+      -rw-r--r--. 1 root root  770 May 24 17:48 /lib/systemd/system/alignak-broker@.service
+      -rw-r--r--. 1 root root  770 May 24 17:48 /lib/systemd/system/alignak-poller@.service
+      -rw-r--r--. 1 root root  805 May 24 17:48 /lib/systemd/system/alignak-reactionner@.service
+      -rw-r--r--. 1 root root  784 May 24 17:48 /lib/systemd/system/alignak-receiver@.service
+      -rw-r--r--. 1 root root  791 May 24 17:48 /lib/systemd/system/alignak-scheduler@.service
+      -rw-r--r--. 1 root root 1286 May 24 17:48 /lib/systemd/system/alignak.service
+
+    sudo systemctl enable alignak
+      Created symlink from /etc/systemd/system/multi-user.target.wants/alignak.service to /usr/lib/systemd/system/alignak.service.
+
+.. note:: more information about the default shipped configuration is available :ref: `on this page <configuration/default_configuration>`.
+
+
+Once you achieved this tricky part, running Alignak daemons is easy. All you need is to inform the Alignak daemons where they will find the configuration to use and start the `alignak` system service. All this is explained :ref:`in this chapter <run_alignak/services_systemd>`.
+
+
+
+Configuring Alignak
+-------------------
+You need to inform Alignak daemons where they should find the main configuration file. Using the ``ALIGNAK_CONFIGURATION_FILE`` environment variable is the simplest solution.
+
+This variable is configured, as default, in each Alignak service unit file::
 
    [Service]
    # Environment variables - may be overriden in the /etc/default/alignak
@@ -26,7 +59,7 @@ This variable is configured, as default, in the Alignak service units::
    Environment=ALIGNAK_GROUP=alignak
    EnvironmentFile=-/etc/default/alignak
 
-To change its value, you can create an environment configuration file in */etc/default/alignak*::
+To change its value, you need to create an environment configuration file: */etc/default/alignak*::
 
    ALIGNAK_CONFIGURATION_FILE=/usr/local/etc/my-alignak.ini
    ALIGNAK_USER=my-alignak
@@ -47,6 +80,8 @@ And to manage Alignak services::
    # Stop Alignak daemons
    sudo systemctl stop alignak
 
+Alignak daemons
+---------------
 The target and templating features of systemctl are used to declare all the daemons that need to be started before starting the Arbiter. See the service units installed files in */lib/systemd/system/* for more information and configuration.
 
 .. note:: the *alignak.service* defines the daemons that will be involved in the monitoring configuration. Especially, this file allows to define several instances of each daemon that use each daemon type service template.
@@ -233,7 +268,7 @@ As an example, the content of an */etc/rc.conf.d/alignak*::
    alignak_receiver_receiver_nsca="17773"
 
 
-.. tip:: rather than updatnig the */etc/rc.conf* file, you can create an */etc/rc.conf.d/alignak* file for all the configuration variables!
+.. tip:: rather than updating the */etc/rc.conf* file, you can create an */etc/rc.conf.d/alignak* file for all the configuration variables!
 
 .. tip:: configure ``rc_info=YES`` in the */etc/rc.conf* file to have some information message on the console and in the system log. You can also configure the ``rc_debug=YES`` to have more detailed information about each alignak daemon configuration!
 

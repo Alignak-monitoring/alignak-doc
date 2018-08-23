@@ -24,7 +24,7 @@ The Alignak installation process ships some systemd unit files in the */usr/loca
     # Install the man pages
     sudo cp /usr/local/share/alignak/bin/manpages/manpages/* /usr/share/man/man8
 
-    # Copy the systemd unitshtop
+    # Copy the systemd units
     sudo cp /usr/local/share/alignak/bin/systemd/alignak* /etc/systemd/system
 
     ll /etc/systemd/system

@@ -32,12 +32,12 @@ The Alignak backend is a REST backend dedicated to the Alignak framework. It is 
 
 More information is available in the `project repository <https://github.com/Alignak-monitoring-contrib/alignak-backend>`_.
 
-The backend full documentation is available on http://alignak-backend.readthedocs.io/en/latest/intro.html
+The backend full documentation is available on https://alignak-backend.readthedocs.io/en/latest/index.html
 
 REST API
 ========
 
-The Alignak backend, based on the Python Eve frameworks, implements a complete REST API to manage the monitored objects data model.
+The Alignak backend, based on the Python Eve framework, implements a complete REST API to manage the monitored objects data model.
 
 The detailed API is available in the backend documentation.
 
@@ -48,22 +48,19 @@ Using the backend with Alignak
 Installing the Alignak backend is an easy operation.
 The different installation methods are detailed in the documentation but the most easy way is to::
 
-    pip install alignak-backend
+    # On Debian base distro
+    # Assuming that you already have a running MongoDB instance
+    sudo apt install uwsgi uwsgi-plugin-python alignak-backend
 
 
 Once installed, the backend is ready to run and you can start with::
 
-    # As a single process for test (without uWsgi)
-    alignak-backend
-
-    # As a multi-process uWsgi application
-    alignak-backend-uwsgi
+    sudo systemctl enable alignak-backend
+    sudo systemctl start alignak-backend
 
 
 Configuring the Alignak backend is made easy thanks to a *settings.json* file.
 The default configuration makes the backend run on the local interface, on port 5000, and it creates an admin user that can be used to log-in.
-
-**Note**: to be updated after the backend packaging ...
 
 Once installed, the backend needs to be related to Alignak daemons. This is achieved thanks to the `Alignak backend`_ modules.
 

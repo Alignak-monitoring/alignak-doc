@@ -98,11 +98,12 @@ This is because you are starting the Alignak arbiter as a root user and you did 
 
 **Solutions**:
 
- - configure the ``user`` and ``group`` variables with a user account in the alignak configuration file.
- - define the ``ALIGNAK_USER`` and ``ALIGNAK_GROUP`` environment variables
+ - confirm that you really need to start the Alignak arbiter as a root user. Are you sure you need this?
+ - configure the ``user`` and ``group`` variables with a user account in the *alignak.ini* configuration file.
+ - or define the ``ALIGNAK_USER`` and ``ALIGNAK_GROUP`` environment variables
 
-Directory access rights
------------------------
+Directory missing
+-----------------
 
 You get this error::
 
@@ -118,12 +119,12 @@ You get this error::
 
 Alignak arbiter is trying to create some directories (*/usr/local/var/log/alignak* and * /usr/local/var/run/alignak*) but it is not allowed to because of the current user account credentials.
 
-If you are usually using the Aligak system services, you should already have some existing directories: */var/log/alignak* and */var/run/alignak*. You only have ti update the configuration file accordingly::
+If you are usually using the Alignak system services, you should already have some existing directories: */var/log/alignak* and */var/run/alignak*. You only have to update the configuration file accordingly::
 
     _dist_RUN=/var/run/alignak
     _dist_LOG=/var/log/alignak
 
-Create the directories and make sure that the current user account is allowed to write in those directories. The best solution is to::
+Else, you should create the directories and make sure that the current user account is allowed to write in those directories. The best solution is to::
 
    sudo mkdir /usr/local/var/run/alignak
    sudo chown alignak:wheel /usr/local/var/run/alignak
@@ -132,4 +133,34 @@ Create the directories and make sure that the current user account is allowed to
    chown alignak:wheel /usr/local/var/log/alignak
    chmod 775 /usr/local/var/log/alignak
 
-Because your current user account is ``sudo`` enabled, use the *wheel* group.
+Because your current user account is ``sudo`` enabled, use the *wheel* group. Else, set appropriate acces rights.
+
+Directory access rights
+-----------------------
+
+You get this error::
+
+    alignak-arbiter -V -e /usr/local/share/alignak/etc/alignak.ini
+        Loading configuration files: ['/usr/local/share/alignak/etc/alignak.ini', '/usr/local/share/alignak/etc/alignak.d/daemons.ini', '/usr/local/share/alignak/etc/alignak.d/modules.ini']
+        Daemon 'arbiter-master' logger configuration file: /usr/local/share/alignak/etc/./alignak-logger.json
+        Daemon 'arbiter-master' pid file: /usr/local/var/run/alignak/arbiter-master.pid
+        Cannot call the additional groups setting with initgroups: Operation not permitted
+        Error message: Error opening pid file: /usr/local/var/run/alignak/arbiter-master.pid. Error: [Errno 13] Permission denied: '/usr/local/var/run/alignak/arbiter-master.pid'. Check the fred:fred account permissions to write this file.
+
+        Alignak arbiter is trying to create some directories (*/usr/local/var/log/alignak* and * /usr/local/var/run/alignak*) but it is not allowed to because of the current user account credentials.
+
+Checking the directory::
+
+    ll /usr/local/var/run/
+        total 12
+        drwxr-xr-x 3 root    root    4096 août  21 08:21 ./
+        drwxr-xr-x 4 root    root    4096 août  21 08:21 ../
+        drwxrwxr-x 2 alignak alignak 4096 août  21 08:21 alignak/
+
+
+**Solutions**:
+
+Your current user account is probably not a member of the ``alignak`` users group. Set it as a member::
+
+    sudo usermod -a -G alignak my_user
+    # Do not forget to logout and login again... ;)

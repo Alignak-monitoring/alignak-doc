@@ -245,9 +245,11 @@ Or you can simply use the standard package tool to install Alignak and its depen
       -rwxrwxr-x. 1 root root 2179 Jun 22  2018 post-install.sh
       -rw-rw-r--. 1 root root 1889 Jun 22  2018 requirements.txt
 
-Contrary to the debian installer, no system services are installed. You must then::
+.. warning:: on some CentOS versions, the installation of the `setproctitle` Python library is raising an error and requiring *gcc*! To cope with this problem, you must ` sudo yum install python-devel` and then ` sudo yum reinstall python-alignak` !
 
-   sudo /usr/local/share/alignak/post-install.sh
+.. note:: any help for a correct RPM packaging will be much appreciated ;)
+
+Contrary to the debian installer, no system services are installed. You must then follow :ref:`this procedure <Installation/services>`.
 
 .. _Installation/freebsd:
 

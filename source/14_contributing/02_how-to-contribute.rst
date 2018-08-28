@@ -26,9 +26,9 @@ Roadmap and versioning
 Release strategy
 ----------------
 
-Alignak has no strict schedule for now on release date. The very first main release was released after almost two years of intense cleaning, coding and environment testing. The current version is 1.1 and it is a strongly improved and stable version.
+Alignak has no strict schedule for now on release date. The very first main release was released after almost two years of intense cleaning, coding and environment testing. The current version is the second major version (2.0) and it is a strongly improved and stable version.
 
-The project roadmap is managed in the github repository thanks to `milestones <https://github.com/Alignak-monitoring/alignak/milestones>`_ and `specific issues <https://github.com/Alignak-monitoring/alignak/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+roadmap>`_ tagged with the `roadmap` label Feature request and specification is discussed there. A technical specifciation or point of view about a specific feature is discussed in a dedicated issue.
+The project roadmap is managed in the github repository thanks to `milestones <https://github.com/Alignak-monitoring/alignak/milestones>`_ and `specific issues <https://github.com/Alignak-monitoring/alignak/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+roadmap>`_ tagged with the `roadmap` label Feature request and specification is discussed there. A technical specification or point of view about a specific feature is discussed in a dedicated issue.
 
 Versioning scheme
 -----------------

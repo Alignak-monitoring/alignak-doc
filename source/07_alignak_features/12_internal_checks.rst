@@ -26,6 +26,13 @@ If the plugin output is an empty string, Alignak will build an output message as
 
 If the plugin exit code is composed as a comma separated list, Alignak will randomly choose one of the values as the exit code. This allows to use internal checks to simply simulate hosts states changing.
 
+When several values are used, the first value is always the most probable one that will be used. The choice rules are:
+
+- 80 / 20 for 2 values
+- 70 / 20 /10 for 3 values
+- 60 / 20 / 10 / 10 for 4 values
+- 40 / 20 / 20 / 10 / 10 for 5 values
+
 .. note:: If the syntax of this command is not correct, the check will be considered as and unknown check and the output will be *Malformed host internal check*.
 
  ::
@@ -114,12 +121,20 @@ Internal services check command
 Alignak allows to define a ``check_command`` that makes it consider a service to have always the same state. Defining the **_service_internal_check** command as the service ``check_command`` will make the service always have the same state and output.
 
 The **_service_internal_check** must be specified with 2 parameters:
+
 - plugin exit code: 0 (Up), 1 (Warning), 2 (Critical), 3 (Unknown), 4 (Unreachable)
 - plugin output: string
 
 If the plugin output is an empty string, Alignak will build an output message as ``Service internal check result: X`` where X is the plugin exit code.
 
 If the plugin exit code is composed as a comma separated list, Alignak will randomly choose one of the values as the exit code. This allows to use internal checks to simply simulate services states changing.
+
+When several values are used, the first value is always the most probable one that will be used. The choice rules are:
+
+- 80 / 20 for 2 values
+- 70 / 20 /10 for 3 values
+- 60 / 20 / 10 / 10 for 4 values
+- 40 / 20 / 20 / 10 / 10 for 5 values
 
 .. note:: If the syntax of this command is not correct, the check will be considered as and unknown check and the output will be *Malformed host internal check*.
 

@@ -43,6 +43,8 @@ This variable overrides the corresponding `logger_configuration` :ref:`configura
 Alignak internal metrics
 ------------------------
 
+When the Alignak internal metrics are sent to Graphite, the daemons will send the metrics to Graphite in bulk mode. A flushing happens periodically but the metrics are pushed only if the internal metrics queue contains a minimum of `` ALIGNAK_STATS_FLUSH_COUNT`` metrics to be sent. The default value is 256 and it can be configured thanks to the environment variable.
+
 If some environment variables exist the Alignak internal metrics will be logged to a file in append mode:
 
     ``ALIGNAK_STATS_FILE``
@@ -55,6 +57,13 @@ If some environment variables exist the Alignak internal metrics will be logged 
         defaults to '%Y-%m-%d %H:%M:%S'
         date is UTC
         if configured as an empty string, the date will be output as a UTC timestamp
+
+.. warning:: storing the internal metrics to a file is really verbose! Use this feature with much caution and only for developement or tests purpose.
+
+When the Alignak :ref:`inner metrics module <alignak_features/inner_modules>`_ is enabled, some more environment variables may be used to configure the module. The value in these variables takes precedence on the Alignak configuration of the module:
+
+    ``ALIGNAK_HOSTS_STATS_FILE``
+        writes the metrics in append mode in the file which full path name is defined in the variable
 
 
 Alignak events log
@@ -157,7 +166,9 @@ As an example::
 Log Alignak daemons loop
 ------------------------
 
-Defining the ``ALIGNAK_LOG_ACTIVITY`` environment variable will make Alignak daemons periodically log an information log as a keep alive. The integer value of this variable defines the period count. Each period count, an information log is raised::
+Defining the ``ALIGNAK_LOG_ACTIVITY`` environment variable will make Alignak daemons periodically log an information log as a keep alive. The integer value of this variable defines the period count. Each period count, an information log is raised. Per default, the daemons will make a log more or less every hour (3600 loop turns).
+
+ ::
 
       ==> /usr/local/var/log/alignak/receiver-master.log <==
       [2018-06-16 17:16:37] INFO: [receiver-master.alignak.daemon] Daemon receiver-master is living: loop #18001 ;)

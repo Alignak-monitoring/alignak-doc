@@ -5,7 +5,7 @@ Installation with system packages
 =================================
 
 
-Alignak packaging and download repositories for Linux/Unix is done thanks to the `Bintray software distribution <https://bintray.com/alignak/>`_.
+Alignak packaging and download repositories for Linux/Unix is done thanks to the `Bintray software distribution <https://bintray.com/alignak/>`_. Check the [Alignak Bintray home page](https://bintray.com/alignak) for all the available packages.
 
 
 .. _Installation/requirements:
@@ -24,6 +24,7 @@ The Python `pip` tool is necessary to install the Python dependencies needed by 
 
 
 Alignak is an application started from a privileged user account and it needs to use a low privileged user account. We recommend creating a user account identified as (in the default shipped configuration) *alignak* member of a group *alignak*.
+
  ::
 
       # Create alignak system user/group for Alignak application
@@ -34,6 +35,7 @@ Alignak is an application started from a privileged user account and it needs to
 .. note:: the post installation Alignak script installed with distro packaging will create a default `alignak` user account if it does not yet exist on your system.
 
 If you intend to use the Nagios checks plugins and if they are installed on your system, you should invite the user `alignak` into the `nagios` group. Most often, the installation of the Nagios checks plugins create a `nagios` user member of the `nagios` group...
+
  ::
 
       sudo usermod -a -G nagios alignak
@@ -188,6 +190,7 @@ The Alignak packages repositories contain several version of the application. So
 
 
 Once the download sources are set, you can simply use the standard package tool to have more information about Alignak packages and available versions.
+
  ::
 
    yum search alignak
@@ -232,6 +235,7 @@ Once the download sources are set, you can simply use the standard package tool 
 
 
 Or you can simply use the standard package tool to install Alignak and its dependencies.
+
  ::
 
    sudo yum install alignak

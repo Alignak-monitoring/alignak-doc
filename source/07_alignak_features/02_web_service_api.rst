@@ -41,6 +41,18 @@ Each daemon has its own address:port it listens to. As per defaut, the configura
 
 A request on the daemon ``/`` endpoint returns the daemon identity in a JSON object.
 
+ ::
+
+   {
+      "type": "arbiter",
+      "name": "arbiter-master",
+      "alignak": "My Alignak",
+      "version": "1.1.0",
+      "start_time": 1522385883,
+      "running_id": 1522385883.123456
+   }
+
+
 A request on the daemon ``/api`` endpoint returns an object containing some information about the daemon available services:
 
    - *doc* for a global API information
@@ -400,18 +412,4 @@ The `event` data is an event notification parameter.
 The `parameters` data is only a text string that append information to the `event`.
 
 As of now, the Arbiter will only log the request and provoke a configuration reload if `event` is *creation* or *deletion*.
-
-Alignak daemons information
----------------------------
-
-``http://daemon:port/identity`` returns information about the daemon and Alignak version::
-
-   {
-      "type": "arbiter",
-      "name": "arbiter-master",
-      "alignak": "My Alignak",
-      "version": "1.1.0",
-      "start_time": 1522385883,
-      "running_id": 1522385883.123456
-   }
 

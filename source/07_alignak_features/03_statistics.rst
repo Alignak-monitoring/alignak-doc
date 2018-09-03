@@ -104,17 +104,13 @@ Alignak daemons statistics dictionary:
         - retention.hosts
         - retention.services
 
-    - scheduler load (gauge) - seems to be buggy :(
-        - load.sleep
-        - load.average
-        - load.load
+    - dropped items, on too much load, the scheduler may drop some items
+        - activity.broks_dropped: dropped broks
+        - activity.checks_dropped: checks dropped
+        - activity.actions_dropped: actions dropped
 
-    - scheduler checks (gauge)
-        - checks.total
-        - checks.scheduled
-        - checks.inpoller
-        - checks.zombie
-        - actions.notifications
+    - scheduler activity (gauge)
+        - activity.*, checks, broks, results, ...
 
     - first_scheduling (timer) - for the first scheduling on scheduler start
 
@@ -148,6 +144,7 @@ Alignak daemons statistics dictionary:
         - send_broks_to_modules
         - get_objects_from_from_queues
         - get_latency_average_percentile
+
 
 * satellite (poller, reactionner):
     - con-init.scheduler (timer) - scheduler connection duration

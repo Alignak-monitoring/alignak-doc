@@ -80,7 +80,9 @@ Defining the ``ALIGNAK_SYSTEM_MONITORING`` environment variable will make Aligna
 
 On each activity loop end, if the report period is happening, the arbiter gets the current cpu, memory and disk information from the OS and dumps them to the information log. The dump is formatted as a Nagios plugin output with performance data.
 
-When this variable is defined, the default report period is set to 5. As such, each 5 loop turn, there is a report in the information log. If this variable contains an integer value, this value will define the report period in seconds.::
+When this variable is defined, the default report period is set to 5. As such, each 5 loop turn, there is a report in the information log. If this variable contains an integer value, this value will define the report period in seconds.
+
+ ::
 
    # Define environment variable
    setenv ALIGNAK_SYSTEM_MONITORING 5

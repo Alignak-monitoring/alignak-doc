@@ -12,32 +12,26 @@ Alignak framework configuration
     \newpage
 
 
-The Alignak framework configuration is split in two main parts:
-
-   - the core configuration
-   - the modules configuration.
-
-All the configurations are stored in the folder */usr/local/etc/alignak/* (or */etc/alignak/*), even the monitoring objects (what is monitored and how it is). Monitoring objects configuration, probably the most important for Alignak's users, is described in  :ref:`the monitored objects dedicated chapter <monitoring_configuration/index>`.
-
-Each main part of the Alignak framework configuration is described in the following chapters :
+The main Alignak framework configuration is described in the following chapters :
 
 .. toctree::
    :maxdepth: 1
 
-   core_configuration
-   modules_configuration
+   01_logger_configuration
+   02_core_configuration
+   03_global_configuration.rst
 
-This chapter gives information about configuring the inter-daemon communication with SSL.
-
-.. toctree::
-   :maxdepth: 1
-
-   ssl_certificate
-
-The last chapters give more information about the default installed configuration and some specific objects configuration features.
+The next chapter explains the default shipped configuration.
 
 .. toctree::
    :maxdepth: 1
 
-   default_configuration
-   core_configuration_tips.rst
+   04_default_configuration
+
+This last chapter gives information about configuring the inter-daemon communication with SSL.
+
+.. toctree::
+   :maxdepth: 1
+
+   05_ssl_certificate
+

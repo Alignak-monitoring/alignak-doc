@@ -6,7 +6,14 @@
 Welcome to Alignak's documentation!
 ===================================
 
-Contents:
+Project version:
+----------------
+
+Main version: |version|, release: |release|
+
+
+Documentation contents:
+-----------------------
 
 .. toctree::
    :maxdepth: 2
@@ -19,7 +26,6 @@ Contents:
    05_extending_alignak/index
    06_monitoring_features/index
    07_alignak_features/index
-   10_alignak_statistics/index
    14_contributing/index
    20_annexes/index
 
@@ -27,7 +33,7 @@ Contents:
 .. only:: html
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

@@ -66,6 +66,7 @@ If you wish to use the non-stable versions (eg. current develop or any other spe
 
 .. note:: According to your OS, replace {xenial} in the former script example:
 
+    - Debian 9: ``stretch``
     - Debian 8: ``jessie``
     - Ubuntu 16.04: ``xenial``
     - Ubuntu 14.04: ``trusty``
@@ -76,7 +77,7 @@ And then update the repositories list::
    sudo apt-get update
 
 
-The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are `available on this page <contributing/release_cycle>`_.
+The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are :ref:`available on this page <contributing/release_cycle>`_.
 
 Once the download sources are set, you can simply use the standard package tool to have more information about Alignak packages and available versions::
 
@@ -101,7 +102,11 @@ Once the download sources are set, you can simply use the standard package tool 
 
 Or you can simply use the standard package tool to install Alignak::
 
-    sudo apt install alignak
+    # For Python 2
+    sudo apt install python-alignak
+
+    # For Python 3
+    sudo apt install python3-alignak
 
     # Check Alignak installation
     # It copied the default shipped files and sample configuration.
@@ -138,10 +143,6 @@ Or you can simply use the standard package tool to install Alignak::
      Process: 13293 ExecStartPre=/bin/chown -R alignak:alignak /usr/local/var/log/alignak (code=exited, status=0/SUCCESS)
      Process: 13275 ExecStartPre=/bin/mkdir -p /usr/local/var/log/alignak/monitoring-log (code=exited, status=0/SUCCESS)
     Main PID: 13321 (code=exited, status=0/SUCCESS)
-
-   juin 19 19:53:33 alignak-demo systemd[1]: Starting Alignak daemons instance...
-   juin 19 19:53:33 alignak-demo systemd[1]: Started Alignak daemons instance.
-   juin 19 19:53:33 alignak-demo echo[13321]: Starting Alignak daemons...
 
 .. note:: that immediately after the installation the *alignak* service is enabled and started! This is a side effect of the packaging tool that is used (*fpm*).
 
@@ -186,7 +187,7 @@ If you wish to use the non-stable versions (eg. current develop or any other spe
    repo_gpgcheck=0
    enabled=1
 
-The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are `available on this page <contributing/release_cycle>`_.
+The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are :ref:`available on this page <contributing/release_cycle>`_.
 
 
 Once the download sources are set, you can simply use the standard package tool to have more information about Alignak packages and available versions.
@@ -238,16 +239,20 @@ Or you can simply use the standard package tool to install Alignak and its depen
 
  ::
 
-   sudo yum install alignak
+    # For Python 2
+    sudo yum install python-alignak
 
-   # Check Alignak installation
-   # It copied the default shipped files and sample configuration.
-   ll /usr/local/share/alignak/
-      total 8
-      drwxr-xr-x. 5 root root   49 May 24 17:52 bin
-      drwxr-xr-x. 6 root root  144 May 24 17:52 etc
-      -rwxrwxr-x. 1 root root 2179 Jun 22  2018 post-install.sh
-      -rw-rw-r--. 1 root root 1889 Jun 22  2018 requirements.txt
+    # For Python 3
+    sudo yum install python3-alignak
+
+    # Check Alignak installation
+    # It copied the default shipped files and sample configuration.
+    ll /usr/local/share/alignak/
+        total 8
+        drwxr-xr-x. 5 root root   49 May 24 17:52 bin
+        drwxr-xr-x. 6 root root  144 May 24 17:52 etc
+        -rwxrwxr-x. 1 root root 2179 Jun 22  2018 post-install.sh
+        -rw-rw-r--. 1 root root 1889 Jun 22  2018 requirements.txt
 
 .. warning:: on some CentOS versions, the installation of the `setproctitle` Python library is raising an error and requiring *gcc*! To cope with this problem, you must ` sudo yum install python-devel` and then ` sudo yum reinstall python-alignak` !
 
@@ -260,16 +265,16 @@ Contrary to the debian installer, no system services are installed. You must the
 On BSD-like Unix
 ================
 
-There is not yet any package available for BSD based systems. You can install Alignak from the source code or with `pip`, .. :ref:`see this procedure <Installation/pip>`.
+There is not yet any package available for BSD based systems. You can install Alignak from the source code or with `pip`, ... :ref:`see this procedure <Installation/pip>`.
 
 The alignak repository contains an rc.d script that allows running Alignak daemons as system services. See the *bin/rc.d/alignak-daemon* file in the project repository.
 
 To install the system service startup script you must::
 
-      sudo cp /usr/local/share/alignak/bin/rc.d/alignak /usr/local/etc/rc.d/
+    sudo cp /usr/local/share/alignak/bin/rc.d/alignak /usr/local/etc/rc.d/
 
 You can also run the post-installation script that is shipped with the application. Run::
 
-   sudo /usr/local/share/alignak/post-install.sh
+    sudo /usr/local/share/alignak/post-install.sh
 
 Once you achieved the installation part, you need to configure the Alignak daemon startup script before starting the daemons. This configuration is explained :ref:`in this chapter <run_alignak/services_freebsd>`.

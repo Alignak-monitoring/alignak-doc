@@ -118,7 +118,7 @@ Defining the ``ALIGNAK_LOG_LOOP`` environment variable will make Alignak add som
 As an example::
 
     # Define environment variable
-    export TEST_LOG_LOOP=1
+    export ALIGNAK_LOG_LOOP=1
 
     # Start Alignak daemons
 

@@ -46,7 +46,7 @@ The main information to retain is that Alignak is released with "Major.Minor.Pat
 
 The stable current Alignak has a *simple* version number such as **M.m.p**, but some other versions may also be available in the installation repositories:
 
-   - the current `develop` branch version is referenced as M.m.p-dev
+   - the current `develop` branch version is referenced as M.m.p-develop
    - a specifc branch version (eg. my_branch) is referenced as M.m.p-my_branch
    - a specific tag version (eg. my_tag) is referenced as M.m.p-my_tag
 
@@ -283,7 +283,7 @@ The *package.sh* script command line parameters:
          -> python-alignak_x.x.x-mybranch_all.deb
 
    - python version:
-      2.7, 3.5 (default)
+      2.7, 3.6 (default)
 
    - package type:
       deb (default), rpm, freebsd, apk, pacman, ...
@@ -322,14 +322,16 @@ To proceed with installation, you must register the alignak repository and store
     # Get the stable repository URL
     $ echo "deb https://dl.bintray.com/alignak/alignak-deb-stable {distribution} main" | sudo tee -a /etc/apt/sources.list
 
-**Note:** According to your OS, use the following {distribution} in the former script example:
+.. note:: According to your OS, replace {xenial} in the former script example:
+
+    - Debian 9: ``stretch``
     - Debian 8: ``jessie``
     - Ubuntu 16.04: ``xenial``
     - Ubuntu 14.04: ``trusty``
     - Ubuntu 12.04: ``precise``
 
 
-The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are `available on this page <contributing/release_cycle>`_.
+The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are :ref: `available on this page <contributing/release_cycle>`_.
 
 For Travis build deploying to Bintray:
    - let the ``alignak`` subject in the bintray json files

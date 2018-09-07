@@ -12,7 +12,7 @@ Check installation
 The installation process installs the *alignak* python library in the system global Python packages. To check a correct Python installation::
 
    # Get the alignak version
-   $ python -c 'from alignak.bin import VERSION; print(VERSION)'
+   $ python -c 'from alignak.version import VERSION; print(VERSION)'
 
 It also installs some startup scripts::
 

@@ -24,8 +24,8 @@ extend Alignak for making it suit your monitoring needs
 .. toctree::
    :maxdepth: 2
 
-   updating_default
-   installing_checks
-   alignak_backend
-   installing_modules
-   alignak_webui
+   01_updating_default
+   02_installing_checks
+   03_alignak_backend
+   04_installing_modules
+   05_alignak_webui

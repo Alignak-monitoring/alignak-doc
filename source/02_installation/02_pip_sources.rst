@@ -4,50 +4,10 @@
 Installation with pip or from source
 ====================================
 
-You must have the Python pip tool on your system to proceed with installation.
+Alignak system requirements are documented :ref:`in this chapter <Installation/requirements>`. Make sure that your system is complying before trying to install;)
+
 
 .. _Installation/python_pip:
-
-If your system does not yet include the Python pip tool, here is an installation reminder.
-
-
-**For Debian-like Linux**
- ::
-
-    # Python 2
-    sudo apt install python-pip
-
-    # Python 3
-    sudo apt install python3-pip
-
-
-**For RHEL-like Linux**
-
-On a RHEL (CentOS, Oracle Linux,...), the Python pip installer tool is not included in the standard RHEL repositories but it is part of the EPEL repository. You must enable EPEL repository to install pip.
-
- ::
-
-    sudo yum install epel-release
-    sudo yum -y update
-
-    # Python 2
-    sudo yum install python-pip
-
-    # Python 3
-    sudo yum install python3-pip
-
-
-    # On some older versions, it may be necessary to install extra compiler tools for the python *psutil* package::
-    sudo yum install gcc python-devel
-
-
-**For FreeBSD**::
-
-    # Python 2.7
-    sudo pkg install py27-pip
-
-    # Python 3.6
-    sudo pkg install py36-pip
 
 
 Installation with pip

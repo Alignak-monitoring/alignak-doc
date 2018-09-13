@@ -5,41 +5,10 @@ Installation with system packages
 =================================
 
 
-Alignak packaging and download repositories for Linux/Unix is done thanks to the `Bintray software distribution <https://bintray.com/alignak/>`_. Check the [Alignak Bintray home page](https://bintray.com/alignak) for all the available packages.
+Alignak system requirements are documented :ref:`in this chapter <Installation/requirements>`. Make sure that your system is complying before trying to install;)
 
 
-.. _Installation/requirements:
-
-System requirements
-===================
-
-Some system requirements are needed to install Alignak:
-
-   * python 2.7 or 3.5/3.6
-   * python pip
-
-The Python `pip` tool is necessary to install the Python dependencies needed by Alignak. Installing Python pip on different systems is :ref:`documented here <Installation/python_pip>`.
-
-.. note:: for sure, the required Python packages should be made available in the Alignak repositories, but it is quite a lot of work and we do not have enough time for this... any help appreciated for this;)
-
-
-Alignak is an application started from a privileged user account and it needs to use a low privileged user account. We recommend creating a user account identified as (in the default shipped configuration) *alignak* member of a group *alignak*.
-
- ::
-
-      # Create alignak system user/group for Alignak application
-      sudo addgroup --system alignak
-      sudo adduser --system alignak --ingroup alignak
-
-
-.. note:: the post installation Alignak script installed with distro packaging will create a default `alignak` user account if it does not yet exist on your system.
-
-If you intend to use the Nagios checks plugins and if they are installed on your system, you should invite the user `alignak` into the `nagios` group. Most often, the installation of the Nagios checks plugins create a `nagios` user member of the `nagios` group...
-
- ::
-
-      sudo usermod -a -G nagios alignak
-
+Alignak packaging and download repositories for Linux/Unix is done thanks to the `Bintray software distribution <https://bintray.com/alignak/>`_. Check the `Alignak Bintray home page <https://bintray.com/alignak>`_ for all the available repositories and their packages.
 
 .. _Installation/deb:
 
@@ -48,7 +17,7 @@ On Debian-like Linux
 
 Installing Alignak for a Debian based Linux distribution (eg. Debian, Ubuntu, etc.) is using ``deb`` packages and it is the recommended way. You can find packages in the Alignak dedicated repositories.
 
-To proceed with installation, you must register the alignak repository and store its public key on your system. This script is an example (for Ubuntu 16) to be adapted to your system::
+To proceed with installation, you must register the alignak repository and store its public key on your system. This script is an example (for Ubuntu 16) to be adapted to your system.
 
 Create the file */etc/apt/sources.list.d/alignak.list* with the following content::
 
@@ -77,7 +46,7 @@ And then update the repositories list::
    sudo apt-get update
 
 
-The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are :ref:`available on this page <contributing/release_cycle>`_.
+The Alignak packages repositories contain several version of the application. Some information about the versioning scheme are :ref:`available on this page <contributing/release_cycle>`.
 
 Once the download sources are set, you can simply use the standard package tool to have more information about Alignak packages and available versions::
 
@@ -146,7 +115,7 @@ Or you can simply use the standard package tool to install Alignak::
 
 .. note:: that immediately after the installation the *alignak* service is enabled and started! This is a side effect of the packaging tool that is used (*fpm*).
 
-.. note:: more information about the default shipped configuration is available :ref: `on this page <configuration/default_configuration>`.
+.. note:: more information about the default shipped configuration is available :ref:`on this page <configuration/default_configuration>`.
 
 
 A post-installation script (repository *bin/post-install.sh*) is started at the end of the installation procedure to install the required Python packages. This script is copied during the installation in the default installation directory: */usr/local/share/alignak*. It is using the Python pip tool to get the Python packages listed in the default installation directory *requirements.txt* file.

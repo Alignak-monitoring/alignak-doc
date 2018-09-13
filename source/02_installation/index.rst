@@ -19,6 +19,7 @@ Alignak is a Python application. Despite the excellent `pip` Python installing t
 .. toctree::
    :maxdepth: 2
 
+   00_requirements
    01_system
    02_pip_sources
    03_develop

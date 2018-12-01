@@ -15,24 +15,37 @@ Retention module
 
 The inner retention module provides a simple retention save / load of the current system live state in Json formated files. This to mimic the Nagios legacy `status.dat` feature...
 
-This module is automatically enabled if your configuration has some values in the `retain_state_information` parameter. The module has its own default configuration but it will use the `state_retention_file` if it not empty as the file name.
+This module is automatically enabled if your configuration has some values in the `retain_state_information` parameter. The module has its own default configuration but it will use the `state_retention_file` and `state_retention_dir` if it not empty as the directory/file name.
+
+If you set some values in the module configuration they will overload the one defined formely in the main configuration
 
 Module default configuration::
 
-    [module.inner-retention]
-    ; The inner retention module is declared to allow parameters configuration when it is activated
-    ; in the configuration. To activate, simply set 'enabled' as 1 or set the
-    ; retain_state_information Nagios legacy parameter
-    name = inner-retention
-    type = retention
-    python_name = alignak.modules.inner_retention
-    definition_order = 1
-    enabled = 1
+   [module.inner-retention]
+   ; The inner retention module is declared to allow parameters configuration when it is activated
+   ; in the configuration. To activate, simply set 'enabled' as 1 or set the
+   ; retain_state_information Nagios legacy parameter
+   name = inner-retention
+   type = retention
+   python_name = alignak.modules.inner_retention
+   definition_order = 1
+   enabled = 1
 
-    ; Still declared but these parameters will take precedence if set
-    ;state_retention_file=/tmp/alignak-retention-%%s.json
+   ; --------------------------------------------------------------------
+   ; Retention configuration
+   ; ---
+   ; If defined in this file, the configuration will overload the default one
+   ; built on former configuration loading.
+   ; ---
 
-    ;retention_update_interval=60
+   ; retention_dir overloads main state_retention_dir
+   ; Environment variable 'ALIGNAK_RETENTION_DIR' overloads this configuration variable
+   ;retention_dir=/var/run/alignak
+
+   ; retention_file overloads main state_retention_file
+   ; Environment variable 'ALIGNAK_RETENTION_FILE' overloads this configuration variable
+   ;retention_file=
+   ; --------------------------------------------------------------------
 
 
 Metrics module

@@ -68,6 +68,12 @@ Python source code documentation
 
         `parameters`: the parameter that will be appended after all the arguments
 
+        When using this endpoint with the HTTP GET method, the semi colons that are commonly used
+        to separate the parameters must be replace with %3B! This because the ; is an accepted
+        URL query parameters separator...
+
+        Indeed, the recommended way of using this endpoint is to use the HTTP POST method.
+
         In case of any error, this function returns an object containing some properties:
         '_status': 'ERR' because of the error
         `_message`: some more explanations about the error
@@ -208,32 +214,37 @@ Python source code documentation
         you will get a detailed JSON output:
         [
             {
-                timestamp: "2018-07-23 15:16:35",
+                timestamp: 1535517701.1817362,
+                date: "2018-07-23 15:16:35",
                 message: "SERVICE ALERT: host_11;dummy_echo;UNREACHABLE;HARD;2;",
                 level: "info"
             },
             {
-                timestamp: "2018-07-23 15:16:32",
+                timestamp: 1535517701.1817362,
+                date: "2018-07-23 15:16:32",
                 message: "SERVICE NOTIFICATION: guest;host_0;dummy_random;OK;0;
-                notify-service-by-log;Service internal check result: 0",
+                        notify-service-by-log;Service internal check result: 0",
                 level: "info"
             },
             {
-                timestamp: "2018-07-23 15:16:32",
+                timestamp: 1535517701.1817362,
+                date: "2018-07-23 15:16:32",
                 message: "SERVICE NOTIFICATION: admin;host_0;dummy_random;OK;0;
-                notify-service-by-log;Service internal check result: 0",
+                        notify-service-by-log;Service internal check result: 0",
                 level: "info"
             },
             {
-                timestamp: "2018-07-23 15:16:32",
+                timestamp: 1535517701.1817362,
+                date: "2018-07-23 15:16:32",
                 message: "SERVICE ALERT: host_0;dummy_random;OK;HARD;2;
-                Service internal check result: 0",
+                        Service internal check result: 0",
                 level: "info"
             },
             {
-                timestamp: "2018-07-23 15:16:19",
+                timestamp: 1535517701.1817362,
+                date: "2018-07-23 15:16:19",
                 message: "SERVICE ALERT: host_11;dummy_random;OK;HARD;2;
-                Service internal check result: 0",
+                        Service internal check result: 0",
                 level: "info"
             }
         ]
@@ -277,6 +288,22 @@ Python source code documentation
         running_id
         :return: current log level
         :rtype: str
+        
+
+/host
+~~~~~
+
+Python source code documentation
+ ::
+
+    Get a passive checks for an host and its services
+
+        This function builds the external commands corresponding to the host and services
+        provided information
+
+        :param host_name: host name
+        :param data: dictionary of the host properties to be modified
+        :return: command line
         
 
 /identity
@@ -344,6 +371,7 @@ Python source code documentation
                         "hosts_unreachable_hard": 0,
                         "hosts_unreachable_soft": 0,
                         "hosts_flapping": 0,
+                        "hosts_problems": 0,
                         "hosts_acknowledged": 0,
                         "hosts_in_downtime": 0,
                         "services_total": 100,
@@ -359,6 +387,7 @@ Python source code documentation
                         "services_unreachable_hard": 0,
                         "services_unreachable_soft": 0,
                         "services_flapping": 0,
+                        "services_problems": 0,
                         "services_acknowledged": 0,
                         "services_in_downtime": 0
                         }
@@ -376,6 +405,7 @@ Python source code documentation
                         "hosts_unreachable_hard": 0,
                         "hosts_unreachable_soft": 0,
                         "hosts_flapping": 0,
+                        "hosts_problems": 0,
                         "hosts_acknowledged": 0,
                         "hosts_in_downtime": 0,
                         "services_total": 100,
@@ -391,6 +421,7 @@ Python source code documentation
                         "services_unreachable_hard": 0,
                         "services_unreachable_soft": 0,
                         "services_flapping": 0,
+                        "services_problems": 0,
                         "services_acknowledged": 0,
                         "services_in_downtime": 0
                         }
@@ -565,6 +596,80 @@ Python source code documentation
  ::
 
     Alias for monitoring_problems
+
+/query
+~~~~~~
+
+Python source code documentation
+ ::
+
+    
+        Request object passed to datasource.query function:
+
+        {
+            'timezone': 'browser',
+            'panelId': 38,
+            'range': {
+                'from': '2018-08-29T02:38:09.633Z',
+                'to': '2018-08-29T03:38:09.633Z',
+                'raw': {'from': 'now-1h', 'to': 'now'}
+            },
+            'rangeRaw': {'from': 'now-1h', 'to': 'now'},
+            'interval': '10s',
+            'intervalMs': 10000,
+            'targets': [
+                {
+                    'target': 'problems', 'refId': 'A', 'type': 'table'}
+            ],
+            'format': 'json',
+            'maxDataPoints': 314,
+            'scopedVars': {
+                '__interval': {'text': '10s', 'value': '10s'},
+                '__interval_ms': {'text': 10000, 'value': 10000}
+            }
+        }
+
+        Only the first target is considered. If several targets are required, an error is raised.
+
+        The target is a string that is searched in the target_queries dictionary. If found
+        the corresponding query is executed and the result is returned.
+
+        Table response from datasource.query. An array of:
+
+        [
+          {
+            "type": "table",
+            "columns": [
+              {
+                "text": "Time",
+                "type": "time",
+                "sort": true,
+                "desc": true,
+              },
+              {
+                "text": "mean",
+              },
+              {
+                "text": "sum",
+              }
+            ],
+            "rows": [
+              [
+                1457425380000,
+                null,
+                null
+              ],
+              [
+                1457425370000,
+                1002.76215352,
+                1002.76215352
+              ],
+            ]
+          }
+        ]
+        :return: See upper comment
+        :rtype: list
+        
 
 /realms
 ~~~~~~~
@@ -748,6 +853,23 @@ Python source code documentation
         :type daemon_type: str
         :return: dict with key *daemon_type* and value list of daemon name
         :rtype: dict
+        
+
+/search
+~~~~~~~
+
+Python source code documentation
+ ::
+
+    
+        Request available queries
+
+        Posted data: {u'target': u''}
+
+        Return the list of available target queries
+
+        :return: See upper comment
+        :rtype: list
         
 
 /set_log_level
